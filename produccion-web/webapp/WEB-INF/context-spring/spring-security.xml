@@ -17,34 +17,21 @@
 		<intercept-url pattern="/errorHTTP4" access="IS_AUTHENTICATED_ANONYMOUSLY"  />
 		<intercept-url pattern="/admin/errorLogin" access="IS_AUTHENTICATED_ANONYMOUSLY"  />
 				
-		<intercept-url pattern="/home.xhtml" access="ROLE_ADMIN, ROLE_EMPLEADO,  ROLE_ASISTENTE"/>
+		<intercept-url pattern="/home.xhtml" access="ROLE_CLIENTE, ROLE_EMPLEADO,  ROLE_ASISTENTE"/>
 		
-		<!-- Modulo de observados 
-		<intercept-url pattern="/plantilla/ModuloObservados/Plantillas/plantilla_o.xhtml" access="ROLE_ADMIN"/> 
-		<intercept-url pattern="/plantilla/ModuloObservados/Plantillas/plantilla_dir_aca_o.xhtml" access="ROLE_ADMIN,ROLE_EMPLEADO"/>
-		<intercept-url pattern="/plantilla/ModuloObservados/Plantillas/plantilla_unayoe_o.xhtml" access="ROLE_ADMIN,ROLE_ASISTENTE"/>
-		
-		<intercept-url pattern="/paginas/ModuloObservados/principal_o.xhtml" access="ROLE_ADMIN"/>
-		<intercept-url pattern="/paginas/ModuloObservados/principal_dir_aca_o.xhtml" access="ROLE_ADMIN,ROLE_EMPLEADO"/>
-		<intercept-url pattern="/paginas/ModuloObservados/principal_unayoe_o.xhtml" access="ROLE_ADMIN,ROLE_ASISTENTE"/>
-		
-		<intercept-url pattern="/plantilla/ModuloObservados/Menus/menu_o.xhtml" access="ROLE_ADMIN"/> 
-		<intercept-url pattern="/plantilla/ModuloObservados/Menus/menu_dir_aca_o.xhtml" access="ROLE_ADMIN,ROLE_EMPLEADO"/>
-		<intercept-url pattern="/plantilla/ModuloObservados/Menus/menu_unayoe_o.xhtml" access="ROLE_ADMIN,ROLE_ASISTENTE"/>
-		-->
 		<!-- Modulo - produccion -->
 		
-		<intercept-url pattern="/plantilla/ModuloProduccion/Plantillas/plantilla.xhtml" access="ROLE_ADMIN"/> 
-		<intercept-url pattern="/plantilla/ModuloProduccion/Plantillas/plantilla_empleado.xhtml" access="ROLE_ADMIN,ROLE_EMPLEADO"/>
-		<intercept-url pattern="/plantilla/ModuloProduccion/Plantillas/plantilla_asistente.xhtml" access="ROLE_ADMIN,ROLE_ASISTENTE"/>
+		<intercept-url pattern="/plantilla/ModuloProduccion/Plantillas/plantilla.xhtml" access="ROLE_CLIENTE"/> 
+		<intercept-url pattern="/plantilla/ModuloProduccion/Plantillas/plantilla_empleado.xhtml" access="ROLE_CLIENTE,ROLE_EMPRESA"/>
+		<intercept-url pattern="/plantilla/ModuloProduccion/Plantillas/plantilla_asistente.xhtml" access="ROLE_CLIENTE,ROLE_ASISTENTE"/>
 		
-		<intercept-url pattern="/paginas/ModuloProduccion/principal.xhtml" access="ROLE_ADMIN"/>
-		<intercept-url pattern="/paginas/ModuloProduccion/principal_empleado.xhtml" access="ROLE_ADMIN,ROLE_EMPLEADO"/>
-		<intercept-url pattern="/paginas/ModuloProduccion/principal_asistente.xhtml" access="ROLE_ADMIN,ROLE_ASISTENTE"/>
+		<intercept-url pattern="/paginas/ModuloProduccion/principal.xhtml" access="ROLE_CLIENTE"/>
+		<intercept-url pattern="/paginas/ModuloProduccion/principal_empleado.xhtml" access="ROLE_CLIENTE,ROLE_EMPRESA"/>
+		<intercept-url pattern="/paginas/ModuloProduccion/principal_asistente.xhtml" access="ROLE_CLIENTE,ROLE_ASISTENTE"/>
 		
-		<intercept-url pattern="/plantilla/ModuloProduccion/Menus/menu.xhtml" access="ROLE_ADMIN"/> 
-		<intercept-url pattern="/plantilla/ModuloProduccion/Menus/menu_empleado.xhtml" access="ROLE_ADMIN,ROLE_EMPLEADO"/>
-		<intercept-url pattern="/plantilla/ModuloProduccion/Menus/menu_asistente.xhtml" access="ROLE_ADMIN,ROLE_ASISTENTE"/>
+		<intercept-url pattern="/plantilla/ModuloProduccion/Menus/menu.xhtml" access="ROLE_CLIENTE"/> 
+		<intercept-url pattern="/plantilla/ModuloProduccion/Menus/menu_empleado.xhtml" access="ROLE_CLIENTE,ROLE_EMPRESA"/>
+		<intercept-url pattern="/plantilla/ModuloProduccion/Menus/menu_asistente.xhtml" access="ROLE_CLIENTE,ROLE_ASISTENTE"/>
 		
 		
 

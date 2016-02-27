@@ -9,13 +9,23 @@
 <ui:composition
 	template="/plantilla/ModuloProduccion/Plantillas/plantilla.xhtml">
 	<ui:define name="contenido">
+
 		<p:outputPanel id="mensajeNuevoServicio"
+			style="width:400px;margin-top:5px;">
+			<p:row>
+				<p:column colspan="4" rowspan="2">
+					<p:messages id="messages" showDetail="true" autoUpdate="true"
+						closable="true" />
+				</p:column>
+			</p:row>
+		</p:outputPanel>
+		<!--  p:outputPanel id="mensajeNuevoServicio"
 			style="width:100%;margin-top:2px;margin-bottom:5px">
 			<h:outputLabel id="lblBienvenida" style="font-size: 20px;"
 				value="Solicitud de nuevo servicio" />
-		</p:outputPanel>
+		</p:outputPanel>-->
 
-		<p:panelGrid id="pnlGridNuevoServicio" style="font-size: 12px;" >
+		<p:panelGrid id="pnlGridNuevoServicio">
 			<f:facet name="header">
 				<p:row>
 					<p:column colspan="6">Nuevo servicio</p:column>
@@ -23,20 +33,27 @@
 			</f:facet>
 
 			<p:row>
-				<p:column colspan="4" styleClass="ui-column-label-spij styleAlignRightColumn">
+				<p:column styleClass="ui-column-label-spij styleAlignRightColumn">
 					<h:outputText id="lSubtitulo"
 						value="#{mensaje['produccion.nuevo.servicio.label.subtitulo']}" />
 				</p:column>
-
-				<p:column  styleClass="ui-column-label-spij styleAlignRightColumn">
+				<p:column  colspan="2" styleClass="ui-column-label-spij styleAlignRightColumn">
 					<h:outputText id="lFecha"
 						value="#{mensaje['produccion.nuevo.servicio.label.fecha']}" />
 				</p:column>
-				<p:column>
+				<p:column colspan="2" >
 					<p:calendar value="#{servicioMBean.date}" id="fechaServicio"
 						pattern="dd/MM/yyyy" mode="popup" showOn="button">
 					</p:calendar>
 				</p:column>
+			</p:row>
+			
+			<p:row>
+				<p:column colspan="6"  styleClass="ui-column-label-spij styleAlignRightColumn">
+					<h:outputText id="lRequerimiento"
+						value="#{mensaje['produccion.nuevo.servicio.label.requerimiento']}" />
+				</p:column>
+				
 			</p:row>
 
 			<p:row>
@@ -51,7 +68,7 @@
 					<p:message for="nombreServicio" />
 				</p:column>
 
-				<p:column  styleClass="ui-column-label-spij styleAlignRightColumn">
+				<p:column styleClass="ui-column-label-spij styleAlignRightColumn">
 					<h:outputText id="lblCITE"
 						value="#{mensaje['produccion.nuevo.servicio.label.CITE']}" />
 				</p:column>
@@ -95,7 +112,7 @@
 					<p:message for="nombreSolicitante" />
 				</p:column>
 
-				<p:column  styleClass="ui-column-label-spij styleAlignRightColumn">
+				<p:column styleClass="ui-column-label-spij styleAlignRightColumn">
 					<h:outputText id="lblCargo"
 						value="#{mensaje['produccion.nuevo.servicio.label.cargo']}" />
 				</p:column>
@@ -128,7 +145,7 @@
 				</p:column>
 
 				<p:column colspan="2">
-					<p:inputText id="email" size="40" 
+					<p:inputText id="email" size="40"
 						value="#{servicioMBean.servicioModel.email}" />
 					<p:message for="email" />
 				</p:column>
@@ -156,22 +173,21 @@
 							update="tablaAlumnos, nombreExcel"
 							ajax="true" />
 					</p:column>
-				</p:row -->	
-						
-			</p:panelGrid>
-			
-			<p:outputPanel id="pnlGuardar" style="width:400x;margin-top:10px;">
-				<p:row>
-					<p:column colspan="2" styleClass="styleAlignRightColumn">
-						<p:commandButton 
-							id="botonGuardar" 
-							value="#{mensaje['produccion.nuevo.servicio.label.enviar']}"  
-							actionListener="#{servicioMBean.guardarNuevoServicio}"
-							update="lFecha,nombreServicio, descripcionServicio,  nombreSolicitante,  cargo,  telefono, email" 
-							ajax="true"/>							
-					</p:column>
-				</p:row>
-			</p:outputPanel>
+				</p:row -->
+
+		</p:panelGrid>
+
+		<p:outputPanel id="pnlGuardar" style="width:400x;margin-top:10px;">
+			<p:row>
+				<p:column colspan="2" styleClass="styleAlignRightColumn">
+					<p:commandButton id="botonGuardar"
+						value="#{mensaje['produccion.nuevo.servicio.label.enviar']}"
+						actionListener="#{servicioMBean.guardarNuevoServicio}"
+						update="lFecha,nombreServicio, descripcionServicio,  nombreSolicitante,  cargo,  telefono, email"
+						ajax="true" />
+				</p:column>
+			</p:row>
+		</p:outputPanel>
 	</ui:define>
 </ui:composition>
 </html>

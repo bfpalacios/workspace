@@ -143,22 +143,22 @@ public class ServicioMBean {
 		try{
 			CITEBO aCITEBO = new CITEBO();
 			aCITEBO.setCodigo("0001");
-			aCITEBO.setDescripcion("CITE MADERA");;
+			aCITEBO.setDescripcion("CITE MADERA");
 			listCITE.add(aCITEBO);
 			
 			CITEBO bCITEBO = new CITEBO();
 			bCITEBO.setCodigo("0002");
-			bCITEBO.setDescripcion("CITE CALZADO");;
+			bCITEBO.setDescripcion("CITE CALZADO");
 			listCITE.add(bCITEBO);
 			
 			CITEBO cCITEBO = new CITEBO();
 			cCITEBO.setCodigo("0003");
-			cCITEBO.setDescripcion("CITE AGROINDUSTRIAL");;
+			cCITEBO.setDescripcion("CITE AGROINDUSTRIAL");
 			listCITE.add(cCITEBO);
 			
 			CITEBO dCITEBO = new CITEBO();
 			dCITEBO.setCodigo("0004");
-			dCITEBO.setDescripcion("CITE PESQUERO");;
+			dCITEBO.setDescripcion("CITE PESQUERO");
 			listCITE.add(dCITEBO);
 			
 			getServicioModel().setListarCITE(listCITE);

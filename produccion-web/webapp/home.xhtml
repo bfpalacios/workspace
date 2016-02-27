@@ -6,7 +6,28 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:p="http://primefaces.org/ui"
 	xmlns:c="http://java.sun.com/jsp/jstl/core">
-<h:head>
+<c:set var="RESULTADO" scope="session" value="${loginMBean.rol}" />
+		<!-- Módulo de alumnos Observados -->
+		<c:if test="${RESULTADO=='ROLE_CLIENTE'}">
+			<HEAD>
+				<META http-equiv="refresh"
+					  content="0;URL='/produccion-web/paginas/ModuloProduccion/principal.xhtml'" />
+			</HEAD>
+		</c:if>
+		
+		<c:if test="${RESULTADO=='ROLE_EMPRESA'}">
+			<HEAD>
+				<META http-equiv="refresh"
+					  content="0;URL='/produccion-web/paginas/ModuloProduccion/principal.xhtml'" />
+			</HEAD>
+		</c:if>
+		
+		<c:if test="${RESULTADO=='0'}">
+        	ROL OTROS
+    	</c:if>
+</html>
+
+<!--  h:head>
 	<meta charset="UTF-8" />
 	<link type="text/css" rel="stylesheet"
 		href="#{request.contextPath}/resources/css/demo.css" />
@@ -42,7 +63,7 @@
 					<ul class="lista-roles">
 						<ui:repeat var="rol" value="#{loginMBean.roles}">
 
-							<ui:fragment rendered="#{rol eq 'ROLE_ADMIN'}">
+							<ui:fragment rendered="#{rol eq 'ROLE_CLIENTE'}">
 								<li><p:link
 										href="/paginas/ModuloProduccion/principal.xhtml"
 										value="Modulo Admin Produccion"></p:link></li>
@@ -51,7 +72,7 @@
 										value="Modulo Empleado Produccion"></p:link></li>
 							</ui:fragment>
 
-							<ui:fragment rendered="#{rol eq 'ROLE_EMPLEADO'}">
+							<ui:fragment rendered="#{rol eq 'ROLE_EMPRESA'}">
 								<li><p:link
 										href="/paginas/ModuloProduccion/principal_empleado.xhtml"
 										value="Modulo Empleado Produccion"></p:link></li>
@@ -86,4 +107,4 @@
 </h:body>
 
 
-</html>
+</html -->
