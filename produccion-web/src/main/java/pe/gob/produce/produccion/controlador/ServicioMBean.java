@@ -12,6 +12,7 @@ import org.springframework.stereotype.Controller;
 import pe.edu.sistemas.unayoe.unayoe.bo.CITEBO;
 import pe.gob.produce.produccion.core.util.Convertidor;
 import pe.gob.produce.produccion.core.util.FormateadorFecha;
+import pe.gob.produce.produccion.model.DatosAlumnoExcelModel;
 import pe.gob.produce.produccion.model.ServicioModel;
 
 
@@ -35,6 +36,12 @@ public class ServicioMBean {
 	private static int MODO_EMPLEADO = 2;
 	
 	
+	//para la lista de servicios se declara una variable list de tipo ServicioModel
+	private List<ServicioModel>  datosServiciosModelGrid;
+	
+	
+	
+	//constructor
 	public ServicioMBean(){
 		System.out.println("::::: LOADING ServicioMBean ::::::::");		
 		inicializarClases();		
@@ -45,6 +52,15 @@ public class ServicioMBean {
 		
 	}
 	
+
+	
+	
+	private void inicializarClases(){
+		this.servicioModel = new ServicioModel();		
+		setDatosServiciosModelGrid(new ArrayList<ServicioModel>());
+	}
+	
+	
 	public String selectorNuevoServicio(int modo) throws Exception{
 		 String pagina = "";
 		 
@@ -53,7 +69,7 @@ public class ServicioMBean {
 					inicializarClases();
 
 					listarCITE();
-					pagina = "/paginas/ModuloProduccion/admin/nuevo/nuevoServicio.xhtml"; break;
+					pagina = "/paginas/ModuloProduccion/cliente/nuevo/nuevoServicio.xhtml"; break;
 			/*@@ESTE ES EL CASO PARA PERFIL EMPLEADO
 			 * case 2: MODO_USUARIO = MODO_OCAA;
 					inicializarClases();									
@@ -65,11 +81,6 @@ public class ServicioMBean {
 		return pagina;		
 	 }
 
-	
-	
-	private void inicializarClases(){
-		this.servicioModel = new ServicioModel();
-	}
 
 	public String guardarNuevoServicio() {
 		String pagina = "";
@@ -185,4 +196,13 @@ public class ServicioMBean {
 		this.date = date;
 	}
 	
+
+	public List<ServicioModel> getDatosServiciosModelGrid() {
+		return datosServiciosModelGrid;
+	}
+
+	public void setDatosServiciosModelGrid(
+			List<ServicioModel> datosServiciosModelGrid) {
+		this.datosServiciosModelGrid = datosServiciosModelGrid;
+	}
 }

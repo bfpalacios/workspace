@@ -15,6 +15,7 @@ import pe.edu.sistemas.unayoe.unayoe.bo.CITEBO;
 public class ServicioModel {
 	
 	
+	private String codigo;
 	private String nombre;
 	private String descripcion;
 	private String nombreSolicitante;
@@ -24,6 +25,12 @@ public class ServicioModel {
 	private String descripcionCITE;
 	private String codigoCITE;
 	
+	public String getCodigo() {
+		return codigo;
+	}
+	public void setCodigo(String codigo) {
+		this.codigo = codigo;
+	}
 	private List<CITEBO> listarCITE;
 	public String getNombre() {
 		return nombre;
