@@ -117,6 +117,8 @@ public class LoginMBean {
 		}
 		return "/login.xhtml";
 	}
+	
+	
 
 	public List<RolBO> getlistaRoles() {
 		return this.rolServices.listarRoles();

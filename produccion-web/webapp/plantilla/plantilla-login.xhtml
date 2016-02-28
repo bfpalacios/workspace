@@ -13,7 +13,7 @@
 
 <h:body>
 	<form id="formLoginPrincipal" method="post"
-		action="${request.contextPath}/j_spring_security_check">
+		action="${request.contextPath}/j_spring_security_check" >
 		<p:layout fullPage="true">
 
 			<p:layoutUnit id="lytPlantillaLoginBanner" position="north"
@@ -33,7 +33,7 @@
 
 			<p:layoutUnit id="lytTemplateLoginContent" position="center">
 				<div id="divTemplateLoginContent" align="center">
-					<ui:insert name="contenido" />
+					<ui:insert name="contenido"  />
 				</div>
 			</p:layoutUnit>
 		</p:layout>

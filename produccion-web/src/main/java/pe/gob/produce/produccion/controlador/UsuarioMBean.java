@@ -72,6 +72,11 @@ public class UsuarioMBean {
 		}
 	}
 	
+	private void nuevoUsuario(){
+		
+		
+	}
+	
 	private void llenarRolesObservados(){
 		List<UsuarioBO> usuarioRoles = new ArrayList<UsuarioBO>();
 		try{

@@ -123,7 +123,6 @@
 					<p:message for="cargo" />
 				</p:column>
 
-
 			</p:row>
 
 
@@ -185,6 +184,10 @@
 						actionListener="#{servicioMBean.guardarNuevoServicio}"
 						update="lFecha,nombreServicio, descripcionServicio,  nombreSolicitante,  cargo,  telefono, email"
 						ajax="true" />
+				</p:column>
+				<p:column  >
+					<p:commandButton value="Cancelar" id="botonCamcelar"
+						actionListener="#{servicioMBean.cancelar}" ajax="false" />
 				</p:column>
 			</p:row>
 		</p:outputPanel>

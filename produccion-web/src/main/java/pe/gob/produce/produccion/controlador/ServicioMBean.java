@@ -38,6 +38,7 @@ public class ServicioMBean {
 	
 	//para la lista de servicios se declara una variable list de tipo ServicioModel
 	private List<ServicioModel>  datosServiciosModelGrid;
+	private List<ServicioModel>  selectedServicios;
 	
 	
 	
@@ -57,7 +58,51 @@ public class ServicioMBean {
 	
 	private void inicializarClases(){
 		this.servicioModel = new ServicioModel();		
-		setDatosServiciosModelGrid(new ArrayList<ServicioModel>());
+		
+		List<ServicioModel> listaServicio = new ArrayList<ServicioModel>();
+		
+		ServicioModel servicioModel = new ServicioModel();
+		servicioModel.setCodigo("0001 - CITE MADERA");
+		servicioModel.setNombre("Asistencia Tecnica");
+		servicioModel.setUnidad("Hora");
+		servicioModel.setRequisito("Constancia de Pago");
+		servicioModel.setValorDeVenta("37.47");
+		servicioModel.setPrecioDeVenta("44.21");
+		listaServicio.add(servicioModel);
+		
+		ServicioModel servicioModel2 = new ServicioModel();
+		servicioModel2.setCodigo("0001 - CITE MADERA");
+		servicioModel2.setNombre("Secado de madera en horno experimental");
+		servicioModel2.setUnidad("Lote");
+		servicioModel2.setRequisito("Constancia de Pago");
+		servicioModel2.setValorDeVenta("130.56");
+		servicioModel2.setPrecioDeVenta("855.90");
+		listaServicio.add(servicioModel2);
+		
+		ServicioModel servicioModel3 = new ServicioModel();
+		servicioModel3.setCodigo("0003 - CITE AGROINDUSTRIAL");
+		servicioModel3.setNombre("Asistencia Tecnica");
+		servicioModel3.setUnidad("Muestra");
+		servicioModel3.setRequisito("Constancia de Pago");
+		servicioModel3.setValorDeVenta("37.47");
+		servicioModel3.setPrecioDeVenta("44.21");
+		listaServicio.add(servicioModel3);
+		
+		ServicioModel servicioModel4 = new ServicioModel();
+		servicioModel4.setCodigo("0004 - CITE PESQUERO");
+		servicioModel4.setNombre("Deflexion de las repisas");
+		servicioModel4.setUnidad("Muestra");
+		servicioModel4.setRequisito("Constancia de Pago");
+		servicioModel4.setValorDeVenta("137.47");
+		servicioModel4.setPrecioDeVenta("544.21");		
+		
+		listaServicio.add(servicioModel4);
+		
+		
+		setDatosServiciosModelGrid(listaServicio);
+		
+		
+		
 	}
 	
 	
@@ -69,7 +114,38 @@ public class ServicioMBean {
 					inicializarClases();
 
 					listarCITE();
-					pagina = "/paginas/ModuloProduccion/cliente/nuevo/nuevoServicio.xhtml"; break;
+					pagina = "/paginas/ModuloProduccion/cliente/servicio/nuevo/nuevoServicio.xhtml"; break;
+			/*@@ESTE ES EL CASO PARA PERFIL EMPLEADO
+			 * case 2: MODO_USUARIO = MODO_OCAA;
+					inicializarClases();									
+					if(getDatosAlumnoExcelModelGrid() != null){
+						getDatosAlumnoExcelModelGrid().removeAll(getDatosAlumnoExcelModelGrid());
+					}
+					pagina = "/paginas/ModuloObservados/ocaa/cargar/cargarDatosAlumnosObs.xhtml"; break;*/
+		}
+		return pagina;		
+	}
+	
+	public String cancelar() throws Exception{
+		 String pagina = "";
+		 
+		 	inicializarClases();
+
+			listarCITE();
+			pagina = "/paginas/ModuloProduccion/cliente/servicio/nuevo/nuevoServicio.xhtml"; 
+			
+		return pagina;		
+	}
+	
+	public String selectorBuscarServicio(int modo) throws Exception{
+		 String pagina = "";
+		 
+		 switch(modo){ 
+			case 1: MODO_USUARIO = MODO_ADMIN;									
+					inicializarClases();
+
+					listarCITE();
+					pagina = "/paginas/ModuloProduccion/cliente/servicio/buscar/buscarServicio.xhtml"; break;
 			/*@@ESTE ES EL CASO PARA PERFIL EMPLEADO
 			 * case 2: MODO_USUARIO = MODO_OCAA;
 					inicializarClases();									
@@ -80,6 +156,9 @@ public class ServicioMBean {
 		}
 		return pagina;		
 	 }
+	
+	
+	
 
 
 	public String guardarNuevoServicio() {
@@ -196,6 +275,20 @@ public class ServicioMBean {
 		this.date = date;
 	}
 	
+	
+	public List<ServicioModel> getSelectedServicios() {
+		return selectedServicios;
+	}
+
+
+
+
+	public void setSelectedServicios(List<ServicioModel> selectedServicios) {
+		this.selectedServicios = selectedServicios;
+	}
+
+
+
 
 	public List<ServicioModel> getDatosServiciosModelGrid() {
 		return datosServiciosModelGrid;

@@ -24,7 +24,35 @@ public class ServicioModel {
 	private String email;
 	private String descripcionCITE;
 	private String codigoCITE;
+	private String unidad;
+	private String requisito;
+	private String valorDeVenta;
+	private String precioDeVenta;
 	
+	public String getUnidad() {
+		return unidad;
+	}
+	public void setUnidad(String unidad) {
+		this.unidad = unidad;
+	}
+	public String getRequisito() {
+		return requisito;
+	}
+	public void setRequisito(String requisito) {
+		this.requisito = requisito;
+	}
+	public String getValorDeVenta() {
+		return valorDeVenta;
+	}
+	public void setValorDeVenta(String valorDeVenta) {
+		this.valorDeVenta = valorDeVenta;
+	}
+	public String getPrecioDeVenta() {
+		return precioDeVenta;
+	}
+	public void setPrecioDeVenta(String precioDeVenta) {
+		this.precioDeVenta = precioDeVenta;
+	}
 	public String getCodigo() {
 		return codigo;
 	}
