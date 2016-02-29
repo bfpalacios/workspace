@@ -21,7 +21,7 @@
 
 		<p:panel header="Consulta de Servicios - Cites " style="width: 400px;">
 			<p:panelGrid id="pnlGridBuscarServicio">
-				
+
 				<p:row>
 					<p:column styleClass="ui-column-label-spij styleAlignRightColumn">
 						<h:outputText id="lNombre"
@@ -72,10 +72,10 @@
 							update="tablaServicios" />
 					</p:column>
 				</p:row>
-				</p:panelGrid>
+			</p:panelGrid>
 		</p:panel>
 		<p:separator />
-			
+
 		<p:panelGrid id="pnlGridResultadoBuscarServicio">
 			<f:facet name="header">
 				<p:row>
@@ -90,9 +90,7 @@
 			<p:row id="filTabla">
 				<p:column id="colTabla"
 					styleClass="ui-column-label-spij styleAlignRightColumn" colspan="3">
-
-					<!--  p:dataTable id="multipleDT" var="car" value="#{dtSelectionView.cars4}" selectionMode="multiple" selection="#{dtSelectionView.selectedCards}" 
-	rowKey="#{car.id}" -->
+					
 					<p:dataTable id="tablaServicios"
 						value="#{servicioMBean.datosServiciosModelGrid}"
 						selectionMode="multiple"
@@ -144,18 +142,6 @@
 			</p:row>
 
 
-
-			<!--  p:dialog widgetVar="multiServicioList"
-						modal="true" showEffect="fade" hideEffect="fade" resizable="false"
-						width="200">
-						<p:dataTable id="multiServicioDetail" style="text-align:center;">
-							<ui:repeat value="#{servicioMBean.selectedServicios}" var="servicio">
-								<h:outputText value="#{servicio.codigo}"
-									style="display:block" />
-							</ui:repeat>
-						</p:outputPanel>
-			</p:dialog -->
-
 			<p:separator />
 			<p:row id="filTabla2">
 				<p:column id="colTabla2"
@@ -163,7 +149,7 @@
 
 					<p:dataTable id="multiServicioDetail" widgetVar="multiServicioList"
 						value="#{servicioMBean.selectedServicios}" var="registro"
-						style="display:block" paginator="true" rows="5">
+						paginator="true" rows="5">
 
 						<p:column headerText="Codigo(*)"
 							styleClass="ui-column-label-spij styleAlignRightColumn">
@@ -188,7 +174,6 @@
 						<p:column headerText="Valor de Venta"
 							styleClass="ui-column-label-spij styleAlignRightColumn">
 							<h:outputText value="#{registro.valorDeVenta}">
-								<!--  f:convertNumber type="currency" currencySymbol="$" /-->
 							</h:outputText>
 						</p:column>
 
@@ -196,7 +181,6 @@
 						<p:column headerText="Precio de Venta"
 							styleClass="ui-column-label-spij styleAlignRightColumn">
 							<h:outputText value="#{registro.precioDeVenta}">
-								<!--  f:convertNumber type="currency" currencySymbol="S/." />-->
 							</h:outputText>
 
 						</p:column>
@@ -208,90 +192,6 @@
 
 			</p:row>
 		</p:panelGrid>
-
-
-		<!-- p:panelGrid id="pnlGridNuevoCotizacion">
-			<f:facet name="header">
-				<p:row>
-					<p:column colspan="2">Nueva Cotizacion </p:column>
-				</p:row>
-			</f:facet>
-
-			<p:separator />
-			<p:row id="filTabla2">
-				<p:column id="colTabla2"
-					styleClass="ui-column-label-spij styleAlignRightColumn" colspan="3">
-
-					<p:dataTable id="multiServicioDetail" widgetVar="multiServicioList"
-						value="#{servicioMBean.selectedServicios}" var="registro" 
-						style="display:block" paginator="true" rows="5">
-
-						<p:column headerText="Codigo(*)"
-							styleClass="ui-column-label-spij styleAlignRightColumn">
-							<h:outputText value="#{registro.codigo}" />
-						</p:column>
-
-						<p:column headerText="Codigo(*)"
-							styleClass="ui-column-label-spij styleAlignRightColumn">
-							<h:outputText value="#{registro.codigo}" />
-						</p:column>
-
-						<p:column headerText="Nombre Servicio"
-							styleClass="ui-column-label-spij styleAlignRightColumn">
-							<h:outputText value="#{registro.nombre}" />
-						</p:column>
-
-						<p:column headerText="Unidad"
-							styleClass="ui-column-label-spij styleAlignRightColumn">
-							<h:outputText value="#{registro.unidad}" />
-						</p:column>
-
-						<p:column headerText="Requisito"
-							styleClass="ui-column-label-spij styleAlignRightColumn">
-							<h:outputText value="#{registro.requisito}" />
-						</p:column>
-
-						<p:column headerText="Valor de Venta"
-							styleClass="ui-column-label-spij styleAlignRightColumn">
-							<h:outputText value="#{registro.valorDeVenta}">
-								<f:convertNumber type="currency" currencySymbol="$" />
-							</h:outputText>
-						</p:column>
-						
-
-						<<p:column headerText="Precio de Venta"
-							styleClass="ui-column-label-spij styleAlignRightColumn">
-							<h:outputText value="#{registro.precioDeVenta}">
-								<f:convertNumber type="currency" currencySymbol="S/." />
-							</h:outputText>
-
-						</p:column>
-
-						<p:columnGroup type="footer">
-							<p:row>
-								<p:column colspan="3" style="text-align:right"
-									footerText="Costo Total:" />
-								<p:column footerText="$#{registro.precioDeVenta}" />
-
-							</p:row>
-						</p:columnGroup>
-
-
-					</p:dataTable>
-				</p:column>
-
-			</p:row>
-
-
-			<p:row>
-				<p:column colspan="3">
-					<p:commandButton value="Guardar" id="botonGuardar"
-						actionListener="#{datosAlumnosMBean.guardarTutoriaObservados}"
-						update="tablaAlumnos, nombreExcel" ajax="true" />
-				</p:column>
-			</p:row> 
-
-		</p:panelGrid> -->
 
 	</ui:define>
 </ui:composition>
