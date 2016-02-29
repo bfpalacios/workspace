@@ -56,7 +56,10 @@ public class LoginMBean {
 			System.out.println("USUARIO " + name + "  CON ROL " + roles[0].toString());
 			return roles[0].toString();
 		}
-
+		
+		
+		
+		
 		return "0";
 	}
 	

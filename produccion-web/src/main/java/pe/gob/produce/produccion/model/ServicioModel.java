@@ -28,7 +28,15 @@ public class ServicioModel {
 	private String requisito;
 	private String valorDeVenta;
 	private String precioDeVenta;
+	private String totalPrecioDeVenta;
 	
+
+	public String getTotalPrecioDeVenta() {
+		return totalPrecioDeVenta;
+	}
+	public void setTotalPrecioDeVenta(String totalPrecioDeVenta) {
+		this.totalPrecioDeVenta = totalPrecioDeVenta;
+	}
 	public String getUnidad() {
 		return unidad;
 	}

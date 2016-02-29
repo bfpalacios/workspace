@@ -96,6 +96,8 @@ public class ServicioMBean {
 		servicioModel4.setValorDeVenta("137.47");
 		servicioModel4.setPrecioDeVenta("544.21");		
 		
+		//servicioModel4.setTotalPrecioDeVenta("123");
+		
 		listaServicio.add(servicioModel4);
 		
 		
