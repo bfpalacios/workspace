@@ -90,7 +90,7 @@
 			<p:row id="filTabla">
 				<p:column id="colTabla"
 					styleClass="ui-column-label-spij styleAlignRightColumn" colspan="3">
-					
+
 					<p:dataTable id="tablaServicios"
 						value="#{servicioMBean.datosServiciosModelGrid}"
 						selectionMode="multiple"
@@ -133,20 +133,52 @@
 						<f:facet name="footer">
 							<p:commandButton process="tablaServicios"
 								update=":formPrincipal:multiServicioDetail"
-								icon="ui-icon-search" value="Agregar Servicio a Cotizar"
-								>
-							
-            				<!-- p:ajax event="change" process="multiServicioDetail" update="multiServicioDetail"/> 	 -->
+								icon="ui-icon-search" value="Agregar Servicio a Cotizar">
+
+								<!-- p:ajax event="change" process="multiServicioDetail" update="multiServicioDetail"/> 	 -->
 							</p:commandButton>
 						</f:facet>
 					</p:dataTable>
 
 				</p:column>
 			</p:row>
+		</p:panelGrid>
 
 
+		<p:panelGrid id="pnlGridNuevaCotizacion">
+			<f:facet name="header">
+				<p:row>
+					<p:column colspan="2">#{mensaje['produccion.buscar.servicio.label.subtitulo']}</p:column>
+				</p:row>
+			</f:facet>
 			<p:separator />
+
+			<p:row>
+				<p:column styleClass="ui-column-label-spij styleAlignRightColumn">
+					<h:outputText id="lCotizacion"
+						value="#{mensaje['produccion.buscar.servicio.label.cotizacionnro']}" />
+				</p:column>
+				<p:column>
+					<p:inputText id="cotizacionNro"
+						value="#{servicioMBean.servicioModel.codigo}" size="20" />
+				</p:column>
+
+				<p:column colspan="2"
+					styleClass="ui-column-label-spij styleAlignRightColumn">
+					<h:outputText id="lFecha" value="#{mensaje['general.label.fecha']}" />
+				</p:column>
+				<p:column colspan="2">
+					<p:calendar value="#{servicioMBean.date}" id="fechaServicio"
+						pattern="dd/MM/yyyy" mode="popup" showOn="button">
+					</p:calendar>
+				</p:column>
+
+			</p:row>
+
+
 			<p:row id="filTabla2">
+
+
 				<p:column id="colTabla2"
 					styleClass="ui-column-label-spij styleAlignRightColumn" colspan="3">
 
