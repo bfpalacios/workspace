@@ -37,6 +37,13 @@ public class LoginMBean {
 		System.out.println(":::::::INICIO :::::::::");
 		rol = "0";
 	}
+	
+	@SuppressWarnings("unused")
+	private String nuevoUsuario(){
+		System.out.println("nuevo usuario");
+		return "/paginas/ModuloProduccion/cliente/nuevo/usuario/nuevoUsuario.xhtml";
+		
+	}
 
 	public String obtieneRol() {
 		System.out.println("::::::::::::::: ENTRO ACA1 ::::::::::::::::");
@@ -61,6 +68,8 @@ public class LoginMBean {
 		
 		
 		return "0";
+		
+		//return "/paginas/ModuloProduccion/cliente/nuevo/usuario/nuevoUsuario.xhtml";
 	}
 	
 	

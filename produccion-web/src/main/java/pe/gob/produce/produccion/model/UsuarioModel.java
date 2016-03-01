@@ -22,7 +22,52 @@ public class UsuarioModel {
 	private String correo;
 	private String direccion;
 	private String telefono;
+	private String dni;
+	private String tipoDoc;
+	private String rubro;
+	private String email1;
+	private String email2;
 	private String rol;
+	
+	public String getDni() {
+		return dni;
+	}
+
+	public void setDni(String dni) {
+		this.dni = dni;
+	}
+
+	public String getTipoDoc() {
+		return tipoDoc;
+	}
+
+	public void setTipoDoc(String tipoDoc) {
+		this.tipoDoc = tipoDoc;
+	}
+
+	public String getRubro() {
+		return rubro;
+	}
+
+	public void setRubro(String rubro) {
+		this.rubro = rubro;
+	}
+
+	public String getEmail1() {
+		return email1;
+	}
+
+	public void setEmail1(String email1) {
+		this.email1 = email1;
+	}
+
+	public String getEmail2() {
+		return email2;
+	}
+
+	public void setEmail2(String email2) {
+		this.email2 = email2;
+	}
 	private UsuarioBO usuario;
 	private String codAlumno;
 	private int planAlumno;

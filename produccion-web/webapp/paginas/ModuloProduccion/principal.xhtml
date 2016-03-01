@@ -1,11 +1,42 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE html>
+
+
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:p="http://primefaces.org/ui">
-      
+
+<h:head>
+	<link type="text/css" rel="stylesheet"
+		href="#{request.contextPath}/resources/css/demo.css" />
+
+	<h:outputScript library="primefaces" name="jquery/jquery.js"
+		target="head" />
+	<h:outputScript library="primefaces" name="jquery/jquery-plugins.js"
+		target="head" />
+    <!-- script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.4.3/jquery.min.js"></script>
+      <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.10/jquery-ui.min.js"></script>
+	
+	<script type="text/javascript" src="#{request.contextPath}/resource/primefaces.js.xhtml?ln=primefaces&amp;v=5.3"></script>
+	
+	<h:outputScript library="primefaces" name="primefaces.js"
+		target="head" />
+	<script 	
+	PF=function(d){
+    var c=b.widgets[d];
+    if(!c){
+        if(a.console&&console.log){
+            console.log("Widget for var '"+d+"' not available!")
+        }
+        b.error("Widget for var '"+d+"' not available!")
+    }
+    return c
+};	-->
+		
+
+</h:head>      
       <ui:composition template="/plantilla/ModuloProduccion/Plantillas/plantilla.xhtml">      		
 	        <ui:define name="contenido">	        
 	        		 <h:graphicImage 

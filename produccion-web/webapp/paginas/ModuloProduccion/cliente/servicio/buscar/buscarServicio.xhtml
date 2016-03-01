@@ -134,7 +134,10 @@
 							<p:commandButton process="tablaServicios"
 								update=":formPrincipal:multiServicioDetail"
 								icon="ui-icon-search" value="Agregar Servicio a Cotizar"
-								oncomplete="PF('multiServicioList').show()" />
+								>
+							
+            				<!-- p:ajax event="change" process="multiServicioDetail" update="multiServicioDetail"/> 	 -->
+							</p:commandButton>
 						</f:facet>
 					</p:dataTable>
 

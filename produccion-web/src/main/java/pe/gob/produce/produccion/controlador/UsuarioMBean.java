@@ -72,8 +72,10 @@ public class UsuarioMBean {
 		}
 	}
 	
-	private void nuevoUsuario(){
-		
+	@SuppressWarnings("unused")
+	private String nuevoUsuario(){
+		System.out.println("nuevo usuario");
+		return "/paginas/ModuloProduccion/cliente/nuevo/usuario/nuevoUsuario.xhtml";
 		
 	}
 	

@@ -43,32 +43,29 @@
 						</p:column>
 					</p:row>
 					
-					<!--  p:row>
-						<p:column styleClass="ui-column-label-spij styleAlignRightColumn">
-						
-            			<p:layout for="_spring_security_remember_me">
-                			<h:outputText value="Remember me" />
-            			</p:layout>>
-            <h:selectBooleanCheckbox id="_spring_security_remember_me" />
-            <br /><br />
-            <p:commandButton ajax="false" type="submit" id="login" action="#{loginBean.doLogin}" value="Login" update="errorMessages" /-->
             
 					<p:row>
-						<!--  p:column colspan="2" styleClass="styleAlignRightColumn">
-			                    	<p:commandButton id="btnLoginSignIn" ajax="false" value="#{mensaje['demo.login.btn.entrar']}" 
-			                    					 action="#{loginMBean.entrar}"/ >
-		                   		</p:column -->
+
 						<p:column styleClass="styleAlignRightColumn">
-							<input type="submit" id="login" name="login" value="#{mensaje['demo.login.btn.ingresar']}"
+							<input type="submit" id="login" name="login"
+								
+								value="#{mensaje['demo.login.btn.ingresar']}"
 								title="#{mensaje['demo.login.btn.ingresar']}" />
 						</p:column>
-
+						
 						<!--  p:column styleClass="styleAlignLeftColumn">
-							<p:commandButton id="nuevoUsuario" ajax="false"
-								value="#{mensaje['demo.login.btn.nuevo']}"
-								title="#{mensaje['demo.login.btn.nuevo']}"
-								action="#{usuarioMBean.nuevoUsuario}" />
+							<p:commandButton  type="submit" id="login" name="login"  
+								value="#{mensaje['demo.login.btn.ingresar']}"
+								title="#{mensaje['demo.login.btn.ingresar']}"  />
 						</p:column -->
+
+						<p:column colspan="2" styleClass="styleAlignLeftColumn">
+							<p:commandButton  value="Nuevo Cliente" id="botonNuevo"
+								actionListener="#{loginMBean.nuevoUsuario}" />
+                          
+						</p:column>
+
+						
 					</p:row>
 
 				</p:panelGrid>
