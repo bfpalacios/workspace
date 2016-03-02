@@ -61,7 +61,7 @@
 		<authentication-provider>
 			<password-encoder hash="sha" />
 			<jdbc-user-service data-source-ref="dataSource"				
-				users-by-username-query="SELECT ID_USUARIO AS USERNAME, CLAVE AS PASSWORD, 1 AS ENABLED FROM USUARIO WHERE ID_USUARIO=?" 				
+				users-by-username-query="SELECT ID_USUARIO AS USERNAME, CONTRASENIA AS PASSWORD, 1 AS ENABLED FROM USUARIO WHERE ID_USUARIO=?" 				
 				authorities-by-username-query="SELECT U.ID_USUARIO AS USERNAME, UR.ROL AS AUTHORITY FROM USUARIO U, USUARIO_ROL UR 
 				WHERE U.ID_USUARIO = UR.ID_USUARIO AND U.ID_USUARIO = ?  "/>
 		</authentication-provider>
