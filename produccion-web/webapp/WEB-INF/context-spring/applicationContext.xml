@@ -57,7 +57,7 @@
         <property name="hibernateProperties">
             <props>
                 <prop key="hibernate.show_sql">true</prop>
-                <!--  prop key="hibernate.dialect">org.hibernate.dialect.OracleDialect</prop>-->
+                <!--  prop key="hibernate.dialect">org.hibernate.dialect.OracleDialect</prop-->
                 <prop key="hibernate.dialect">org.hibernate.dialect.SQLServerDialect</prop>
                 
             </props>

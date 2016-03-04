@@ -12,19 +12,17 @@
 
 		<p:outputPanel id="mensajeNuevoServicio"
 			style="width:400px;margin-top:5px;">
-			<p:row>
-				<p:column colspan="4" rowspan="2">
-					<p:messages id="messages" showDetail="true" autoUpdate="true"
+			<p:messages id="messages" showDetail="true" autoUpdate="true"
 						closable="true" />
-				</p:column>
-			</p:row>
+			
 		</p:outputPanel>
-		<!--  p:outputPanel id="mensajeNuevoServicio"
+		<p:outputPanel id="mensajeSolicitudNuevoServicio"
 			style="width:100%;margin-top:2px;margin-bottom:5px">
 			<h:outputLabel id="lblBienvenida" style="font-size: 20px;"
-				value="Solicitud de nuevo servicio" />
-		</p:outputPanel>-->
-
+				value="Solicitud de Nuevo Servicio" />
+		</p:outputPanel>
+		<p:separator/>
+		
 		<p:panelGrid id="pnlGridNuevoServicio">
 			<f:facet name="header">
 				<p:row>
@@ -33,15 +31,15 @@
 			</f:facet>
 
 			<p:row>
-				<p:column styleClass="ui-column-label-spij styleAlignRightColumn">
+				<p:column colspan="2" styleClass="ui-column-label-spij styleAlignRightColumn">
 					<h:outputText id="lSubtitulo"
 						value="#{mensaje['produccion.nuevo.servicio.label.subtitulo']}" />
 				</p:column>
-				<p:column  colspan="2" styleClass="ui-column-label-spij styleAlignRightColumn">
+				<p:column colspan="2" styleClass="ui-column-label-spij styleAlignLeftColumn">
 					<h:outputText id="lFecha"
 						value="#{mensaje['general.label.fecha']}" />
 				</p:column>
-				<p:column colspan="2" >
+				<p:column  >
 					<p:calendar value="#{servicioMBean.date}" id="fechaServicio"
 						pattern="dd/MM/yyyy" mode="popup" showOn="button">
 					</p:calendar>
@@ -63,9 +61,9 @@
 				</p:column>
 
 				<p:column colspan="2">
-					<p:inputText id="nombreServicio" size="40"
+					<p:inputText id="nombreServicio" size="20" required="true"
 						value="#{servicioMBean.servicioModel.nombre}" />
-					<p:message for="nombreServicio" />
+					
 				</p:column>
 
 				<p:column styleClass="ui-column-label-spij styleAlignRightColumn">
@@ -93,7 +91,7 @@
 
 				<p:column colspan="5">
 					<p:inputTextarea id="descripcionServicio" size="40"
-						value="#{servicioMBean.servicioModel.descripcion}" />
+						value="#{servicioMBean.servicioModel.descripcion}" required="true" />
 					<p:message for="descripcionServicio" />
 				</p:column>
 
