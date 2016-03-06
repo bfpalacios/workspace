@@ -72,10 +72,17 @@ public class UsuarioMBean {
 		}
 	}
 	
-	@SuppressWarnings("unused")
-	private String nuevoUsuario(){
+	public String selectorNuevoUsuario(int i){
+		
+		String pagina ="";
 		System.out.println("nuevo usuario");
-		return "/paginas/ModuloProduccion/cliente/nuevo/usuario/nuevoUsuario.xhtml";
+		pagina ="/paginas/ModuloProduccion/cliente/nuevo/usuario/nuevoUsuario.xhtml";
+		return pagina;
+	}
+	
+	public String nuevoUsuarioEmpresa(int i){
+		System.out.println("nuevo usuario");
+		return "/paginas/ModuloProduccion/cliente/nuevo/usuario/nuevoUsuarioEmpresa.xhtml";
 		
 	}
 	

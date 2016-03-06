@@ -21,7 +21,7 @@
 			<h:outputLabel id="lblBienvenida" style="font-size: 20px;"
 				value="Solicitud de Nuevo Servicio" />
 		</p:outputPanel>
-		<p:separator/>
+		<p:separator />
 		
 		<p:panelGrid id="pnlGridNuevoServicio">
 			<f:facet name="header">
@@ -39,7 +39,7 @@
 					<h:outputText id="lFecha"
 						value="#{mensaje['general.label.fecha']}" />
 				</p:column>
-				<p:column  >
+				<p:column>
 					<p:calendar value="#{servicioMBean.date}" id="fechaServicio"
 						pattern="dd/MM/yyyy" mode="popup" showOn="button">
 					</p:calendar>
@@ -61,7 +61,7 @@
 				</p:column>
 
 				<p:column colspan="2">
-					<p:inputText id="nombreServicio" size="20" required="true"
+					<p:inputText id="nombreServicio" size="20" 
 						value="#{servicioMBean.servicioModel.nombre}" />
 					
 				</p:column>
@@ -91,7 +91,7 @@
 
 				<p:column colspan="5">
 					<p:inputTextarea id="descripcionServicio" size="40"
-						value="#{servicioMBean.servicioModel.descripcion}" required="true" />
+						value="#{servicioMBean.servicioModel.descripcion}"  />
 					<p:message for="descripcionServicio" />
 				</p:column>
 
@@ -151,38 +151,22 @@
 
 			</p:row>
 
-
-			<!--  p:row>
-					<p:column  colspan="2">
-						<p:commandButton  
-							value="#{mensaje['produccion.nuevo.servicio.label.enviar']}" 
-							id="botonGuardar"   
-							actionListener="#{servicioMBean.guardarNuevoServicioMO}" 
-							update="fechaServicio, telefono,email"
-							ajax="true" />
-					</p:column>
-				</p:row>	
-						<p:row>
-					<p:column  colspan="2">
-						<p:commandButton  
-							value="#{mensaje['produccion.nuevo.servicio.label.cancelar']}" 
-							id="botonGuardar"   
-							actionListener="#{servicioMBean.cancelar}" 
-							update="tablaAlumnos, nombreExcel"
-							ajax="true" />
-					</p:column>
-				</p:row -->
-
 		</p:panelGrid>
-
+		
+		<p:spacer width="5px" />
 		<p:outputPanel id="pnlGuardar" style="width:400x;margin-top:10px;">
 			<p:row>
-				<p:column colspan="2" styleClass="styleAlignRightColumn">
+				<p:column colspan="2" styleClass="styleAlignLeftColumn">
 					<p:commandButton id="botonGuardar"
 						value="#{mensaje['produccion.nuevo.servicio.label.enviar']}"
 						actionListener="#{servicioMBean.guardarNuevoServicio}"
 						update="lFecha,nombreServicio, descripcionServicio,  nombreSolicitante,  cargo,  telefono, email"
-						ajax="true" />
+						ajax="false" />
+				</p:column>
+				
+				<p:column colspan="2" styleClass="styleAlignRightColumn">
+					<p:commandButton value="Cancelar" id="botonCamcelar"
+						actionListener="#{servicioMBean.cancelar}" ajax="false" />
 				</p:column>
 			</p:row>
 		</p:outputPanel>

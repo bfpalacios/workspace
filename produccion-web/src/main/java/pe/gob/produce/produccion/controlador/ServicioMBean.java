@@ -13,10 +13,7 @@ import pe.edu.sistemas.unayoe.unayoe.bo.CITEBO;
 import pe.gob.produce.produccion.core.util.Convertidor;
 import pe.gob.produce.produccion.core.util.FormateadorFecha;
 import pe.gob.produce.produccion.model.ServicioModel;
-
-import javax.faces.context.FacesContext;
-import org.primefaces.event.SelectEvent;
-import org.primefaces.event.UnselectEvent;
+import pe.gob.produce.produccion.services.CITEServices;
 
 
 
@@ -26,8 +23,9 @@ public class ServicioMBean {
 	
 	@Autowired
 	private ServicioModel servicioModel;
-	/*@Autowired
-	private ServicioServices servicioServices;*/
+	
+	@Autowired
+	private CITEServices citeServices;
 	
 	//datos complementarios de la pantalla
 	private Date date;
@@ -118,6 +116,9 @@ public class ServicioMBean {
 					inicializarClases();
 
 					listarCITE();
+					
+					listarServicios();
+					
 					pagina = "/paginas/ModuloProduccion/cliente/servicio/nuevo/nuevoServicio.xhtml"; break;
 			/*@@ESTE ES EL CASO PARA PERFIL EMPLEADO
 			 * case 2: MODO_USUARIO = MODO_OCAA;
@@ -140,6 +141,45 @@ public class ServicioMBean {
 			
 		return pagina;		
 	}
+	
+	public void buscarServicio() throws Exception{
+		 
+		List<ServicioModel> listaServicio = new ArrayList<ServicioModel>();
+		
+		ServicioModel servicioModel = new ServicioModel();
+		servicioModel.setCodigo("0001 - CITE MADERA");
+		servicioModel.setNombre("Asistencia Tecnica");
+		servicioModel.setUnidad("Hora");
+		servicioModel.setRequisito("Constancia de Pago");
+		servicioModel.setValorDeVenta("37.47");
+		servicioModel.setPrecioDeVenta("44.21");
+		listaServicio.add(servicioModel);
+		
+		ServicioModel servicioModel3 = new ServicioModel();
+		servicioModel3.setCodigo("0003 - CITE AGROINDUSTRIAL");
+		servicioModel3.setNombre("Asistencia Tecnica");
+		servicioModel3.setUnidad("Muestra");
+		servicioModel3.setRequisito("Constancia de Pago");
+		servicioModel3.setValorDeVenta("37.47");
+		servicioModel3.setPrecioDeVenta("44.21");
+		listaServicio.add(servicioModel3);
+		
+		ServicioModel servicioModel4 = new ServicioModel();
+		servicioModel4.setCodigo("0004 - CITE PESQUERO");
+		servicioModel4.setNombre("Deflexion de las repisas");
+		servicioModel4.setUnidad("Muestra");
+		servicioModel4.setRequisito("Constancia de Pago");
+		servicioModel4.setValorDeVenta("137.47");
+		servicioModel4.setPrecioDeVenta("544.21");		
+		
+		//servicioModel4.setTotalPrecioDeVenta("123");
+		
+		listaServicio.add(servicioModel4);
+		
+		
+		setDatosServiciosModelGrid(listaServicio);
+	}
+	
 	
 	public String selectorBuscarServicio(int modo) throws Exception{
 		 String pagina = "";
@@ -165,7 +205,7 @@ public class ServicioMBean {
 	
 
 
-	public String guardarNuevoServicio() {
+	public void guardarNuevoServicio() {
 		String pagina = "";
 		try{
 			//if (buscarUsuario(getUsuarioModel().getIdUsuario()==null?"0":getUsuarioModel().getIdUsuario()).equals("")){
@@ -222,8 +262,14 @@ public class ServicioMBean {
 					}				
 		}*/	
 		
-		pagina = "/paginas/ModuloProduccion/admin/nuevo/nuevoServicio.xhtml";
-		return pagina;
+		
+		//
+		try {
+			selectorNuevoServicio(1);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 	
@@ -233,36 +279,30 @@ public class ServicioMBean {
 	}
 
 	private void listarCITE(){
-		List<CITEBO> listCITE = new ArrayList<CITEBO>();
 		try{
-			CITEBO aCITEBO = new CITEBO();
-			aCITEBO.setCodigo("0001");
-			aCITEBO.setDescripcion("CITE MADERA");
-			listCITE.add(aCITEBO);
 			
-			CITEBO bCITEBO = new CITEBO();
-			bCITEBO.setCodigo("0002");
-			bCITEBO.setDescripcion("CITE CALZADO");
-			listCITE.add(bCITEBO);
 			
-			CITEBO cCITEBO = new CITEBO();
-			cCITEBO.setCodigo("0003");
-			cCITEBO.setDescripcion("CITE AGROINDUSTRIAL");
-			listCITE.add(cCITEBO);
-			
-			CITEBO dCITEBO = new CITEBO();
-			dCITEBO.setCodigo("0004");
-			dCITEBO.setDescripcion("CITE PESQUERO");
-			listCITE.add(dCITEBO);
-			
-			getServicioModel().setListarCITE(listCITE);
-			/*usuarioRoles = usuarioServices.obtenerRoles(PROCESO_OBSERVADOS);
-			getUsuarioModel().setRolesUsuario(usuarioRoles);*/
+			getServicioModel().setListarCITE(citeServices.listarCITES());
 		}
 		catch(Exception e){
 			e.printStackTrace();
 		}
 	}
+	
+	
+	private void listarServicios(){
+		
+		
+		try{
+			
+			
+			getServicioModel().setListarCITE(citeServices.listarCITES());
+		}
+		catch(Exception e){
+			e.printStackTrace();
+		}
+	}
+	
 	public void setServicioModel(ServicioModel servicioModel) {
 		this.servicioModel = servicioModel;
 	}

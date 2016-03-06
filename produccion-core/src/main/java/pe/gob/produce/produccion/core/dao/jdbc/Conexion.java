@@ -7,11 +7,20 @@ import java.sql.SQLException;
 public class Conexion {
 	
 	public static Connection obtenerConexion() throws SQLException {
-
+		
+		String connectionString =
+	            "jdbc:sqlserver://BFPALACIOS\\SQLEXPRESS:1433;"
+	            + "database=DBPRODUCCION;"
+	            + "user=BRUNOPE;"
+	            + "password=brunope;"
+	            + "loginTimeout=30;";
+		
+		
 		Connection con = null;
+		
 		try {
-			Class.forName("oracle.jdbc.driver.OracleDriver");
-			con = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:xe","DBUNAYOE", "DBUNAYOE");
+			Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+			con = DriverManager.getConnection(connectionString);
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		} catch (Exception e) {

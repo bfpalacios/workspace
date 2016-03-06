@@ -68,14 +68,14 @@
 				<p:row id="filServicios">
 					<p:column colspan="2"
 						styleClass="ui-column-label-spij styleAlignCenterColumn">
-						<p:commandButton value="Buscar" id="botonBuscar" ajax="true"
+						<p:commandButton value="Buscar" id="botonBuscar" actionListener="#{servicioMBean.buscarServicio}" ajax="true"
 							update="tablaServicios" />
 					</p:column>
 				</p:row>
 			</p:panelGrid>
 		</p:panel>
-		<p:separator />
-
+		<p:spacer width="10px" />
+				
 		<p:panelGrid id="pnlGridResultadoBuscarServicio">
 			<f:facet name="header">
 				<p:row>

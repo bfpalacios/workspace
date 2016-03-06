@@ -18,12 +18,20 @@
 					value="Recomendar Nuevo Servicio" action="#{servicioMBean.selectorNuevoServicio(1)}"
 					icon="ui-icon-arrowrefresh-1-w" />
 			</p:submenu> 
-			<p:submenu label="Registro de Clientes">
+			<p:submenu label="Registro de Usuario">
+				<p:menuitem 
+					value="Usuario Cliente" action="#{usuarioMBean.selectorNuevoUsuario(1)}"
+					icon="ui-icon-arrowrefresh-1-w" />
+			
+				<p:menuitem 
+					value="Usuario Empresa" action="#{usuarioMBean.nuevoUsuarioEmpresa(1)}"
+					icon="ui-icon-arrowrefresh-1-w" />
+			
 				
 			</p:submenu>
 			<p:submenu label="Cotizacion de Servicios">
 				<p:menuitem 
-					value="Nueva Cotizacion" action="#{servicioMBean.selectorBuscarCotizacionServicio(1)}"
+					value="Nueva Cotizacion" action="#{cotizacionMBean.selectorNuevaCotizacion(1)}"
 					icon="ui-icon-arrowrefresh-1-w"  />	
 				<p:menuitem 
 					value="Buscar Cotizaciones" action="#"

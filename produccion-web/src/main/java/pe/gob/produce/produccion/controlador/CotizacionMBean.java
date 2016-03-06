@@ -105,7 +105,7 @@ public class CotizacionMBean {
 	}
 	
 	
-	public String selectorNuevoServicio(int modo) throws Exception{
+	public String selectorNuevaCotizacion(int modo) throws Exception{
 		 String pagina = "";
 		 
 		 switch(modo){ 
@@ -113,7 +113,7 @@ public class CotizacionMBean {
 					inicializarClases();
 
 					listarCITE();
-					pagina = "/paginas/ModuloProduccion/cliente/servicio/nuevo/nuevoServicio.xhtml"; break;
+					pagina = "/paginas/ModuloProduccion/cliente/cotizacion/nuevo/nuevaCotizacion.xhtml"; break;
 			/*@@ESTE ES EL CASO PARA PERFIL EMPLEADO
 			 * case 2: MODO_USUARIO = MODO_OCAA;
 					inicializarClases();									

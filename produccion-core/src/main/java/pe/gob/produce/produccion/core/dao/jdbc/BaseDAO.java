@@ -5,6 +5,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 
 public class BaseDAO {
 
@@ -29,6 +30,18 @@ public class BaseDAO {
 	}
 
 	protected void cerrarStatement(PreparedStatement stmt)
+			throws RuntimeException {
+		try {
+			if (stmt != null) {
+				stmt.close();
+			}
+		} catch (SQLException se) {
+			System.err.println("Error: cerrarStatement: " + se);
+		}
+	}
+	
+	
+	protected void cerrarSentenceStatement(Statement stmt)
 			throws RuntimeException {
 		try {
 			if (stmt != null) {
