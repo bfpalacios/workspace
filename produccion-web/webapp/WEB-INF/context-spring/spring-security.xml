@@ -10,10 +10,10 @@
         <intercept-url pattern="/javax.faces.resource/**" access="IS_AUTHENTICATED_ANONYMOUSLY"/>
                 
 		<intercept-url pattern="/login.xhtml" access="IS_AUTHENTICATED_ANONYMOUSLY"  />
-		<intercept-url pattern="/nuevoUsuario.xhtml" access="IS_AUTHENTICATED_ANONYMOUSLY"  />
 		<intercept-url pattern="/plantilla/plantilla-login.xhtml" access="IS_AUTHENTICATED_ANONYMOUSLY"  />
 		<intercept-url pattern="/admin" access="IS_AUTHENTICATED_ANONYMOUSLY"  />
-		<intercept-url pattern="/admin/" access="IS_AUTHENTICATED_ANONYMOUSLY"  />
+		<intercept-url pattern="/admin/**" access="IS_AUTHENTICATED_ANONYMOUSLY"  />
+		<intercept-url pattern="/admin/nuevoUsuario.xhtml" access="IS_AUTHENTICATED_ANONYMOUSLY"  />
 		<intercept-url pattern="/denegado" access="IS_AUTHENTICATED_ANONYMOUSLY"  />
 		<intercept-url pattern="/errorHTTP4" access="IS_AUTHENTICATED_ANONYMOUSLY"  />
 		<intercept-url pattern="/admin/errorLogin" access="IS_AUTHENTICATED_ANONYMOUSLY"  />
@@ -41,6 +41,7 @@
 <!--		<intercept-url pattern="/incidencias/**" access="ROLE_SUPERVIDOR, ROLE_PROCESADOR, ROLE_REVISOR"  />
 		<intercept-url pattern="/canales/**" access="ROLE_SUPERVIDOR, ROLE_PROCESADOR, ROLE_REVISOR"  />-->
 		
+				
 		<form-login login-page="/login.xhtml" 
 			default-target-url="/home.xhtml" 
 			authentication-failure-url="/login.xhtml" />

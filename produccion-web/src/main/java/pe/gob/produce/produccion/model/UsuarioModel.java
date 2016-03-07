@@ -22,13 +22,104 @@ public class UsuarioModel {
 	private String correo;
 	private String direccion;
 	private String telefono;
+	private String telefono2;
+	
+	private String portal;
 	private String dni;
 	private String tipoDoc;
+	private String nroDoc;
 	private String rubro;
 	private String email1;
 	private String email2;
 	private String rol;
+	private String departamento;
+	private String provincia;
+	private String perfil;
+	private String emailAdmin;	
+	private String razonSocial;	
+	private String ruc;	
+	private String representante;	
 	
+	
+	public String getTelefono2() {
+		return telefono2;
+	}
+
+	public void setTelefono2(String telefono2) {
+		this.telefono2 = telefono2;
+	}
+
+	public String getPortal() {
+		return portal;
+	}
+
+	public void setPortal(String portal) {
+		this.portal = portal;
+	}
+	public String getRazonSocial() {
+		return razonSocial;
+	}
+
+	public void setRazonSocial(String razonSocial) {
+		this.razonSocial = razonSocial;
+	}
+
+	public String getRuc() {
+		return ruc;
+	}
+
+	public void setRuc(String ruc) {
+		this.ruc = ruc;
+	}
+
+	public String getRepresentante() {
+		return representante;
+	}
+
+	public void setRepresentante(String representante) {
+		this.representante = representante;
+	}
+
+	public String getDepartamento() {
+		return departamento;
+	}
+
+	public void setDepartamento(String departamento) {
+		this.departamento = departamento;
+	}
+
+	public String getProvincia() {
+		return provincia;
+	}
+
+	public void setProvincia(String provincia) {
+		this.provincia = provincia;
+	}
+
+	public String getPerfil() {
+		return perfil;
+	}
+
+	public void setPerfil(String perfil) {
+		this.perfil = perfil;
+	}
+
+	public String getEmailAdmin() {
+		return emailAdmin;
+	}
+
+	public void setEmailAdmin(String emailAdmin) {
+		this.emailAdmin = emailAdmin;
+	}
+
+	public String getNroDoc() {
+		return nroDoc;
+	}
+
+	public void setNroDoc(String nroDoc) {
+		this.nroDoc = nroDoc;
+	}
+
 	public String getDni() {
 		return dni;
 	}

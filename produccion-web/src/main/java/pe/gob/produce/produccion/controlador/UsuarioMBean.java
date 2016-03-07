@@ -16,6 +16,7 @@ import org.springframework.stereotype.Controller;
 
 import pe.edu.sistemas.unayoe.unayoe.bo.ClaseMaestra;
 import pe.edu.sistemas.unayoe.unayoe.bo.UsuarioBO;
+import pe.gob.produce.produccion.model.ServicioModel;
 import pe.gob.produce.produccion.model.UsuarioModel;
 import pe.gob.produce.produccion.services.ComunServices;
 import pe.gob.produce.produccion.services.UsuarioServices;
@@ -76,9 +77,30 @@ public class UsuarioMBean {
 		
 		String pagina ="";
 		System.out.println("nuevo usuario");
+		//pagina ="/admin/nuevoUsuario.xhtml";
 		pagina ="/paginas/ModuloProduccion/cliente/nuevo/usuario/nuevoUsuario.xhtml";
+		
 		return pagina;
 	}
+	
+	
+	public String cancelar() throws Exception{
+		 String pagina = "";
+		 
+		 	inicializarClases();
+
+			//listarCITE();
+			pagina = "/paginas/ModuloProduccion/cliente/nuevo/usuario/nuevoUsuario.xhtml"; 
+			
+		return pagina;		
+	}
+	
+	private void inicializarClases(){
+		this.usuarioModel = new UsuarioModel();		
+		
+	
+	}
+	
 	
 	public String nuevoUsuarioEmpresa(int i){
 		System.out.println("nuevo usuario");
