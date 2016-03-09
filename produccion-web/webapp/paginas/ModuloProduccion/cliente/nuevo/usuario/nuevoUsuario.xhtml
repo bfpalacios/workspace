@@ -23,10 +23,11 @@
 				<p:panelGrid id="pnlGridLoginAcceso">
 					<p:row>
 						<p:column colspan="6" sstyleClass="ui-column-label-spij styleAlignRightColumn">
-							<h:outputText 
-								id="lblTitulo"
+						<h3>
+							<h:outputText id="lblTitulo"
 								value="#{mensaje['produccion.nuevo.cliente.datosgenerales']}" />
-						</p:column>
+						</h3>
+					</p:column>
 					</p:row>
 					<p:row>
 						
@@ -164,10 +165,11 @@
 			
 					<p:row>
 						<p:column colspan="6" styleClass="ui-column-label-spij styleAlignRightColumn">
-							<h:outputText 
-								id="lblDatosUsuario"
+						<h3>
+							<h:outputText id="lblDatosUsuario"
 								value="#{mensaje['produccion.nuevo.cliente.datosusuario']}" />
-						</p:column>
+						</h3>
+					</p:column>
 					</p:row>
 					<p:row>
 						<p:column styleClass="ui-column-label-spij styleAlignRightColumn">
@@ -218,7 +220,30 @@
 								<f:selectItem itemLabel="Rol Empresa " itemValue="3" />					
 							</p:selectOneMenu>
 						</p:column>
+						
 					
+					</p:row>
+					<p:row>	
+						<p:column styleClass="ui-column-label-spij styleAlignRightColumn">
+							<h:outputText 
+								id="lblLoginConfirmarPassword"
+								value="#{mensaje['demo.mantenimiento.usuario.confirmaclave']}" />
+						</p:column>
+
+						<p:column styleClass="styleAlignLeftColumn">
+							<p:password 
+								id="confirmarclave" size="40"								
+								value="#{usuarioMBean.usuarioModel.clave}" />
+							<p:message for="confirmarclave" />
+						</p:column>
+						<p:column styleClass="ui-column-label-spij styleAlignRightColumn">
+							
+						</p:column>
+						<p:column colspan="3" styleClass="ui-column-label-spij styleAlignRightColumn">
+							
+						</p:column>
+						
+										
 					</p:row>
 					
 						
