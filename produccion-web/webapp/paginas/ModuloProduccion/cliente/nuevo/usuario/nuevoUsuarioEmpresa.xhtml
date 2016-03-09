@@ -23,9 +23,9 @@
 				<p:panelGrid id="pnlGridLoginAcceso">
 					<p:row>
 						<p:column colspan="6" sstyleClass="ui-column-label-spij styleAlignRightColumn">
-							<h:outputText 
+							<h3><h:outputText 
 								id="lblTitulo"
-								value="#{mensaje['produccion.nuevo.empresa.datosgeneralesempresa']}" />
+								value="#{mensaje['produccion.nuevo.empresa.datosgeneralesempresa']}" /></h3>
 						</p:column>
 					</p:row>
 					<p:row>
@@ -171,12 +171,32 @@
 					</p:row>
 					<p:separator/>
 					<p:spacer  width="5px"/>
-			
+					<!-- Comienza datos de Usuario  -->
 					<p:row>
 						<p:column colspan="6" styleClass="ui-column-label-spij styleAlignRightColumn">
-							<h:outputText 
+							<h3><h:outputText 
 								id="lblDatosUsuario"
-								value="#{mensaje['produccion.nuevo.cliente.datosusuario']}" />
+								value="#{mensaje['produccion.nuevo.cliente.datosusuario']}" /></h3>
+						</p:column>
+					</p:row>
+					<p:row>
+						<p:column styleClass="ui-column-label-spij styleAlignRightColumn">
+							<h:outputText id="lblCodContacto"
+								value="#{mensaje['produccion.nuevo.cliente.nombreContacto']}" />
+						</p:column>
+
+						<p:column>
+							<p:inputText id="idContacto" size="40"						
+								value="#{usuarioMBean.usuarioModel.idUsuario}" />					
+						</p:column>
+						<p:column styleClass="ui-column-label-spij styleAlignRightColumn">
+							<h:outputText id="lblNombreCargo"
+								value="#{mensaje['produccion.nuevo.cliente.nombrecargo']}" />
+						</p:column>
+
+						<p:column colspan="3">
+							<p:inputText id="nombrecargo" size="40"						
+								value="#{usuarioMBean.usuarioModel.idUsuario}" />					
 						</p:column>
 					</p:row>
 					<p:row>
@@ -228,6 +248,29 @@
 									itemLabel="#{roles.role}"
 									itemValue="#{roles.idRol}"/> 								
 							</p:selectOneMenu>
+						</p:column>
+					
+					</p:row>
+					<p:row>	
+						<p:column styleClass="ui-column-label-spij styleAlignRightColumn">
+							<h:outputText 
+								id="lblLoginPasswordEmpresa"
+								value="#{mensaje['demo.mantenimiento.usuario.confirmaclave']}" />
+						</p:column>
+
+						<p:column styleClass="styleAlignLeftColumn">
+							<p:password 
+								id="confirmaclave" size="40"								
+								value="#{usuarioMBean.usuarioModel.clave}" />
+							<p:message for="clave" />
+						</p:column>
+						
+						<p:column styleClass="ui-column-label-spij styleAlignRightColumn">
+							
+						</p:column>
+						
+						<p:column styleClass="styleAlignLeftColumn" colspan="3">
+							
 						</p:column>
 					
 					</p:row>

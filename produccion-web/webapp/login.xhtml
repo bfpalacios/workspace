@@ -47,13 +47,14 @@
 					<p:row>
 
 						<p:column styleClass="styleAlignRightColumn">
-							<input type="submit" id="login" name="login"
-								
+							
+						</p:column>
+						
+						<p:column colspan="2" styleClass="styleAlignLeftColumn">
+							<input type="submit" id="login" name="login" class="botonNormal"
 								value="#{mensaje['demo.login.btn.ingresar']}"
 								title="#{mensaje['demo.login.btn.ingresar']}" />
-						</p:column>
-
-						<p:column colspan="2" styleClass="styleAlignLeftColumn">
+								
 							<p:commandButton  value="Nuevo Cliente" id="botonNuevo"
 								action="#{usuarioMBean.selectorNuevoUsuario(1)}" ajax="true" />
                           
