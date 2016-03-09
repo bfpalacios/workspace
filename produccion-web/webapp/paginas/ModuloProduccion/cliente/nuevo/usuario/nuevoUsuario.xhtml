@@ -49,8 +49,13 @@
 						</p:column>
 						
 						<p:column>
-							<p:inputText id="tipoDoc" size="10"								
-								value="#{usuarioMBean.usuarioModel.tipoDoc}" />
+							<p:selectOneMenu id="tipoDoc" 
+								value="#{usuarioMBean.usuarioModel.tipoDoc}">
+								<f:selectItem itemLabel="Seleccione Tipo Doc " />
+								<f:selectItem itemLabel="DNI" itemValue="1" />
+								<f:selectItem itemLabel="Carne de Extranjeria" itemValue="2" />					
+							</p:selectOneMenu>
+							
 							<p:message for="tipoDoc" />
 						</p:column>
 						
@@ -205,13 +210,12 @@
 						</p:column>
 						
 						<p:column styleClass="styleAlignLeftColumn">
-							<p:selectOneMenu
+							<p:selectOneMenu id="rol" 
 								value="#{usuarioMBean.usuarioModelSelect.rol}">
-								<f:selectItems 
-									value="#{usuarioMBean.usuarioModel.rolesUsuario}"
-									var="roles" 
-									itemLabel="#{roles.role}"
-									itemValue="#{roles.idRol}"/> 								
+								<f:selectItem itemLabel="Seleccione el Perfil" />
+								<f:selectItem itemLabel="Rol Cliente" itemValue="1" />
+								<f:selectItem itemLabel="Rol Usuario CITE " itemValue="2" />
+								<f:selectItem itemLabel="Rol Empresa " itemValue="3" />					
 							</p:selectOneMenu>
 						</p:column>
 					
