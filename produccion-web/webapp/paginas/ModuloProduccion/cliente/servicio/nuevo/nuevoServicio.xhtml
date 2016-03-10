@@ -157,7 +157,7 @@
 		<p:outputPanel id="pnlGuardar" style="width:400x;margin-top:10px;">
 			<p:row>
 				<p:column colspan="2" styleClass="styleAlignLeftColumn">
-					<p:commandButton id="botonGuardar"
+					<p:commandButton id="botonGuardar" styleClass="buttonMarginNormal"
 						value="#{mensaje['produccion.nuevo.servicio.label.enviar']}"
 						actionListener="#{servicioMBean.guardarNuevoServicio}"
 						update="lFecha,nombreServicio, descripcionServicio,  nombreSolicitante,  cargo,  telefono, email"

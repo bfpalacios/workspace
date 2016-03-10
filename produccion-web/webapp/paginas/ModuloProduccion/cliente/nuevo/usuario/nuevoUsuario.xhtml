@@ -255,14 +255,14 @@
 				<p:row>
 					<p:column colspan="2" styleClass="styleAlignRightColumn">
 						<p:commandButton 
-							id="botonGuardar" value="Registrar Usuario" 
+							id="botonGuardar" value="Registrar Usuario" styleClass="buttonMarginNormal"
 							actionListener="#{usuarioMBean.guardarNuevoUsuarioMO}"
 							update="nombre, clave, tipoDoc, email1, direccionUsuario, telefonoUsuario" 
 							ajax="true"/>							
 					</p:column>
 					
 					<p:column colspan="2" styleClass="styleAlignRightColumn">
-					<p:commandButton value="Cancelar" id="botonCamcelar"
+					<p:commandButton value="Cancelar" id="botonCamcelar" 
 						actionListener="#{usuarioMBean.cancelar}" ajax="false" />
 				</p:column>
 				</p:row>

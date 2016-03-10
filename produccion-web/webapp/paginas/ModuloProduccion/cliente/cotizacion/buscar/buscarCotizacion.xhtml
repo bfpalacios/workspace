@@ -97,32 +97,32 @@
 						emptyMessage="Sin datos para cargar" paginator="true" rows="20">
 
 
-						<p:column headerText="Codigo(*)"
+						<p:column headerText="N° Cotización"
 							styleClass="ui-column-label-spij styleAlignRightColumn">
 							<h:outputText value="#{registro.codigo}" />
 						</p:column>
 
-						<p:column headerText="Nombre Servicio"
+						<p:column headerText="Razón Social"
 							styleClass="ui-column-label-spij styleAlignRightColumn">
 							<h:outputText value="#{registro.nombre}" />
 						</p:column>
 
-						<p:column headerText="Unidad"
+						<p:column headerText="Solicitante"
 							styleClass="ui-column-label-spij styleAlignRightColumn">
 							<h:outputText value="#{registro.unidad}" />
 						</p:column>
 
-						<p:column headerText="Requisito"
+						<p:column headerText="Fecha"
 							styleClass="ui-column-label-spij styleAlignRightColumn">
 							<h:outputText value="#{registro.requisito}" />
 						</p:column>
 
-						<p:column headerText="Valor de Venta"
+						<p:column headerText="Cite Destino"
 							styleClass="ui-column-label-spij styleAlignRightColumn">
 							<h:outputText value="#{registro.valorDeVenta}" />
 						</p:column>
 
-						<p:column headerText="Precio de Venta"
+						<p:column headerText="Costo Total"
 							styleClass="ui-column-label-spij styleAlignRightColumn">
 							<h:outputText value="#{registro.precioDeVenta}" />
 
@@ -134,6 +134,24 @@
 				</p:column>
 			</p:row>
 		</p:panelGrid>
+		<p:spacer width="5px" />
+		<p:outputPanel id="pnlGuardar" style="width:400x;margin-top:10px;">
+			<p:row>
+				<p:column colspan="2" styleClass="styleAlignLeftColumn">
+					<p:commandButton id="botonGuardar" styleClass="buttonMarginNormal" 
+						value="#{mensaje['produccion.buscar.cotizacion.label.vercotizacion']}"
+						actionListener="#{servicioMBean.guardarNuevoServicio}"
+						update="lFecha,nombreServicio, descripcionServicio,  nombreSolicitante,  cargo,  telefono, email"
+						ajax="false" />
+				</p:column>
+				
+				<p:column colspan="2" styleClass="styleAlignRightColumn">
+					<p:commandButton value="Imprimir Cotización" id="botonCamcelar"
+						actionListener="#{servicioMBean.cancelar}" ajax="false" />
+				</p:column>
+			</p:row>
+		</p:outputPanel>
+			
 
 		
 
