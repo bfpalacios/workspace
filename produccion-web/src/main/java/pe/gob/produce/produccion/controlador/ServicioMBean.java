@@ -172,9 +172,15 @@ public class ServicioMBean {
 		servicioModel4.setValorDeVenta("137.47");
 		servicioModel4.setPrecioDeVenta("544.21");		
 		
-		//servicioModel4.setTotalPrecioDeVenta("123");
-		
+	
 		listaServicio.add(servicioModel4);
+		
+		
+		String nombreServicio = getServicioModel().getNombre()==null?"blanco":getServicioModel().getNombre();
+		String codigoServicio = getServicioModel().getCodigo()==null?"blanco":getServicioModel().getCodigo();
+		String codigoCITE = getServicioModel().getCodigoCITE()==null?"blanco":getServicioModel().getCodigoCITE();
+		
+		System.out.println("dATOS SERVICIO BUSQUEDA " + nombreServicio + "-" + codigoServicio + "-" + codigoCITE);
 		
 		
 		setDatosServiciosModelGrid(listaServicio);
