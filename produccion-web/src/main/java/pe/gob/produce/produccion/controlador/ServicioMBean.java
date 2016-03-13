@@ -2,6 +2,7 @@ package pe.gob.produce.produccion.controlador;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
 
 import javax.faces.bean.ViewScoped;
@@ -9,11 +10,12 @@ import javax.faces.bean.ViewScoped;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
-import pe.edu.sistemas.unayoe.unayoe.bo.CITEBO;
+import pe.gob.produce.produccion.bo.ServicioBO;
 import pe.gob.produce.produccion.core.util.Convertidor;
 import pe.gob.produce.produccion.core.util.FormateadorFecha;
 import pe.gob.produce.produccion.model.ServicioModel;
 import pe.gob.produce.produccion.services.CITEServices;
+import pe.gob.produce.produccion.services.ServicioServices;
 
 
 
@@ -26,6 +28,9 @@ public class ServicioMBean {
 	
 	@Autowired
 	private CITEServices citeServices;
+	
+	@Autowired
+	private ServicioServices servicioServices;
 	
 	//datos complementarios de la pantalla
 	private Date date;
@@ -59,52 +64,6 @@ public class ServicioMBean {
 	private void inicializarClases(){
 		this.servicioModel = new ServicioModel();		
 		
-		List<ServicioModel> listaServicio = new ArrayList<ServicioModel>();
-		
-		ServicioModel servicioModel = new ServicioModel();
-		servicioModel.setCodigo("0001 - CITE MADERA");
-		servicioModel.setNombre("Asistencia Tecnica");
-		servicioModel.setUnidad("Hora");
-		servicioModel.setRequisito("Constancia de Pago");
-		servicioModel.setValorDeVenta("37.47");
-		servicioModel.setPrecioDeVenta("44.21");
-		listaServicio.add(servicioModel);
-		
-		ServicioModel servicioModel2 = new ServicioModel();
-		servicioModel2.setCodigo("0001 - CITE MADERA");
-		servicioModel2.setNombre("Secado de madera en horno experimental");
-		servicioModel2.setUnidad("Lote");
-		servicioModel2.setRequisito("Constancia de Pago");
-		servicioModel2.setValorDeVenta("130.56");
-		servicioModel2.setPrecioDeVenta("855.90");
-		listaServicio.add(servicioModel2);
-		
-		ServicioModel servicioModel3 = new ServicioModel();
-		servicioModel3.setCodigo("0003 - CITE AGROINDUSTRIAL");
-		servicioModel3.setNombre("Asistencia Tecnica");
-		servicioModel3.setUnidad("Muestra");
-		servicioModel3.setRequisito("Constancia de Pago");
-		servicioModel3.setValorDeVenta("37.47");
-		servicioModel3.setPrecioDeVenta("44.21");
-		listaServicio.add(servicioModel3);
-		
-		ServicioModel servicioModel4 = new ServicioModel();
-		servicioModel4.setCodigo("0004 - CITE PESQUERO");
-		servicioModel4.setNombre("Deflexion de las repisas");
-		servicioModel4.setUnidad("Muestra");
-		servicioModel4.setRequisito("Constancia de Pago");
-		servicioModel4.setValorDeVenta("137.47");
-		servicioModel4.setPrecioDeVenta("544.21");		
-		
-		//servicioModel4.setTotalPrecioDeVenta("123");
-		
-		listaServicio.add(servicioModel4);
-		
-		
-		setDatosServiciosModelGrid(listaServicio);
-		
-		
-		
 	}
 	
 	
@@ -131,59 +90,38 @@ public class ServicioMBean {
 		return pagina;		
 	}
 	
-	public String cancelar() throws Exception{
-		 String pagina = "";
-		 
-		 	inicializarClases();
-
-			listarCITE();
-			pagina = "/paginas/ModuloProduccion/cliente/servicio/nuevo/nuevoServicio.xhtml"; 
-			
-		return pagina;		
-	}
-	
 	public void buscarServicio() throws Exception{
-		 
-		List<ServicioModel> listaServicio = new ArrayList<ServicioModel>();
 		
-		ServicioModel servicioModel = new ServicioModel();
-		servicioModel.setCodigo("0001 - CITE MADERA");
-		servicioModel.setNombre("Asistencia Tecnica");
-		servicioModel.setUnidad("Hora");
-		servicioModel.setRequisito("Constancia de Pago");
-		servicioModel.setValorDeVenta("37.47");
-		servicioModel.setPrecioDeVenta("44.21");
-		listaServicio.add(servicioModel);
-		
-		ServicioModel servicioModel3 = new ServicioModel();
-		servicioModel3.setCodigo("0003 - CITE AGROINDUSTRIAL");
-		servicioModel3.setNombre("Asistencia Tecnica");
-		servicioModel3.setUnidad("Muestra");
-		servicioModel3.setRequisito("Constancia de Pago");
-		servicioModel3.setValorDeVenta("37.47");
-		servicioModel3.setPrecioDeVenta("44.21");
-		listaServicio.add(servicioModel3);
-		
-		ServicioModel servicioModel4 = new ServicioModel();
-		servicioModel4.setCodigo("0004 - CITE PESQUERO");
-		servicioModel4.setNombre("Deflexion de las repisas");
-		servicioModel4.setUnidad("Muestra");
-		servicioModel4.setRequisito("Constancia de Pago");
-		servicioModel4.setValorDeVenta("137.47");
-		servicioModel4.setPrecioDeVenta("544.21");		
-		
-	
-		listaServicio.add(servicioModel4);
+		//inicializarClases();
 		
 		
-		String nombreServicio = getServicioModel().getNombre()==null?"blanco":getServicioModel().getNombre();
-		String codigoServicio = getServicioModel().getCodigo()==null?"blanco":getServicioModel().getCodigo();
-		String codigoCITE = getServicioModel().getCodigoCITE()==null?"blanco":getServicioModel().getCodigoCITE();
+		String nombreServicio = getServicioModel().getNombre()==null?"":getServicioModel().getNombre();
+		String codigoServicio = getServicioModel().getCodigo()==null?"":getServicioModel().getCodigo();
+		String codigoCITE = getServicioModel().getCodigoCITE()==null?"":getServicioModel().getCodigoCITE();
 		
 		System.out.println("dATOS SERVICIO BUSQUEDA " + nombreServicio + "-" + codigoServicio + "-" + codigoCITE);
 		
+		List<ServicioBO> listaServicio = new ArrayList<ServicioBO>();
+		//SE ENVIA EL 6 POR DEFAULT
+		listaServicio = servicioServices.buscarServicio(codigoServicio,nombreServicio, 6);
+		List<ServicioModel> datosServiciosModelGrid = new ArrayList<ServicioModel>();
 		
-		setDatosServiciosModelGrid(listaServicio);
+		
+		for (ServicioBO servicioBO : listaServicio) {
+			ServicioModel servicioModel = new ServicioModel();
+			servicioModel.setCodigo(servicioBO.getCodigo());
+			servicioModel.setNombre(servicioBO.getNombre());
+			servicioModel.setUnidad(servicioBO.getUnidad());
+			servicioModel.setRequisito(servicioBO.getRequisito());
+			servicioModel.setValorDeVenta(servicioBO.getValorDeVenta());
+			servicioModel.setPrecioDeVenta(servicioBO.getPrecioDeVenta());
+			
+			datosServiciosModelGrid.add(servicioModel);
+		}
+		
+
+		setDatosServiciosModelGrid(datosServiciosModelGrid);
+		listarCITE();
 	}
 	
 	
@@ -193,7 +131,26 @@ public class ServicioMBean {
 		 switch(modo){ 
 			case 1: MODO_USUARIO = MODO_ADMIN;									
 					inicializarClases();
+					List<ServicioBO> listaServicio = new ArrayList<ServicioBO>();
+					
+					List<ServicioModel> datosServiciosModelGrid = new ArrayList<ServicioModel>();
+					
+					listaServicio = servicioServices.buscarServicio("", "", 6);
+					
+					for (ServicioBO servicioBO : listaServicio) {
+						ServicioModel servicioModel = new ServicioModel();
+						servicioModel.setCodigo(servicioBO.getCodigo());
+						servicioModel.setNombre(servicioBO.getNombre());
+						servicioModel.setUnidad(servicioBO.getUnidad());
+						servicioModel.setRequisito(servicioBO.getRequisito());
+						servicioModel.setValorDeVenta(servicioBO.getValorDeVenta());
+						servicioModel.setPrecioDeVenta(servicioBO.getPrecioDeVenta());
+						
+						datosServiciosModelGrid.add(servicioModel);
+					}
+					
 
+					setDatosServiciosModelGrid(datosServiciosModelGrid);
 					listarCITE();
 					pagina = "/paginas/ModuloProduccion/cliente/servicio/buscar/buscarServicio.xhtml"; break;
 			/*@@ESTE ES EL CASO PARA PERFIL EMPLEADO
@@ -287,7 +244,18 @@ public class ServicioMBean {
 	private void listarCITE(){
 		try{
 			
-			
+		
+			getServicioModel().setListarCITE(citeServices.listarCITES());
+		}
+		catch(Exception e){
+			e.printStackTrace();
+		}
+	}
+		
+	private void listarServicios(){
+		
+		try{
+				
 			getServicioModel().setListarCITE(citeServices.listarCITES());
 		}
 		catch(Exception e){
@@ -295,18 +263,15 @@ public class ServicioMBean {
 		}
 	}
 	
-	
-	private void listarServicios(){
-		
-		
-		try{
+	public String cancelar() throws Exception{
+		 String pagina = "";
+		 
+		 	inicializarClases();
+
+			listarCITE();
+			pagina = "/paginas/ModuloProduccion/cliente/servicio/nuevo/nuevoServicio.xhtml"; 
 			
-			
-			getServicioModel().setListarCITE(citeServices.listarCITES());
-		}
-		catch(Exception e){
-			e.printStackTrace();
-		}
+		return pagina;		
 	}
 	
 	public void setServicioModel(ServicioModel servicioModel) {

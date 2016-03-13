@@ -6,9 +6,8 @@ import javax.faces.bean.ViewScoped;
 
 import org.springframework.stereotype.Component;
 
-import pe.edu.sistemas.unayoe.unayoe.bo.ClaseMaestra;
-import pe.edu.sistemas.unayoe.unayoe.bo.UsuarioBO;
-import pe.edu.sistemas.unayoe.unayoe.bo.UsuarioRolBO;
+import pe.gob.produce.produccion.bo.UsuarioBO;
+import pe.gob.produce.produccion.bo.UsuarioRolBO;
 
 @Component("usuarioModel")
 @ViewScoped
@@ -164,7 +163,6 @@ public class UsuarioModel {
 	private int planAlumno;
 	private UsuarioRolBO usuarioRol;
 	private List<UsuarioBO> rolesUsuario;
-	private List<ClaseMaestra> listaPlanes;
 	
 	public UsuarioModel () {
 		this.idUsuario = null;
@@ -255,10 +253,5 @@ public class UsuarioModel {
 	public void setPlanAlumno(int planAlumno) {
 		this.planAlumno = planAlumno;
 	}
-	public List<ClaseMaestra> getListaPlanes() {
-		return listaPlanes;
-	}
-	public void setListaPlanes(List<ClaseMaestra> listaPlanes) {
-		this.listaPlanes = listaPlanes;
-	} 	
+	 	
 }

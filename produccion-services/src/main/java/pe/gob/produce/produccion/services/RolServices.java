@@ -2,7 +2,7 @@ package pe.gob.produce.produccion.services;
 
 import java.util.List;
 
-import pe.edu.sistemas.unayoe.unayoe.bo.RolBO;
+import pe.gob.produce.produccion.bo.RolBO;
 
 public interface RolServices {
 

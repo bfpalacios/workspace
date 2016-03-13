@@ -10,11 +10,12 @@ import oracle.jdbc.OracleTypes;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-import pe.edu.sistemas.unayoe.unayoe.bo.AlumnoParBO;
-import pe.edu.sistemas.unayoe.unayoe.bo.UsuarioBO;
+import pe.gob.produce.produccion.bo.UsuarioBO;
 import pe.gob.produce.produccion.core.dao.DAOImpl;
 import pe.gob.produce.produccion.core.dao.jdbc.Conexion;
 import pe.gob.produce.produccion.dao.dominio.Usuario;
+
+
 
 
 @Repository("usuarioDao")
@@ -44,35 +45,7 @@ public class UsuarioDaoImpl extends DAOImpl<Usuario,String> implements UsuarioID
 		cstm.execute();
 	}
 
-	@Override
-	public AlumnoParBO obtenerTutorActividad(int codigoActividad) {
-		Connection con = null;
-		CallableStatement cstm = null;
-		ResultSet rs = null;
-
-		AlumnoParBO alumnoParBO = new AlumnoParBO();
-
-		try{
-			con = Conexion.obtenerConexion();
-			cstm = con.prepareCall("{call USP_TUTOR_DE_ACTIVIDAD(:codigo_actividad,:out_cursor)}");
-			cstm.setInt("codigo_actividad",codigoActividad);
-			cstm.registerOutParameter("out_cursor", OracleTypes.CURSOR);
-			cstm.execute();
-
-			rs = (ResultSet) cstm.getObject("out_cursor");
-
-			while(rs.next()){
-				alumnoParBO.setNombre(rs.getString("A_NOMBRE"));
-				alumnoParBO.setApellidos(rs.getString("A_APELLIDOS"));
-			}
-			return  alumnoParBO;
-		}
-		catch(Exception e){
-			e.printStackTrace();
-			return null;
-		}
-	}
-
+	
 	public void grabarUsuarioRegulares(UsuarioBO usuarioNuevo) throws SQLException{
 		Connection con = null;
 		CallableStatement cstm = null;
@@ -101,8 +74,6 @@ public class UsuarioDaoImpl extends DAOImpl<Usuario,String> implements UsuarioID
 		String codigoUsuario = "";
 		
 		try{
-			
-			System.out.println("USER " + codUsuario );
 			con = Conexion.obtenerConexion();
 			cstm = con.prepareCall("{call VALIDAR_EXISTENCIA_USUARIO(?,?)}");
 			cstm.setString(1, codUsuario);						

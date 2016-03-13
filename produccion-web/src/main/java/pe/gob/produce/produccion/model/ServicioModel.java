@@ -6,7 +6,7 @@ import javax.faces.bean.RequestScoped;
 
 import org.springframework.stereotype.Component;
 
-import pe.edu.sistemas.unayoe.unayoe.bo.CITEBO;
+import pe.gob.produce.produccion.bo.CITEBO;
 
 
 

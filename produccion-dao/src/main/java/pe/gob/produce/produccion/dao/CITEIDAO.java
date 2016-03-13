@@ -2,7 +2,7 @@ package pe.gob.produce.produccion.dao;
 
 import java.util.List;
 
-import pe.edu.sistemas.unayoe.unayoe.bo.CITEBO;
+import pe.gob.produce.produccion.bo.CITEBO;
 
 public interface CITEIDAO {
 

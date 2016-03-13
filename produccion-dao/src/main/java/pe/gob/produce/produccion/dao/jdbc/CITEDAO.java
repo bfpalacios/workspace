@@ -9,7 +9,7 @@ import java.util.List;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-import pe.edu.sistemas.unayoe.unayoe.bo.CITEBO;
+import pe.gob.produce.produccion.bo.CITEBO;
 import pe.gob.produce.produccion.core.dao.jdbc.BaseDAO;
 import pe.gob.produce.produccion.core.dao.jdbc.Conexion;
 import pe.gob.produce.produccion.dao.CITEIDAO;

@@ -2,8 +2,7 @@ package pe.gob.produce.produccion.services;
 
 import java.util.List;
 
-import pe.edu.sistemas.unayoe.unayoe.bo.AlumnoParBO;
-import pe.edu.sistemas.unayoe.unayoe.bo.UsuarioBO;
+import pe.gob.produce.produccion.bo.UsuarioBO;
 
 public interface UsuarioServices {
 	public String buscarUsuario(String codUsuario) throws Exception;
@@ -13,5 +12,4 @@ public interface UsuarioServices {
 	public void grabarUsuarioRegulares(UsuarioBO usuarioNuevo) throws Exception;
 	public void grabarUsuarioObservados(UsuarioBO usuarioNuevo) throws Exception;
 
-	AlumnoParBO obtenerTutorActividad(int codigoActividad);
 }

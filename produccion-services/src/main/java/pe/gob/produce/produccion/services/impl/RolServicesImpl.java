@@ -5,7 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import pe.edu.sistemas.unayoe.unayoe.bo.RolBO;
+import pe.gob.produce.produccion.bo.RolBO;
 import pe.gob.produce.produccion.dao.jdbc.RolDAO;
 import pe.gob.produce.produccion.services.RolServices;
 

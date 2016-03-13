@@ -2,11 +2,11 @@ package pe.gob.produce.produccion.services;
 
 import java.util.List;
 
-import pe.edu.sistemas.unayoe.unayoe.bo.RolBO;
+import pe.gob.produce.produccion.bo.ServicioBO;
 
 public interface ServicioServices {
 	
-	//public List<Servi> listarRoles();
-	//public List<RolBO> listarRoles();
+	public List<ServicioBO> buscarServicio(String codigo, String nombre, int idCite);
+	public List<ServicioBO> buscarServicio();
 
 }

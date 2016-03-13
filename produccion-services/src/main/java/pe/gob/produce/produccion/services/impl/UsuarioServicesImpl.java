@@ -5,8 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import pe.edu.sistemas.unayoe.unayoe.bo.AlumnoParBO;
-import pe.edu.sistemas.unayoe.unayoe.bo.UsuarioBO;
+import pe.gob.produce.produccion.bo.UsuarioBO;
 import pe.gob.produce.produccion.dao.UsuarioIDao;
 import pe.gob.produce.produccion.dao.dominio.Usuario;
 import pe.gob.produce.produccion.dao.jdbc.ComunDAOImpl;
@@ -21,7 +20,6 @@ public class UsuarioServicesImpl implements UsuarioServices {
 	private UsuarioIDao usuarioDao;
 	@Autowired
 	private UsuarioTransformerToBO usuarioTransformerToBO;
-	
 	private ComunDAOImpl comunDAO;
 	
 	public UsuarioServicesImpl(){
@@ -42,10 +40,6 @@ public class UsuarioServicesImpl implements UsuarioServices {
 		usuarioDao.grabarUsuarioObservados(usuarioNuevo);
 	}
 
-	@Override
-	public AlumnoParBO obtenerTutorActividad(int codigoActividad) {
-		return usuarioDao.obtenerTutorActividad(codigoActividad);
-	}
 
 	public void grabarUsuarioRegulares(UsuarioBO usuarioNuevo) throws Exception{
 		usuarioDao.grabarUsuarioRegulares(usuarioNuevo);

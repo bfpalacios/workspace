@@ -11,8 +11,8 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
 
-import pe.edu.sistemas.unayoe.unayoe.bo.RolBO;
-import pe.edu.sistemas.unayoe.unayoe.bo.UsuarioBO;
+import pe.gob.produce.produccion.bo.RolBO;
+import pe.gob.produce.produccion.bo.UsuarioBO;
 import pe.gob.produce.produccion.model.LoginModel;
 import pe.gob.produce.produccion.services.RolServices;
 import pe.gob.produce.produccion.services.UsuarioServices;

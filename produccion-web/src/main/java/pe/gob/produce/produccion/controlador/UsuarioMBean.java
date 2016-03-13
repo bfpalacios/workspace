@@ -14,8 +14,7 @@ import javax.faces.event.ValueChangeEvent;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
-import pe.edu.sistemas.unayoe.unayoe.bo.ClaseMaestra;
-import pe.edu.sistemas.unayoe.unayoe.bo.UsuarioBO;
+import pe.gob.produce.produccion.bo.UsuarioBO;
 import pe.gob.produce.produccion.model.ServicioModel;
 import pe.gob.produce.produccion.model.UsuarioModel;
 import pe.gob.produce.produccion.services.ComunServices;
@@ -29,8 +28,6 @@ public class UsuarioMBean {
 	private UsuarioModel usuarioModel;
 	@Autowired
 	private UsuarioServices usuarioServices;	
-	@Autowired
-	private ComunServices comunServices;
 	
 	private UIComponent btnGuardar;
 	private UsuarioModel usuarioModelSelect;
@@ -130,19 +127,6 @@ public class UsuarioMBean {
 		}
 	}
 	
-	public void listarPlanes() throws Exception{
-    	//System.out.println("Listando los ciclos:");
-    	
-    	List<ClaseMaestra> listaPlanes = null;
-        try {
-        	String tabla = "PLAN";
-        	String campo = "PLAN_ALUMNO";
-        	listaPlanes = comunServices.listarClaseMaestra(tabla, campo);   
-        	usuarioModel.setListaPlanes(listaPlanes);      
-        } catch (Exception e) {           
-            e.printStackTrace();
-        }
-    }
 	
 	public boolean validaNumero(String valor){
 		boolean esNumerico = false;
@@ -259,75 +243,7 @@ public class UsuarioMBean {
 		return pagina;
 	}
 	
-	public String guardarNuevoUsuarioMR() throws Exception {
-		String pagina = "";
-		try{
-			if (buscarUsuario(getUsuarioModel().getIdUsuario()==null?"0":getUsuarioModel().getIdUsuario()).equals("")){
-				String codAlumno = "0";
-				int planAlumno = 0;
-				
-				String nuevoUsuario = getUsuarioModel().getIdUsuario()==null?"0":getUsuarioModel().getIdUsuario();
-				String contrasenia = getUsuarioModel().getClave()==null?"0":getUsuarioModel().getClave();
-				int idRol = Integer.parseInt(usuarioModelSelect.getRol()==null?"0":usuarioModelSelect.getRol());
-				String nombres = getUsuarioModel().getNombres()==null?"":validaCadena(getUsuarioModel().getNombres())==true?getUsuarioModel().getNombres():"invalido";
-				String apellidoPaterno = getUsuarioModel().getPaterno()==null?"":validaCadena(getUsuarioModel().getPaterno())==true?getUsuarioModel().getPaterno():"invalido";
-				String apellidoMaterno = getUsuarioModel().getMaterno()==null?"":validaCadena(getUsuarioModel().getMaterno())==true?getUsuarioModel().getMaterno():"invalido";
-				String correo = getUsuarioModel().getCorreo()==null?"":validaCorreo(getUsuarioModel().getCorreo())==true?getUsuarioModel().getCorreo():"invalido";
-				String direccion = getUsuarioModel().getDireccion()==null?"":getUsuarioModel().getDireccion();
-				String telefono = getUsuarioModel().getTelefono()==null?"":validaNumero(getUsuarioModel().getTelefono())==true?getUsuarioModel().getTelefono():"invalido";
-				
-				if (idRol == ROL_ALUMNO_REGULAR){
-					codAlumno = getUsuarioModel().getCodAlumno()==null?"0":validaNumero(getUsuarioModel().getCodAlumno())==true?getUsuarioModel().getCodAlumno():"invalido";
-					planAlumno = usuarioModelSelect.getPlanAlumno()==0?0:usuarioModelSelect.getPlanAlumno();
-				}			
-				
-				if(validarCampos(nombres,apellidoPaterno,apellidoMaterno,correo,telefono,codAlumno,idRol)==true){
-					UsuarioBO usuarioNuevo = new UsuarioBO();
-					usuarioNuevo.setIdUsuario(nuevoUsuario);
-					usuarioNuevo.setContrasenia(contrasenia);
-					usuarioNuevo.setNombres(nombres);
-					usuarioNuevo.setApellidoPaterno(apellidoPaterno);
-					usuarioNuevo.setApellidoMaterno(apellidoMaterno);
-					usuarioNuevo.setCorreo(correo);
-					usuarioNuevo.setDireccion(direccion);
-					usuarioNuevo.setTelefono(telefono);
-					usuarioNuevo.setIdRol(String.valueOf(idRol));
-					if (idRol == ROL_ALUMNO_REGULAR){
-						usuarioNuevo.setCodAlumno(codAlumno);
-						usuarioNuevo.setPlanAlumno(planAlumno);
-					}
-					
-					usuarioServices.grabarUsuarioRegulares(usuarioNuevo);
-					limpiarCampos();
-					mostrarMensaje(8);	
-				}
-			}
-			else{
-				mostrarMensaje(7);
-			}
-		}
-		catch(Exception e){
-			e.printStackTrace();
-			mostrarMensaje(9);				
-		}		
-		limpiarObjetos();
-		listarPlanes();
-		llenarRolesRegulares();	
-		
-		switch(PROCESO){
-			case 1: switch(MODO_USUARIO){
-						case 1: pagina = "/paginas/ModuloObservados/admin/mantenimiento/usuario/nuevoUsuarioMO.xhtml"; break;
-						case 2: pagina = "/paginas/ModuloObservados/ocaa/mantenimiento/usuario/nuevoUsuarioMO.xhtml"; break;
-					}
-				
-			case 2: switch(MODO_USUARIO){
-						case 1: pagina = "/paginas/ModuloRegulares/admin/mantenimiento/usuario/nuevoUsuarioMR.xhtml"; break;
-						case 2: pagina = "/paginas/ModuloRegulares/ocaa/mantenimiento/usuario/nuevoUsuarioMR.xhtml"; break;
-					}				
-		}		
-		return pagina;
-	}
-
+	
 	private boolean validarCampos(String nombres, String apellidoPaterno, String apellidoMaterno, 
 			                      String correo, String telefono, String codAlumno, int idRol){
 		boolean apto = true;
@@ -417,13 +333,13 @@ public class UsuarioMBean {
 						case 1: PROCESO = PROCESO_REGULARES;
 								MODO_USUARIO = MODO_ADMIN;	
 								llenarRolesRegulares();		
-								listarPlanes();
+								//listarPlanes();
 								setEsAlumno(true);								
 								pagina = "/paginas/ModuloRegulares/admin/mantenimiento/usuario/nuevoUsuarioMR.xhtml"; break;
 						
 						case 2: MODO_USUARIO = MODO_OCAA;								
 								llenarRolesRegulares();		
-								listarPlanes();
+								//listarPlanes();
 								setEsAlumno(true);
 								pagina = "/paginas/ModuloRegulares/ocaa/mantenimiento/usuario/nuevoUsuarioMR.xhtml"; break;
 		 			} break;

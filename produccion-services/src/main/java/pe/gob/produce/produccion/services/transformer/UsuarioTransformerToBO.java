@@ -6,7 +6,7 @@ import java.util.List;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
-import pe.edu.sistemas.unayoe.unayoe.bo.UsuarioBO;
+import pe.gob.produce.produccion.bo.UsuarioBO;
 import pe.gob.produce.produccion.core.transformer.Transformer;
 import pe.gob.produce.produccion.dao.dominio.Usuario;
  
