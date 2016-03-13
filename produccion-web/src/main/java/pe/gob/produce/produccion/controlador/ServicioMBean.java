@@ -173,37 +173,16 @@ public class ServicioMBean {
 		try{
 			//if (buscarUsuario(getUsuarioModel().getIdUsuario()==null?"0":getUsuarioModel().getIdUsuario()).equals("")){
 			if (true){
-				String nuevoServicio = getServicioModel().getNombre()==null?"blanco":getServicioModel().getNombre();
+				String nuevoServicio = getServicioModel().getNombre()==null?"":getServicioModel().getNombre();
+				String citeID = getServicioModel().getCodigoCITE()==null?"":getServicioModel().getCodigoCITE();
+				String fecha = (String) (getDate()==null?"":getDate());
+				String descripcion = getServicioModel().getDescripcion()==null?"":getServicioModel().getDescripcion();
+				String nombreSolicitante = getServicioModel().getNombreSolicitante()==null?"":getServicioModel().getNombreSolicitante();
+				String cargo = getServicioModel().getCargo()==null?"":getServicioModel().getCargo();
+				String telefonos = getServicioModel().getTelefono()==null?"":getServicioModel().getTelefono();
+				String email = getServicioModel().getTelefono()==null?"":getServicioModel().getTelefono();
 				
-				System.out.println("Nombre de servicio " + nuevoServicio);
-				/*String contrasenia = getUsuarioModel().getClave()==null?"0":getUsuarioModel().getClave();
-				int idRol = Integer.parseInt(usuarioModelSelect.getRol()==null?"0":usuarioModelSelect.getRol());
-				String nombres = getUsuarioModel().getNombres()==null?"":validaCadena(getUsuarioModel().getNombres())==true?getUsuarioModel().getNombres():"invalido";
-				String apellidoPaterno = getUsuarioModel().getPaterno()==null?"":validaCadena(getUsuarioModel().getPaterno())==true?getUsuarioModel().getPaterno():"invalido";
-				String apellidoMaterno = getUsuarioModel().getMaterno()==null?"":validaCadena(getUsuarioModel().getMaterno())==true?getUsuarioModel().getMaterno():"invalido";
-				String correo = getUsuarioModel().getCorreo()==null?"":validaCorreo(getUsuarioModel().getCorreo())==true?getUsuarioModel().getCorreo():"invalido";
-				String direccion = getUsuarioModel().getDireccion()==null?"":getUsuarioModel().getDireccion();
-				String telefono = getUsuarioModel().getTelefono()==null?"":validaNumero(getUsuarioModel().getTelefono())==true?getUsuarioModel().getTelefono():"invalido";*/
-				
-				/*if(validarCampos(nombres,apellidoPaterno,apellidoMaterno,correo,telefono, "", 0)==true){
-					ServicioBO usuarioNuevo = new UsuarioBO();
-					usuarioNuevo.setIdUsuario(nuevoUsuario);
-					usuarioNuevo.setContrasenia(contrasenia);
-					usuarioNuevo.setNombres(nombres);
-					usuarioNuevo.setApellidoPaterno(apellidoPaterno);
-					usuarioNuevo.setApellidoMaterno(apellidoMaterno);
-					usuarioNuevo.setCorreo(correo);
-					usuarioNuevo.setDireccion(direccion);
-					usuarioNuevo.setTelefono(telefono);
-					usuarioNuevo.setIdRol(String.valueOf(idRol));
-					
-					servicioServices.grabarNuevoServicio(usuarioNuevo);*/
-					//limpiarCampos();
-					//mostrarMensaje(8);	
-				//}
-			}
-			else{
-				//mostrarMensaje(7);
+			servicioServices.nuevoServicio(nuevoServicio,citeID, fecha, descripcion, nombreSolicitante, cargo, telefonos, email );
 			}
 		}
 		catch(Exception e){
