@@ -9,7 +9,7 @@ import javax.faces.bean.ViewScoped;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
-import pe.edu.sistemas.unayoe.unayoe.bo.CITEBO;
+import pe.gob.produce.produccion.bo.CITEBO;
 import pe.gob.produce.produccion.core.util.Convertidor;
 import pe.gob.produce.produccion.core.util.FormateadorFecha;
 import pe.gob.produce.produccion.model.ServicioModel;
