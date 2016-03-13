@@ -12,18 +12,17 @@ import org.springframework.stereotype.Controller;
 import pe.gob.produce.produccion.bo.CITEBO;
 import pe.gob.produce.produccion.core.util.Convertidor;
 import pe.gob.produce.produccion.core.util.FormateadorFecha;
+import pe.gob.produce.produccion.dao.CITEIDAO;
 import pe.gob.produce.produccion.model.ServicioModel;
 
 
 
 
-
-
-@Controller("cotizacionMBean")
+@Controller("ordenPagoMBean")
 @ViewScoped
-public class CotizacionMBean {
+public class OrdenPagoMBean {
 
-	//ctrl + shit + o importas todas las clases que estan otros paquetes
+	
 	@Autowired
 	private ServicioModel servicioModel;
 	/*@Autowired
@@ -45,8 +44,8 @@ public class CotizacionMBean {
 	
 	
 	//constructor
-	public CotizacionMBean(){
-		System.out.println("::::: LOADING ServicioMBean ::::::::");		
+	public OrdenPagoMBean(){
+		System.out.println("::::: LOADING OrdenPagoMBean ::::::::");		
 		inicializarClases();		
 		new Convertidor();
 		new FormateadorFecha();
@@ -107,15 +106,15 @@ public class CotizacionMBean {
 	}
 	
 	
-	public String selectorNuevaCotizacion(int modo) throws Exception{
+	public String selectorNuevaOrdenPago(int modo) throws Exception{
 		 String pagina = "";
 		 
 		 switch(modo){ 
 			case 1: MODO_USUARIO = MODO_ADMIN;									
 					inicializarClases();
 
-					listarCITE();
-					pagina = "/paginas/ModuloProduccion/cliente/cotizacion/nuevo/nuevaCotizacion.xhtml"; break;
+					//listarCITE();
+					pagina = "/paginas/ModuloProduccion/cliente/ordenPago/nuevaOrdenPago.xhtml"; break;
 			/*@@ESTE ES EL CASO PARA PERFIL EMPLEADO
 			 * case 2: MODO_USUARIO = MODO_OCAA;
 					inicializarClases();									
@@ -132,21 +131,43 @@ public class CotizacionMBean {
 		 
 		 	inicializarClases();
 
-			listarCITE();
+		 	//listarCITE();
 			pagina = "/paginas/ModuloProduccion/cliente/servicio/nuevo/nuevoServicio.xhtml"; 
 			
 		return pagina;		
 	}
 	
-	public String selectorBuscarCotizacionServicio(int modo) throws Exception{
+	public String selectorBuscarOrdenPago(int modo) throws Exception{
 		 String pagina = "";
 		 
 		 switch(modo){ 
 			case 1: MODO_USUARIO = MODO_ADMIN;									
 					inicializarClases();
 
-					listarCITE();
-					pagina = "/paginas/ModuloProduccion/cliente/cotizacion/buscar/buscarCotizacion.xhtml"; break;
+					//listarCITE();
+					pagina = "/paginas/ModuloProduccion/cliente/ordenPago/buscarOrdenPago.xhtml"; break;
+			/*@@ESTE ES EL CASO PARA PERFIL EMPLEADO
+			 * case 2: MODO_USUARIO = MODO_OCAA;
+					inicializarClases();									
+					if(getDatosAlumnoExcelModelGrid() != null){
+						getDatosAlumnoExcelModelGrid().removeAll(getDatosAlumnoExcelModelGrid());
+					}
+					pagina = "/paginas/ModuloObservados/ocaa/cargar/cargarDatosAlumnosObs.xhtml"; break;*/
+		}
+		return pagina;		
+	 }
+	
+	/* Vista envío de orden de pago */
+	
+	public String selectorEnviarOrdenPago(int modo) throws Exception{
+		 String pagina = "";
+		 
+		 switch(modo){ 
+			case 1: MODO_USUARIO = MODO_ADMIN;									
+					inicializarClases();
+
+					//listarCITE();
+					pagina = "/paginas/ModuloProduccion/cliente/ordenPago/enviarOrdenPago.xhtml"; break;
 			/*@@ESTE ES EL CASO PARA PERFIL EMPLEADO
 			 * case 2: MODO_USUARIO = MODO_OCAA;
 					inicializarClases();									
@@ -229,8 +250,8 @@ public class CotizacionMBean {
 		setServicioModel(new ServicioModel());
 	}
 
-	private void listarCITE(){
-		List<CITEBO> listCITE = new ArrayList<CITEBO>();
+	/*private void listarCITE(){
+		List<CITEIDAO> listCITE = new ArrayList<CITEBO>();
 		try{
 			CITEBO aCITEBO = new CITEBO();
 			aCITEBO.setCodigo("0001");
@@ -253,13 +274,14 @@ public class CotizacionMBean {
 			listCITE.add(dCITEBO);
 			
 			getServicioModel().setListarCITE(listCITE);
-			/*usuarioRoles = usuarioServices.obtenerRoles(PROCESO_OBSERVADOS);
-			getUsuarioModel().setRolesUsuario(usuarioRoles);*/
+			/*usuarioRoles = usuarioServices.obtenerRoles(PROC
 		}
 		catch(Exception e){
 			e.printStackTrace();
 		}
-	}
+	} 
+*/
+
 	public void setServicioModel(ServicioModel servicioModel) {
 		this.servicioModel = servicioModel;
 	}
