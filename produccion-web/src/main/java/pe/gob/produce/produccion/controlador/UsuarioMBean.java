@@ -8,26 +8,32 @@ import java.util.regex.Pattern;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ViewScoped;
 import javax.faces.component.UIComponent;
+import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ValueChangeEvent;
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletRequest;
+import javax.servlet.ServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.encoding.ShaPasswordEncoder;
 import org.springframework.stereotype.Controller;
 
 import pe.gob.produce.produccion.bo.UsuarioBO;
-import pe.gob.produce.produccion.model.ServicioModel;
 import pe.gob.produce.produccion.model.UsuarioModel;
-import pe.gob.produce.produccion.services.ComunServices;
 import pe.gob.produce.produccion.services.UsuarioServices;
 
 @Controller("usuarioMBean")
 @ViewScoped
-public class UsuarioMBean {
+public class UsuarioMBean extends GenericoController{
 
 	@Autowired
 	private UsuarioModel usuarioModel;
 	@Autowired
 	private UsuarioServices usuarioServices;	
+	
+	@Autowired
+	private ShaPasswordEncoder shaPasswordEncoder;
 	
 	private UIComponent btnGuardar;
 	private UsuarioModel usuarioModelSelect;
@@ -59,9 +65,6 @@ public class UsuarioMBean {
 			setUsuarioModel(null);
 			System.out.println("limpiar campos getUsuarioModel");
 			
-			
-			
-			
 			setUsuarioModel(new UsuarioModel());
 			System.out.println("id " + this.usuarioModel.getCodAlumno());
 			System.out.println("id " + this.usuarioModel.getIdUsuario());
@@ -70,7 +73,22 @@ public class UsuarioMBean {
 		}
 	}
 	
-	public String selectorNuevoUsuario(int i){
+	public String login(){
+		ExternalContext context = getFacesContext().getExternalContext();
+		String password = shaPasswordEncoder.encodePassword(usuarioModel.getClave(),null);
+		RequestDispatcher requestDispatcher = ((ServletRequest)context.getRequest()).getRequestDispatcher("/j_spring_security_check?j_username="+
+				usuarioModel.getIdUsuario()+"&j_password="+password);
+		try {
+			requestDispatcher.forward((ServletRequest)context.getRequest(),(ServletResponse)context.getResponse());
+			getFacesContext().responseComplete();
+		}catch (Exception e) {
+			mostrarError(e.getMessage());
+		}
+		return "";
+	}
+	
+	
+	public String selectorNuevoUsuario(){
 		
 		String pagina ="";
 		System.out.println("nuevo usuario");
