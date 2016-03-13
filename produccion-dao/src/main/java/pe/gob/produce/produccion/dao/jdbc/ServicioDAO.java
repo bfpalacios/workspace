@@ -32,7 +32,7 @@ public class ServicioDAO extends BaseDAO implements ServicioIDao  {
 
 		try {
 			con = Conexion.obtenerConexion();
-			PreparedStatement pstmt = con.prepareStatement("{call dbo.Consulta_Servicios_CITE(?,?,?)}");
+			PreparedStatement pstmt = con.prepareStatement("{call dbo.SP_Buscar_Servicios(?,?,?)}");
 			pstmt.setString(1, nombre);
 			pstmt.setString(2, codigo);
 			pstmt.setInt(3, idCite);

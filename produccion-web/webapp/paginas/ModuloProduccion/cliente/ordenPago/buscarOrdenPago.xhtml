@@ -18,17 +18,20 @@
 				</p:column>
 			</p:row>
 		</p:outputPanel>
-
-		<p:panel header="Consulta de Servicios - Cites " style="width: 400px;">
-			<p:panelGrid id="pnlGridBuscarServicio">
-
+		
+		<p:panel header="Buscar Orden de Pago" style="width: 800px;">
+			
+			<p:panelGrid id="pnlGridBuscarCotizacion">
+				<p:outputPanel id="disabledButton">
+					<p:commandButton value="#{mensaje['produccion.buscar.cotizacion.disabled.cliente']}" style="opacity:1 !important; margin-bottom: 10px;" id="disabled" disabled="true" />
+				</p:outputPanel>
 				<p:row>
 					<p:column styleClass="ui-column-label-spij styleAlignRightColumn">
-						<h:outputText id="lNombre"
-							value="#{mensaje['produccion.buscar.servicio.label.buscarpornombre']}" />
+						<h:outputText id="lNumero"
+							value="#{mensaje['produccion.buscar.ordenpago.label.numero']}" />
 					</p:column>
-					<p:column>
-						<p:inputText id="nombreServicio"
+					<p:column colspan="4">
+						<p:inputText id="numeroCotizacion"
 							value="#{servicioMBean.servicioModel.nombre}" size="20" />
 					</p:column>
 
@@ -36,41 +39,36 @@
 
 				<p:row>
 					<p:column styleClass="ui-column-label-spij styleAlignRightColumn">
-						<h:outputText id="lCodigo"
-							value="#{mensaje['produccion.buscar.servicio.label.buscarporcodigo']}" />
+						<h:outputText id="lFechaCotizacion"
+							value="#{mensaje['produccion.buscar.ordenpago.label.fecha']}" />
 					</p:column>
-					<p:column>
-						<p:inputText id="codigoServicio"
-							value="#{servicioMBean.servicioModel.codigo}" size="20" />
-					</p:column>
-
-				</p:row>
-
-				<p:row>
+					
+					
 					<p:column styleClass="ui-column-label-spij styleAlignRightColumn">
-						<h:outputText id="lCite"
-							value="#{mensaje['produccion.buscar.servicio.label.buscarporcite']}" />
+						<h:outputText id="lFechaInicio"
+							value="#{mensaje['produccion.buscar.ordenpago.label.fechainicio']}" />
+						<p:calendar value="#{servicioMBean.date}" id="fechaInicio"
+							pattern="dd/MM/yyyy" mode="popup" showOn="button">
+						</p:calendar>
 					</p:column>
-					<p:column colspan="2">
-						<p:selectOneMenu id="selectOneCITE"
-							value="#{servicioMBean.servicioModel.codigoCITE}"
-							styleClass="ui-column-label-spij styleAlignRightColumn">
-							<f:selectItem itemLabel="Seleccione el CITE " />
-							<f:selectItems value="#{servicioMBean.servicioModel.listarCITE}"
-								var="CITE" itemLabel="#{CITE.descripcion}"
-								itemValue="#{CITE.codigo}" />
-						</p:selectOneMenu>
+					
+					<p:column styleClass="ui-column-label-spij styleAlignRightColumn">
+						<h:outputText id="lfechaFin"
+							value="#{mensaje['produccion.buscar.ordenpago.label.fechafin']}" />
+						<p:calendar value="#{servicioMBean.date}" id="fechaFin"
+						pattern="dd/MM/yyyy" mode="popup" showOn="button">
+					</p:calendar>
 					</p:column>
-
+				
 				</p:row>
-
 
 				<p:row id="filServicios">
-					<p:column colspan="2"
+					<p:column colspan="4"
 						styleClass="ui-column-label-spij styleAlignCenterColumn">
 						<p:commandButton value="Buscar" id="botonBuscar" actionListener="#{servicioMBean.buscarServicio}" ajax="true"
 							update="tablaServicios" />
 					</p:column>
+					
 				</p:row>
 			</p:panelGrid>
 		</p:panel>
@@ -79,12 +77,12 @@
 		<p:panelGrid id="pnlGridResultadoBuscarServicio">
 			<f:facet name="header">
 				<p:row>
-					<p:column colspan="2">Consulta de Servicios - Cites </p:column>
+					<p:column colspan="2">Consulta de Órdenes de Pago: </p:column>
 				</p:row>
 			</f:facet>
 
 			<p:row>
-				<p:column colspan="2" style="font-weight:bold;font-size:15px">#{mensaje['produccion.buscar.servicio.label.listadeservicios']}</p:column>
+				<p:column colspan="2" style="font-weight:bold;font-size:15px">#{mensaje['produccion.buscar.ordenpago.listadeordenespago']}</p:column>
 			</p:row>
 
 			<p:row id="filTabla">
@@ -96,35 +94,35 @@
 						selectionMode="multiple"
 						selection="#{servicioMBean.selectedServicios}"
 						rowKey="#{registro.codigo}" var="registro" binding="#{tabla}"
-						emptyMessage="No se encuentra informacion" paginator="true" rows="5">
+						emptyMessage="Sin datos para cargar" paginator="true" rows="20">
 
 
-						<p:column headerText="Codigo(*)"
+						<p:column headerText="N° Orden Pago"
 							styleClass="ui-column-label-spij styleAlignRightColumn">
 							<h:outputText value="#{registro.codigo}" />
 						</p:column>
 
-						<p:column headerText="Nombre Servicio"
+						<p:column headerText="N° Cotización Asociada"
 							styleClass="ui-column-label-spij styleAlignRightColumn">
 							<h:outputText value="#{registro.nombre}" />
 						</p:column>
 
-						<p:column headerText="Unidad"
+						<p:column headerText="Solicitante"
 							styleClass="ui-column-label-spij styleAlignRightColumn">
 							<h:outputText value="#{registro.unidad}" />
 						</p:column>
 
-						<p:column headerText="Requisito"
+						<p:column headerText="Fecha de Envío"
 							styleClass="ui-column-label-spij styleAlignRightColumn">
 							<h:outputText value="#{registro.requisito}" />
 						</p:column>
 
-						<p:column headerText="Valor de Venta"
+						<p:column headerText="Cite Destino"
 							styleClass="ui-column-label-spij styleAlignRightColumn">
 							<h:outputText value="#{registro.valorDeVenta}" />
 						</p:column>
-						
-						<p:column headerText="Precio de Venta"
+
+						<p:column headerText="Costo Total"
 							styleClass="ui-column-label-spij styleAlignRightColumn">
 							<h:outputText value="#{registro.precioDeVenta}" />
 
@@ -136,6 +134,24 @@
 				</p:column>
 			</p:row>
 		</p:panelGrid>
+		<p:spacer width="5px" />
+		<p:outputPanel id="pnlGuardar" style="width:400x;margin-top:10px;">
+			<p:row>
+				<p:column colspan="2" styleClass="styleAlignLeftColumn">
+					<p:commandButton id="botonGuardar" styleClass="buttonMarginNormal" 
+						value="#{mensaje['produccion.buscar.ordenpago.btn.verordenpago']}"
+						actionListener="#{servicioMBean.guardarNuevoServicio}"
+						update="lFecha,nombreServicio, descripcionServicio,  nombreSolicitante,  cargo,  telefono, email"
+						ajax="false" />
+				</p:column>
+				
+				<p:column colspan="2" styleClass="styleAlignRightColumn">
+					<p:commandButton value="Imprimir Orden de Pago" id="botonCamcelar"
+						actionListener="#{servicioMBean.cancelar}" ajax="false" />
+				</p:column>
+			</p:row>
+		</p:outputPanel>
+			
 
 		
 

@@ -14,14 +14,14 @@
 			style="width:500px;margin-top:5px;">
 			<p:row>
 				<p:column colspan="4" rowspan="2">
-					<p:messages id="messages" showDetail="true" autoUpdate="true"
+					<p:messages id="messagesOrdenPago" showDetail="true" autoUpdate="true"
 						closable="true" />
 				</p:column>
 			</p:row>
 		</p:outputPanel>
 
 		<p:spacer width="5px" />
-		<p:panel header="Nueva Orden de Pago" style="width: 100%;">
+		<p:panel header="Enviar Orden de Pago" style="width: 100%;">
 			<p:panelGrid id="pnlGridLoginAcceso">
 				<p:row>
 					<p:column colspan="6"
@@ -43,7 +43,7 @@
 				<p:row>
 
 					<p:column styleClass="ui-column-label-spij styleAlignRightColumn">
-						<h:outputText id="lblRazonSocial"
+						<h:outputText id="lblRazonSocialOrdenPago"
 							value="#{mensaje['produccion.nuevo.ordenpago.label.solicitante']}" />
 					</p:column>
 
@@ -54,12 +54,12 @@
 					</p:column>
 
 					<p:column styleClass="ui-column-label-spij styleAlignRightColumn">
-						<h:outputText id="lblRuc"
+						<h:outputText id="lblCargoOrdenPago"
 							value="#{mensaje['produccion.nuevo.ordenpago.label.cargo']}" />
 					</p:column>
 
 					<p:column colspan="3">
-						<p:inputText id="ruc" size="20"
+						<p:inputText id="ordenpago" size="20"
 							value="#{usuarioMBean.usuarioModel.ruc}" />
 						<p:message for="ruc" />
 					</p:column>
@@ -129,13 +129,13 @@
 					</p:column>
 
 					<p:column>
-						<p:inputText id="razonSocial" size="40"
+						<p:inputText id="ordenPago" size="40"
 							value="#{usuarioMBean.usuarioModel.razonSocial}" />
 						<p:message for="razonSocial" />
 					</p:column>
 
 					<p:column styleClass="ui-column-label-spij styleAlignRightColumn">
-						<h:outputText id="lblRuc"
+						<h:outputText id="lblOrdenPago"
 							value="#{mensaje['produccion.enviar.ordenpago.label.fechacotizacion']}" />
 					</p:column>
 

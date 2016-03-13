@@ -8,7 +8,15 @@ public class ServicioBO {
 	private String requisito;
 	private String valorDeVenta;
 	private String precioDeVenta;
-	private CITEBO cite;
+	private String estado;
+	private CITEBO cite;	
+	
+	public String getEstado() {
+		return estado;
+	}
+	public void setEstado(String estado) {
+		this.estado = estado;
+	}
 	public String getCodigo() {
 		return codigo;
 	}
