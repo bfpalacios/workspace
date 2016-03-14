@@ -23,7 +23,8 @@
 			<p:panelGrid id="pnlGridBuscarServicio" style="width: 600px;">
 
 				<p:row>
-					<p:column colspan="2" styleClass="ui-column-label-spij styleAlignRightColumn">
+					<p:column colspan="2"
+						styleClass="ui-column-label-spij styleAlignRightColumn">
 						<h:outputText id="lEmpresa"
 							value="#{mensaje['produccion.nuevo.usuario.empresa']}" />
 					</p:column>
@@ -31,27 +32,52 @@
 					<p:spacer width="10px" />
 					<p:column colspan="2"
 						styleClass="ui-column-label-spij styleAlignCenterColumn">
-						<p:commandButton value="Registrar Empresa" id="botonRegistrarEmpresa"
-							actionListener="#{usuarioMBean.registraNuevaEmpresa}" ajax="false"/>
+						<p:commandButton value="Registrar Empresa"
+							id="botonRegistrarEmpresa"
+							action="#{usuarioMBean.registraNuevaEmpresa}"
+							ajax="false" />
 					</p:column>
 
 				</p:row>
 
 				<p:spacer width="10px" />
-				
+
 				<p:row>
-					<p:column colspan="2" styleClass="ui-column-label-spij styleAlignRightColumn">
+					<p:column colspan="2"
+						styleClass="ui-column-label-spij styleAlignRightColumn">
 						<h:outputText id="lCliente"
 							value="#{mensaje['produccion.nuevo.usuario.cliente']}" />
 					</p:column>
-
+					
+					
+								
 					<p:spacer width="10px" />
 					<p:column colspan="2"
 						styleClass="ui-column-label-spij styleAlignCenterColumn">
-						<p:commandButton value="Registrar Cliente" id="botonRegistrarCliente"
-							actionListener="#{usuarioMBean.registraNuevoCliente}" ajax="false"
-							update="tablaServicios" />
+						<p:commandButton value="Registrar Cliente"
+							id="botonRegistrarCliente"
+							action="#{usuarioMBean.registraNuevoCliente}"
+							ajax="false" />
 					</p:column>
+
+				</p:row>
+
+				<p:row>
+					<p:column colspan="2"
+						styleClass="ui-column-label-spij styleAlignRightColumn">
+						<p:commandButton value="Cancelar"
+							id="botonCancelarRegistrarCliente"
+							action="#{usuarioMBean.cancelarRegistrarNuevoUsuario}"
+							ajax="false" />
+					</p:column>
+
+					<p:spacer width="10px" />
+					<!--p:column colspan="2"
+						styleClass="ui-column-label-spij styleAlignCenterColumn">
+						<p:link outcome="/login" value="Ayuda para Registrar">
+							<f:param name="ayudaId" value="10" />
+						</p:link>
+					</p:column -->
 
 				</p:row>
 			</p:panelGrid>

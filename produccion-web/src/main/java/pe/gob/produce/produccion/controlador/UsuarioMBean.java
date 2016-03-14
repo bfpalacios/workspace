@@ -75,6 +75,25 @@ public class UsuarioMBean extends GenericoController{
 		return pagina;
 	}
 	
+	public String registraNuevaEmpresa(){
+		
+		String pagina ="";
+		System.out.println("nuevo usuario empresa");
+		pagina ="/paginas/ModuloProduccion/admin/nuevo/usuario/nuevoUsuarioEmpresa.xhtml";
+		
+		return pagina;
+	}
+
+	public String registraNuevoCliente(){
+	
+		String pagina ="";
+		System.out.println("nuevo usuario cliente");
+		pagina ="/paginas/ModuloProduccion/admin/nuevo/usuario/nuevoUsuarioCliente.xhtml";
+		
+		return pagina;
+	}
+	
+	
 	public String cancelarRegistrarNuevoUsuario() throws Exception{
 		 String pagina = "";
 		 
