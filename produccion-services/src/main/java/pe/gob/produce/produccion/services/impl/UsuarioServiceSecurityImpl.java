@@ -30,7 +30,7 @@ public class UsuarioServiceSecurityImpl implements UsuarioServiceSecurity {
 		UsuarioBO usuarioBO = null;
 		try {
 			usuarioBO = usuarioService.obtenerUsuario(usuario);
-			if(usuario==null){
+			if(usuarioBO==null){
 				throw new UsernameNotFoundException("Usuario no encontrado");
 			}
 		} catch (Exception e) {

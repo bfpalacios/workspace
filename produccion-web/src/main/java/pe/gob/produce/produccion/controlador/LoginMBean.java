@@ -3,26 +3,33 @@ package pe.gob.produce.produccion.controlador;
 import java.util.List;
 
 import javax.faces.bean.ViewScoped;
+import javax.faces.context.ExternalContext;
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletRequest;
+import javax.servlet.ServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
+import org.springframework.security.authentication.encoding.ShaPasswordEncoder;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
 
 import pe.gob.produce.produccion.bo.RolBO;
-import pe.gob.produce.produccion.bo.UsuarioBO;
 import pe.gob.produce.produccion.model.LoginModel;
 import pe.gob.produce.produccion.services.RolServices;
 import pe.gob.produce.produccion.services.UsuarioServices;
 
 @Controller("loginMBean")
 @ViewScoped
-public class LoginMBean {
+public class LoginMBean extends GenericoController{
 
 	@Autowired
 	private LoginModel loginModel;
+	
+	@Autowired
+	private ShaPasswordEncoder shaPasswordEncoder;
 
 	@Autowired
 	private UsuarioServices usuarioServices;
@@ -102,27 +109,17 @@ public class LoginMBean {
 	public String entrar() {
 		try {
 
-			// httpServletRequest = null;
-			UsuarioBO usuarioBO = new UsuarioBO();
-			usuarioBO = usuarioServices.obtenerUsuario(this.loginModel.getUsuario());
-			System.out.println("usuarioBO: " + usuarioBO);
-
-			// mostrar la interface del rol seleccionado
-			this.rol = this.loginModel.getRol();
-
-			if (usuarioBO != null) {
-				// httpServletRequest.setAttribute("sessionUsuario",
-				// usuarioBO.getUsuario());
-				// FacesMessage(FacesMessage.SEVERITY_INFO, "Acceso Correcto",
-				// null);
-				// faceContext.addMessage(null, facesMessage);
-				return "/paginas/principal.xhtml";
-			} else {
-				// facesMessage=new FacesMessage(FacesMessage.SEVERITY_ERROR,
-				// "Usuario o contraseña incorrecto", null);
-				// faceContext.addMessage(null, facesMessage);
-				return "/login.xhtml";
+			ExternalContext context = getFacesContext().getExternalContext();
+			String password = shaPasswordEncoder.encodePassword(loginModel.getClave(),null);
+			RequestDispatcher requestDispatcher = ((ServletRequest)context.getRequest()).getRequestDispatcher("/j_spring_security_check?j_username="+
+					loginModel.getUsuario()+"&j_password="+password);
+			try {
+				requestDispatcher.forward((ServletRequest)context.getRequest(),(ServletResponse)context.getResponse());
+				getFacesContext().responseComplete();
+			}catch (Exception e) {
+				mostrarError(e.getMessage());
 			}
+			return "";
 
 		} catch (Exception e) {
 			System.out.println("" + e.toString());
