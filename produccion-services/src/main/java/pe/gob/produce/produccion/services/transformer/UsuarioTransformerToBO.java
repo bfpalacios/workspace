@@ -20,7 +20,7 @@ public class UsuarioTransformerToBO implements Transformer<Usuario,UsuarioBO> {
 		if(usuario!=null){
 			usuarioBO = new UsuarioBO();
 			usuarioBO.setIdUsuario(usuario.getIdUsuario());
-			usuarioBO.setContrasenia(usuario.getClave());
+			usuarioBO.setContrasenia(usuario.getContrasenia());
 		}
 		return usuarioBO;
 	}

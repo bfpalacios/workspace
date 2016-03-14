@@ -2,8 +2,10 @@ package pe.gob.produce.produccion.dao;
 
 import java.sql.CallableStatement;
 import java.sql.Connection;
-import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import oracle.jdbc.OracleTypes;
 
@@ -23,7 +25,13 @@ import pe.gob.produce.produccion.dao.dominio.Usuario;
 public class UsuarioDaoImpl extends DAOImpl<Usuario,String> implements UsuarioIDao {
 
 	public Usuario obtenerUsuario(String usuario) throws Exception {
-		return super.obtenerEntidadPorId(Usuario.class,usuario);
+		Map<String,Object> mapaParametro =  new HashMap<>();
+		mapaParametro.put("idUsuario", usuario);
+		List<Usuario> listUsuario = super.obtenerListEntidadPorParametro(Usuario.class,mapaParametro);
+		if(listUsuario == null){
+			return null;
+		}
+		return listUsuario.get(0);
 	}
 	
 	public void grabarUsuarioObservados(UsuarioBO usuarioNuevo) throws SQLException{

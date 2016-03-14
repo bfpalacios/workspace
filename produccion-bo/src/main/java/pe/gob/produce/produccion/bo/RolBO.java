@@ -11,7 +11,11 @@ public class RolBO implements Serializable {
 	private String descripcion;
 
 	public RolBO() {
-		// TODO Auto-generated constructor stub
+	}
+
+	public RolBO(String nombre) {
+		super();
+		this.nombre = nombre;
 	}
 
 	public String getDescripcion() {

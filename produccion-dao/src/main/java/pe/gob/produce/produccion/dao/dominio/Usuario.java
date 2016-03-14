@@ -13,57 +13,80 @@ import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
  * @author bpalacios
  */
 @Entity
-@Table(name = "USUARIO", catalog = "", schema = "DBUNAYOE")
+@Table(name="USUARIO",schema = "dbo")
+@XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Usuario.findAll", query = "SELECT u FROM Usuario u"),
+    @NamedQuery(name = "Usuario.findByIdusuario", query = "SELECT u FROM Usuario u WHERE u.idusuario = :idusuario"),
     @NamedQuery(name = "Usuario.findByIdUsuario", query = "SELECT u FROM Usuario u WHERE u.idUsuario = :idUsuario"),
-    @NamedQuery(name = "Usuario.findByClave", query = "SELECT u FROM Usuario u WHERE u.clave = :clave"),
+    @NamedQuery(name = "Usuario.findByContrasenia", query = "SELECT u FROM Usuario u WHERE u.contrasenia = :contrasenia"),
     @NamedQuery(name = "Usuario.findByNombres", query = "SELECT u FROM Usuario u WHERE u.nombres = :nombres"),
-    @NamedQuery(name = "Usuario.findByMaterno", query = "SELECT u FROM Usuario u WHERE u.materno = :materno"),
-    @NamedQuery(name = "Usuario.findByPaterno", query = "SELECT u FROM Usuario u WHERE u.paterno = :paterno"),
-    @NamedQuery(name = "Usuario.findByCorreo", query = "SELECT u FROM Usuario u WHERE u.correo = :correo"),
-    @NamedQuery(name = "Usuario.findByDireccion", query = "SELECT u FROM Usuario u WHERE u.direccion = :direccion"),
-    @NamedQuery(name = "Usuario.findByTelefono", query = "SELECT u FROM Usuario u WHERE u.telefono = :telefono"),
+    @NamedQuery(name = "Usuario.findByApellidoPat", query = "SELECT u FROM Usuario u WHERE u.apellidoPat = :apellidoPat"),
+    @NamedQuery(name = "Usuario.findByApellidoMat", query = "SELECT u FROM Usuario u WHERE u.apellidoMat = :apellidoMat"),
+    @NamedQuery(name = "Usuario.findByTelefono1", query = "SELECT u FROM Usuario u WHERE u.telefono1 = :telefono1"),
+    @NamedQuery(name = "Usuario.findByTelefono2", query = "SELECT u FROM Usuario u WHERE u.telefono2 = :telefono2"),
     @NamedQuery(name = "Usuario.findByEstado", query = "SELECT u FROM Usuario u WHERE u.estado = :estado")})
 public class Usuario implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
+    private Long idusuario;
+    @Basic(optional = false)
     @Column(name = "ID_USUARIO")
     private String idUsuario;
-    @Column(name = "CLAVE")
-    private String clave;
-    @Column(name = "NOMBRES")
+    @Basic(optional = false)
+    private String contrasenia;
+    @Basic(optional = false)
     private String nombres;
-    @Column(name = "MATERNO")
-    private String materno;
-    @Column(name = "PATERNO")
-    private String paterno;
-    @Column(name = "CORREO")
-    private String correo;
-    @Column(name = "DIRECCION")
-    private String direccion;
-    @Column(name = "TELEFONO")
-    private String telefono;
-    @Column(name = "ESTADO")
-    private Character estado;
-     
+    @Column(name = "APELLIDO_PAT")
+    private String apellidoPat;
+    @Column(name = "APELLIDO_MAT")
+    private String apellidoMat;
+    private String telefono1;
+    private String telefono2;
+    @Basic(optional = false)
+    private short estado;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idusuario")
+    private List<UsuarioRol> usuarioRolList;
+    @JoinColumn(name = "TIPO_USUARIO", referencedColumnName = "IDTIPO_USUARIO")
+    @ManyToOne(optional = false)
+    private TipoUsuario tipoUsuario;
+
     public Usuario() {
     }
 
-    public Usuario(String idUsuario) {
+    public Usuario(Long idusuario) {
+        this.idusuario = idusuario;
+    }
+
+    public Usuario(Long idusuario, String idUsuario, String contrasenia, String nombres, short estado) {
+        this.idusuario = idusuario;
         this.idUsuario = idUsuario;
+        this.contrasenia = contrasenia;
+        this.nombres = nombres;
+        this.estado = estado;
+    }
+
+    public Long getIdusuario() {
+        return idusuario;
+    }
+
+    public void setIdusuario(Long idusuario) {
+        this.idusuario = idusuario;
     }
 
     public String getIdUsuario() {
@@ -74,12 +97,12 @@ public class Usuario implements Serializable {
         this.idUsuario = idUsuario;
     }
 
-    public String getClave() {
-        return clave;
+    public String getContrasenia() {
+        return contrasenia;
     }
 
-    public void setClave(String clave) {
-        this.clave = clave;
+    public void setContrasenia(String contrasenia) {
+        this.contrasenia = contrasenia;
     }
 
     public String getNombres() {
@@ -90,60 +113,67 @@ public class Usuario implements Serializable {
         this.nombres = nombres;
     }
 
-    public String getMaterno() {
-        return materno;
+    public String getApellidoPat() {
+        return apellidoPat;
     }
 
-    public void setMaterno(String materno) {
-        this.materno = materno;
+    public void setApellidoPat(String apellidoPat) {
+        this.apellidoPat = apellidoPat;
     }
 
-    public String getPaterno() {
-        return paterno;
+    public String getApellidoMat() {
+        return apellidoMat;
     }
 
-    public void setPaterno(String paterno) {
-        this.paterno = paterno;
+    public void setApellidoMat(String apellidoMat) {
+        this.apellidoMat = apellidoMat;
     }
 
-    public String getCorreo() {
-        return correo;
+    public String getTelefono1() {
+        return telefono1;
     }
 
-    public void setCorreo(String correo) {
-        this.correo = correo;
+    public void setTelefono1(String telefono1) {
+        this.telefono1 = telefono1;
     }
 
-    public String getDireccion() {
-        return direccion;
+    public String getTelefono2() {
+        return telefono2;
     }
 
-    public void setDireccion(String direccion) {
-        this.direccion = direccion;
+    public void setTelefono2(String telefono2) {
+        this.telefono2 = telefono2;
     }
 
-    public String getTelefono() {
-        return telefono;
-    }
-
-    public void setTelefono(String telefono) {
-        this.telefono = telefono;
-    }
-
-    public Character getEstado() {
+    public short getEstado() {
         return estado;
     }
 
-    public void setEstado(Character estado) {
+    public void setEstado(short estado) {
         this.estado = estado;
     }
 
-   
+    @XmlTransient
+    public List<UsuarioRol> getUsuarioRolList() {
+        return usuarioRolList;
+    }
+
+    public void setUsuarioRolList(List<UsuarioRol> usuarioRolList) {
+        this.usuarioRolList = usuarioRolList;
+    }
+
+    public TipoUsuario getTipoUsuario() {
+        return tipoUsuario;
+    }
+
+    public void setTipoUsuario(TipoUsuario tipoUsuario) {
+        this.tipoUsuario = tipoUsuario;
+    }
 
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (idUsuario != null ? idUsuario.hashCode() : 0);
+        hash += (idusuario != null ? idusuario.hashCode() : 0);
         return hash;
     }
 
@@ -154,7 +184,7 @@ public class Usuario implements Serializable {
             return false;
         }
         Usuario other = (Usuario) object;
-        if ((this.idUsuario == null && other.idUsuario != null) || (this.idUsuario != null && !this.idUsuario.equals(other.idUsuario))) {
+        if ((this.idusuario == null && other.idusuario != null) || (this.idusuario != null && !this.idusuario.equals(other.idusuario))) {
             return false;
         }
         return true;
@@ -162,7 +192,7 @@ public class Usuario implements Serializable {
 
     @Override
     public String toString() {
-        return "pe.unmsm.ceups.dao.dominio.Usuario[ idUsuario=" + idUsuario + " ]";
+        return "pe.gob.produce.produccion.dao.dominio.Usuario[ idusuario=" + idusuario + " ]";
     }
     
 }

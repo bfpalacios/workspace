@@ -3,15 +3,27 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package pe.gob.produce.produccion.dao.dominio;
 
 import java.io.Serializable;
-import java.math.BigInteger;
 import javax.persistence.Basic;
 import javax.persistence.Column;
-import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
+import javax.persistence.Table;
+import javax.xml.bind.annotation.XmlRootElement;
+
+import java.io.Serializable;
+import javax.persistence.Basic;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
@@ -22,57 +34,80 @@ import javax.xml.bind.annotation.XmlRootElement;
  * @author bpalacios
  */
 @Entity
-@Table(name = "USUARIO_ROL", catalog = "", schema = "DBUNAYOE")
+@Table(name = "USUARIO_ROL", schema = "dbo")
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "UsuarioRol.findAll", query = "SELECT u FROM UsuarioRol u"),
-    @NamedQuery(name = "UsuarioRol.findByIdRol", query = "SELECT u FROM UsuarioRol u WHERE u.usuarioRolPK.idRol = :idRol"),
-    @NamedQuery(name = "UsuarioRol.findByRole", query = "SELECT u FROM UsuarioRol u WHERE u.role = :role"),
-    @NamedQuery(name = "UsuarioRol.findByIdUsuario", query = "SELECT u FROM UsuarioRol u WHERE u.usuarioRolPK.idUsuario = :idUsuario")})
+    @NamedQuery(name = "UsuarioRol.findByIdusuarioRol", query = "SELECT u FROM UsuarioRol u WHERE u.idusuarioRol = :idusuarioRol"),
+    @NamedQuery(name = "UsuarioRol.findByIdUsuario", query = "SELECT u FROM UsuarioRol u WHERE u.idUsuario = :idUsuario"),
+    @NamedQuery(name = "UsuarioRol.findByRol", query = "SELECT u FROM UsuarioRol u WHERE u.rol = :rol")})
 public class UsuarioRol implements Serializable {
     private static final long serialVersionUID = 1L;
-    @EmbeddedId
-    protected UsuarioRolPK usuarioRolPK;
+    @Id
     @Basic(optional = false)
-    @Column(name = "ROLE")
-    private String role;
+    @Column(name = "IDUSUARIO_ROL")
+    private Long idusuarioRol;
+    @Column(name = "ID_USUARIO")
+    private String idUsuario;
+    private String rol;
+    @JoinColumn(name = "IDROL", referencedColumnName = "ID_ROL")
+    @ManyToOne(optional = false)
+    private Rol idrol;
+    @JoinColumn(name = "IDUSUARIO", referencedColumnName = "IDUSUARIO")
+    @ManyToOne(optional = false)
+    private Usuario idusuario;
 
     public UsuarioRol() {
     }
 
-    public UsuarioRol(UsuarioRolPK usuarioRolPK) {
-        this.usuarioRolPK = usuarioRolPK;
+    public UsuarioRol(Long idusuarioRol) {
+        this.idusuarioRol = idusuarioRol;
     }
 
-    public UsuarioRol(UsuarioRolPK usuarioRolPK, String role) {
-        this.usuarioRolPK = usuarioRolPK;
-        this.role = role;
+    public Long getIdusuarioRol() {
+        return idusuarioRol;
     }
 
-    public UsuarioRol(BigInteger idRol, String idUsuario) {
-        this.usuarioRolPK = new UsuarioRolPK(idRol, idUsuario);
+    public void setIdusuarioRol(Long idusuarioRol) {
+        this.idusuarioRol = idusuarioRol;
     }
 
-    public UsuarioRolPK getUsuarioRolPK() {
-        return usuarioRolPK;
+    public String getIdUsuario() {
+        return idUsuario;
     }
 
-    public void setUsuarioRolPK(UsuarioRolPK usuarioRolPK) {
-        this.usuarioRolPK = usuarioRolPK;
+    public void setIdUsuario(String idUsuario) {
+        this.idUsuario = idUsuario;
     }
 
-    public String getRole() {
-        return role;
+    public String getRol() {
+        return rol;
     }
 
-    public void setRole(String role) {
-        this.role = role;
+    public void setRol(String rol) {
+        this.rol = rol;
+    }
+
+    public Rol getIdrol() {
+        return idrol;
+    }
+
+    public void setIdrol(Rol idrol) {
+        this.idrol = idrol;
+    }
+
+    public Usuario getIdusuario() {
+        return idusuario;
+    }
+
+    public void setIdusuario(Usuario idusuario) {
+        this.idusuario = idusuario;
     }
 
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (usuarioRolPK != null ? usuarioRolPK.hashCode() : 0);
+        hash += (idusuarioRol != null ? idusuarioRol.hashCode() : 0);
         return hash;
     }
 
@@ -83,7 +118,7 @@ public class UsuarioRol implements Serializable {
             return false;
         }
         UsuarioRol other = (UsuarioRol) object;
-        if ((this.usuarioRolPK == null && other.usuarioRolPK != null) || (this.usuarioRolPK != null && !this.usuarioRolPK.equals(other.usuarioRolPK))) {
+        if ((this.idusuarioRol == null && other.idusuarioRol != null) || (this.idusuarioRol != null && !this.idusuarioRol.equals(other.idusuarioRol))) {
             return false;
         }
         return true;
@@ -91,7 +126,7 @@ public class UsuarioRol implements Serializable {
 
     @Override
     public String toString() {
-        return "pe.edu.sistemas.unayoe.dao.dominio.UsuarioRol[ usuarioRolPK=" + usuarioRolPK + " ]";
+        return "pe.gob.produce.produccion.dao.dominio.UsuarioRol[ idusuarioRol=" + idusuarioRol + " ]";
     }
     
 }

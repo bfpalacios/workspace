@@ -3,7 +3,9 @@ package pe.gob.produce.produccion.core.dao;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
+import org.hibernate.Criteria;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,6 +37,18 @@ public class DAOImpl<Entidad,Id extends Serializable> implements IDAO<Entidad, I
 	public Entidad obtenerEntidadPorId(Class<Entidad> clase, Serializable id)
 			throws Exception {
 		return (Entidad) sessionFactory.getCurrentSession().createCriteria(clase).add(Restrictions.idEq(id)).uniqueResult();
+	}
+	
+	
+	@SuppressWarnings("unchecked")
+	public List<Entidad> obtenerListEntidadPorParametro(Class<Entidad> clase, Map<String,Object> parametro)
+			throws Exception {
+		Criteria criteria = sessionFactory.getCurrentSession().createCriteria(clase);
+		
+		for(Map.Entry<String, Object> row : parametro.entrySet()){
+			criteria.add(Restrictions.eq(row.getKey(), row.getValue()));
+		}
+		return (List<Entidad>) criteria.list();
 	}
 	
 	@SuppressWarnings("unchecked")

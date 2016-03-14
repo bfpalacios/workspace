@@ -2,6 +2,7 @@ package pe.gob.produce.produccion.services.impl;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
@@ -12,6 +13,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import pe.gob.produce.produccion.bo.RolBO;
 import pe.gob.produce.produccion.bo.UsuarioBO;
 import pe.gob.produce.produccion.services.UsuarioServiceSecurity;
 import pe.gob.produce.produccion.services.UsuarioServices;
@@ -46,7 +48,10 @@ public class UsuarioServiceSecurityImpl implements UsuarioServiceSecurity {
 
 	private Collection<GrantedAuthority> makeGrantedAuthorities(UsuarioBO usuario){
 		Collection<GrantedAuthority> result = new ArrayList<GrantedAuthority>();
-		result.add(new GrantedAuthorityImpl("ROL1"));
+		List<RolBO> listRol = usuario.getListRol();
+		for (RolBO rolBO : listRol) {
+			result.add(new GrantedAuthorityImpl(rolBO.getNombre()));
+		}
         return result;
 	}
 	
