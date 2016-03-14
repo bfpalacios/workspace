@@ -70,7 +70,7 @@ public class UsuarioMBean extends GenericoController{
 		
 		String pagina ="";
 		System.out.println("nuevo usuario");
-		pagina ="/paginas/ModuloProduccion/admin/nuevo/registrarNuevoUsuario.xhtml";
+		pagina ="/admin/nuevo/registrarNuevoUsuario.xhtml";
 		
 		return pagina;
 	}
@@ -79,7 +79,7 @@ public class UsuarioMBean extends GenericoController{
 		
 		String pagina ="";
 		System.out.println("nuevo usuario empresa");
-		pagina ="/paginas/ModuloProduccion/admin/nuevo/usuario/nuevoUsuarioEmpresa.xhtml";
+		pagina ="/admin/nuevo/nuevoUsuarioEmpresa.xhtml";
 		
 		return pagina;
 	}
@@ -88,7 +88,7 @@ public class UsuarioMBean extends GenericoController{
 	
 		String pagina ="";
 		System.out.println("nuevo usuario cliente");
-		pagina ="/paginas/ModuloProduccion/admin/nuevo/usuario/nuevoUsuarioCliente.xhtml";
+		pagina ="/admin/nuevo/nuevoUsuarioCliente.xhtml";
 		
 		return pagina;
 	}
@@ -97,18 +97,19 @@ public class UsuarioMBean extends GenericoController{
 	public String cancelarRegistrarNuevoUsuario() throws Exception{
 		 String pagina = "";
 		 
-		 	pagina = "/login.xhtml"; 
+			pagina ="/admin/nuevo/registrarNuevoUsuario.xhtml";
+
 			
 		return pagina;		
 	}
 	
-	public String cancelar() throws Exception{
+	public String cancelarRegisttro() throws Exception{
 		 String pagina = "";
 		 
 		 	inicializarClases();
 
 			//listarCITE();
-			pagina = "/paginas/ModuloProduccion/cliente/nuevo/usuario/nuevoUsuario.xhtml"; 
+			pagina = "/admin/nuevo/nuevoUsuario.xhtml"; 
 			
 		return pagina;		
 	}

@@ -237,14 +237,13 @@
 								value="#{mensaje['produccion.nuevo.cliente.perfil']}" />
 						</p:column>
 						
-						<p:column styleClass="styleAlignLeftColumn" colspan="3">
-							<p:selectOneMenu
+						<p:column colspan="4" styleClass="styleAlignLeftColumn">
+							<p:selectOneMenu id="rol" 
 								value="#{usuarioMBean.usuarioModelSelect.rol}">
-								<f:selectItems 
-									value="#{usuarioMBean.usuarioModel.rolesUsuario}"
-									var="roles" 
-									itemLabel="#{roles.role}"
-									itemValue="#{roles.idRol}"/> 								
+								<f:selectItem itemLabel="Seleccione el Perfil" />
+								<f:selectItem itemLabel="Rol Cliente" itemValue="1" />
+								<f:selectItem itemLabel="Rol Usuario CITE " itemValue="2" />
+								<f:selectItem itemLabel="Rol Empresa " itemValue="3" />					
 							</p:selectOneMenu>
 						</p:column>
 					
@@ -290,7 +289,7 @@
 					
 					<p:column colspan="2" styleClass="styleAlignRightColumn">
 					<p:commandButton value="Cancelar" id="botonCamcelar"
-						actionListener="#{usuarioMBean.cancelar}" ajax="false" />
+						actionListener="#{usuarioMBean.cancelarRegistrarNuevoUsuario}" ajax="false" />
 				</p:column>
 				</p:row>
 			</p:outputPanel>
