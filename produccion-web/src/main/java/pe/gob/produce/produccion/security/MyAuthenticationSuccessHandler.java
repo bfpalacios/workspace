@@ -6,6 +6,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.web.DefaultRedirectStrategy;
@@ -22,6 +23,7 @@ public class MyAuthenticationSuccessHandler extends
 
 	private RedirectStrategy redirectStrategy = new DefaultRedirectStrategy();
 	
+	@Autowired
 	private UsuarioServices usuarioService;
 	
 	@Override
