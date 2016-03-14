@@ -66,16 +66,22 @@ public class UsuarioMBean extends GenericoController{
 		}
 	}
 	
-	public String selectorNuevoUsuario(){
+	public String registrarNuevoUsuario(){
 		
 		String pagina ="";
 		System.out.println("nuevo usuario");
-		//pagina ="/admin/nuevoUsuario.xhtml";
-		pagina ="/paginas/ModuloProduccion/cliente/nuevo/usuario/nuevoUsuario.xhtml";
+		pagina ="/paginas/ModuloProduccion/admin/nuevo/registrarNuevoUsuario.xhtml";
 		
 		return pagina;
 	}
 	
+	public String cancelarRegistrarNuevoUsuario() throws Exception{
+		 String pagina = "";
+		 
+		 	pagina = "/login.xhtml"; 
+			
+		return pagina;		
+	}
 	
 	public String cancelar() throws Exception{
 		 String pagina = "";
@@ -92,13 +98,6 @@ public class UsuarioMBean extends GenericoController{
 		this.usuarioModel = new UsuarioModel();		
 		
 	
-	}
-	
-	
-	public String nuevoUsuarioEmpresa(int i){
-		System.out.println("nuevo usuario");
-		return "/paginas/ModuloProduccion/cliente/nuevo/usuario/nuevoUsuarioEmpresa.xhtml";
-		
 	}
 	
 	private void llenarRolesObservados(){
