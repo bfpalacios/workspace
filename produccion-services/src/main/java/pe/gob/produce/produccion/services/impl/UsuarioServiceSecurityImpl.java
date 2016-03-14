@@ -18,7 +18,7 @@ import pe.gob.produce.produccion.services.UsuarioServices;
 
 @SuppressWarnings("deprecation")
 @Service("usuarioServiceSecurity")
-@Transactional(value="transactionManagerSeguridad")
+@Transactional(value="transactionManager")
 public class UsuarioServiceSecurityImpl implements UsuarioServiceSecurity {
 
 	@Autowired

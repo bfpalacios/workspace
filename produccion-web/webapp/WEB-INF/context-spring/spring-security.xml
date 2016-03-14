@@ -20,6 +20,8 @@
 	<security:http auto-config="true"  use-expressions="true">	
 		<security:intercept-url pattern="/**" access="isAuthenticated()" />		
 		<security:form-login login-page="/login.xhtml" 
+							 authentication-success-handler-ref="myAuthenticationSuccessHandler"
+ 							 authentication-failure-handler-ref="myAuthenticationFailureHandler"
 			authentication-failure-url="/login.xhtml" />
 			<security:logout invalidate-session="true"/>
 	</security:http>
