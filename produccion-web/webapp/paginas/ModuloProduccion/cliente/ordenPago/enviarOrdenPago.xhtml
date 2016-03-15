@@ -32,6 +32,17 @@
 								style="opacity:1 !important; margin-bottom: 10px;" id="disabled"
 								disabled="true" />
 						</p:outputPanel>
+
+						<p:outputPanel id="disabledButtonEnviarOrdenPago"
+							style="float: right; margin-top: -34px;">
+
+							<h:outputText id="lFecha"
+								value="#{mensaje['general.label.fecha']}" />
+							<p:calendar value="#{servicioMBean.date}" id="fechaServicio"
+								pattern="dd/MM/yyyy" mode="popup" showOn="button">
+							</p:calendar>
+						</p:outputPanel>
+
 						<h3>
 							<h:outputText id="lblTitulo"
 								value="#{mensaje['produccion.enviar.ordenpago.label.enviar']}" />
