@@ -36,7 +36,7 @@
 						</p:column>
 						
 						<p:column>
-							<p:inputText id="nombre" size="40"								
+							<p:inputText id="nombre" size="25"								
 								value="#{usuarioMBean.usuarioModel.nombres}" />
 							<p:message for="nombre" />
 						</p:column>
@@ -81,7 +81,7 @@
 						</p:column>
 						
 						<p:column>
-							<p:inputText id="rubro" size="40"								
+							<p:inputText id="rubro" size="10"								
 								value="#{usuarioMBean.usuarioModel.rubro}" />
 							<p:message for="rubro" />
 						</p:column>
@@ -95,7 +95,7 @@
 					
 
 						<p:column colspan="3">
-							<p:inputText id="direccionUsuario" size="60"						
+							<p:inputText id="direccionUsuario" size="40"						
 								value="#{usuarioMBean.usuarioModel.direccion}" />					
 						</p:column>
 						
@@ -108,7 +108,7 @@
 							</p:column>
 
 						<p:column>
-							<p:inputText id="telefonoUsuario" size="40"						
+							<p:inputText id="telefonoUsuario" size="10"						
 								value="#{usuarioMBean.usuarioModel.telefono}" />					
 						</p:column>
 						
@@ -118,8 +118,12 @@
 						</p:column>
 
 						<p:column>
-							<p:inputText id="dpto" size="20"						
-								value="#{usuarioMBean.usuarioModel.departamento}" />					
+							<p:selectOneMenu id="dpto" 
+								value="#{usuarioMBean.usuarioModel.departamento}">
+								<f:selectItem itemLabel="Seleccione" />
+								<f:selectItem itemLabel="LIMA" itemValue="1401" />				
+							</p:selectOneMenu>
+												
 						</p:column>
 						
 						<p:column styleClass="ui-column-label-spij styleAlignRightColumn">
@@ -127,9 +131,13 @@
 								value="#{mensaje['produccion.nuevo.cliente.provincia']}" />
 						</p:column>
 
-						<p:column>
-							<p:inputText id="provincia" size="10"						
-								value="#{usuarioMBean.usuarioModel.provincia}" />					
+						<p:column>	
+							<p:selectOneMenu id="provincia" 
+								value="#{usuarioMBean.usuarioModel.provincia}">
+								<f:selectItem itemLabel="Seleccione" />
+								<f:selectItem itemLabel="LIMA" itemValue="01" />				
+							</p:selectOneMenu>
+											
 						</p:column>
 						
 					</p:row>
@@ -142,7 +150,7 @@
 						</p:column>
 
 						<p:column>
-							<p:inputText id="email1" size="40"						
+							<p:inputText id="email1" size="25"						
 								value="#{usuarioMBean.usuarioModel.email1}" />					
 						</p:column>
 						<p:column styleClass="ui-column-label-spij styleAlignRightColumn">
@@ -151,7 +159,7 @@
 						</p:column>
 
 						<p:column colspan="3">
-							<p:inputText id="email" size="40"						
+							<p:inputText id="email" size="25"						
 								value="#{usuarioMBean.usuarioModel.email2}" />					
 						</p:column>
 						
@@ -176,7 +184,7 @@
 						</p:column>
 
 						<p:column>
-							<p:inputText id="idUsuario" size="40"						
+							<p:inputText id="idUsuario" size="25"						
 								value="#{usuarioMBean.usuarioModel.idUsuario}" />					
 						</p:column>
 						<p:column styleClass="ui-column-label-spij styleAlignRightColumn">
@@ -185,7 +193,7 @@
 						</p:column>
 
 						<p:column colspan="3">
-							<p:inputText id="emailadmin" size="40"						
+							<p:inputText id="emailadmin" size="20"						
 								value="#{usuarioMBean.usuarioModel.emailAdmin}" />					
 						</p:column>
 					</p:row>	
@@ -198,7 +206,7 @@
 
 						<p:column styleClass="styleAlignLeftColumn">
 							<p:password 
-								id="clave" size="40"								
+								id="clave" size="25"								
 								value="#{usuarioMBean.usuarioModel.clave}" />
 							<p:message for="clave" />
 						</p:column>
@@ -230,7 +238,7 @@
 
 						<p:column styleClass="styleAlignLeftColumn">
 							<p:password 
-								id="confirmarclave" size="40"								
+								id="confirmarclave" size="25"								
 								value="#{usuarioMBean.usuarioModel.clave}" />
 							<p:message for="confirmarclave" />
 						</p:column>
@@ -254,14 +262,14 @@
 					<p:column colspan="2" styleClass="styleAlignRightColumn">
 						<p:commandButton 
 							id="botonGuardar" value="Registrar Usuario" styleClass="buttonMarginNormal"
-							actionListener="#{usuarioMBean.guardarNuevoUsuarioMO}"
-							update="nombre, clave, tipoDoc, email1, direccionUsuario, telefonoUsuario" 
+							actionListener="#{usuarioMBean.guardarNuevoUsuarioCliente}"
+							update="nombre, clave, tipoDoc, email1, direccionUsuario, telefonoUsuario, rol" 
 							ajax="true"/>							
 					</p:column>
 					
 					<p:column colspan="2" styleClass="styleAlignRightColumn">
 					<p:commandButton value="Cancelar" id="botonCamcelar" 
-						actionListener="#{usuarioMBean.cancelarRegistrarNuevoUsuario}" ajax="false" />
+						action="#{usuarioMBean.cancelarRegistrarNuevoUsuario}" ajax="true" />
 				</p:column>
 				</p:row>
 			</p:outputPanel>

@@ -34,12 +34,36 @@ public class UsuarioDaoImpl extends DAOImpl<Usuario,String> implements UsuarioID
 		return listUsuario.get(0);
 	}
 	
+	public void grabarUsuarioClientes(UsuarioBO usuarioNuevo) throws SQLException{
+		Connection con = null;
+		CallableStatement cstm = null;
+		
+		con = Conexion.obtenerConexion();
+		cstm = con.prepareCall("{call SP_Nuevo_Usuario(?,?,?,?,?,?,?,?,?,?)}");		
+		cstm.setQueryTimeout(3);
+		cstm.setString(1, usuarioNuevo.getIdUsuario());		
+		cstm.setString(2, usuarioNuevo.getContrasenia());
+		cstm.setString(3, usuarioNuevo.getNombres());
+		cstm.setString(4, usuarioNuevo.getApellidoPaterno());
+		cstm.setString(5, usuarioNuevo.getApellidoMaterno());
+
+		cstm.setInt(6, Integer.parseInt(usuarioNuevo.getIdRol()));
+		cstm.setString(7, usuarioNuevo.getApellidoMaterno());
+		cstm.setString(8, usuarioNuevo.getApellidoMaterno());
+		//cstm.setString(6, usuarioNuevo.getCorreo());
+		//cstm.setString(7, usuarioNuevo.getDireccion());
+		//cstm.setString(8, usuarioNuevo.getTelefono());//en el managementbean adicionarlo
+		cstm.setInt(9, Integer.parseInt(usuarioNuevo.getIdRol()));//cambiar por el estado
+		cstm.setInt(10, Integer.parseInt(usuarioNuevo.getIdRol()));
+		cstm.execute();
+	}
+
 	public void grabarUsuarioObservados(UsuarioBO usuarioNuevo) throws SQLException{
 		Connection con = null;
 		CallableStatement cstm = null;
 		
 		con = Conexion.obtenerConexion();
-		cstm = con.prepareCall("{call CREAR_USUARIO_OBSERVADOS(?,?,?,?,?,?,?,?,?)}");		
+		cstm = con.prepareCall("{call SP_Nuevo_Usuario(?,?,?,?,?,?,?,?,?)}");		
 		cstm.setQueryTimeout(3);
 		cstm.setString(1, usuarioNuevo.getIdUsuario());		
 		cstm.setString(2, usuarioNuevo.getContrasenia());
@@ -52,7 +76,6 @@ public class UsuarioDaoImpl extends DAOImpl<Usuario,String> implements UsuarioID
 		cstm.setInt(9, Integer.parseInt(usuarioNuevo.getIdRol()));
 		cstm.execute();
 	}
-
 	
 	public void grabarUsuarioRegulares(UsuarioBO usuarioNuevo) throws SQLException{
 		Connection con = null;

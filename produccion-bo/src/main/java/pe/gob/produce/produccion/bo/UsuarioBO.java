@@ -18,6 +18,13 @@ public class UsuarioBO implements Serializable {
 	private String direccion;
 	private String telefono;
 	private String codAlumno;
+	private String rubro;
+	private String dni;
+	private String tipoDoc;
+	private String email1;
+	private String email2;
+	private String emailAdmin;
+	private String ubigeo;
 	private int planAlumno;
 
 	private List<RolBO> listRol;
@@ -33,8 +40,7 @@ public class UsuarioBO implements Serializable {
 	}
 
 	/**
-	 * @param idRol
-	 *            the idRol to set
+	 * @param idRol the idRol to set
 	 */
 	public void setIdRol(String idRol) {
 		this.idRol = idRol;
@@ -48,8 +54,7 @@ public class UsuarioBO implements Serializable {
 	}
 
 	/**
-	 * @param role
-	 *            the role to set
+	 * @param role the role to set
 	 */
 	public void setRole(String role) {
 		this.role = role;
@@ -63,8 +68,7 @@ public class UsuarioBO implements Serializable {
 	}
 
 	/**
-	 * @param idUsuario
-	 *            the idUsuario to set
+	 * @param idUsuario the idUsuario to set
 	 */
 	public void setIdUsuario(String idUsuario) {
 		this.idUsuario = idUsuario;
@@ -78,8 +82,7 @@ public class UsuarioBO implements Serializable {
 	}
 
 	/**
-	 * @param contrasenia
-	 *            the contrasenia to set
+	 * @param contrasenia the contrasenia to set
 	 */
 	public void setContrasenia(String contrasenia) {
 		this.contrasenia = contrasenia;
@@ -93,8 +96,7 @@ public class UsuarioBO implements Serializable {
 	}
 
 	/**
-	 * @param nombres
-	 *            the nombres to set
+	 * @param nombres the nombres to set
 	 */
 	public void setNombres(String nombres) {
 		this.nombres = nombres;
@@ -108,8 +110,7 @@ public class UsuarioBO implements Serializable {
 	}
 
 	/**
-	 * @param apellidoPaterno
-	 *            the apellidoPaterno to set
+	 * @param apellidoPaterno the apellidoPaterno to set
 	 */
 	public void setApellidoPaterno(String apellidoPaterno) {
 		this.apellidoPaterno = apellidoPaterno;
@@ -123,8 +124,7 @@ public class UsuarioBO implements Serializable {
 	}
 
 	/**
-	 * @param apellidoMaterno
-	 *            the apellidoMaterno to set
+	 * @param apellidoMaterno the apellidoMaterno to set
 	 */
 	public void setApellidoMaterno(String apellidoMaterno) {
 		this.apellidoMaterno = apellidoMaterno;
@@ -138,8 +138,7 @@ public class UsuarioBO implements Serializable {
 	}
 
 	/**
-	 * @param correo
-	 *            the correo to set
+	 * @param correo the correo to set
 	 */
 	public void setCorreo(String correo) {
 		this.correo = correo;
@@ -153,8 +152,7 @@ public class UsuarioBO implements Serializable {
 	}
 
 	/**
-	 * @param direccion
-	 *            the direccion to set
+	 * @param direccion the direccion to set
 	 */
 	public void setDireccion(String direccion) {
 		this.direccion = direccion;
@@ -168,8 +166,7 @@ public class UsuarioBO implements Serializable {
 	}
 
 	/**
-	 * @param telefono
-	 *            the telefono to set
+	 * @param telefono the telefono to set
 	 */
 	public void setTelefono(String telefono) {
 		this.telefono = telefono;
@@ -183,11 +180,108 @@ public class UsuarioBO implements Serializable {
 	}
 
 	/**
-	 * @param codAlumno
-	 *            the codAlumno to set
+	 * @param codAlumno the codAlumno to set
 	 */
 	public void setCodAlumno(String codAlumno) {
 		this.codAlumno = codAlumno;
+	}
+
+	/**
+	 * @return the rubro
+	 */
+	public String getRubro() {
+		return rubro;
+	}
+
+	/**
+	 * @param rubro the rubro to set
+	 */
+	public void setRubro(String rubro) {
+		this.rubro = rubro;
+	}
+
+	/**
+	 * @return the dni
+	 */
+	public String getDni() {
+		return dni;
+	}
+
+	/**
+	 * @param dni the dni to set
+	 */
+	public void setDni(String dni) {
+		this.dni = dni;
+	}
+
+	/**
+	 * @return the tipoDoc
+	 */
+	public String getTipoDoc() {
+		return tipoDoc;
+	}
+
+	/**
+	 * @param tipoDoc the tipoDoc to set
+	 */
+	public void setTipoDoc(String tipoDoc) {
+		this.tipoDoc = tipoDoc;
+	}
+
+	/**
+	 * @return the email1
+	 */
+	public String getEmail1() {
+		return email1;
+	}
+
+	/**
+	 * @param email1 the email1 to set
+	 */
+	public void setEmail1(String email1) {
+		this.email1 = email1;
+	}
+
+	/**
+	 * @return the email2
+	 */
+	public String getEmail2() {
+		return email2;
+	}
+
+	/**
+	 * @param email2 the email2 to set
+	 */
+	public void setEmail2(String email2) {
+		this.email2 = email2;
+	}
+
+	/**
+	 * @return the emailAdmin
+	 */
+	public String getEmailAdmin() {
+		return emailAdmin;
+	}
+
+	/**
+	 * @param emailAdmin the emailAdmin to set
+	 */
+	public void setEmailAdmin(String emailAdmin) {
+		this.emailAdmin = emailAdmin;
+	}
+
+	/**
+	 * @return the ubigeo
+	 */
+	public String getUbigeo() {
+		return ubigeo;
+	}
+
+	/**
+	 * @param ubigeo the ubigeo to set
+	 */
+	public void setUbigeo(String ubigeo) {
+		this.ubigeo = ubigeo;
 	}
 
 	/**
@@ -198,8 +292,7 @@ public class UsuarioBO implements Serializable {
 	}
 
 	/**
-	 * @param planAlumno
-	 *            the planAlumno to set
+	 * @param planAlumno the planAlumno to set
 	 */
 	public void setPlanAlumno(int planAlumno) {
 		this.planAlumno = planAlumno;
@@ -213,10 +306,12 @@ public class UsuarioBO implements Serializable {
 	}
 
 	/**
-	 * @param listRol
-	 *            the listRol to set
+	 * @param listRol the listRol to set
 	 */
 	public void setListRol(List<RolBO> listRol) {
 		this.listRol = listRol;
 	}
+
+	
+	
 }

@@ -100,20 +100,28 @@
 							<h:outputText id="lblDpto"
 								value="#{mensaje['produccion.nuevo.cliente.dpto']}" />
 						</p:column>
-
+						
 						<p:column>
-							<p:inputText id="dpto" size="20"						
-								value="#{usuarioMBean.usuarioModel.departamento}" />					
+							<p:selectOneMenu id="dpto" 
+								value="#{usuarioMBean.usuarioModel.departamento}">
+								<f:selectItem itemLabel="Seleccione" />
+								<f:selectItem itemLabel="LIMA" itemValue="1401" />				
+							</p:selectOneMenu>
+												
 						</p:column>
 						
 						<p:column styleClass="ui-column-label-spij styleAlignRightColumn">
 							<h:outputText id="lblProvincia"
 								value="#{mensaje['produccion.nuevo.cliente.provincia']}" />
 						</p:column>
-
-						<p:column>
-							<p:inputText id="provincia" size="10"						
-								value="#{usuarioMBean.usuarioModel.provincia}" />					
+						
+						<p:column>	
+							<p:selectOneMenu id="provincia" 
+								value="#{usuarioMBean.usuarioModel.provincia}">
+								<f:selectItem itemLabel="Seleccione" />
+								<f:selectItem itemLabel="LIMA" itemValue="01" />				
+							</p:selectOneMenu>
+											
 						</p:column>
 						
 					</p:row>
@@ -289,7 +297,7 @@
 					
 					<p:column colspan="2" styleClass="styleAlignRightColumn">
 					<p:commandButton value="Cancelar" id="botonCamcelar"
-						actionListener="#{usuarioMBean.cancelarRegistrarNuevoUsuario}" ajax="false" />
+						action="#{usuarioMBean.cancelarRegistrarNuevoUsuario}" ajax="false" />
 				</p:column>
 				</p:row>
 			</p:outputPanel>

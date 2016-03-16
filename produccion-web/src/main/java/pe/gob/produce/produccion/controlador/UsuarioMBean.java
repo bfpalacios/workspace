@@ -96,8 +96,10 @@ public class UsuarioMBean extends GenericoController{
 	
 	public String cancelarRegistrarNuevoUsuario() throws Exception{
 		 String pagina = "";
-		 
-			pagina ="/admin/nuevo/registrarNuevoUsuario.xhtml";
+
+		 inicializarClases();
+		 //pagina ="/admin/nuevo/registrarNuevoUsuario.xhtml";
+		 pagina ="/admin/nuevo/registrarNuevoUsuario.xhtml";
 
 			
 		return pagina;		
@@ -109,7 +111,7 @@ public class UsuarioMBean extends GenericoController{
 		 	inicializarClases();
 
 			//listarCITE();
-			pagina = "/admin/nuevo/nuevoUsuario.xhtml"; 
+			pagina = "/login.xhtml"; 
 			
 		return pagina;		
 	}
@@ -202,10 +204,10 @@ public class UsuarioMBean extends GenericoController{
 		return codUsuario;
 	}
 	
-	public String guardarNuevoUsuarioMO() {
+	public String guardarNuevoUsuarioCliente() {
 		String pagina = "";
 		try{
-			if (buscarUsuario(getUsuarioModel().getIdUsuario()==null?"0":getUsuarioModel().getIdUsuario()).equals("")){
+			//if (buscarUsuario(getUsuarioModel().getIdUsuario()==null?"0":getUsuarioModel().getIdUsuario()).equals("")){
 				String nuevoUsuario = getUsuarioModel().getIdUsuario()==null?"0":getUsuarioModel().getIdUsuario();
 				String contrasenia = getUsuarioModel().getClave()==null?"0":getUsuarioModel().getClave();
 				int idRol = Integer.parseInt(usuarioModelSelect.getRol()==null?"0":usuarioModelSelect.getRol());
@@ -228,22 +230,23 @@ public class UsuarioMBean extends GenericoController{
 					usuarioNuevo.setTelefono(telefono);
 					usuarioNuevo.setIdRol(String.valueOf(idRol));
 					
-					usuarioServices.grabarUsuarioObservados(usuarioNuevo);
+					usuarioServices.grabarUsuarioClientes(usuarioNuevo);
 					limpiarCampos();
 					mostrarMensaje(8);	
 				}
-			}
-			else{
+			//}
+			/*else{
 				mostrarMensaje(7);
-			}
+			}*/
 		}
 		catch(Exception e){
 			e.printStackTrace();
 			mostrarMensaje(9);				
 		}		
 		limpiarObjetos();
-		llenarRolesObservados();
+		//llenarRolesObservados();
 		
+		/*
 		switch(PROCESO){
 			case 1: switch(MODO_USUARIO){
 						case 1: pagina = "/paginas/ModuloObservados/admin/mantenimiento/usuario/nuevoUsuarioMO.xhtml"; break;
@@ -254,7 +257,9 @@ public class UsuarioMBean extends GenericoController{
 						case 1: pagina = "/paginas/ModuloRegulares/admin/mantenimiento/usuario/nuevoUsuarioMR.xhtml"; break;
 						case 2: pagina = "/paginas/ModuloRegulares/ocaa/mantenimiento/usuario/nuevoUsuarioMR.xhtml"; break;
 					}				
-		}		
+		}*/
+
+		pagina = "/login.xhtml"; 
 		return pagina;
 	}
 	

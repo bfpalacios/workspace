@@ -10,6 +10,7 @@ public interface UsuarioIDao {
 	public String buscarUsuario(String codUsuario) throws Exception;
 	public String buscarUsuarioEquivalencia(String codUsuario) throws Exception;
 	public void grabarUsuarioRegulares(UsuarioBO usuarioNuevo) throws Exception; 
+	public void grabarUsuarioClientes(UsuarioBO usuarioNuevo) throws Exception;
 	public void grabarUsuarioObservados(UsuarioBO usuarioNuevo) throws Exception;
 
 	
