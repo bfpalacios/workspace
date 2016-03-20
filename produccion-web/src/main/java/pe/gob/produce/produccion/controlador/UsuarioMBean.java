@@ -1,6 +1,7 @@
 package pe.gob.produce.produccion.controlador;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -14,8 +15,13 @@ import javax.faces.event.ValueChangeEvent;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
+import pe.gob.produce.produccion.bo.ServicioBO;
+import pe.gob.produce.produccion.bo.UbigeoBO;
 import pe.gob.produce.produccion.bo.UsuarioBO;
+import pe.gob.produce.produccion.model.ServicioModel;
+import pe.gob.produce.produccion.model.UbigeoModel;
 import pe.gob.produce.produccion.model.UsuarioModel;
+import pe.gob.produce.produccion.services.ComunServices;
 import pe.gob.produce.produccion.services.UsuarioServices;
 
 @Controller("usuarioMBean")
@@ -27,6 +33,9 @@ public class UsuarioMBean extends GenericoController{
 	
 	@Autowired
 	private UsuarioServices usuarioServices;	
+	
+	@Autowired
+	private ComunServices comunServices;	
 	
 	private UIComponent btnGuardar;
 	private UsuarioModel usuarioModelSelect;
@@ -75,14 +84,89 @@ public class UsuarioMBean extends GenericoController{
 		return pagina;
 	}
 	
-	public String registraNuevaEmpresa(){
+	public String registraNuevaEmpresa() {
 		
 		String pagina ="";
+		List<UbigeoBO> listarUbigeo = new ArrayList<UbigeoBO>();
+		
+		List<UbigeoModel> listaUbigeoModel = new ArrayList<UbigeoModel>();
+				
+		try {
+			//se llama para cargar al combo de departamento
+			listarUbigeo = comunServices.listUbigeo();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		for (UbigeoBO ubigeoBO : listarUbigeo) {
+			
+			UbigeoModel ubigeo = new UbigeoModel();
+			ubigeo.setIdUbigeo(ubigeoBO.getIdUbigeo());
+			ubigeo.setDepartamento(ubigeoBO.getDepartamento());
+			//ubigeo.setProvincia(ubigeoBO.getProvincia());
+			//ubigeo.setDistrito(ubigeoBO.getDistrito());
+			listaUbigeoModel.add(ubigeo);
+		}
+		
+		getUsuarioModel().setListUbigeo(listaUbigeoModel);
+		
 		System.out.println("nuevo usuario empresa");
 		pagina ="/admin/nuevo/nuevoUsuarioEmpresa.xhtml";
 		
 		return pagina;
 	}
+	
+	public void actualizarlistProvincia(ValueChangeEvent e) throws Exception{		
+		String codDepartamento = (String) (e.getNewValue()==null?"": e.getNewValue());		
+		System.out.println("codigo de departamento " + codDepartamento);
+		
+		List<UbigeoBO> listarProvincia = new ArrayList<UbigeoBO>();
+		List<UbigeoModel> listaUbigeoModel = new ArrayList<UbigeoModel>();
+		
+		listarProvincia = comunServices.listarProvincia(codDepartamento);
+		
+		for (UbigeoBO ubigeoBO : listarProvincia) {
+			
+			UbigeoModel ubigeo = new UbigeoModel();
+			ubigeo.setIdUbigeo(ubigeoBO.getIdUbigeo());
+			//ubigeo.setDepartamento(ubigeoBO.getDepartamento());
+			ubigeo.setProvincia(ubigeoBO.getProvincia());
+			//ubigeo.setDistrito(ubigeoBO.getDistrito());
+			listaUbigeoModel.add(ubigeo);
+		}
+		
+		
+		getUsuarioModel().setListProvincia(listaUbigeoModel);
+	}
+	
+	public void actualizarlistDistrito(ValueChangeEvent e) throws Exception{		
+		String codDepartamento = getUsuarioModelSelect().getCodDepartamento()==null?"":getUsuarioModelSelect().getCodDepartamento();
+			
+		String codProvincia = (String) (e.getNewValue()==null?"": e.getNewValue());		
+		
+		System.out.println("codigo de departamento " + codDepartamento);
+		System.out.println("codigo de provincia " + codProvincia);
+		
+		List<UbigeoBO> listarProvincia = new ArrayList<UbigeoBO>();
+		List<UbigeoModel> listaUbigeoModel = new ArrayList<UbigeoModel>();
+		
+		listarProvincia = comunServices.listarDistrito(codDepartamento, codProvincia);
+		
+		for (UbigeoBO ubigeoBO : listarProvincia) {
+			
+			UbigeoModel ubigeo = new UbigeoModel();
+			ubigeo.setIdUbigeo(ubigeoBO.getIdUbigeo());
+			//ubigeo.setDepartamento(ubigeoBO.getDepartamento());
+			//ubigeo.setProvincia(ubigeoBO.getProvincia());
+			ubigeo.setDistrito(ubigeoBO.getDistrito());
+			listaUbigeoModel.add(ubigeo);
+		}
+		
+		
+		getUsuarioModel().setListDistrito(listaUbigeoModel);
+	}
+	
 
 	public String registraNuevoCliente(){
 	

@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import pe.gob.produce.produccion.bo.RolBO;
+import pe.gob.produce.produccion.bo.UbigeoBO;
 import pe.gob.produce.produccion.bo.UsuarioBO;
 import pe.gob.produce.produccion.dao.UsuarioIDao;
 import pe.gob.produce.produccion.dao.dominio.Rol;
@@ -74,5 +75,11 @@ public class UsuarioServicesImpl implements UsuarioServices {
 
 	public void setComunDAO(ComunDAOImpl comunDAO) {
 		this.comunDAO = comunDAO;
+	}
+
+	@Override
+	public List<UbigeoBO> listUbigeo() throws Exception {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

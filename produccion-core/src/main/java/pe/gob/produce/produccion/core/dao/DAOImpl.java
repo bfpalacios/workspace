@@ -58,4 +58,6 @@ public class DAOImpl<Entidad,Id extends Serializable> implements IDAO<Entidad, I
 	    listaEntidad = sessionFactory.getCurrentSession().createCriteria(clase).list();
 	    return listaEntidad;
 	}
+	
+	
 }

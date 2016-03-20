@@ -18,19 +18,74 @@ public class UsuarioBO implements Serializable {
 	private String direccion;
 	private String telefono;
 	private String codAlumno;
-	private String rubro;
 	private String dni;
 	private String tipoDoc;
+	private String rubro;
 	private String email1;
 	private String email2;
-	private String emailAdmin;
-	private String ubigeo;
-	private int planAlumno;
-
+	private String emailAdmin;	
+	private EmpresaBO Empresa;
+	private UbigeoBO ubigeo;
+	private List<UbigeoBO> listUbigeo;
 	private List<RolBO> listRol;
 
 	public UsuarioBO() {
 	}
+
+	
+	/**
+	 * @return the empresa
+	 */
+	public EmpresaBO getEmpresa() {
+		return Empresa;
+	}
+
+
+
+	/**
+	 * @param empresa the empresa to set
+	 */
+	public void setEmpresa(EmpresaBO empresa) {
+		Empresa = empresa;
+	}
+
+
+
+	/**
+	 * @return the ubigeo
+	 */
+	public UbigeoBO getUbigeo() {
+		return ubigeo;
+	}
+
+
+
+	/**
+	 * @param ubigeo the ubigeo to set
+	 */
+	public void setUbigeo(UbigeoBO ubigeo) {
+		this.ubigeo = ubigeo;
+	}
+
+
+
+	/**
+	 * @return the listUbigeo
+	 */
+	public List<UbigeoBO> getListUbigeo() {
+		return listUbigeo;
+	}
+
+
+
+	/**
+	 * @param listUbigeo the listUbigeo to set
+	 */
+	public void setListUbigeo(List<UbigeoBO> listUbigeo) {
+		this.listUbigeo = listUbigeo;
+	}
+
+
 
 	/**
 	 * @return the idRol
@@ -270,33 +325,6 @@ public class UsuarioBO implements Serializable {
 		this.emailAdmin = emailAdmin;
 	}
 
-	/**
-	 * @return the ubigeo
-	 */
-	public String getUbigeo() {
-		return ubigeo;
-	}
-
-	/**
-	 * @param ubigeo the ubigeo to set
-	 */
-	public void setUbigeo(String ubigeo) {
-		this.ubigeo = ubigeo;
-	}
-
-	/**
-	 * @return the planAlumno
-	 */
-	public int getPlanAlumno() {
-		return planAlumno;
-	}
-
-	/**
-	 * @param planAlumno the planAlumno to set
-	 */
-	public void setPlanAlumno(int planAlumno) {
-		this.planAlumno = planAlumno;
-	}
 
 	/**
 	 * @return the listRol
