@@ -23,6 +23,7 @@ import pe.gob.produce.produccion.model.UbigeoModel;
 import pe.gob.produce.produccion.model.UsuarioModel;
 import pe.gob.produce.produccion.services.ComunServices;
 import pe.gob.produce.produccion.services.UsuarioServices;
+import sun.org.mozilla.javascript.internal.regexp.SubString;
 
 @Controller("usuarioMBean")
 @ViewScoped
@@ -119,8 +120,9 @@ public class UsuarioMBean extends GenericoController{
 	
 	public void actualizarlistProvincia(ValueChangeEvent e) throws Exception{		
 		String codDepartamento = (String) (e.getNewValue()==null?"": e.getNewValue());		
-		System.out.println("codigo de departamento " + codDepartamento);
 		
+		codDepartamento = codDepartamento.substring(0, 2);
+		System.out.println("codigo de departamento " + codDepartamento);
 		List<UbigeoBO> listarProvincia = new ArrayList<UbigeoBO>();
 		List<UbigeoModel> listaUbigeoModel = new ArrayList<UbigeoModel>();
 		
@@ -145,6 +147,8 @@ public class UsuarioMBean extends GenericoController{
 			
 		String codProvincia = (String) (e.getNewValue()==null?"": e.getNewValue());		
 		
+		codDepartamento = codDepartamento.substring(0, 2);
+		codProvincia = codProvincia.substring(2, 4);
 		System.out.println("codigo de departamento " + codDepartamento);
 		System.out.println("codigo de provincia " + codProvincia);
 		
