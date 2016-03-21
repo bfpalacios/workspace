@@ -18,7 +18,21 @@
 		<c:if test="${RESULTADO=='ROLE_EMPRESA'}">
 			<HEAD>
 				<META http-equiv="refresh"
-					  content="0;URL='/produccion-web/paginas/ModuloProduccion/principal.xhtml'" />
+					  content="0;URL='/produccion-web/paginas/ModuloProduccion/principal_empresa.xhtml'" />
+			</HEAD>
+		</c:if>
+		
+		<c:if test="${RESULTADO=='ROLE_CITE'}">
+			<HEAD>
+				<META http-equiv="refresh"
+					  content="0;URL='/produccion-web/paginas/ModuloProduccion/principal_cite.xhtml'" />
+			</HEAD>
+		</c:if>
+		
+		<c:if test="${RESULTADO=='ROLE_ADMIN'}">
+			<HEAD>
+				<META http-equiv="refresh"
+					  content="0;URL='/produccion-web/paginas/ModuloAdministrador/principal_admin.xhtml'" />
 			</HEAD>
 		</c:if>
 		

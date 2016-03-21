@@ -90,7 +90,7 @@ public class UsuarioMBean extends GenericoController{
 		return pagina;
 	}
 	
-	public String registraNuevaEmpresa() {
+	public String registraNuevaEmpresa(int modo) {
 		
 		String pagina ="";
 		List<UbigeoBO> listarUbigeo = new ArrayList<UbigeoBO>();
@@ -117,12 +117,22 @@ public class UsuarioMBean extends GenericoController{
 		
 		getUsuarioModel().setListUbigeo(listaUbigeoModel);
 		
-		System.out.println("nuevo usuario empresa");
-		pagina ="/admin/nuevo/nuevoUsuarioEmpresa.xhtml";
+		 switch(modo){ 
+		 	/*@@ESTE ES EL CASO PARA PERFIL usuario nuevo */
+		 	case 1: 	
+			
+		 		pagina ="/admin/nuevo/nuevoUsuarioEmpresa.xhtml";break;
+				
+			 /*@@ESTE ES EL CASO PARA PERFIL CITE */
+		 	case 2:  						
+				  
+				pagina = "/paginas/ModuloProduccion/cite/registro/nuevoUsuarioEmpresa.xhtml"; break;
+
+			} 
 		
 		return pagina;
 	}
-	
+
 	public void actualizarlistProvincia(ValueChangeEvent e) throws Exception{		
 		String codDepartamento = (String) (e.getNewValue()==null?"": e.getNewValue());		
 		
@@ -177,22 +187,63 @@ public class UsuarioMBean extends GenericoController{
 	}
 	
 
-	public String registraNuevoCliente(){
+	public String registraNuevoCliente(int modo){
 	
-		String pagina ="";
-		System.out.println("nuevo usuario cliente");
-		pagina ="/admin/nuevo/nuevoUsuarioCliente.xhtml";
+		String pagina ="";  
+		List<UbigeoBO> listarUbigeo = new ArrayList<UbigeoBO>();
+		
+		List<UbigeoModel> listaUbigeoModel = new ArrayList<UbigeoModel>();
+				
+		try {
+			//se llama para cargar al combo de departamento
+			listarUbigeo = comunServices.listUbigeo();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		for (UbigeoBO ubigeoBO : listarUbigeo) {
+			
+			UbigeoModel ubigeo = new UbigeoModel();
+			ubigeo.setIdUbigeo(ubigeoBO.getIdUbigeo());
+			ubigeo.setDepartamento(ubigeoBO.getDepartamento());
+			//ubigeo.setProvincia(ubigeoBO.getProvincia());
+			//ubigeo.setDistrito(ubigeoBO.getDistrito());
+			listaUbigeoModel.add(ubigeo);
+		}
+		
+		getUsuarioModel().setListUbigeo(listaUbigeoModel);
+		
+		 switch(modo){ 
+		 	/*@@ESTE ES EL CASO PARA PERFIL usuario nuevo */
+		 	case 1: 	
+		 		pagina ="/admin/nuevo/nuevoUsuarioCliente.xhtml";break;
+		
+		 		/*@@ESTE ES EL CASO PARA PERFIL CITE */
+		 	case 2:  						
+		  
+		 		pagina = "/paginas/ModuloProduccion/cite/registro/nuevoUsuarioCliente.xhtml"; break;
+
+	} 
 		
 		return pagina;
 	}
 	
 	
-	public String cancelarRegistrarNuevoUsuario() throws Exception{
+	public String cancelarRegistrarNuevoUsuario(int modo) throws Exception{
 		 String pagina = "";
 
-		 inicializarClases();
-		 //pagina ="/admin/nuevo/registrarNuevoUsuario.xhtml";
-		 pagina ="/admin/nuevo/registrarNuevoUsuario.xhtml";
+		 inicializarClases(); 
+		 switch(modo){ 
+		 	/*@@ESTE ES EL CASO PARA PERFIL usuario nuevo */
+		 	case 1: 	
+		 		pagina ="/admin/nuevo/registrarNuevoUsuario.xhtml";break;
+		
+		 	/*@@ESTE ES EL CASO PARA PERFIL CITE */
+		 	case 2:  						
+		 		pagina = "/paginas/ModuloProduccion/principal_cite.xhtml"; break;
+
+		 }  
 
 			
 		return pagina;		
@@ -202,8 +253,7 @@ public class UsuarioMBean extends GenericoController{
 		 String pagina = "";
 		 
 		 	inicializarClases();
-
-			//listarCITE();
+ 
 			pagina = "/login.xhtml"; 
 			
 		return pagina;		
