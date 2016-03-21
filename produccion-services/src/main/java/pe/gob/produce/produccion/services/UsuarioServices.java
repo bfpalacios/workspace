@@ -2,6 +2,7 @@ package pe.gob.produce.produccion.services;
 
 import java.util.List;
 
+import pe.gob.produce.produccion.bo.UbigeoBO;
 import pe.gob.produce.produccion.bo.UsuarioBO;
 
 public interface UsuarioServices {
@@ -12,5 +13,6 @@ public interface UsuarioServices {
 	public void grabarUsuarioRegulares(UsuarioBO usuarioNuevo) throws Exception;
 	public void grabarUsuarioObservados(UsuarioBO usuarioNuevo) throws Exception;
 	public void grabarUsuarioClientes(UsuarioBO usuarioNuevo) throws Exception;
-
+	public List<UbigeoBO> listUbigeo() throws Exception;
+	
 }

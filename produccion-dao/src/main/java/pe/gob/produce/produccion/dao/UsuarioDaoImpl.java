@@ -2,7 +2,10 @@ package pe.gob.produce.produccion.dao;
 
 import java.sql.CallableStatement;
 import java.sql.Connection;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -12,8 +15,10 @@ import oracle.jdbc.OracleTypes;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import pe.gob.produce.produccion.bo.UbigeoBO;
 import pe.gob.produce.produccion.bo.UsuarioBO;
 import pe.gob.produce.produccion.core.dao.DAOImpl;
+import pe.gob.produce.produccion.core.dao.jdbc.BaseDAO;
 import pe.gob.produce.produccion.core.dao.jdbc.Conexion;
 import pe.gob.produce.produccion.dao.dominio.Usuario;
 
@@ -94,7 +99,7 @@ public class UsuarioDaoImpl extends DAOImpl<Usuario,String> implements UsuarioID
 		cstm.setString(8, usuarioNuevo.getTelefono());		
 		cstm.setInt(9, Integer.parseInt(usuarioNuevo.getIdRol()));
 		cstm.setString(10, usuarioNuevo.getCodAlumno()==null?"0":usuarioNuevo.getCodAlumno());
-		cstm.setInt(11, usuarioNuevo.getPlanAlumno()==0?0:usuarioNuevo.getPlanAlumno());
+		//cstm.setInt(11, usuarioNuevo.getPlanAlumno()==0?0:usuarioNuevo.getPlanAlumno());
 		cstm.execute();
 	}
 	
@@ -139,4 +144,6 @@ public class UsuarioDaoImpl extends DAOImpl<Usuario,String> implements UsuarioID
 		}	
 		return codigoUsuarioEquivalencia;
 	}
+
+	
 }
