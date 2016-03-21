@@ -16,7 +16,8 @@ public abstract class GenericoController {
     }
     
     public static void mostrarError(String msjResumen) {
-        FacesMessage msj = new FacesMessage(FacesMessage.SEVERITY_ERROR, msjResumen,"");
+        FacesMessage msj = new FacesMessage(FacesMessage.SEVERITY_ERROR, msjResumen,
+                "Credenciales no válidas");
         FacesContext.getCurrentInstance().addMessage("", msj);
     }
 }

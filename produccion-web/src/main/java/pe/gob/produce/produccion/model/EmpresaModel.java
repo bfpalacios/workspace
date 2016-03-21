@@ -14,6 +14,11 @@ public class EmpresaModel {
 	private String portalWeb;
 	private String nombreContacto;
 	private String nombreCargo;
+	
+	//constructor por defecto
+	public EmpresaModel() {
+		
+	}
 	/**
 	 * @return the razonSocial
 	 */
@@ -87,6 +92,4 @@ public class EmpresaModel {
 		this.nombreCargo = nombreCargo;
 	}
 	
-	
-
 }

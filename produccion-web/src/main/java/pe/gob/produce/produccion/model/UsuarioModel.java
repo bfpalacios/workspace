@@ -14,6 +14,7 @@ public class UsuarioModel {
 
 	private String idUsuario;
 	private String clave;
+	private String confirmarClave;
 	private String nombres;
 	private String paterno;
 	private String materno;
@@ -50,7 +51,24 @@ public class UsuarioModel {
 	public UsuarioModel () {
 		this.idUsuario = null;
 		this.clave = null;
+		this.empresaModel = new EmpresaModel();
 	}
+	
+	
+
+
+	public String getConfirmarClave() {
+		return confirmarClave;
+	}
+
+
+
+
+	public void setConfirmarClave(String confirmarClave) {
+		this.confirmarClave = confirmarClave;
+	}
+
+
 
 
 	public List<UbigeoModel> getListProvincia() {

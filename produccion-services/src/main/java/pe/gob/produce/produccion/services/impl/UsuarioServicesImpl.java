@@ -52,9 +52,10 @@ public class UsuarioServicesImpl implements UsuarioServices {
 		usuarioDao.grabarUsuarioObservados(usuarioNuevo);
 	}
 	
-	public void grabarUsuarioClientes(UsuarioBO usuarioNuevo) throws Exception{
-		usuarioDao.grabarUsuarioClientes(usuarioNuevo);
+	public void grabarUsuario(UsuarioBO usuarioNuevo) throws Exception{
+		usuarioDao.grabarUsuario(usuarioNuevo);
 	}
+	
 
 
 	public void grabarUsuarioRegulares(UsuarioBO usuarioNuevo) throws Exception{

@@ -6,6 +6,7 @@ import java.util.Iterator;
 import java.util.List;
 
 import javax.faces.bean.ViewScoped;
+import javax.faces.context.FacesContext;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -13,6 +14,7 @@ import org.springframework.stereotype.Controller;
 import pe.gob.produce.produccion.bo.ServicioBO;
 import pe.gob.produce.produccion.core.util.Convertidor;
 import pe.gob.produce.produccion.core.util.FormateadorFecha;
+import pe.gob.produce.produccion.model.LoginModel;
 import pe.gob.produce.produccion.model.ServicioModel;
 import pe.gob.produce.produccion.services.CITEServices;
 import pe.gob.produce.produccion.services.ServicioServices;
@@ -69,23 +71,27 @@ public class ServicioMBean {
 	
 	public String selectorNuevoServicio(int modo) throws Exception{
 		 String pagina = "";
-		 
-		 switch(modo){ 
-			case 1: MODO_USUARIO = MODO_ADMIN;									
-					inicializarClases();
+			
+		 inicializarClases();
 
-					listarCITE();
-					
-					listarServicios();
-					
-					pagina = "/paginas/ModuloProduccion/cliente/servicio/nuevo/nuevoServicio.xhtml"; break;
-			/*@@ESTE ES EL CASO PARA PERFIL EMPLEADO
-			 * case 2: MODO_USUARIO = MODO_OCAA;
-					inicializarClases();									
-					if(getDatosAlumnoExcelModelGrid() != null){
-						getDatosAlumnoExcelModelGrid().removeAll(getDatosAlumnoExcelModelGrid());
-					}
-					pagina = "/paginas/ModuloObservados/ocaa/cargar/cargarDatosAlumnosObs.xhtml"; break;*/
+		 listarCITE();
+
+		 listarServicios();
+		 switch(modo){ 
+		 case 1: 	
+			
+			pagina = "/paginas/ModuloProduccion/cliente/servicio/nuevo/nuevoServicio.xhtml"; break;
+		
+		 /*@@ESTE ES EL CASO PARA PERFIL CITE */
+		 case 2:  						
+			  
+			pagina = "/paginas/ModuloProduccion/cliente/servicio/nuevo/nuevoServicio.xhtml"; break;
+		 
+		/*@@ESTE ES EL CASO PARA PERFIL EMPRESA */
+		 case 3:  									
+			
+		 	pagina = "/paginas/ModuloProduccion/empresa/servicio/nuevo/nuevoServicio.xhtml"; break;
+	 
 		}
 		return pagina;		
 	}
@@ -93,7 +99,9 @@ public class ServicioMBean {
 	public void buscarServicio() throws Exception{
 		
 		//inicializarClases();
-		
+		FacesContext facesContext = FacesContext.getCurrentInstance();
+		LoginModel login = (LoginModel) facesContext.getExternalContext().getSessionMap().get("user");
+		System.out.println("login user " + login.getUsuario());
 		
 		String nombreServicio = getServicioModel().getNombre()==null?"":getServicioModel().getNombre();
 		String codigoServicio = getServicioModel().getCodigo()==null?"":getServicioModel().getCodigo();
@@ -127,13 +135,13 @@ public class ServicioMBean {
 	
 	public String selectorBuscarServicio(int modo) throws Exception{
 		 String pagina = "";
-		 
+		 inicializarClases();
+		List<ServicioBO> listaServicio = new ArrayList<ServicioBO>();
+			
+		List<ServicioModel> datosServiciosModelGrid = new ArrayList<ServicioModel>();
+			
 		 switch(modo){ 
-			case 1: MODO_USUARIO = MODO_ADMIN;									
-					inicializarClases();
-					List<ServicioBO> listaServicio = new ArrayList<ServicioBO>();
-					
-					List<ServicioModel> datosServiciosModelGrid = new ArrayList<ServicioModel>();
+			case 1:  								
 					
 					listaServicio = servicioServices.buscarServicio("", "", 6);
 					
@@ -153,13 +161,50 @@ public class ServicioMBean {
 					setDatosServiciosModelGrid(datosServiciosModelGrid);
 					listarCITE();
 					pagina = "/paginas/ModuloProduccion/cliente/servicio/buscar/buscarServicio.xhtml"; break;
-			/*@@ESTE ES EL CASO PARA PERFIL EMPLEADO
-			 * case 2: MODO_USUARIO = MODO_OCAA;
-					inicializarClases();									
-					if(getDatosAlumnoExcelModelGrid() != null){
-						getDatosAlumnoExcelModelGrid().removeAll(getDatosAlumnoExcelModelGrid());
+			/*@@ESTE ES EL CASO PARA PERFIL CITE */
+			case 2:  
+				 	
+					listaServicio = servicioServices.buscarServicio("", "", 6);
+					
+					for (ServicioBO servicioBO : listaServicio) {
+						ServicioModel servicioModel = new ServicioModel();
+						servicioModel.setCodigo(servicioBO.getCodigo());
+						servicioModel.setNombre(servicioBO.getNombre());
+						servicioModel.setUnidad(servicioBO.getUnidad());
+						servicioModel.setRequisito(servicioBO.getRequisito());
+						servicioModel.setValorDeVenta(servicioBO.getValorDeVenta());
+						servicioModel.setPrecioDeVenta(servicioBO.getPrecioDeVenta());
+						
+						datosServiciosModelGrid.add(servicioModel);
 					}
-					pagina = "/paginas/ModuloObservados/ocaa/cargar/cargarDatosAlumnosObs.xhtml"; break;*/
+					
+
+					setDatosServiciosModelGrid(datosServiciosModelGrid);
+					listarCITE();
+					pagina = "/paginas/ModuloProduccion/cite/servicio/buscar/buscarServicio.xhtml"; break;
+					
+			/*@@ESTE ES EL CASO PARA PERFIL EMPRESA */
+			case 3:  
+				 	listaServicio = servicioServices.buscarServicio("", "", 6);
+					
+					for (ServicioBO servicioBO : listaServicio) {
+						ServicioModel servicioModel = new ServicioModel();
+						servicioModel.setCodigo(servicioBO.getCodigo());
+						servicioModel.setNombre(servicioBO.getNombre());
+						servicioModel.setUnidad(servicioBO.getUnidad());
+						servicioModel.setRequisito(servicioBO.getRequisito());
+						servicioModel.setValorDeVenta(servicioBO.getValorDeVenta());
+						servicioModel.setPrecioDeVenta(servicioBO.getPrecioDeVenta());
+						
+						datosServiciosModelGrid.add(servicioModel);
+					}
+					
+
+					setDatosServiciosModelGrid(datosServiciosModelGrid);
+					listarCITE();
+					pagina = "/paginas/ModuloProduccion/empresa/servicio/buscar/buscarServicio.xhtml"; break;
+					
+			
 		}
 		return pagina;		
 	 }

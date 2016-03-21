@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.ExternalContext;
+import javax.faces.context.FacesContext;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
@@ -119,6 +120,10 @@ public class LoginMBean extends GenericoController{
 			}catch (Exception e) {
 				mostrarError(e.getMessage());
 			}
+			
+			//SE GUARDA EN SESSION EL USER QUE SERA UTILIZADO PARA LA BUSQUEDA DE COTIZACIONES
+			FacesContext facesContext = FacesContext.getCurrentInstance();
+			facesContext.getExternalContext().getSessionMap().put("user", loginModel);
 			return "";
 
 		} catch (Exception e) {

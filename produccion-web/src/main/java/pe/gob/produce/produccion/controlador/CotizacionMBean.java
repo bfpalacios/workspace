@@ -5,6 +5,7 @@ import java.util.Date;
 import java.util.List;
 
 import javax.faces.bean.ViewScoped;
+import javax.faces.context.FacesContext;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -12,6 +13,7 @@ import org.springframework.stereotype.Controller;
 import pe.gob.produce.produccion.bo.CITEBO;
 import pe.gob.produce.produccion.core.util.Convertidor;
 import pe.gob.produce.produccion.core.util.FormateadorFecha;
+import pe.gob.produce.produccion.model.LoginModel;
 import pe.gob.produce.produccion.model.ServicioModel;
 
 
@@ -50,9 +52,9 @@ public class CotizacionMBean {
 		inicializarClases();		
 		new Convertidor();
 		new FormateadorFecha();
-		date=new Date();
+		date=new Date(); 
 		
-		
+		 		
 	}
 	
 	private void inicializarClases(){

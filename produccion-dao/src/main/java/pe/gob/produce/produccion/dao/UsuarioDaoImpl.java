@@ -39,12 +39,16 @@ public class UsuarioDaoImpl extends DAOImpl<Usuario,String> implements UsuarioID
 		return listUsuario.get(0);
 	}
 	
-	public void grabarUsuarioClientes(UsuarioBO usuarioNuevo) throws SQLException{
+	public void grabarUsuario(UsuarioBO usuarioNuevo) throws SQLException{
+		
+		int idUsuario;
+		String numeroDocumento;
+		String estado = "1";
 		Connection con = null;
 		CallableStatement cstm = null;
 		
 		con = Conexion.obtenerConexion();
-		cstm = con.prepareCall("{call SP_Nuevo_Usuario(?,?,?,?,?,?,?,?,?,?)}");		
+		cstm = con.prepareCall("{call SP_Nuevo_Usuario(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)}");		
 		cstm.setQueryTimeout(3);
 		cstm.setString(1, usuarioNuevo.getIdUsuario());		
 		cstm.setString(2, usuarioNuevo.getContrasenia());
@@ -60,7 +64,75 @@ public class UsuarioDaoImpl extends DAOImpl<Usuario,String> implements UsuarioID
 		//cstm.setString(8, usuarioNuevo.getTelefono());//en el managementbean adicionarlo
 		cstm.setInt(9, Integer.parseInt(usuarioNuevo.getIdRol()));//cambiar por el estado
 		cstm.setInt(10, Integer.parseInt(usuarioNuevo.getIdRol()));
+		cstm.setString(11, usuarioNuevo.getEmpresa().getRazonSocial());
+		cstm.setString(12, usuarioNuevo.getEmpresa().getRuc());
+		cstm.setString(13, usuarioNuevo.getRubro());
+		cstm.setString(14, usuarioNuevo.getEmpresa().getRepresentante());
+		cstm.setString(15, usuarioNuevo.getEmpresa().getPortalWeb());
+		cstm.setString(16, usuarioNuevo.getEmpresa().getNombreContacto());
+		cstm.setString(17, usuarioNuevo.getEmpresa().getNombreCargo());
+		cstm.setString(18, usuarioNuevo.getEmailAdmin());
+		cstm.registerOutParameter(19, java.sql.Types.INTEGER);
+		
 		cstm.execute();
+		
+
+		idUsuario = cstm.getInt(19);
+		System.out.println("id de usuario " + String.valueOf(idUsuario));
+		
+		if(!usuarioNuevo.getDireccion().equals(""))
+		{
+			
+			grabarUsuarioDirecciones(idUsuario,usuarioNuevo.getUbigeo().getIdUbigeo(), usuarioNuevo.getDireccion());
+			
+		}
+		
+		/*if(!usuarioNuevo.getDni().equals(""))
+		{			
+			numeroDocumento = usuarioNuevo.getDni();			
+		}else */
+		numeroDocumento = usuarioNuevo.getEmpresa().getRuc();
+		
+		
+		if(!numeroDocumento.equals(""))
+		{
+			//1 activo
+			grabarUsuarioDocumentos(idUsuario,numeroDocumento, estado);
+			
+		}	
+		
+		
+	}
+	
+	public void grabarUsuarioDirecciones(int idUsuario, String ubigeo, String direccion) throws SQLException{
+		
+		Connection con = null;
+		CallableStatement cstm = null;
+		
+		con = Conexion.obtenerConexion();
+		cstm = con.prepareCall("{call Insertar_Usuario_Direcciones(?,?,?)}");		
+		cstm.setQueryTimeout(3);
+		cstm.setInt(1, idUsuario);		
+		cstm.setString(2, ubigeo);
+		cstm.setString(3, direccion);	
+		cstm.execute();
+		
+	}
+	
+	
+public void grabarUsuarioDocumentos(int idUsuario, String numeroDocumento, String estado) throws SQLException{
+		
+		Connection con = null;
+		CallableStatement cstm = null;
+		
+		con = Conexion.obtenerConexion();
+		cstm = con.prepareCall("{call Insertar_Usuario_Documentos(?,?,?)}");		
+		cstm.setQueryTimeout(3);
+		cstm.setInt(1, idUsuario);		
+		cstm.setString(2, numeroDocumento);
+		cstm.setString(3, estado);	
+		cstm.execute();
+		
 	}
 
 	public void grabarUsuarioObservados(UsuarioBO usuarioNuevo) throws SQLException{

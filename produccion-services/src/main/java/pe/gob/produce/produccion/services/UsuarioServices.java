@@ -12,7 +12,7 @@ public interface UsuarioServices {
 	public String buscarUsuarioEquivalencia(String codUsuario) throws Exception;
 	public void grabarUsuarioRegulares(UsuarioBO usuarioNuevo) throws Exception;
 	public void grabarUsuarioObservados(UsuarioBO usuarioNuevo) throws Exception;
-	public void grabarUsuarioClientes(UsuarioBO usuarioNuevo) throws Exception;
+	public void grabarUsuario(UsuarioBO usuarioNuevo) throws Exception;
 	public List<UbigeoBO> listUbigeo() throws Exception;
 	
 }
