@@ -11,6 +11,7 @@ public class UsuarioBO implements Serializable {
 	private String role;
 	private String idUsuario;
 	private String contrasenia;
+	private String confirmacionContrasenia;
 	private String nombres;
 	private String apellidoPaterno;
 	private String apellidoMaterno;
@@ -33,6 +34,16 @@ public class UsuarioBO implements Serializable {
 	}
 
 	
+	public String getConfirmacionContrasenia() {
+		return confirmacionContrasenia;
+	}
+
+
+	public void setConfirmacionContrasenia(String confirmacionContrasenia) {
+		this.confirmacionContrasenia = confirmacionContrasenia;
+	}
+
+
 	/**
 	 * @return the empresa
 	 */

@@ -2,6 +2,7 @@ package pe.gob.produce.produccion.bo;
 
 import java.io.Serializable;
 
+/*SE CREA OARA MANEJAR LA EMPRESA */
 public class EmpresaBO implements Serializable {
 	
 	/**
