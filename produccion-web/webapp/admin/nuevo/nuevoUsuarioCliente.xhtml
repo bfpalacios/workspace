@@ -17,7 +17,9 @@
    			</p:outputPanel>
    		 
 			<p:spacer  width="5px"/>
-			<p:panel header="Plataforma de Gestion de Cites - Registro de Clientes" style="width: 100%;">					
+			<p:panel id="panelRegistroUsuario"
+			header="Plataforma de Gestion de Cites - Registro de Clientes" 
+			style="width: 100%;" >					
 				<p:panelGrid id="pnlGridLoginAcceso">
 					<p:row>
 						<p:column colspan="6" sstyleClass="ui-column-label-spij styleAlignRightColumn">
@@ -194,7 +196,7 @@
 						</p:column>
 
 						<p:column colspan="3">
-							<p:inputText id="email" size="25"						
+							<p:inputText id="email2" size="25"						
 								value="#{usuarioMBean.usuarioModel.email2}" />					
 						</p:column>
 						
@@ -228,7 +230,7 @@
 						</p:column>
 
 						<p:column colspan="3">
-							<p:inputText id="emailadmin" size="20"						
+							<p:inputText id="emailAdmin" size="20"						
 								value="#{usuarioMBean.usuarioModel.emailAdmin}" />					
 						</p:column>
 					</p:row>	
@@ -297,9 +299,9 @@
 					<p:column colspan="2" styleClass="styleAlignRightColumn">
 						<p:commandButton 
 							id="botonGuardar" value="Registrar Usuario" styleClass="buttonMarginNormal"
-							actionListener="#{usuarioMBean.guardarNuevoUsuarioCliente}"
-							update="nombre, clave, tipoDoc, email1, direccionUsuario, telefonoUsuario, rol" 
-							ajax="true"/>							
+							actionListener="#{usuarioMBean.guardarNuevoUsuarioEmpresa}"
+							update="rubro,dpto, provincia, distrito, idUsuario, emailAdmin, clave, email1,email2, direccionUsuario, telefonoUsuario, rol" 
+							ajax="true"/>						
 					</p:column>
 					
 					<p:column colspan="2" styleClass="styleAlignRightColumn">

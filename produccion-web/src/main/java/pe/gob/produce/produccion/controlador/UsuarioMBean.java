@@ -79,7 +79,7 @@ public class UsuarioMBean extends GenericoController{
 	}
 	
 	public void reset() {
-        RequestContext.getCurrentInstance().reset("formLoginPrincipal:panelRegistroEmpresas");
+        RequestContext.getCurrentInstance().reset("formLoginPrincipal:panelRegistroUsuario");
     }
 	public String registrarNuevoUsuario(){
 		
@@ -190,43 +190,43 @@ public class UsuarioMBean extends GenericoController{
 	public String registraNuevoCliente(int modo){
 	
 		String pagina ="";  
-		List<UbigeoBO> listarUbigeo = new ArrayList<UbigeoBO>();
-		
-		List<UbigeoModel> listaUbigeoModel = new ArrayList<UbigeoModel>();
-				
-		try {
-			//se llama para cargar al combo de departamento
-			listarUbigeo = comunServices.listUbigeo();
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-		for (UbigeoBO ubigeoBO : listarUbigeo) {
+			List<UbigeoBO> listarUbigeo = new ArrayList<UbigeoBO>();
 			
-			UbigeoModel ubigeo = new UbigeoModel();
-			ubigeo.setIdUbigeo(ubigeoBO.getIdUbigeo());
-			ubigeo.setDepartamento(ubigeoBO.getDepartamento());
-			//ubigeo.setProvincia(ubigeoBO.getProvincia());
-			//ubigeo.setDistrito(ubigeoBO.getDistrito());
-			listaUbigeoModel.add(ubigeo);
-		}
-		
-		getUsuarioModel().setListUbigeo(listaUbigeoModel);
-		
-		 switch(modo){ 
-		 	/*@@ESTE ES EL CASO PARA PERFIL usuario nuevo */
-		 	case 1: 	
-		 		pagina ="/admin/nuevo/nuevoUsuarioCliente.xhtml";break;
-		
-		 		/*@@ESTE ES EL CASO PARA PERFIL CITE */
-		 	case 2:  						
-		  
-		 		pagina = "/paginas/ModuloProduccion/cite/registro/nuevoUsuarioCliente.xhtml"; break;
+			List<UbigeoModel> listaUbigeoModel = new ArrayList<UbigeoModel>();
+					
+			try {
+				//se llama para cargar al combo de departamento
+				listarUbigeo = comunServices.listUbigeo();
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+			for (UbigeoBO ubigeoBO : listarUbigeo) {
+				
+				UbigeoModel ubigeo = new UbigeoModel();
+				ubigeo.setIdUbigeo(ubigeoBO.getIdUbigeo());
+				ubigeo.setDepartamento(ubigeoBO.getDepartamento());
+				//ubigeo.setProvincia(ubigeoBO.getProvincia());
+				//ubigeo.setDistrito(ubigeoBO.getDistrito());
+				listaUbigeoModel.add(ubigeo);
+			}
+			
+			getUsuarioModel().setListUbigeo(listaUbigeoModel);
+			
+			 switch(modo){ 
+			 	/*@@ESTE ES EL CASO PARA PERFIL usuario nuevo */
+			 	case 1: 	
+			 		pagina ="/admin/nuevo/nuevoUsuarioCliente.xhtml";break;
+			
+			 		/*@@ESTE ES EL CASO PARA PERFIL CITE */
+			 	case 2:  						
+			  
+			 		pagina = "/paginas/ModuloProduccion/cite/registro/nuevoUsuarioCliente.xhtml"; break;
 
-	} 
-		
-		return pagina;
+		} 
+			
+			return pagina;
 	}
 	
 	
@@ -407,20 +407,47 @@ public class UsuarioMBean extends GenericoController{
 		String pagina = "";
 		try{
 			//if (buscarUsuario(getUsuarioModel().getIdUsuario()==null?"0":getUsuarioModel().getIdUsuario()).equals("")){
-				String nuevoUsuario = getUsuarioModel().getIdUsuario()==null?"0":getUsuarioModel().getIdUsuario();
+				//String nuevoUsuario = getUsuarioModel().getIdUsuario()==null?"0":getUsuarioModel().getIdUsuario();
 				String contrasenia = getUsuarioModel().getClave()==null?"0":getUsuarioModel().getClave();
+				String confirmaClave = getUsuarioModel().getConfirmarClave()==null?"0":getUsuarioModel().getConfirmarClave();
 				int idRol = Integer.parseInt(usuarioModelSelect.getRol()==null?"0":usuarioModelSelect.getRol());
 				String nombres = getUsuarioModel().getNombres()==null?"":validaCadena(getUsuarioModel().getNombres())==true?getUsuarioModel().getNombres():"invalido";
 				String apellidoPaterno = getUsuarioModel().getPaterno()==null?"":validaCadena(getUsuarioModel().getPaterno())==true?getUsuarioModel().getPaterno():"invalido";
 				String apellidoMaterno = getUsuarioModel().getMaterno()==null?"":validaCadena(getUsuarioModel().getMaterno())==true?getUsuarioModel().getMaterno():"invalido";
 				String correo = getUsuarioModel().getCorreo()==null?"":validaCorreo(getUsuarioModel().getCorreo())==true?getUsuarioModel().getCorreo():"invalido";
 				String direccion = getUsuarioModel().getDireccion()==null?"":getUsuarioModel().getDireccion();
-				String telefono = getUsuarioModel().getTelefono()==null?"":validaNumero(getUsuarioModel().getTelefono())==true?getUsuarioModel().getTelefono():"invalido";
+				String telefono = getUsuarioModel().getTelefono();//==null?"";validaNumero(getUsuarioModel().getTelefono())==true?getUsuarioModel().getTelefono():"invalido";
+				String telefonoUsuario = getUsuarioModel().getTelefono2()==null?"":validaNumero(getUsuarioModel().getTelefono2())==true?getUsuarioModel().getTelefono2():"invalido";
+				
+			
+				/*String razonSocial 	= getUsuarioModel().getEmpresaModel().getRazonSocial()==null?"":validaCadena(getUsuarioModel().getEmpresaModel().getRazonSocial())==true?getUsuarioModel().getEmpresaModel().getRazonSocial():"invalido";
+				String ruc 			= getUsuarioModel().getEmpresaModel().getRuc()==null?"":validaNumero(getUsuarioModel().getEmpresaModel().getRuc())==true?getUsuarioModel().getEmpresaModel().getRuc():"invalido";
+				String representante = getUsuarioModel().getEmpresaModel().getRepresentante()==null?"":validaCadena(getUsuarioModel().getEmpresaModel().getRepresentante())==true?getUsuarioModel().getEmpresaModel().getRepresentante():"invalido";
+				*/
+				String ruc 			= "";
+				
+				String rubro 		= getUsuarioModel().getRubro()==null?"":validaCadena(getUsuarioModel().getRubro())==true?getUsuarioModel().getRubro():"invalido";
+				
+				String dni 			= getUsuarioModel().getDni()==null?"":validaNumero(getUsuarioModel().getDni())==true?getUsuarioModel().getDni():"invalido";
+				
+				String ubigeo 	= getUsuarioModelSelect().getCodDistrito();
+				
+				String email1 = getUsuarioModel().getEmail1()==null?"":validaCorreo(getUsuarioModel().getEmail1())==true?getUsuarioModel().getEmail1():"invalido";
+				String email2 = getUsuarioModel().getEmail2()==null?"":validaCorreo(getUsuarioModel().getEmail2())==true?getUsuarioModel().getEmail2():"invalido";
+				String emailAdmin = getUsuarioModel().getEmailAdmin()==null?"":validaCorreo(getUsuarioModel().getEmailAdmin())==true?getUsuarioModel().getEmailAdmin():"invalido";
+				
+				String portalWeb = getUsuarioModel().getEmpresaModel().getPortalWeb();//==null?"":getUsuarioModel().getEmpresaModel().getPortalWeb()?getUsuarioModel().getEmpresaModel().getPortalWeb():"invalido";
+				String nombreContacto = getUsuarioModel().getEmpresaModel().getNombreContacto()==null?"":validaCadena(getUsuarioModel().getEmpresaModel().getNombreContacto())==true?getUsuarioModel().getEmpresaModel().getNombreContacto():"invalido";
+				String nombreCargo = getUsuarioModel().getEmpresaModel().getNombreCargo()==null?"":validaCadena(getUsuarioModel().getEmpresaModel().getNombreCargo())==true?getUsuarioModel().getEmpresaModel().getNombreCargo():"invalido";
+				
+				String idUsuario = getUsuarioModel().getIdUsuario()==null?"":validaCadena(getUsuarioModel().getIdUsuario())==true?getUsuarioModel().getIdUsuario():"invalido";
+				
+				
 				
 				
 				if(validarCampos(nombres,apellidoPaterno,apellidoMaterno,correo,telefono, "", 0)==true){
 					UsuarioBO usuarioNuevo = new UsuarioBO();
-					usuarioNuevo.setIdUsuario(nuevoUsuario);
+					usuarioNuevo.setIdUsuario(idUsuario);
 					usuarioNuevo.setContrasenia(contrasenia);
 					usuarioNuevo.setNombres(nombres);
 					usuarioNuevo.setApellidoPaterno(apellidoPaterno);
@@ -428,7 +455,24 @@ public class UsuarioMBean extends GenericoController{
 					usuarioNuevo.setCorreo(correo);
 					usuarioNuevo.setDireccion(direccion);
 					usuarioNuevo.setTelefono(telefono);
+					usuarioNuevo.setEmail1(email1);
+					usuarioNuevo.setEmail2(email2);
+					usuarioNuevo.setEmailAdmin(emailAdmin);
+					usuarioNuevo.setRubro(rubro);
+					usuarioNuevo.setDni(dni);
 					usuarioNuevo.setIdRol(String.valueOf(idRol));
+					
+					usuarioNuevo.setEmpresa(new EmpresaBO());
+					usuarioNuevo.getEmpresa().setNombreCargo(nombreCargo);
+					usuarioNuevo.getEmpresa().setNombreContacto(nombreContacto);
+					usuarioNuevo.getEmpresa().setPortalWeb(portalWeb);
+					usuarioNuevo.getEmpresa().setRuc(ruc);
+					usuarioNuevo.getEmpresa().setRazonSocial("");
+					usuarioNuevo.getEmpresa().setRepresentante("");
+					System.out.println("Ubigeo " + ubigeo);
+					usuarioNuevo.setUbigeo(new UbigeoBO());
+					usuarioNuevo.getUbigeo().setIdUbigeo(ubigeo);
+					
 					
 					usuarioServices.grabarUsuario(usuarioNuevo);
 					limpiarCampos();
@@ -446,18 +490,7 @@ public class UsuarioMBean extends GenericoController{
 		limpiarObjetos();
 		//llenarRolesObservados();
 		
-		/*
-		switch(PROCESO){
-			case 1: switch(MODO_USUARIO){
-						case 1: pagina = "/paginas/ModuloObservados/admin/mantenimiento/usuario/nuevoUsuarioMO.xhtml"; break;
-						case 2: pagina = "/paginas/ModuloObservados/ocaa/mantenimiento/usuario/nuevoUsuarioMO.xhtml"; break;
-					}
-			
-			case 2: switch(MODO_USUARIO){
-						case 1: pagina = "/paginas/ModuloRegulares/admin/mantenimiento/usuario/nuevoUsuarioMR.xhtml"; break;
-						case 2: pagina = "/paginas/ModuloRegulares/ocaa/mantenimiento/usuario/nuevoUsuarioMR.xhtml"; break;
-					}				
-		}*/
+		
 
 		pagina = "/login.xhtml"; 
 		return pagina;
@@ -496,7 +529,7 @@ public class UsuarioMBean extends GenericoController{
 				String nombreContacto = getUsuarioModel().getEmpresaModel().getNombreContacto()==null?"":validaCadena(getUsuarioModel().getEmpresaModel().getNombreContacto())==true?getUsuarioModel().getEmpresaModel().getNombreContacto():"invalido";
 				String nombreCargo = getUsuarioModel().getEmpresaModel().getNombreCargo()==null?"":validaCadena(getUsuarioModel().getEmpresaModel().getNombreCargo())==true?getUsuarioModel().getEmpresaModel().getNombreCargo():"invalido";
 				String idUsuario = getUsuarioModel().getIdUsuario()==null?"":validaCadena(getUsuarioModel().getIdUsuario())==true?getUsuarioModel().getIdUsuario():"invalido";
-				
+				String dni = "";
 				
 				
 				
@@ -515,6 +548,7 @@ public class UsuarioMBean extends GenericoController{
 					usuarioNuevo.setEmailAdmin(emailAdmin);
 					usuarioNuevo.setRubro(rubro);;
 					usuarioNuevo.setIdRol(String.valueOf(idRol));
+					usuarioNuevo.setDni(dni);
 					
 					usuarioNuevo.setEmpresa(new EmpresaBO());
 					usuarioNuevo.getEmpresa().setNombreCargo(nombreCargo);

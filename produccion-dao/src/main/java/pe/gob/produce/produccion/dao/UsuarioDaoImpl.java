@@ -87,10 +87,10 @@ public class UsuarioDaoImpl extends DAOImpl<Usuario,String> implements UsuarioID
 			
 		}
 		
-		/*if(!usuarioNuevo.getDni().equals(""))
+		if(!usuarioNuevo.getDni().equals(""))
 		{			
 			numeroDocumento = usuarioNuevo.getDni();			
-		}else */
+		}else 
 		numeroDocumento = usuarioNuevo.getEmpresa().getRuc();
 		
 		
