@@ -347,6 +347,62 @@ public class UsuarioMBean extends GenericoController{
 		return codUsuario;
 	}
 	
+	public String selectorBuscarClienteEmpresa(int modo) throws Exception{
+		 String pagina = "";
+		 
+		 switch(modo){ 
+			case 1: MODO_USUARIO = MODO_ADMIN;									
+					inicializarClases();
+
+					//listarCITE();
+					pagina = ""; break;
+					
+			case 2: 								
+					inicializarClases();
+
+					//listarCITE();
+					pagina = "/paginas/ModuloProduccion/cite/registro/buscarClienteEmpresa.xhtml"; break;
+					
+			
+			/*@@ESTE ES EL CASO PARA PERFIL EMPLEADO
+			 * case 2: MODO_USUARIO = MODO_OCAA;
+					inicializarClases();									
+					if(getDatosAlumnoExcelModelGrid() != null){
+						getDatosAlumnoExcelModelGrid().removeAll(getDatosAlumnoExcelModelGrid());
+					}
+					pagina = "/paginas/ModuloObservados/ocaa/cargar/cargarDatosAlumnosObs.xhtml"; break;*/
+		}
+		return pagina;		
+	 }
+	
+	public String selectorBuscarClientePersona(int modo) throws Exception{
+		 String pagina = "";
+		 
+		 switch(modo){ 
+			case 1: MODO_USUARIO = MODO_ADMIN;									
+					inicializarClases();
+
+					//listarCITE();
+					pagina = ""; break;
+					
+			case 2: 								
+					inicializarClases();
+
+					//listarCITE();
+					pagina = "/paginas/ModuloProduccion/cite/registro/buscarClientePersona.xhtml"; break;
+					
+			
+			/*@@ESTE ES EL CASO PARA PERFIL EMPLEADO
+			 * case 2: MODO_USUARIO = MODO_OCAA;
+					inicializarClases();									
+					if(getDatosAlumnoExcelModelGrid() != null){
+						getDatosAlumnoExcelModelGrid().removeAll(getDatosAlumnoExcelModelGrid());
+					}
+					pagina = "/paginas/ModuloObservados/ocaa/cargar/cargarDatosAlumnosObs.xhtml"; break;*/
+		}
+		return pagina;		
+	 }
+	
 	public String guardarNuevoUsuarioCliente() {
 		String pagina = "";
 		try{
