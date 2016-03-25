@@ -17,6 +17,7 @@ import pe.gob.produce.produccion.core.util.FormateadorFecha;
 import pe.gob.produce.produccion.model.LoginModel;
 import pe.gob.produce.produccion.model.ServicioModel;
 import pe.gob.produce.produccion.services.CITEServices;
+import pe.gob.produce.produccion.services.ComunServices;
 import pe.gob.produce.produccion.services.ServicioServices;
 
 
@@ -30,6 +31,10 @@ public class ServicioMBean {
 	
 	@Autowired
 	private CITEServices citeServices;
+	
+	
+	@Autowired
+	private ComunServices comunServices;
 	
 	@Autowired
 	private ServicioServices servicioServices;
@@ -84,8 +89,9 @@ public class ServicioMBean {
 		
 		 /*@@ESTE ES EL CASO PARA PERFIL CITE */
 		 case 2:  						
-			  
-			pagina = "/paginas/ModuloProduccion/cliente/servicio/nuevo/nuevoServicio.xhtml"; break;
+			 
+			listarMuestras(); 
+			pagina = "/paginas/ModuloProduccion/cite/servicio/nuevo/nuevoServicio.xhtml"; break;
 		 
 		/*@@ESTE ES EL CASO PARA PERFIL EMPRESA */
 		 case 3:  									
@@ -213,7 +219,7 @@ public class ServicioMBean {
 	
 
 
-	public void guardarNuevoServicio() {
+	public void guardarNuevoServicio(int opcion) {
 		String pagina = "";
 		try{
 			//if (buscarUsuario(getUsuarioModel().getIdUsuario()==null?"0":getUsuarioModel().getIdUsuario()).equals("")){
@@ -270,6 +276,17 @@ public class ServicioMBean {
 			
 		
 			getServicioModel().setListarCITE(citeServices.listarCITES());
+		}
+		catch(Exception e){
+			e.printStackTrace();
+		}
+	}
+	
+	private void listarMuestras(){
+		try{
+			
+		
+			getServicioModel().setListarMuestra(comunServices.listarMuestra());
 		}
 		catch(Exception e){
 			e.printStackTrace();

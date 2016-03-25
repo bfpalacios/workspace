@@ -7,6 +7,7 @@ import javax.faces.bean.RequestScoped;
 import org.springframework.stereotype.Component;
 
 import pe.gob.produce.produccion.bo.CITEBO;
+import pe.gob.produce.produccion.bo.MuestraBO;
 
 
 
@@ -29,8 +30,18 @@ public class ServicioModel {
 	private String valorDeVenta;
 	private String precioDeVenta;
 	private String totalPrecioDeVenta;
-	
 
+	private List<CITEBO> listarCITE;
+
+	private List<MuestraBO> listarMuestra;
+
+	
+	public List<MuestraBO> getListarMuestra() {
+		return listarMuestra;
+	}
+	public void setListarMuestra(List<MuestraBO> listarMuestra) {
+		this.listarMuestra = listarMuestra;
+	}
 	public String getTotalPrecioDeVenta() {
 		return totalPrecioDeVenta;
 	}
@@ -67,7 +78,6 @@ public class ServicioModel {
 	public void setCodigo(String codigo) {
 		this.codigo = codigo;
 	}
-	private List<CITEBO> listarCITE;
 	public String getNombre() {
 		return nombre;
 	}

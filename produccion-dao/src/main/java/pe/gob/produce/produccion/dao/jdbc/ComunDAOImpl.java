@@ -12,6 +12,7 @@ import org.springframework.stereotype.Component;
 
 import oracle.jdbc.OracleTypes;
 import pe.gob.produce.produccion.bo.CITEBO;
+import pe.gob.produce.produccion.bo.MuestraBO;
 import pe.gob.produce.produccion.bo.UbigeoBO;
 import pe.gob.produce.produccion.bo.UsuarioBO;
 import pe.gob.produce.produccion.core.dao.jdbc.BaseDAO;
@@ -160,4 +161,35 @@ public class ComunDAOImpl extends BaseDAO implements ComunIDAO{
 		return listaUbigeos;
 	}
 
+	@Override
+	public List<MuestraBO> listarMuestra() throws Exception {
+		
+		Connection con = null;
+		
+		Statement statement = null;
+		ResultSet rs = null;
+		List<MuestraBO> listaMuestras = new ArrayList<MuestraBO>();
+		
+		try{
+			con = Conexion.obtenerConexion();
+			PreparedStatement pstmt = con.prepareStatement("{call dbo.ListarUnidadServicio}");
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()){				
+				MuestraBO muestra = new MuestraBO();
+				muestra.setCodigo(rs.getString(1));
+				muestra.setDescripcion(rs.getString(2));
+				listaMuestras.add(muestra);
+			}
+		}
+		catch(Exception e){
+			e.printStackTrace();
+		}
+		finally{
+			this.cerrarResultSet(rs);
+			this.cerrarSentenceStatement(statement);
+			this.cerrarConexion(con);
+		}		
+		return listaMuestras;
+	}
 }

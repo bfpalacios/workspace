@@ -5,7 +5,9 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import pe.gob.produce.produccion.bo.MuestraBO;
 import pe.gob.produce.produccion.bo.UbigeoBO;
+import pe.gob.produce.produccion.dao.ComunIDAO;
 import pe.gob.produce.produccion.dao.jdbc.ComunDAOImpl;
 import pe.gob.produce.produccion.services.ComunServices;
 
@@ -13,7 +15,7 @@ import pe.gob.produce.produccion.services.ComunServices;
 public class ComunServicesImpl implements ComunServices{
 
 	@Autowired
-	private ComunDAOImpl comunDAO;
+	private ComunIDAO comunDAO;
 	
 
 	@Override
@@ -34,6 +36,13 @@ public class ComunServicesImpl implements ComunServices{
 	public List<UbigeoBO> listarDistrito(String codDepartamento, String codProvincia) throws Exception {
 		// TODO Auto-generated method stub
 		return comunDAO.listarDistrito(codDepartamento,codProvincia);
+	}
+
+
+	@Override
+	public List<MuestraBO> listarMuestra() throws Exception {
+		// TODO Auto-generated method stub
+		return comunDAO.listarMuestra();
 	}
 	
 	
