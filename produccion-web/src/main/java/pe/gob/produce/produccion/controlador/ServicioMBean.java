@@ -2,18 +2,21 @@ package pe.gob.produce.produccion.controlador;
 
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.Iterator;
 import java.util.List;
 
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
+import pe.gob.produce.produccion.bo.CITEBO;
 import pe.gob.produce.produccion.bo.ServicioBO;
+import pe.gob.produce.produccion.bo.UbigeoBO;
 import pe.gob.produce.produccion.core.util.Convertidor;
 import pe.gob.produce.produccion.core.util.FormateadorFecha;
+import pe.gob.produce.produccion.core.util.ObtenerNumeroAleatorio;
 import pe.gob.produce.produccion.model.LoginModel;
 import pe.gob.produce.produccion.model.ServicioModel;
 import pe.gob.produce.produccion.services.CITEServices;
@@ -117,7 +120,7 @@ public class ServicioMBean {
 		
 		List<ServicioBO> listaServicio = new ArrayList<ServicioBO>();
 		//SE ENVIA EL 6 POR DEFAULT
-		listaServicio = servicioServices.buscarServicio(codigoServicio,nombreServicio, 6);
+		listaServicio = servicioServices.buscarServicio(codigoServicio,nombreServicio, Integer.parseInt(codigoCITE));
 		List<ServicioModel> datosServiciosModelGrid = new ArrayList<ServicioModel>();
 		
 		
@@ -148,8 +151,8 @@ public class ServicioMBean {
 			
 		 switch(modo){ 
 			case 1:  								
-					
-					listaServicio = servicioServices.buscarServicio("", "", 6);
+					//SE ENVIA 0 EN EL CODIGO DE CITE PARA QUE NOS OBTENGA TODOS LOS SERVICIOS DE LOS CITES
+					listaServicio = servicioServices.buscarServicio("", "", 0);
 					
 					for (ServicioBO servicioBO : listaServicio) {
 						ServicioModel servicioModel = new ServicioModel();
@@ -169,8 +172,8 @@ public class ServicioMBean {
 					pagina = "/paginas/ModuloProduccion/cliente/servicio/buscar/buscarServicio.xhtml"; break;
 			/*@@ESTE ES EL CASO PARA PERFIL CITE */
 			case 2:  
-				 	
-					listaServicio = servicioServices.buscarServicio("", "", 6);
+				 	//SE ENVIA 0 EN EL CODIGO DE CITE PARA QUE NOS OBTENGA TODOS LOS SERVICIOS DE LOS CITES
+					listaServicio = servicioServices.buscarServicio("", "", 0);
 					
 					for (ServicioBO servicioBO : listaServicio) {
 						ServicioModel servicioModel = new ServicioModel();
@@ -191,7 +194,8 @@ public class ServicioMBean {
 					
 			/*@@ESTE ES EL CASO PARA PERFIL EMPRESA */
 			case 3:  
-				 	listaServicio = servicioServices.buscarServicio("", "", 6);
+					//SE ENVIA 0 EN EL CODIGO DE CITE PARA QUE NOS OBTENGA TODOS LOS SERVICIOS DE LOS CITES
+					listaServicio = servicioServices.buscarServicio("", "", 0);
 					
 					for (ServicioBO servicioBO : listaServicio) {
 						ServicioModel servicioModel = new ServicioModel();
@@ -221,48 +225,82 @@ public class ServicioMBean {
 
 	public void guardarNuevoServicio(int opcion) {
 		String pagina = "";
+		ObtenerNumeroAleatorio numero = new ObtenerNumeroAleatorio();
+		FormateadorFecha fecha = new FormateadorFecha();
 		try{
 			//if (buscarUsuario(getUsuarioModel().getIdUsuario()==null?"0":getUsuarioModel().getIdUsuario()).equals("")){
 			if (true){
-				String nuevoServicio = getServicioModel().getNombre()==null?"":getServicioModel().getNombre();
+				String nombreServicio = getServicioModel().getNombre()==null?"":getServicioModel().getNombre();
 				String citeID = getServicioModel().getCodigoCITE()==null?"":getServicioModel().getCodigoCITE();
-				String fecha = (String) (getDate()==null?"":getDate());
-				String descripcion = getServicioModel().getDescripcion()==null?"":getServicioModel().getDescripcion();
-				String nombreSolicitante = getServicioModel().getNombreSolicitante()==null?"":getServicioModel().getNombreSolicitante();
-				String cargo = getServicioModel().getCargo()==null?"":getServicioModel().getCargo();
-				String telefonos = getServicioModel().getTelefono()==null?"":getServicioModel().getTelefono();
-				String email = getServicioModel().getTelefono()==null?"":getServicioModel().getTelefono();
+				String unidad = getServicioModel().getUnidad()==null?"":getServicioModel().getUnidad();
+				String requisito = getServicioModel().getRequisito()==null?"":getServicioModel().getRequisito();
+				String valorDeVenta = getServicioModel().getValorDeVenta()==null?"":getServicioModel().getValorDeVenta();
+				String precioDeVenta = getServicioModel().getPrecioDeVenta()==null?"":getServicioModel().getPrecioDeVenta();
+				String codigoServicio ="";
+				String codigoUbigeo = "1";
 				
-			servicioServices.nuevoServicio(nuevoServicio,citeID, fecha, descripcion, nombreSolicitante, cargo, telefonos, email );
+				if(citeID.equals("1")) 
+				{
+					codigoServicio = "0001" + fecha.formatoFechaDDMMAAAA2(new Date()) + String.valueOf(numero.obtenerNumeroAleatorioEntero());
+				}
+				
+				if(citeID.equals("2")) 
+				{
+					codigoServicio = "0002" + fecha.formatoFechaDDMMAAAA2(new Date()) + String.valueOf(numero.obtenerNumeroAleatorioEntero());
+				}
+				if(citeID.equals("3")) 
+				{
+					codigoServicio = "0003" + fecha.formatoFechaDDMMAAAA2(new Date()) + String.valueOf(numero.obtenerNumeroAleatorioEntero());
+				}
+				if(citeID.equals("4")) 
+				{
+					codigoServicio = "0004" + fecha.formatoFechaDDMMAAAA2(new Date()) + String.valueOf(numero.obtenerNumeroAleatorioEntero());
+				}
+				
+					
+				ServicioBO servicio = new ServicioBO();
+					servicio.setCodigo(codigoServicio);
+					
+					servicio.setUbigeo(new UbigeoBO());
+					servicio.getUbigeo().setIdUbigeo(codigoUbigeo);
+					servicio.setCite(new CITEBO());
+					servicio.getCite().setCodigo(citeID);
+					servicio.setEstado("1");
+					servicio.setUnidad(unidad);
+					servicio.setNombre(nombreServicio);
+					servicio.setRequisito(requisito);
+					servicio.setPrecioDeVenta(precioDeVenta);
+					servicio.setValorDeVenta(valorDeVenta);
+					
+					
+				servicioServices.nuevoServicio(servicio);
 			}
 		}
 		catch(Exception e){
 			e.printStackTrace();
-			//mostrarMensaje(9);				
+			mostrarMensaje(9);				
 		}		
 		limpiarObjetos();
+		mostrarMensaje(8);	
 		//llenarRolesObservados();
 		
-		/*switch(PROCESO){
+		switch(opcion){
 			case 1: switch(MODO_USUARIO){
 						case 1: pagina = "/paginas/ModuloObservados/admin/mantenimiento/usuario/nuevoUsuarioMO.xhtml"; break;
 						case 2: pagina = "/paginas/ModuloObservados/ocaa/mantenimiento/usuario/nuevoUsuarioMO.xhtml"; break;
 					}
 			
-			case 2: switch(MODO_USUARIO){
-						case 1: pagina = "/paginas/ModuloRegulares/admin/mantenimiento/usuario/nuevoUsuarioMR.xhtml"; break;
-						case 2: pagina = "/paginas/ModuloRegulares/ocaa/mantenimiento/usuario/nuevoUsuarioMR.xhtml"; break;
-					}				
-		}*/	
+			case 2: 
+			try {
+				selectorNuevoServicio(opcion);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} break;
+						
+									
+		}	
 		
-		
-		//
-		try {
-			selectorNuevoServicio(1);
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 	}
 	
 	
@@ -313,6 +351,31 @@ public class ServicioMBean {
 			pagina = "/paginas/ModuloProduccion/cliente/servicio/nuevo/nuevoServicio.xhtml"; 
 			
 		return pagina;		
+	}
+	
+	private void mostrarMensaje(int opcionMensaje){
+		FacesMessage message = null;		
+		
+		switch(opcionMensaje){
+			case 1: message = new FacesMessage(FacesMessage.SEVERITY_ERROR,"", "Debe ingresar sólo caracteres en el campo - " + "Nombres");
+	        		FacesContext.getCurrentInstance().addMessage(null, message); break;
+			case 2: message = new FacesMessage(FacesMessage.SEVERITY_ERROR,"", "Debe ingresar sólo caracteres en el campo - " + "Apellido Paterno");
+	        		FacesContext.getCurrentInstance().addMessage(null, message); break;
+			case 3: message = new FacesMessage(FacesMessage.SEVERITY_ERROR,"", "Debe ingresar sólo caracteres en el campo - " + "Apellido Materno");
+    				FacesContext.getCurrentInstance().addMessage(null, message); break;
+			case 4: message = new FacesMessage(FacesMessage.SEVERITY_ERROR,"", "Debe ingresar un correo válido en el campo - " + "Correo");
+    				FacesContext.getCurrentInstance().addMessage(null, message); break;
+			case 5: message = new FacesMessage(FacesMessage.SEVERITY_ERROR,"", "Debe ingresar sólo números en el campo - " + "Teléfono");
+					FacesContext.getCurrentInstance().addMessage(null, message); break;
+			case 6: message = new FacesMessage(FacesMessage.SEVERITY_ERROR,"", "Debe ingresar sólo números en el campo - " + "Código del alumno");
+					FacesContext.getCurrentInstance().addMessage(null, message); break;
+			case 7: message = new FacesMessage(FacesMessage.SEVERITY_WARN,"", "El usuario ingresado ya ha sido registrado");
+					FacesContext.getCurrentInstance().addMessage(null, message); break;	
+			case 8: message = new FacesMessage(FacesMessage.SEVERITY_INFO,"", "El servicio se guardo correctamente");
+					FacesContext.getCurrentInstance().addMessage(null, message); break;
+			case 9: message = new FacesMessage(FacesMessage.SEVERITY_FATAL,"", "Hubo un error al guardar el usuario");
+					FacesContext.getCurrentInstance().addMessage(null, message); break;
+		}
 	}
 	
 	public void setServicioModel(ServicioModel servicioModel) {

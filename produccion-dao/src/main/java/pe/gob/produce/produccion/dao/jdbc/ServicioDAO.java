@@ -66,18 +66,41 @@ public class ServicioDAO extends BaseDAO implements ServicioIDao  {
 		}
 		
 	}
+	
 
 	@Override
-	public List<ServicioBO> buscarServicio() {
-		// TODO Auto-generated method stub
-		return null;
-	}
+	public void nuevoServicio(ServicioBO servicio) {
+		
+		Connection con = null;
+		CallableStatement cstm = null;
+		try {
+			con = Conexion.obtenerConexion();
+			cstm = con.prepareCall("{call SP_Insertar_Servicio(?,?,?,?,?,?,?,?,?)}");		
+			cstm.setQueryTimeout(3);
+			cstm.setString(1, servicio.getCodigo());		
+			cstm.setString(2, servicio.getUbigeo().getIdUbigeo());
+			cstm.setInt(3, Integer.parseInt(servicio.getCite().getCodigo()));
+			cstm.setInt(4, Integer.parseInt(servicio.getEstado()));
+			cstm.setInt(5, Integer.parseInt(servicio.getUnidad()));
+	
+			cstm.setString(6, servicio.getNombre());
+			cstm.setString(7, servicio.getRequisito());
+			cstm.setFloat(8, Float.parseFloat(servicio.getValorDeVenta()));
+			cstm.setFloat(9, Float.parseFloat(servicio.getPrecioDeVenta()));
+			
+			
+			cstm.execute();
+		
+		
+		} catch (Exception e) {
+			e.printStackTrace();
+			
+		} finally {
+			this.cerrarStatement(cstm);
+			this.cerrarConexion(con);
+		}
 
-	@Override
-	public void nuevoServicio(String cnuevoServicio, String citeID,
-			String fecha, String descripcion, String nombreSolicitante,
-			String cargo, String telefonos, String email) {
-		// TODO Auto-generated method stub
+		
 		
 	}
 	

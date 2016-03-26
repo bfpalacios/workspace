@@ -10,7 +10,15 @@ public class ServicioBO {
 	private String precioDeVenta;
 	private String estado;
 	private CITEBO cite;	
+	private UbigeoBO ubigeo;	
 	
+	
+	public UbigeoBO getUbigeo() {
+		return ubigeo;
+	}
+	public void setUbigeo(UbigeoBO ubigeo) {
+		this.ubigeo = ubigeo;
+	}
 	public String getEstado() {
 		return estado;
 	}

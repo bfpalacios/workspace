@@ -25,19 +25,11 @@ public class ServicioServicesImpl implements ServicioServices{
 	}
 
 	@Override
-	public List<ServicioBO> buscarServicio() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public void nuevoServicio(String cnuevoServicio, String citeID,
-			String fecha, String descripcion, String nombreSolicitante,
-			String cargo, String telefonos, String email) {
-		// TODO Auto-generated method stub
+	public void nuevoServicio(ServicioBO servicio) {
+		servicioDao.nuevoServicio(servicio);
 		
 	}
-	
+
 	
 
 }
