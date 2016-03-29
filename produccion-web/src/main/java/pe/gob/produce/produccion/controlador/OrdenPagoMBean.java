@@ -122,6 +122,13 @@ public class OrdenPagoMBean {
 						getDatosAlumnoExcelModelGrid().removeAll(getDatosAlumnoExcelModelGrid());
 					}
 					pagina = "/paginas/ModuloObservados/ocaa/cargar/cargarDatosAlumnosObs.xhtml"; break;*/
+					
+			case 2: MODO_USUARIO = MODO_ADMIN;									
+			inicializarClases();
+
+			//listarCITE();
+			pagina = "/paginas/ModuloProduccion/cite/ordenPago/nuevaOrdenPago.xhtml"; break;
+					
 		}
 		return pagina;		
 	}
@@ -153,6 +160,29 @@ public class OrdenPagoMBean {
 						getDatosAlumnoExcelModelGrid().removeAll(getDatosAlumnoExcelModelGrid());
 					}
 					pagina = "/paginas/ModuloObservados/ocaa/cargar/cargarDatosAlumnosObs.xhtml"; break;*/
+					
+			case 2: MODO_USUARIO = MODO_ADMIN;									
+			inicializarClases();
+			//listarCITE();
+			pagina = "/paginas/ModuloProduccion/cite/ordenPago/buscarOrdenPago.xhtml"; break;
+		}
+		return pagina;		
+	 }
+	//Continuación de búsqueda de Orden de pago
+	public String selectorBuscarOrdenPago2(int modo) throws Exception{
+		 String pagina = "";
+		 
+		 switch(modo){ 
+			case 1: MODO_USUARIO = MODO_ADMIN;									
+					inicializarClases();
+
+					//listarCITE();
+					pagina = "/paginas/ModuloProduccion/cliente/ordenPago/buscarOrdenPago.xhtml"; break;
+					
+			case 2: MODO_USUARIO = MODO_ADMIN;									
+					inicializarClases();
+			//listarCITE();
+					pagina = "/paginas/ModuloProduccion/cite/ordenPago/verOrdenPago.xhtml"; break;
 		}
 		return pagina;		
 	 }

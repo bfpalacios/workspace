@@ -18,53 +18,9 @@
 				</p:column>
 			</p:row>
 		</p:outputPanel>
-
-		<p:panel header="Nueva Orden de Pago" style="width: 400px;">
-			<p:panelGrid id="pnlGridBuscarServicio">
-
-				<p:row>
-					<p:column styleClass="ui-column-label-spij styleAlignRightColumn">
-						<h:outputText id="lCite"
-							value="Seleccionar Cite:" />
-					</p:column>
-					<p:column colspan="2">
-						<p:selectOneMenu id="selectOneCITE"
-							value="#{servicioMBean.servicioModel.codigoCITE}"
-							styleClass="ui-column-label-spij styleAlignRightColumn">
-							<f:selectItem itemLabel="Seleccione el CITE " />
-							<f:selectItems value="#{servicioMBean.servicioModel.listarCITE}"
-								var="CITE" itemLabel="#{CITE.descripcion}"
-								itemValue="#{CITE.codigo}" />
-						</p:selectOneMenu>
-					</p:column>
-
-				</p:row>		
-
-				<p:row>
-					<p:column styleClass="ui-column-label-spij styleAlignRightColumn">
-						<h:outputText id="lCodigo"
-							value="N° Cotización de Referencia:" />
-					</p:column>
-					<p:column>
-						<p:inputText id="codigoServicio"
-							value="#{servicioMBean.servicioModel.codigo}" size="20" />
-					</p:column>
-
-				</p:row>
-
-
-				<p:row id="filServicios">
-					<p:column colspan="2"
-						styleClass="ui-column-label-spij styleAlignCenterColumn">
-						<p:commandButton value="Buscar" id="botonBuscar" actionListener="#{servicioMBean.buscarServicio}" ajax="true" />
-					</p:column>
-				</p:row>
-			</p:panelGrid>
-		</p:panel>
-		<p:spacer width="10px" />
-				
-		
-		<p:panelGrid id="pnlGridLoginAcceso" style="width: 90%;" >
+		<p:spacer width="5px" />
+		<p:panel header="Ver Orden de Pago">		
+		<p:panelGrid id="pnlGridLoginAcceso" header="Ver Orden de Pago" style="width: 100%;" >
 				<p:row>
 					<p:column colspan="6"
 						sstyleClass="ui-column-label-spij styleAlignRightColumn">
@@ -73,9 +29,7 @@
 							<h:outputText id="lblTitulo"	
 								value="#{mensaje['produccion.cotizacioncite.label.subtitulo']}" />
 						</h3>
-						<p:outputPanel id="disabledButtonOrdenServicio" style="float: right; margin-top: -35px; margin-right: 570px;">   
-													
-						</p:outputPanel>
+						
 						
 						<p:outputPanel id="disabledButton" style="float: right; margin-top: -35px;">       
 							
@@ -94,7 +48,7 @@
 
 					<p:column styleClass="ui-column-label-spij styleAlignRightColumn">
 						<h:outputText id="lblRazonSocialOrdenServicio"
-							value="Nombre / Razón Social:" />
+							value="#{mensaje['produccion.buscar.ordenservicio.label.razonsocial']}" />
 					</p:column>
 
 					<p:column>
@@ -105,7 +59,7 @@
 
 					<p:column styleClass="ui-column-label-spij styleAlignRightColumn">
 						<h:outputText id="lblRucOrdenServicio"
-							value="RUC / DNI:" />
+							value="#{mensaje['produccion.buscar.ordenservicio.label.ruc']}" />
 					</p:column>
 
 					<p:column colspan="3">
@@ -132,7 +86,7 @@
 
 					<p:column styleClass="ui-column-label-spij styleAlignRightColumn">
 						<h:outputText id="lblContacto"
-							value="Fecha de Cotización:" />
+							value="#{mensaje['produccion.buscar.cotizacionCite.label.representante']}" />
 					</p:column>
 
 
@@ -202,14 +156,15 @@
 
 
 			</p:panelGrid>
+		</p:panel>
 			
-			<p:spacer width="20px" />
+			<p:spacer width="50px" />
 			
-			<p:panelGrid id="pnlGridNuevaCotizacion" style="width: 95%;border: 0px;">
+		<p:panelGrid id="pnlGridNuevaCotizacion" style="width: 95%;border: 0px;">
 
 			<p:row>
 				<p:column colspan="4"  style="font-weight:bold;font-size:15px"
-					styleClass="ui-column-label-spij styleAlignCenterColumn">Datos de la Cotización Asociada</p:column>
+					styleClass="ui-column-label-spij styleAlignCenterColumn">#{mensaje['produccion.buscar.cotizacionCite.label.subtitulo']}</p:column>
 			</p:row>
 			<p:row>
 				<p:column styleClass="ui-column-label-spij styleAlignRightColumn">
@@ -218,7 +173,7 @@
 				</p:column>
 				<p:column>
 					<p:inputText id="cotizacionCiteNro" styleClass="ui-column-label-spij styleAlignRightColumn cotizacionCiteNro" disabled="true"
-						value="001 - 2016" size="20" />
+						value="#{servicioMBean.servicioModel.codigo}" size="20" />
 				</p:column>
 
 				<p:column styleClass="ui-column-label-spij styleAlignRightColumn">
@@ -289,25 +244,54 @@
 			</p:row>	
 		
 		</p:panelGrid>
-		<p:outputPanel id="pnlGuardar" style="width:500px;margin-top:10px;">
+		<p:spacer width="40px" />
+
+			<p:outputPanel id="disabledButtonOrdenServicio">   																		
+			<h:graphicImage id="imgPlantillaLoginBanner" class="previewComprobante"
+				value="/resources/images/comprobante/comprobante1.jpg" />	    
+			</p:outputPanel>
+		<p:spacer width="20px" />
+		<p:panelGrid id="pnlGridEstadoCotizacion" style="width: 95%;border: 0px;">
+
+			<p:row>
+				<p:column colspan="1">
+					<h:outputText id="lEstadoCotizacionCite"
+						value="Estado de la Orden de Pago:" />
+					<p:selectOneMenu id="selectOneEstado"
+						value="#{servicioMBean.servicioModel.codigoCITE}"
+						styleClass="ui-column-label-spij styleAlignRightColumn selectOneEstado">
+						<f:selectItem itemLabel="Seleccione estado" />
+						<f:selectItem itemLabel="Registrado" itemValue="registrado" />
+						<f:selectItem itemLabel="Aprobado" itemValue="aprobado" />
+						<f:selectItem itemLabel="Archivado" itemValue="archivado" />
+					</p:selectOneMenu>
+				</p:column>
+				
+
+			</p:row>
+			
+			
+		</p:panelGrid>
+		
+		<p:outputPanel id="pnlGuardar" style="width:400px;margin-top:10px;">
 				<p:row>
 					<p:column colspan="2" styleClass="styleAlignLeftColumn">
 						<p:commandButton id="botonGuardar" styleClass="buttonMarginNormal"
-							value="Registrar Orden de Pago"
+							value="#{mensaje['produccion.cotizacioncite.btn.actualizarcotizacion']}"
 							actionListener="#{servicioMBean.guardarNuevoServicio}"
-							update="lFecha,nombreServicio, descripcionServicio,  nombreSolicitante,  cargo,  telefono, email"
 							ajax="false" />
 					</p:column>
 
 					<p:column colspan="2" styleClass="styleAlignRightColumn">
 						<p:commandButton
-							value="Imprimir Orden de Pago"
+							value="#{mensaje['produccion.nuevo.ordenpago.btn.cancelar']}"
 							id="botonCamcelar" actionListener="#{servicioMBean.cancelar}"
 							ajax="false" />
 					</p:column>
 				</p:row>
 			</p:outputPanel>
-
+		
+		
 		
 
 	</ui:define>

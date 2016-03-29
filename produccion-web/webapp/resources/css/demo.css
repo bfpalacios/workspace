@@ -39,6 +39,27 @@
 	width: 350px;
 }
 
+.cotizacionCiteNro{
+
+	opacity:1 !important;
+}
+
+.selectOneEstado{
+
+	margin-left: 10px;
+}
+
+.previewComprobante{
+
+	border: 5px solid #DDECF7;
+    padding: 5px;
+    background: #fff;
+}
+
+
+
+
+
 
 
 

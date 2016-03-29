@@ -18,51 +18,40 @@
 				</p:column>
 			</p:row>
 		</p:outputPanel>
-		
-		<p:panel header="Buscar Orden de Pago" style="width: 800px;">
-			
-			<p:panelGrid id="pnlGridBuscarCotizacion">
-				
+
+		<p:panel header="Listar Cotizaciones - Cites " style="width:800px;">
+			<p:panelGrid id="pnlGridBuscarServicio" >
+
 				<p:row>
 					<p:column styleClass="ui-column-label-spij styleAlignRightColumn">
-						<h:outputText id="lNombreCliente"
-							value="Buscar por Nombre Cliente" />
+						<h:outputText id="lNombre"
+							value="#{mensaje['produccion.buscar.cotizacionCite.razonsocial']}" />
 					</p:column>
-					<p:column colspan="4">
-						<p:inputText id="NombreOrdenPago"
+					<p:column colspan="2">
+						<p:inputText id="nombreServicio"
 							value="#{servicioMBean.servicioModel.nombre}" size="20" />
+					</p:column>
+					
+					
+
+				</p:row>
+
+				<p:row>
+					<p:column styleClass="ui-column-label-spij styleAlignRightColumn">
+						<h:outputText id="lCodigo"
+							value="#{mensaje['produccion.buscar.cotizacionCite.numero']}" />
+					</p:column>
+					<p:column colspan="2">
+						<p:inputText id="codigoServicio"
+							value="#{servicioMBean.servicioModel.codigo}" size="20" />
 					</p:column>
 
 				</p:row>
 				
-				<p:row>
-					<p:column styleClass="ui-column-label-spij styleAlignRightColumn">
-						<h:outputText id="lNumero"
-							value="Buscar por RUC / DNI" />
-					</p:column>
-					<p:column colspan="4">
-						<p:inputText id="numeroCotizacion"
-							value="#{servicioMBean.servicioModel.nombre}" size="20" />
-					</p:column>
-
-				</p:row>
-				
-				<p:row>
-					<p:column styleClass="ui-column-label-spij styleAlignRightColumn">
-						<h:outputText id="lNumero2"
-							value="#{mensaje['produccion.buscar.ordenpago.label.numero']}" />
-					</p:column>
-					<p:column colspan="4">
-						<p:inputText id="numeroOrdenPago"
-							value="#{servicioMBean.servicioModel.nombre}" size="20" />
-					</p:column>
-
-				</p:row>
-
 				<p:row>
 					<p:column styleClass="ui-column-label-spij styleAlignRightColumn">
 						<h:outputText id="lFechaCotizacion"
-							value="#{mensaje['produccion.buscar.ordenpago.label.fecha']}" />
+							value="#{mensaje['produccion.buscar.cotizacionCite.fecha']}" />
 					</p:column>
 					
 					
@@ -84,14 +73,19 @@
 				
 				</p:row>
 
+
 				<p:row id="filServicios">
-					<p:column colspan="4"
+					<p:column colspan="1"
 						styleClass="ui-column-label-spij styleAlignCenterColumn">
-						<p:commandButton value="Buscar" id="botonBuscar" actionListener="#{servicioMBean.buscarServicio}" ajax="true"
-							update="tablaServicios" />
+						
+					</p:column>
+					<p:column colspan="2"
+						styleClass="ui-column-label-spij styleAlignCenterColumn">
+						<p:commandButton value="Buscar" id="botonBuscar" ajax="true" />
 					</p:column>
 					
 				</p:row>
+				
 			</p:panelGrid>
 		</p:panel>
 		<p:spacer width="10px" />
@@ -99,12 +93,12 @@
 		<p:panelGrid id="pnlGridResultadoBuscarServicio">
 			<f:facet name="header">
 				<p:row>
-					<p:column colspan="2">Consulta de Órdenes de Pago: </p:column>
+					<p:column colspan="2">Lista de Cotizaciones - Cites </p:column>
 				</p:row>
 			</f:facet>
 
 			<p:row>
-				<p:column colspan="2" style="font-weight:bold;font-size:15px">#{mensaje['produccion.buscar.ordenpago.listadeordenespago']}</p:column>
+				<p:column colspan="2" style="font-weight:bold;font-size:15px">#{mensaje['produccion.buscar.cotizacionCite.listadecotizaciones']}</p:column>
 			</p:row>
 
 			<p:row id="filTabla">
@@ -116,15 +110,15 @@
 						selectionMode="multiple"
 						selection="#{servicioMBean.selectedServicios}"
 						rowKey="#{registro.codigo}" var="registro" binding="#{tabla}"
-						emptyMessage="Sin datos para cargar" paginator="true" rows="20">
+						emptyMessage="No se encuentra informacion" paginator="true" rows="5">
 
 
-						<p:column headerText="N° Orden Pago"
+						<p:column headerText="N° Cotización(*)"
 							styleClass="ui-column-label-spij styleAlignRightColumn">
 							<h:outputText value="#{registro.codigo}" />
 						</p:column>
 
-						<p:column headerText="N° Cotización Asociada"
+						<p:column headerText="Razón Social"
 							styleClass="ui-column-label-spij styleAlignRightColumn">
 							<h:outputText value="#{registro.nombre}" />
 						</p:column>
@@ -134,7 +128,7 @@
 							<h:outputText value="#{registro.unidad}" />
 						</p:column>
 
-						<p:column headerText="Fecha de Envío"
+						<p:column headerText="Fecha"
 							styleClass="ui-column-label-spij styleAlignRightColumn">
 							<h:outputText value="#{registro.requisito}" />
 						</p:column>
@@ -143,36 +137,31 @@
 							styleClass="ui-column-label-spij styleAlignRightColumn">
 							<h:outputText value="#{registro.valorDeVenta}" />
 						</p:column>
-
+						
 						<p:column headerText="Costo Total"
 							styleClass="ui-column-label-spij styleAlignRightColumn">
 							<h:outputText value="#{registro.precioDeVenta}" />
 
 						</p:column>
-
-						
+					
 					</p:dataTable>
 
 				</p:column>
 			</p:row>
 		</p:panelGrid>
-		<p:spacer width="5px" />
-		<p:outputPanel id="pnlGuardar" style="width:400x;margin-top:10px;">
-			<p:row>
-				<p:column colspan="2" styleClass="styleAlignLeftColumn">
-					<p:commandButton id="botonGuardar" styleClass="buttonMarginNormal" 
-						value="#{mensaje['produccion.buscar.ordenpago.btn.verordenpago']}"
-						actionListener="#{ordenPagoMBean.selectorBuscarOrdenPago2(2)}"
-						ajax="false" />
-				</p:column>
-				
-				<p:column colspan="2" styleClass="styleAlignRightColumn">
-					<p:commandButton value="Imprimir Orden de Pago" id="botonCamcelar"
-						actionListener="#{servicioMBean.cancelar}" ajax="false" />
-				</p:column>
-			</p:row>
-		</p:outputPanel>
-			
+		
+		<p:outputPanel id="pnlGuardar" style="width:400px;margin-top:10px;">
+				<p:row>
+					<p:column colspan="2" styleClass="styleAlignLeftColumn">
+						<p:commandButton id="botonGuardar" styleClass="buttonMarginNormal"
+							value="#{mensaje['produccion.crear.btn.vercotizacioncite']}"
+							actionListener="#{servicioMBean.guardarNuevoServicio}"
+							update="lFecha,nombreServicio, descripcionServicio,  nombreSolicitante,  cargo,  telefono, email"
+							ajax="false" />
+					</p:column>
+
+				</p:row>
+			</p:outputPanel>
 
 		
 
