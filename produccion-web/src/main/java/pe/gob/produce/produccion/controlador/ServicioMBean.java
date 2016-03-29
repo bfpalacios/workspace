@@ -114,7 +114,10 @@ public class ServicioMBean {
 		
 		String nombreServicio = getServicioModel().getNombre()==null?"":getServicioModel().getNombre();
 		String codigoServicio = getServicioModel().getCodigo()==null?"":getServicioModel().getCodigo();
-		String codigoCITE = getServicioModel().getCodigoCITE()==null?"":getServicioModel().getCodigoCITE();
+		String codigoCITE = getServicioModel().getCodigoCITE()==null?"0":getServicioModel().getCodigoCITE();
+		
+		
+		
 		
 		System.out.println("dATOS SERVICIO BUSQUEDA " + nombreServicio + "-" + codigoServicio + "-" + codigoCITE);
 		
@@ -305,8 +308,8 @@ public class ServicioMBean {
 	
 	
 	private void limpiarObjetos(){
-		setServicioModel(null);
-		setServicioModel(new ServicioModel());
+		setServicioModelbi(null);
+		setServicioModelbi(new ServicioModel());
 	}
 
 	private void listarCITE(){
@@ -378,7 +381,7 @@ public class ServicioMBean {
 		}
 	}
 	
-	public void setServicioModel(ServicioModel servicioModel) {
+	public void setServicioModelbi(ServicioModel servicioModel) {
 		this.servicioModel = servicioModel;
 	}
 
