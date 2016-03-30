@@ -110,12 +110,16 @@ public class ServicioMBean {
 		//inicializarClases();
 		FacesContext facesContext = FacesContext.getCurrentInstance();
 		LoginModel login = (LoginModel) facesContext.getExternalContext().getSessionMap().get("user");
-		System.out.println("login user " + login.getUsuario());
+		System.out.println("login user " + login.getUsuario() + "hola" + getServicioModel().getCodigoCITE() + "que tal");
 		
-		String nombreServicio = getServicioModel().getNombre()==null?"":getServicioModel().getNombre();
-		String codigoServicio = getServicioModel().getCodigo()==null?"":getServicioModel().getCodigo();
-		String codigoCITE = getServicioModel().getCodigoCITE()==null?"0":getServicioModel().getCodigoCITE();
+		String nombreServicio = getServicioModel().getNombre()==""?null:getServicioModel().getNombre();
+		String codigoServicio = getServicioModel().getCodigo()==""?null:getServicioModel().getCodigo();
+		String codigoCITE = getServicioModel().getCodigoCITE()==""?"0":getServicioModel().getCodigoCITE();
 		
+		if (getServicioModel().getCodigoCITE().equals("")){
+			codigoCITE= "0";
+			
+		}
 		
 		
 		
@@ -155,7 +159,7 @@ public class ServicioMBean {
 		switch(modo){ 
 			case 1:  								
 					//SE ENVIA 0 EN EL CODIGO DE CITE PARA QUE NOS OBTENGA TODOS LOS SERVICIOS DE LOS CITES
-					listaServicio = servicioServices.buscarServicio("", "", 0);
+					listaServicio = servicioServices.buscarServicio(null, null, 0);
 					
 					for (ServicioBO servicioBO : listaServicio) {
 						ServicioModel servicioModel = new ServicioModel();
