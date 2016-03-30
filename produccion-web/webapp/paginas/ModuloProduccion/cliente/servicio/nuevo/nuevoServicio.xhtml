@@ -16,11 +16,7 @@
 						closable="true" />
 			
 		</p:outputPanel>
-		<p:outputPanel id="mensajeSolicitudNuevoServicio"
-			style="width:100%;margin-top:2px;margin-bottom:5px">
-			<h:outputLabel id="lblBienvenida" style="font-size: 20px;"
-				value="Solicitud de Nuevo Servicio" />
-		</p:outputPanel>
+		
 		<p:separator />
 		
 		<p:panelGrid id="pnlGridNuevoServicio">
@@ -31,11 +27,11 @@
 			</f:facet>
 
 			<p:row>
-				<p:column colspan="2" styleClass="ui-column-label-spij styleAlignRightColumn">
+				<p:column colspan="3" styleClass="ui-column-label-spij styleAlignRightColumn">
 					<h:outputText id="lSubtitulo"
 						value="#{mensaje['produccion.nuevo.servicio.label.subtitulo']}" />
 				</p:column>
-				<p:column colspan="2" styleClass="ui-column-label-spij styleAlignLeftColumn">
+				<p:column colspan="1" styleClass="ui-column-label-spij styleAlignRightColumn">
 					<h:outputText id="lFecha"
 						value="#{mensaje['general.label.fecha']}" />
 				</p:column>
@@ -48,8 +44,9 @@
 			
 			<p:row>
 				<p:column colspan="6"  styleClass="ui-column-label-spij styleAlignRightColumn">
-					<h:outputText id="lRequerimiento"
+					<h3><h:outputText id="lRequerimiento"
 						value="#{mensaje['produccion.nuevo.servicio.label.requerimiento']}" />
+					</h3>
 				</p:column>
 				
 			</p:row>
@@ -61,7 +58,7 @@
 				</p:column>
 
 				<p:column colspan="2">
-					<p:inputText id="nombreServicio" size="20" 
+					<p:inputText id="nombreServicio" size="40" 
 						value="#{servicioMBean.servicioModel.nombre}" />
 					
 				</p:column>
@@ -90,7 +87,7 @@
 				</p:column>
 
 				<p:column colspan="5">
-					<p:inputTextarea id="descripcionServicio" size="40"
+					<p:inputTextarea id="descripcionServicio" size="40" cols="38"
 						value="#{servicioMBean.servicioModel.descripcion}"  />
 					<p:message for="descripcionServicio" />
 				</p:column>
