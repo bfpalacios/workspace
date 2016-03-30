@@ -4,17 +4,20 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
-import pe.gob.produce.produccion.bo.CITEBO;
+import pe.gob.produce.produccion.bo.ServicioBO;
 import pe.gob.produce.produccion.core.util.Convertidor;
 import pe.gob.produce.produccion.core.util.FormateadorFecha;
-import pe.gob.produce.produccion.model.LoginModel;
 import pe.gob.produce.produccion.model.ServicioModel;
+import pe.gob.produce.produccion.services.CITEServices;
+import pe.gob.produce.produccion.services.ComunServices;
+import pe.gob.produce.produccion.services.ServicioServices;
 
 
 
@@ -28,11 +31,20 @@ public class CotizacionMBean {
 	//ctrl + shit + o importas todas las clases que estan otros paquetes
 	@Autowired
 	private ServicioModel servicioModel;
-	/*@Autowired
-	private ServicioServices servicioServices;*/
+	
+	@Autowired
+	private CITEServices citeServices;
+	
+	
+	@Autowired
+	private ComunServices comunServices;
+	
+	@Autowired
+	private ServicioServices servicioServices;
 	
 	//datos complementarios de la pantalla
 	private Date date;
+	
 	
 	//constantes
 	private int MODO_USUARIO;
@@ -57,76 +69,84 @@ public class CotizacionMBean {
 		 		
 	}
 	
+
 	private void inicializarClases(){
 		this.servicioModel = new ServicioModel();		
 		
-		List<ServicioModel> listaServicio = new ArrayList<ServicioModel>();
+	}
+	
+	public String selectorNuevaCotizacion(int modo) throws Exception{
+		String pagina = "";
+		inicializarClases();
+		List<ServicioBO> listaServicio = new ArrayList<ServicioBO>();
+			
+		List<ServicioModel> datosServiciosModelGrid = new ArrayList<ServicioModel>();
 		
-		ServicioModel servicioModel = new ServicioModel();
-		servicioModel.setCodigo("0001 - CITE MADERA");
-		servicioModel.setNombre("Asistencia Tecnica");
-		servicioModel.setUnidad("Hora");
-		servicioModel.setRequisito("Constancia de Pago");
-		servicioModel.setValorDeVenta("37.47");
-		servicioModel.setPrecioDeVenta("44.21");
-		listaServicio.add(servicioModel);
+		 switch(modo){ 
+		 case 1: 
+			//SE ENVIA 0 EN EL CODIGO DE CITE PARA QUE NOS OBTENGA TODOS LOS SERVICIOS DE LOS CITES
+				listaServicio = servicioServices.buscarServicio("", "", 0);
+				
+				for (ServicioBO servicioBO : listaServicio) {
+					ServicioModel servicioModel = new ServicioModel();
+					servicioModel.setCodigo(servicioBO.getCodigo());
+					servicioModel.setNombre(servicioBO.getNombre());
+					servicioModel.setUnidad(servicioBO.getUnidad());
+					servicioModel.setRequisito(servicioBO.getRequisito());
+					servicioModel.setValorDeVenta(servicioBO.getValorDeVenta());
+					servicioModel.setPrecioDeVenta(servicioBO.getPrecioDeVenta());
+					
+					datosServiciosModelGrid.add(servicioModel);
+				}
+				
+
+				setDatosServiciosModelGrid(datosServiciosModelGrid);
+				listarCITE();
+			
+			 pagina = "/paginas/ModuloProduccion/cliente/cotizacion/nuevo/nuevaCotizacion.xhtml"; break;
 		
-		ServicioModel servicioModel2 = new ServicioModel();
-		servicioModel2.setCodigo("0001 - CITE MADERA");
-		servicioModel2.setNombre("Secado de madera en horno experimental");
-		servicioModel2.setUnidad("Lote");
-		servicioModel2.setRequisito("Constancia de Pago");
-		servicioModel2.setValorDeVenta("130.56");
-		servicioModel2.setPrecioDeVenta("855.90");
-		listaServicio.add(servicioModel2);
-		
-		ServicioModel servicioModel3 = new ServicioModel();
-		servicioModel3.setCodigo("0003 - CITE AGROINDUSTRIAL");
-		servicioModel3.setNombre("Asistencia Tecnica");
-		servicioModel3.setUnidad("Muestra");
-		servicioModel3.setRequisito("Constancia de Pago");
-		servicioModel3.setValorDeVenta("37.47");
-		servicioModel3.setPrecioDeVenta("44.21");
-		listaServicio.add(servicioModel3);
-		
-		ServicioModel servicioModel4 = new ServicioModel();
-		servicioModel4.setCodigo("0004 - CITE PESQUERO");
-		servicioModel4.setNombre("Deflexion de las repisas");
-		servicioModel4.setUnidad("Muestra");
-		servicioModel4.setRequisito("Constancia de Pago");
-		servicioModel4.setValorDeVenta("137.47");
-		servicioModel4.setPrecioDeVenta("544.21");		
-		
-		//servicioModel4.setTotalPrecioDeVenta("123");
-		
-		listaServicio.add(servicioModel4);
-		
-		
-		setDatosServiciosModelGrid(listaServicio);
-		
-		
-		
+		 /*@@ESTE ES EL CASO PARA PERFIL CITE */
+		 case 2:  						
+			 
+			//SE ENVIA 0 EN EL CODIGO DE CITE PARA QUE NOS OBTENGA TODOS LOS SERVICIOS DE LOS CITES
+				listaServicio = servicioServices.buscarServicio("", "", 0);
+				
+				for (ServicioBO servicioBO : listaServicio) {
+					ServicioModel servicioModel = new ServicioModel();
+					servicioModel.setCodigo(servicioBO.getCodigo());
+					servicioModel.setNombre(servicioBO.getNombre());
+					servicioModel.setUnidad(servicioBO.getUnidad());
+					servicioModel.setRequisito(servicioBO.getRequisito());
+					servicioModel.setValorDeVenta(servicioBO.getValorDeVenta());
+					servicioModel.setPrecioDeVenta(servicioBO.getPrecioDeVenta());
+					
+					datosServiciosModelGrid.add(servicioModel);
+				}
+				
+
+				setDatosServiciosModelGrid(datosServiciosModelGrid);
+				listarCITE();
+			pagina = "/paginas/ModuloProduccion/cite/servicio/nuevo/nuevoServicio.xhtml"; break;
+		 
+		/*@@ESTE ES EL CASO PARA PERFIL EMPRESA */
+		 case 3:  									
+			
+		 	pagina = "/paginas/ModuloProduccion/empresa/servicio/nuevo/nuevoServicio.xhtml"; break;
+	 
+		}
+		return pagina;		
 	}
 	
 	
-	public String selectorNuevaCotizacion(int modo) throws Exception{
-		 String pagina = "";
-		 
-		 switch(modo){ 
-			case 1: MODO_USUARIO = MODO_ADMIN;									
-					inicializarClases();
-
-					listarCITE();
-					pagina = "/paginas/ModuloProduccion/cliente/cotizacion/nuevo/nuevaCotizacion.xhtml"; break;
-			/*@@ESTE ES EL CASO PARA PERFIL EMPLEADO
-			 * case 2: MODO_USUARIO = MODO_OCAA;
-					inicializarClases();									
-					if(getDatosAlumnoExcelModelGrid() != null){
-						getDatosAlumnoExcelModelGrid().removeAll(getDatosAlumnoExcelModelGrid());
-					}
-					pagina = "/paginas/ModuloObservados/ocaa/cargar/cargarDatosAlumnosObs.xhtml"; break;*/
+	private void listarServicios(){
+		
+		try{
+				
+			getServicioModel().setListarCITE(citeServices.listarCITES());
 		}
-		return pagina;		
+		catch(Exception e){
+			e.printStackTrace();
+		}
 	}
 	
 	public String cancelar() throws Exception{
@@ -199,7 +219,7 @@ public class CotizacionMBean {
 				//}
 			}
 			else{
-				//mostrarMensaje(7);
+				mostrarMensaje(7);
 			}
 		}
 		catch(Exception e){
@@ -232,36 +252,41 @@ public class CotizacionMBean {
 	}
 
 	private void listarCITE(){
-		List<CITEBO> listCITE = new ArrayList<CITEBO>();
 		try{
-			CITEBO aCITEBO = new CITEBO();
-			aCITEBO.setCodigo("0001");
-			aCITEBO.setDescripcion("CITE MADERA");
-			listCITE.add(aCITEBO);
 			
-			CITEBO bCITEBO = new CITEBO();
-			bCITEBO.setCodigo("0002");
-			bCITEBO.setDescripcion("CITE CALZADO");
-			listCITE.add(bCITEBO);
-			
-			CITEBO cCITEBO = new CITEBO();
-			cCITEBO.setCodigo("0003");
-			cCITEBO.setDescripcion("CITE AGROINDUSTRIAL");
-			listCITE.add(cCITEBO);
-			
-			CITEBO dCITEBO = new CITEBO();
-			dCITEBO.setCodigo("0004");
-			dCITEBO.setDescripcion("CITE PESQUERO");
-			listCITE.add(dCITEBO);
-			
-			getServicioModel().setListarCITE(listCITE);
-			/*usuarioRoles = usuarioServices.obtenerRoles(PROCESO_OBSERVADOS);
-			getUsuarioModel().setRolesUsuario(usuarioRoles);*/
+		
+			getServicioModel().setListarCITE(citeServices.listarCITES());
 		}
 		catch(Exception e){
 			e.printStackTrace();
 		}
 	}
+	
+	private void mostrarMensaje(int opcionMensaje){
+		FacesMessage message = null;		
+		
+		switch(opcionMensaje){
+			case 1: message = new FacesMessage(FacesMessage.SEVERITY_ERROR,"", "Debe ingresar sólo caracteres en el campo - " + "Nombres");
+	        		FacesContext.getCurrentInstance().addMessage(null, message); break;
+			case 2: message = new FacesMessage(FacesMessage.SEVERITY_ERROR,"", "Debe ingresar sólo caracteres en el campo - " + "Apellido Paterno");
+	        		FacesContext.getCurrentInstance().addMessage(null, message); break;
+			case 3: message = new FacesMessage(FacesMessage.SEVERITY_ERROR,"", "Debe ingresar sólo caracteres en el campo - " + "Apellido Materno");
+    				FacesContext.getCurrentInstance().addMessage(null, message); break;
+			case 4: message = new FacesMessage(FacesMessage.SEVERITY_ERROR,"", "Debe ingresar un correo válido en el campo - " + "Correo");
+    				FacesContext.getCurrentInstance().addMessage(null, message); break;
+			case 5: message = new FacesMessage(FacesMessage.SEVERITY_ERROR,"", "Debe ingresar sólo números en el campo - " + "Teléfono");
+					FacesContext.getCurrentInstance().addMessage(null, message); break;
+			case 6: message = new FacesMessage(FacesMessage.SEVERITY_ERROR,"", "Debe ingresar sólo números en el campo - " + "Código del alumno");
+					FacesContext.getCurrentInstance().addMessage(null, message); break;
+			case 7: message = new FacesMessage(FacesMessage.SEVERITY_WARN,"", "El usuario ingresado ya ha sido registrado");
+					FacesContext.getCurrentInstance().addMessage(null, message); break;	
+			case 8: message = new FacesMessage(FacesMessage.SEVERITY_INFO,"", "El servicio se guardo correctamente");
+					FacesContext.getCurrentInstance().addMessage(null, message); break;
+			case 9: message = new FacesMessage(FacesMessage.SEVERITY_FATAL,"", "Hubo un error al guardar el usuario");
+					FacesContext.getCurrentInstance().addMessage(null, message); break;
+		}
+	}
+	
 	public void setServicioModel(ServicioModel servicioModel) {
 		this.servicioModel = servicioModel;
 	}
@@ -301,4 +326,7 @@ public class CotizacionMBean {
 			List<ServicioModel> datosServiciosModelGrid) {
 		this.datosServiciosModelGrid = datosServiciosModelGrid;
 	}
+	
+	
+	
 }

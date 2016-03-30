@@ -38,16 +38,9 @@
 							value="#{servicioMBean.servicioModel.codigo}" size="20" />
 			
 					
-					<h:outputText id="lCite"
-							value="#{mensaje['produccion.buscar.servicio.label.buscarporcite']}" />
-					<p:selectOneMenu id="selectOneCITE"
-							value="#{servicioMBean.servicioModel.codigoCITE}"
-							styleClass="ui-column-label-spij styleAlignRightColumn">
-							<f:selectItem itemLabel="Seleccione el CITE " />
-							<f:selectItems value="#{servicioMBean.servicioModel.listarCITE}"
-								var="CITE" itemLabel="#{CITE.descripcion}"
-								itemValue="#{CITE.codigo}" />
-					</p:selectOneMenu>
+					<p:commandButton value="Buscar" id="botonBuscar" actionListener="#{servicioMBean.buscarServicio}" ajax="true"
+							update="tablaServicios" />
+					
 					
 				
 				<p:spacer width="5px" />
@@ -66,9 +59,9 @@
 					styleClass="ui-column-label-spij styleAlignRightColumn" colspan="3">
 
 					<p:dataTable id="tablaServicios"
-						value="#{servicioMBean.datosServiciosModelGrid}"
+						value="#{cotizacionMBean.datosServiciosModelGrid}"
 						selectionMode="multiple"
-						selection="#{servicioMBean.selectedServicios}"
+						selection="#{cotizacionMBean.selectedServicios}"
 						rowKey="#{registro.codigo}" var="registro" binding="#{tabla}"
 						emptyMessage="Sin datos para cargar" paginator="true" rows="20">
 

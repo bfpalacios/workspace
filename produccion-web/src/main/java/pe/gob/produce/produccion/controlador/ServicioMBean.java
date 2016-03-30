@@ -84,7 +84,7 @@ public class ServicioMBean {
 
 		 listarCITE();
 
-		 listarServicios();
+		 //listarServicios();
 		 switch(modo){ 
 		 case 1: 	
 			
@@ -146,13 +146,13 @@ public class ServicioMBean {
 	
 	
 	public String selectorBuscarServicio(int modo) throws Exception{
-		 String pagina = "";
-		 inicializarClases();
+		String pagina = "";
+		inicializarClases();
 		List<ServicioBO> listaServicio = new ArrayList<ServicioBO>();
 			
 		List<ServicioModel> datosServiciosModelGrid = new ArrayList<ServicioModel>();
 			
-		 switch(modo){ 
+		switch(modo){ 
 			case 1:  								
 					//SE ENVIA 0 EN EL CODIGO DE CITE PARA QUE NOS OBTENGA TODOS LOS SERVICIOS DE LOS CITES
 					listaServicio = servicioServices.buscarServicio("", "", 0);
