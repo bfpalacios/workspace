@@ -38,7 +38,7 @@
 							value="#{servicioMBean.servicioModel.codigo}" size="20" />
 			
 					
-					<p:commandButton value="Buscar" id="botonBuscar" actionListener="#{servicioMBean.buscarServicio}" ajax="true"
+					<p:commandButton value="Buscar" id="botonBuscar" actionListener="#{cotizacionMBean.buscarServicio}" ajax="true"
 							update="tablaServicios" />
 					
 					
@@ -60,12 +60,13 @@
 
 					<p:dataTable id="tablaServicios"
 						value="#{cotizacionMBean.datosServiciosModelGrid}"
-						selectionMode="multiple"
 						selection="#{cotizacionMBean.selectedServicios}"
 						rowKey="#{registro.codigo}" var="registro" binding="#{tabla}"
-						emptyMessage="Sin datos para cargar" paginator="true" rows="20">
-
-
+						emptyMessage="Sin datos para cargar" paginator="true" rows="5">
+						<f:facet name="header">
+            				Seleccionar los servicios a cotizar
+        				</f:facet>
+						<p:column selectionMode="multiple" style="width:16px;text-align:center"/>
 						<p:column headerText="Codigo(*)"
 							styleClass="ui-column-label-spij styleAlignRightColumn">
 							<h:outputText value="#{registro.codigo}" />
@@ -100,7 +101,8 @@
 						<f:facet name="footer">
 							<p:commandButton process="tablaServicios"
 								update=":formPrincipal:multiServicioDetail"
-								icon="ui-icon-search" value="Agregar Servicio a Cotizar">
+								icon="ui-icon-search" value="Agregar Servicio a Cotizar"								
+								>
 
 							</p:commandButton>
 						</f:facet>
@@ -127,7 +129,6 @@
 					<p:inputText id="cotizacionNro"
 						value="#{servicioMBean.servicioModel.codigo}" size="20" />
 				</p:column>
-
 				<p:column styleClass="ui-column-label-spij styleAlignRightColumn">
 					<h:outputText id="lFecha" value="#{mensaje['general.label.fecha']}" />
 				</p:column>
@@ -136,18 +137,13 @@
 						pattern="dd/MM/yyyy" mode="popup" showOn="button">
 					</p:calendar>
 				</p:column>
-
 			</p:row>
-
 			<p:row id="filTabla2">
-
 				<p:column id="colTabla2"
 					styleClass="ui-column-label-spij styleAlignRightColumn" colspan="4">
-
-					<p:dataTable id="multiServicioDetail" widgetVar="multiServicioList"
+					<p:dataTable id="multiServicioDetail" 
 						value="#{servicioMBean.selectedServicios}" var="registro"
 						paginator="true" rows="5">
-
 						<p:column headerText="Codigo(*)"
 							styleClass="ui-column-label-spij styleAlignRightColumn">
 							<h:outputText value="#{registro.codigo}" />
