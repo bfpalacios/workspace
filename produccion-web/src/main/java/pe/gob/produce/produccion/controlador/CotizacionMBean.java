@@ -14,15 +14,11 @@ import org.springframework.stereotype.Controller;
 import pe.gob.produce.produccion.bo.ServicioBO;
 import pe.gob.produce.produccion.core.util.Convertidor;
 import pe.gob.produce.produccion.core.util.FormateadorFecha;
-import pe.gob.produce.produccion.model.LoginModel;
+import pe.gob.produce.produccion.model.CotizacionModel;
 import pe.gob.produce.produccion.model.ServicioModel;
 import pe.gob.produce.produccion.services.CITEServices;
 import pe.gob.produce.produccion.services.ComunServices;
 import pe.gob.produce.produccion.services.ServicioServices;
-
-
-
-
 
 
 @Controller("cotizacionMBean")
@@ -32,6 +28,9 @@ public class CotizacionMBean {
 	//ctrl + shit + o importas todas las clases que estan otros paquetes
 	@Autowired
 	private ServicioModel servicioModel;
+	
+	@Autowired
+	private CotizacionModel cotizacionModel;
 	
 	@Autowired
 	private CITEServices citeServices;
@@ -100,9 +99,12 @@ public class CotizacionMBean {
 					datosServiciosModelGrid.add(servicioModel);
 				}
 				
-
+				setCotizacionModel(new CotizacionModel());
+				getCotizacionModel().setCodigo("001 - 2016");
 				setDatosServiciosModelGrid(datosServiciosModelGrid);
 				listarCITE();
+				
+				
 			
 			 pagina = "/paginas/ModuloProduccion/cliente/cotizacion/nuevo/nuevaCotizacion.xhtml"; break;
 		
@@ -124,7 +126,7 @@ public class CotizacionMBean {
 					datosServiciosModelGrid.add(servicioModel);
 				}
 				
-
+				
 				setDatosServiciosModelGrid(datosServiciosModelGrid);
 				listarCITE();
 			pagina = "/paginas/ModuloProduccion/cite/servicio/nuevo/nuevoServicio.xhtml"; break;
@@ -141,11 +143,10 @@ public class CotizacionMBean {
 	
 	public void buscarServicio() throws Exception{
 		
-		//inicializarClases();
-		FacesContext facesContext = FacesContext.getCurrentInstance();
+		/*FacesContext facesContext = FacesContext.getCurrentInstance();
 		LoginModel login = (LoginModel) facesContext.getExternalContext().getSessionMap().get("user");
 		System.out.println("login user " + login.getUsuario() + "hola" + getServicioModel().getCodigoCITE() + "que tal");
-		
+		*/
 		String nombreServicio = getServicioModel().getNombre()==""?null:getServicioModel().getNombre();
 		String codigoServicio = getServicioModel().getCodigo()==""?null:getServicioModel().getCodigo();
 		String codigoCITE = getServicioModel().getCodigoCITE()==""?"0":getServicioModel().getCodigoCITE();
@@ -188,7 +189,15 @@ public class CotizacionMBean {
 		 	inicializarClases();
 
 			listarCITE();
-			pagina = "/paginas/ModuloProduccion/cliente/servicio/nuevo/nuevoServicio.xhtml"; 
+			pagina = "/paginas/ModuloProduccion/cliente/cotizacion/nuevo/nuevaCotizacion.xhtml"; 
+			
+		return pagina;		
+	}
+	
+	public String verCotizacion() throws Exception{
+		 String pagina = "";
+		 
+			pagina = "/paginas/ModuloProduccion/cliente/cotizacion/nuevo/verCotizacion.xhtml"; 
 			
 		return pagina;		
 	}
@@ -262,7 +271,17 @@ public class CotizacionMBean {
 
 	public ServicioModel getServicioModel() {
 		return servicioModel;
+	}	
+	
+	public CotizacionModel getCotizacionModel() {
+		return cotizacionModel;
 	}
+
+
+	public void setCotizacionModel(CotizacionModel cotizacionModel) {
+		this.cotizacionModel = cotizacionModel;
+	}
+
 
 	public Date getDate() {
 		return date;

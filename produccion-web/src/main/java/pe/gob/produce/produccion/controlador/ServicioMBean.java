@@ -107,16 +107,15 @@ public class ServicioMBean {
 	
 	public void buscarServicio() throws Exception{
 		
-		//inicializarClases();
-		FacesContext facesContext = FacesContext.getCurrentInstance();
+		/*FacesContext facesContext = FacesContext.getCurrentInstance();
 		LoginModel login = (LoginModel) facesContext.getExternalContext().getSessionMap().get("user");
 		System.out.println("login user " + login.getUsuario() + "hola" + getServicioModel().getCodigoCITE() + "que tal");
-		
+		*/
 		String nombreServicio = getServicioModel().getNombre()==""?null:getServicioModel().getNombre();
 		String codigoServicio = getServicioModel().getCodigo()==""?null:getServicioModel().getCodigo();
 		String codigoCITE = getServicioModel().getCodigoCITE()==""?"0":getServicioModel().getCodigoCITE();
 		
-		if (getServicioModel().getCodigoCITE().equals("")){
+		if (getServicioModel().getCodigoCITE() == null){
 			codigoCITE= "0";
 			
 		}

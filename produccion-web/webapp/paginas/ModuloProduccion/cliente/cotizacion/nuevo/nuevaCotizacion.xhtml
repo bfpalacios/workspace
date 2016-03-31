@@ -99,9 +99,11 @@
 						</p:column>
 
 						<f:facet name="footer">
-							<p:commandButton process="tablaServicios"
-								update=":formPrincipal:multiServicioDetail"
-								icon="ui-icon-search" value="Agregar Servicio a Cotizar"								
+							<p:commandButton process="tablaServicios" 
+								ajax="true"
+								update=":formPrincipal:grillaTablaServicios"
+								icon="ui-icon-search" value="Agregar Servicio a Cotizar" 
+													
 								>
 
 							</p:commandButton>
@@ -113,7 +115,7 @@
 		</p:panelGrid>
 		
 		<p:spacer width="5px" />
-		
+		<!-- p:panelGrid id="pnlGridNuevaCotizacion" widgetVar="panelGridNuevaCotizacion" style="width: 95%;border: 0px;" visible="false" closable="true" toggleable="true" >-->
 		<p:panelGrid id="pnlGridNuevaCotizacion" style="width: 95%;border: 0px;">
 
 			<p:row>
@@ -127,13 +129,13 @@
 				</p:column>
 				<p:column>
 					<p:inputText id="cotizacionNro"
-						value="#{servicioMBean.servicioModel.codigo}" size="20" />
+						value="#{cotizacionMBean.cotizacionModel.codigo}" size="20" />
 				</p:column>
 				<p:column styleClass="ui-column-label-spij styleAlignRightColumn">
 					<h:outputText id="lFecha" value="#{mensaje['general.label.fecha']}" />
 				</p:column>
 				<p:column>
-					<p:calendar value="#{servicioMBean.date}" id="fechaServicio"
+					<p:calendar value="#{cotizacionMBean.date}" id="fechaCotizacion"
 						pattern="dd/MM/yyyy" mode="popup" showOn="button">
 					</p:calendar>
 				</p:column>
@@ -141,7 +143,7 @@
 			<p:row id="filTabla2">
 				<p:column id="colTabla2"
 					styleClass="ui-column-label-spij styleAlignRightColumn" colspan="4">
-					<p:dataTable id="multiServicioDetail" 
+					<p:dataTable id="grillaTablaServicios" 
 						value="#{cotizacionMBean.selectedServicios}" var="registro"
 						paginator="true" rows="5">
 						<p:column headerText="Codigo(*)"
@@ -182,7 +184,7 @@
 							<p:row>
 								<p:column colspan="5" style="text-align:right"
 									footerText="Costo Total:" />
-								<p:column footerText="S/.#{egistro.precioDeVenta}" />
+								<p:column footerText="S/.#{registro.precioDeVenta}"  />
 							</p:row>
 						</p:columnGroup>
 
@@ -190,11 +192,28 @@
 
 					</p:dataTable>
 				</p:column>
-
-			</p:row>
-			
-		
+				</p:row>
+				
 		</p:panelGrid>
+		
+		<p:outputPanel id="pnlVerCotizacion" style="width:400x;margin-top:10px;">
+			<p:row>
+				<p:column colspan="2" styleClass="styleAlignLeftColumn">
+					<p:commandButton id="botonVerCotizacion" styleClass="buttonMarginNormal"
+						value="#{mensaje['produccion.nueva.cotizacion.label.vercotizacion']}"
+						actionListener="#{cotizacionMBean.verCotizacion}"
+						update="multiServicioDetail,cotizacionNro,fechaCotizacion "
+						ajax="false" />
+				</p:column>
+				
+				<p:column colspan="2" styleClass="styleAlignRightColumn">
+					<p:commandButton value="Cancelar" id="botonCamcelar"
+						actionListener="#{cotizacionMBean.cancelar}" ajax="false" />
+				</p:column>
+			</p:row>
+		</p:outputPanel>	
+		
+		
 		
 
 	</ui:define>
