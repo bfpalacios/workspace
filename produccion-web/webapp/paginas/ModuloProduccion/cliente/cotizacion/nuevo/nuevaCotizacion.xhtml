@@ -30,12 +30,12 @@
 					<h:outputText id="lNombre"
 							value="#{mensaje['produccion.buscar.servicio.label.buscarpornombre']}" />
 					<p:inputText id="nombreServicio"
-							value="#{servicioMBean.servicioModel.nombre}" size="20" />
+							value="#{cotizacionMBean.servicioModel.nombre}" size="20" />
 					
 					<h:outputText id="lCodigo"
 							value="#{mensaje['produccion.buscar.servicio.label.buscarporcodigo']}" />
 					<p:inputText id="codigoServicio"
-							value="#{servicioMBean.servicioModel.codigo}" size="20" />
+							value="#{cotizacionMBean.servicioModel.codigo}" size="20" />
 			
 					
 					<p:commandButton value="Buscar" id="botonBuscar" actionListener="#{cotizacionMBean.buscarServicio}" ajax="true"
