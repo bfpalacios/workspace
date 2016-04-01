@@ -137,7 +137,28 @@ public class CotizacionMBean {
 		/* @@ESTE ES EL CASO PARA PERFIL EMPRESA */
 		case 3:
 
-			pagina = "/paginas/ModuloProduccion/empresa/servicio/nuevo/nuevoServicio.xhtml";
+			// SE ENVIA 0 EN EL CODIGO DE CITE PARA QUE NOS OBTENGA TODOS LOS
+			// SERVICIOS DE LOS CITES
+			listaServicio = servicioServices.buscarServicio("", "", 0);
+
+			for (ServicioBO servicioBO : listaServicio) {
+				ServicioModel servicioModel = new ServicioModel();
+				servicioModel.setCodigo(servicioBO.getCodigo());
+				servicioModel.setNombre(servicioBO.getNombre());
+				servicioModel.setUnidad(servicioBO.getUnidad());
+				servicioModel.setRequisito(servicioBO.getRequisito());
+				servicioModel.setValorDeVenta(servicioBO.getValorDeVenta());
+				servicioModel.setPrecioDeVenta(servicioBO.getPrecioDeVenta());
+
+				datosServiciosModelGrid.add(servicioModel);
+			}
+
+			setCotizacionModel(new CotizacionModel());
+			getCotizacionModel().setCodigo("001 - 2016");
+			setDatosServiciosModelGrid(datosServiciosModelGrid);
+			listarCITE();
+
+			pagina = "/paginas/ModuloProduccion/empresa/cotizacion/nuevo/nuevaCotizacion.xhtml";
 			break;
 
 		}
@@ -153,20 +174,25 @@ public class CotizacionMBean {
 		 * System.out.println("login user " + login.getUsuario() + "hola" +
 		 * getServicioModel().getCodigoCITE() + "que tal");
 		 */
-		String nombreServicio = getServicioModel().getNombre() == "" ? null : getServicioModel().getNombre();
-		String codigoServicio = getServicioModel().getCodigo() == "" ? null : getServicioModel().getCodigo();
-		String codigoCITE = getServicioModel().getCodigoCITE() == "" ? "0" : getServicioModel().getCodigoCITE();
+		String nombreServicio = getServicioModel().getNombre() == "" ? null
+				: getServicioModel().getNombre();
+		String codigoServicio = getServicioModel().getCodigo() == "" ? null
+				: getServicioModel().getCodigo();
+		String codigoCITE = getServicioModel().getCodigoCITE() == "" ? "0"
+				: getServicioModel().getCodigoCITE();
 
 		if (getServicioModel().getCodigoCITE() == null) {
 			codigoCITE = "0";
 
 		}
 
-		System.out.println("dATOS SERVICIO BUSQUEDA " + nombreServicio + "-" + codigoServicio + "-" + codigoCITE);
+		System.out.println("dATOS SERVICIO BUSQUEDA " + nombreServicio + "-"
+				+ codigoServicio + "-" + codigoCITE);
 
 		List<ServicioBO> listaServicio = new ArrayList<ServicioBO>();
 		// SE ENVIA EL 6 POR DEFAULT
-		listaServicio = servicioServices.buscarServicio(codigoServicio, nombreServicio, Integer.parseInt(codigoCITE));
+		listaServicio = servicioServices.buscarServicio(codigoServicio,
+				nombreServicio, Integer.parseInt(codigoCITE));
 		List<ServicioModel> datosServiciosModelGrid = new ArrayList<ServicioModel>();
 
 		for (ServicioBO servicioBO : listaServicio) {
@@ -253,12 +279,14 @@ public class CotizacionMBean {
 			break;
 		case 2:
 			message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "",
-					"Debe ingresar sólo caracteres en el campo - " + "Apellido Paterno");
+					"Debe ingresar sólo caracteres en el campo - "
+							+ "Apellido Paterno");
 			FacesContext.getCurrentInstance().addMessage(null, message);
 			break;
 		case 3:
 			message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "",
-					"Debe ingresar sólo caracteres en el campo - " + "Apellido Materno");
+					"Debe ingresar sólo caracteres en el campo - "
+							+ "Apellido Materno");
 			FacesContext.getCurrentInstance().addMessage(null, message);
 			break;
 		case 4:
@@ -273,19 +301,23 @@ public class CotizacionMBean {
 			break;
 		case 6:
 			message = new FacesMessage(FacesMessage.SEVERITY_ERROR, "",
-					"Debe ingresar sólo números en el campo - " + "Código del alumno");
+					"Debe ingresar sólo números en el campo - "
+							+ "Código del alumno");
 			FacesContext.getCurrentInstance().addMessage(null, message);
 			break;
 		case 7:
-			message = new FacesMessage(FacesMessage.SEVERITY_WARN, "", "El usuario ingresado ya ha sido registrado");
+			message = new FacesMessage(FacesMessage.SEVERITY_WARN, "",
+					"El usuario ingresado ya ha sido registrado");
 			FacesContext.getCurrentInstance().addMessage(null, message);
 			break;
 		case 8:
-			message = new FacesMessage(FacesMessage.SEVERITY_INFO, "", "El servicio se guardo correctamente");
+			message = new FacesMessage(FacesMessage.SEVERITY_INFO, "",
+					"El servicio se guardo correctamente");
 			FacesContext.getCurrentInstance().addMessage(null, message);
 			break;
 		case 9:
-			message = new FacesMessage(FacesMessage.SEVERITY_FATAL, "", "Hubo un error al guardar el usuario");
+			message = new FacesMessage(FacesMessage.SEVERITY_FATAL, "",
+					"Hubo un error al guardar el usuario");
 			FacesContext.getCurrentInstance().addMessage(null, message);
 			break;
 		}
@@ -322,12 +354,14 @@ public class CotizacionMBean {
 	public void setSelectedServicios(List<ServicioModel> selectedServicios) {
 		this.totalSuma = 0.0;
 		for (int i = 0; i < selectedServicios.size(); i++) {
-			this.totalSuma = this.totalSuma + Double.parseDouble(selectedServicios.get(i).getPrecioDeVenta());
-		}	
-		
+			this.totalSuma = this.totalSuma
+					+ Double.parseDouble(selectedServicios.get(i)
+							.getPrecioDeVenta());
+		}
+
 		this.totalSuma = (double) Math.round(this.totalSuma * 100);
-		this.totalSuma = this.totalSuma/100;
-		
+		this.totalSuma = this.totalSuma / 100;
+
 		this.selectedServicios = selectedServicios;
 	}
 
@@ -335,7 +369,8 @@ public class CotizacionMBean {
 		return datosServiciosModelGrid;
 	}
 
-	public void setDatosServiciosModelGrid(List<ServicioModel> datosServiciosModelGrid) {
+	public void setDatosServiciosModelGrid(
+			List<ServicioModel> datosServiciosModelGrid) {
 		this.datosServiciosModelGrid = datosServiciosModelGrid;
 	}
 
