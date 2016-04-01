@@ -102,9 +102,7 @@
 							<p:commandButton process="tablaServicios" 
 								ajax="true"
 								update=":formPrincipal:grillaTablaServicios"
-								icon="ui-icon-search" value="Agregar Servicio a Cotizar" 
-													
-								>
+								icon="ui-icon-search" value="Agregar Servicio a Cotizar" >
 
 							</p:commandButton>
 						</f:facet>
@@ -183,8 +181,8 @@
 						<p:columnGroup type="footer">
 							<p:row>
 								<p:column colspan="5" style="text-align:right"
-									footerText="Costo Total:" />
-								<p:column footerText="S/.#{registro.precioDeVenta}"  />
+									footerText="Costo Total:" />								
+								<p:column footerText="S/. #{cotizacionMBean.totalSuma} "  />
 							</p:row>
 						</p:columnGroup>
 
