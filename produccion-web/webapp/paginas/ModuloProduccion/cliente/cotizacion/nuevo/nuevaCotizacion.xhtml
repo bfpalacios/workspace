@@ -19,37 +19,39 @@
 			</p:row>
 		</p:outputPanel>
 
-		
+
 		<p:panel header="Solicitud de Cotizacion - Nueva Cotizacion"
 			style="width: 95%;border: 0px;">
-		
-		<h:panelGrid id="pnlBuscador"
+
+			<h:panelGrid id="pnlBuscador"
 				style="font-size: 12px;text-align: left" columns="2" cellspacing="5">
-					
-					
-					<h:outputText id="lNombre"
-							value="#{mensaje['produccion.buscar.servicio.label.buscarpornombre']}" />
-					<p:inputText id="nombreServicio"
-							value="#{cotizacionMBean.servicioModel.nombre}" size="20" />
-					
-					<h:outputText id="lCodigo"
-							value="#{mensaje['produccion.buscar.servicio.label.buscarporcodigo']}" />
-					<p:inputText id="codigoServicio"
-							value="#{cotizacionMBean.servicioModel.codigo}" size="20" />
-			
-					
-					<p:commandButton value="Buscar" id="botonBuscar" actionListener="#{cotizacionMBean.buscarServicio}" ajax="true"
-							update="tablaServicios" />
-					
-					
-				
+
+
+				<h:outputText id="lNombre"
+					value="#{mensaje['produccion.buscar.servicio.label.buscarpornombre']}" />
+				<p:inputText id="nombreServicio"
+					value="#{cotizacionMBean.servicioModel.nombre}" size="20" />
+
+				<h:outputText id="lCodigo"
+					value="#{mensaje['produccion.buscar.servicio.label.buscarporcodigo']}" />
+				<p:inputText id="codigoServicio"
+					value="#{cotizacionMBean.servicioModel.codigo}" size="20" />
+
+
+				<p:commandButton value="Buscar" id="botonBuscar"
+					actionListener="#{cotizacionMBean.buscarServicio}" ajax="true"
+					update="tablaServicios" />
+
+
+
 				<p:spacer width="5px" />
 			</h:panelGrid>
-		
-		</p:panel>	
-			
-		<p:panelGrid id="pnlGridResultadoBuscarServicio" style="width: 95%;border: 0px;" >
-			
+
+		</p:panel>
+
+		<p:panelGrid id="pnlGridResultadoBuscarServicio"
+			style="width: 95%;border: 0px;">
+
 			<p:row>
 				<p:column colspan="2" style="font-weight:bold;font-size:15px">#{mensaje['produccion.buscar.servicio.label.resultadobusqueda']}</p:column>
 			</p:row>
@@ -66,7 +68,8 @@
 						<f:facet name="header">
             				Seleccionar los servicios a cotizar
         				</f:facet>
-						<p:column selectionMode="multiple" style="width:16px;text-align:center"/>
+						<p:column selectionMode="multiple"
+							style="width:16px;text-align:center" />
 						<p:column headerText="Codigo(*)"
 							styleClass="ui-column-label-spij styleAlignRightColumn">
 							<h:outputText value="#{registro.codigo}" />
@@ -99,10 +102,9 @@
 						</p:column>
 
 						<f:facet name="footer">
-							<p:commandButton process="tablaServicios" 
-								ajax="true"
+							<p:commandButton process="tablaServicios" ajax="true"
 								update=":formPrincipal:grillaTablaServicios"
-								icon="ui-icon-search" value="Agregar Servicio a Cotizar" >
+								icon="ui-icon-search" value="Agregar Servicio a Cotizar">
 
 							</p:commandButton>
 						</f:facet>
@@ -111,13 +113,14 @@
 				</p:column>
 			</p:row>
 		</p:panelGrid>
-		
+
 		<p:spacer width="5px" />
 		<!-- p:panelGrid id="pnlGridNuevaCotizacion" widgetVar="panelGridNuevaCotizacion" style="width: 95%;border: 0px;" visible="false" closable="true" toggleable="true" >-->
-		<p:panelGrid id="pnlGridNuevaCotizacion" style="width: 95%;border: 0px;">
+		<p:panelGrid id="pnlGridNuevaCotizacion"
+			style="width: 95%;border: 0px;">
 
 			<p:row>
-				<p:column colspan="4"  style="font-weight:bold;font-size:15px"
+				<p:column colspan="4" style="font-weight:bold;font-size:15px"
 					styleClass="ui-column-label-spij styleAlignCenterColumn">#{mensaje['produccion.buscar.servicio.label.subtitulo']}</p:column>
 			</p:row>
 			<p:row>
@@ -140,10 +143,19 @@
 			</p:row>
 			<p:row id="filTabla2">
 				<p:column id="colTabla2"
-					styleClass="ui-column-label-spij styleAlignRightColumn" colspan="4">
-					<p:dataTable id="grillaTablaServicios" 
+					styleClass="ui-column-label-spij styleAlignRightColumn" colspan="5">
+					<p:dataTable id="grillaTablaServicios"
 						value="#{cotizacionMBean.selectedServicios}" var="registro"
 						paginator="true" rows="20">
+						
+						
+							
+						<p:column headerText="Retirar" styleClass="ui-column-label-spij styleAlignRightColumn">
+							<p:commandButton process="grillaTablaServicios" value="Retirar" ajax="true" icon="ui-icon-close" title="Retirar servicio"
+							actionListener="#{cotizacionMBean.retirarServicio(registro)}" update="grillaTablaServicios">
+							</p:commandButton>
+						</p:column>
+
 						<p:column headerText="Codigo(*)"
 							styleClass="ui-column-label-spij styleAlignRightColumn">
 							<h:outputText value="#{registro.codigo}" />
@@ -177,40 +189,42 @@
 							</h:outputText>
 
 						</p:column>
-	
+
 						<p:columnGroup type="footer">
 							<p:row>
-								<p:column colspan="5" style="text-align:right"
-									footerText="Costo Total:" />								
-								<p:column footerText="S/. #{cotizacionMBean.totalSuma} "  />
+								<p:column colspan="6" style="text-align:right"
+									footerText="Costo Total:" />
+								<p:column footerText="S/. #{cotizacionMBean.totalSuma} " />
 							</p:row>
 						</p:columnGroup>
 
 					</p:dataTable>
 				</p:column>
-				</p:row>
-				
+			</p:row>
+
 		</p:panelGrid>
-		
-		<p:outputPanel id="pnlVerCotizacion" style="width:400x;margin-top:10px;">
+
+		<p:outputPanel id="pnlVerCotizacion"
+			style="width:400x;margin-top:10px;">
 			<p:row>
 				<p:column colspan="2" styleClass="styleAlignLeftColumn">
-					<p:commandButton id="botonVerCotizacion" styleClass="buttonMarginNormal"
+					<p:commandButton id="botonVerCotizacion"
+						styleClass="buttonMarginNormal"
 						value="#{mensaje['produccion.nueva.cotizacion.label.vercotizacion']}"
 						actionListener="#{cotizacionMBean.verCotizacion}"
 						update="multiServicioDetail,cotizacionNro,fechaCotizacion "
 						ajax="false" />
 				</p:column>
-				
+
 				<p:column colspan="2" styleClass="styleAlignRightColumn">
 					<p:commandButton value="Cancelar" id="botonCamcelar"
 						actionListener="#{cotizacionMBean.cancelar}" ajax="false" />
 				</p:column>
 			</p:row>
-		</p:outputPanel>	
-		
-		
-		
+		</p:outputPanel>
+
+
+
 
 	</ui:define>
 </ui:composition>

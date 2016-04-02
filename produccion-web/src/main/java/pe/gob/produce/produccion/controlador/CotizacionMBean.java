@@ -62,6 +62,7 @@ public class CotizacionMBean {
 		new Convertidor();
 		new FormateadorFecha();
 		date = new Date();
+		this.totalSuma = 0.0;
 	}
 
 	public Double getTotalSuma() {
@@ -348,20 +349,28 @@ public class CotizacionMBean {
 	}
 
 	public List<ServicioModel> getSelectedServicios() {
+		this.totalSuma = DoubleDosDecimales(this.totalSuma);
 		return selectedServicios;
 	}
 
+	public Double DoubleDosDecimales(Double total){
+		total = (double) Math.round(total * 100);
+		total = total / 100;
+		return total;
+	}
+	
+	public void retirarServicio(ServicioModel servicioModel){
+		selectedServicios.remove(servicioModel);
+		this.totalSuma = this.totalSuma - DoubleDosDecimales(Double.parseDouble(servicioModel.getPrecioDeVenta()) );
+	}
+	
 	public void setSelectedServicios(List<ServicioModel> selectedServicios) {
 		this.totalSuma = 0.0;
 		for (int i = 0; i < selectedServicios.size(); i++) {
-			this.totalSuma = this.totalSuma
-					+ Double.parseDouble(selectedServicios.get(i)
-							.getPrecioDeVenta());
+			this.totalSuma = this.totalSuma + DoubleDosDecimales(Double.parseDouble(selectedServicios.get(i).getPrecioDeVenta()));
 		}
 
-		this.totalSuma = (double) Math.round(this.totalSuma * 100);
-		this.totalSuma = this.totalSuma / 100;
-
+		this.totalSuma = DoubleDosDecimales(this.totalSuma);
 		this.selectedServicios = selectedServicios;
 	}
 
