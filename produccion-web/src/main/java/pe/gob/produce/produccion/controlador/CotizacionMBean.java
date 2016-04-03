@@ -12,12 +12,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
 import pe.gob.produce.produccion.bo.ServicioBO;
+import pe.gob.produce.produccion.bo.UsuarioBO;
 import pe.gob.produce.produccion.core.util.Convertidor;
 import pe.gob.produce.produccion.core.util.FormateadorFecha;
 import pe.gob.produce.produccion.model.CotizacionModel;
+import pe.gob.produce.produccion.model.LoginModel;
 import pe.gob.produce.produccion.model.ServicioModel;
+import pe.gob.produce.produccion.model.UsuarioModel;
 import pe.gob.produce.produccion.services.CITEServices;
 import pe.gob.produce.produccion.services.ComunServices;
+import pe.gob.produce.produccion.services.CotizacionServices;
 import pe.gob.produce.produccion.services.ServicioServices;
 
 @Controller("cotizacionMBean")
@@ -30,9 +34,12 @@ public class CotizacionMBean {
 
 	@Autowired
 	private CotizacionModel cotizacionModel;
-
+	
 	@Autowired
 	private CITEServices citeServices;
+
+	@Autowired
+	private CotizacionServices cotizacionServices;
 
 	@Autowired
 	private ComunServices comunServices;
@@ -44,9 +51,7 @@ public class CotizacionMBean {
 	private Date date;
 
 	// constantes
-	private int MODO_USUARIO;
 	private static int MODO_ADMIN = 1;
-	private static int MODO_EMPLEADO = 2;
 
 	// para la lista de servicios se declara una variable list de tipo
 	// ServicioModel
@@ -226,6 +231,22 @@ public class CotizacionMBean {
 	public String verCotizacion() throws Exception {
 		String pagina = "";
 
+		
+		FacesContext facesContext = FacesContext.getCurrentInstance();
+		LoginModel login = (LoginModel)
+		facesContext.getExternalContext().getSessionMap().get("user");
+		System.out.println("login user " + login.getUsuario() + "hola" +
+		getServicioModel().getCodigoCITE() + "que tal");
+		
+		UsuarioBO usurio = new UsuarioBO();
+		usurio = comunServices.buscarUsuario(login.getUsuario());
+		
+		getCotizacionModel().setUsuarioModel(new UsuarioModel());
+		getCotizacionModel().getUsuarioModel().setNombres(usurio.getNombres());
+		int codigo = cotizacionServices.obtenerCodigoCotizacion();
+		
+		System.out.println("Codigo de cotizacion " + codigo);
+		
 		pagina = "/paginas/ModuloProduccion/cliente/cotizacion/nuevo/verCotizacion.xhtml";
 
 		return pagina;
@@ -236,7 +257,7 @@ public class CotizacionMBean {
 
 		switch (modo) {
 		case 1:
-			MODO_USUARIO = MODO_ADMIN;
+			
 			inicializarClases();
 
 			listarCITE();

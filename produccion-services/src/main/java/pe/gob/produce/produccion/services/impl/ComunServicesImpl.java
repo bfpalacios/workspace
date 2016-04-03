@@ -7,8 +7,8 @@ import org.springframework.stereotype.Component;
 
 import pe.gob.produce.produccion.bo.MuestraBO;
 import pe.gob.produce.produccion.bo.UbigeoBO;
+import pe.gob.produce.produccion.bo.UsuarioBO;
 import pe.gob.produce.produccion.dao.ComunIDAO;
-import pe.gob.produce.produccion.dao.jdbc.ComunDAOImpl;
 import pe.gob.produce.produccion.services.ComunServices;
 
 @Component("comunServices")
@@ -43,6 +43,12 @@ public class ComunServicesImpl implements ComunServices{
 	public List<MuestraBO> listarMuestra() throws Exception {
 		// TODO Auto-generated method stub
 		return comunDAO.listarMuestra();
+	}
+	
+	@Override
+	public UsuarioBO buscarUsuario(String codUsuario) throws Exception {
+		// TODO Auto-generated method stub
+		return comunDAO.buscarUsuario(codUsuario);
 	}
 	
 	

@@ -12,6 +12,7 @@ import org.springframework.stereotype.Component;
 
 import oracle.jdbc.OracleTypes;
 import pe.gob.produce.produccion.bo.CITEBO;
+import pe.gob.produce.produccion.bo.EmpresaBO;
 import pe.gob.produce.produccion.bo.MuestraBO;
 import pe.gob.produce.produccion.bo.UbigeoBO;
 import pe.gob.produce.produccion.bo.UsuarioBO;
@@ -209,16 +210,24 @@ public class ComunDAOImpl extends BaseDAO implements ComunIDAO{
 		    rs = pstmt.executeQuery();
 
 		    while (rs.next()) {
-		        System.out.println("SERVICIO " + rs.getString("IDSERVICIO"));
+		        System.out.println("idusuario " + rs.getString("IDUSUARIO"));
 		        
-		       // usuario.
-		        
-		        /*servicioBO.setCodigo(rs.getString("IDSERVICIO"));
-		        servicioBO.setNombre(rs.getString("SERVICIO_DESC"));
-		        servicioBO.setUnidad(rs.getString("UNIDAD_DESC"));
-		        servicioBO.setRequisito(rs.getString("REQUISITO"));
-		        
-		     */
+		        usuario.setIdUsuario(String.valueOf(rs.getInt("IDUSUARIO")));
+			    usuario.setEmpresa(new EmpresaBO());
+			    usuario.getEmpresa().setRazonSocial(rs.getString("RAZON_SOCIAL"));
+			    usuario.getEmpresa().setRuc(rs.getString("RUC"));
+			    usuario.getEmpresa().setRepresentante(rs.getString("REPRESENTANTE"));
+			    usuario.getEmpresa().setNombreCargo(rs.getString("NOMBRE_CARGO"));
+			    
+			    usuario.setDireccion(rs.getString("DIRECCION"));
+			    usuario.setNombres(rs.getString("NOMBRES"));
+			    usuario.setApellidoPaterno(rs.getString("APELLIDO_PAT"));
+			    usuario.setTelefono(rs.getString("TELEFONO1"));
+			    usuario.setTelefono(rs.getString("TELEFONO2"));
+			    usuario.setEmailAdmin(rs.getString("EMAIL_ADMIN"));
+				
+			    System.out.println("NOMBRES " + usuario.getNombres());
+			          
 		    }
 		      
 		     
