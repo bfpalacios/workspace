@@ -192,4 +192,44 @@ public class ComunDAOImpl extends BaseDAO implements ComunIDAO{
 		}		
 		return listaMuestras;
 	}
+
+	public UsuarioBO buscarUsuario(String codUsuario) throws Exception{
+
+		Connection con = null;
+		CallableStatement cstm = null;
+		ResultSet rs = null;
+
+		UsuarioBO usuario = new UsuarioBO();
+
+		try {
+			con = Conexion.obtenerConexion();
+			PreparedStatement pstmt = con.prepareStatement("{call dbo.SP_Buscar_Usuario(?)}");
+			pstmt.setString(1, codUsuario);
+			
+		    rs = pstmt.executeQuery();
+
+		    while (rs.next()) {
+		        System.out.println("SERVICIO " + rs.getString("IDSERVICIO"));
+		        
+		       // usuario.
+		        
+		        /*servicioBO.setCodigo(rs.getString("IDSERVICIO"));
+		        servicioBO.setNombre(rs.getString("SERVICIO_DESC"));
+		        servicioBO.setUnidad(rs.getString("UNIDAD_DESC"));
+		        servicioBO.setRequisito(rs.getString("REQUISITO"));
+		        
+		     */
+		    }
+		      
+		     
+			return usuario;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		} finally {
+			this.cerrarResultSet(rs);
+			this.cerrarStatement(cstm);
+			this.cerrarConexion(con);
+		}
+	}
 }
