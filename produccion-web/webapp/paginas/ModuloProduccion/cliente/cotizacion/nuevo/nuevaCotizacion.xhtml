@@ -38,12 +38,21 @@
 					value="#{cotizacionMBean.servicioModel.codigo}" size="20" />
 
 
+				<h:outputText id="lCite"
+							value="#{mensaje['produccion.buscar.servicio.label.buscarporcite']}" />
+				<p:selectOneMenu id="selectOneCITE"
+							value="#{cotizacionMBean.servicioModel.codigoCITE}"
+							styleClass="ui-column-label-spij styleAlignRightColumn">
+							<f:selectItem itemLabel="Seleccione el CITE " />
+							<f:selectItems value="#{cotizacionMBean.servicioModel.listarCITE}"
+								var="CITE" itemLabel="#{CITE.descripcion}"
+								itemValue="#{CITE.codigo}" />
+				</p:selectOneMenu>
+				
 				<p:commandButton value="Buscar" id="botonBuscar"
 					actionListener="#{cotizacionMBean.buscarServicio}" ajax="true"
 					update="tablaServicios" />
-
-
-
+					
 				<p:spacer width="5px" />
 			</h:panelGrid>
 

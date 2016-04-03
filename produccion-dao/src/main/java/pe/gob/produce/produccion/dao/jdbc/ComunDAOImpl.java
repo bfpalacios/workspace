@@ -225,6 +225,7 @@ public class ComunDAOImpl extends BaseDAO implements ComunIDAO{
 			    usuario.setTelefono(rs.getString("TELEFONO1"));
 			    usuario.setTelefono(rs.getString("TELEFONO2"));
 			    usuario.setEmailAdmin(rs.getString("EMAIL_ADMIN"));
+			    usuario.setDni(rs.getString("NUMERO_DOC"));
 				
 			    System.out.println("NOMBRES " + usuario.getNombres());
 			          

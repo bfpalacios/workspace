@@ -11,11 +11,13 @@ import javax.faces.context.FacesContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
+import pe.gob.produce.produccion.bo.EmpresaBO;
 import pe.gob.produce.produccion.bo.ServicioBO;
 import pe.gob.produce.produccion.bo.UsuarioBO;
 import pe.gob.produce.produccion.core.util.Convertidor;
 import pe.gob.produce.produccion.core.util.FormateadorFecha;
 import pe.gob.produce.produccion.model.CotizacionModel;
+import pe.gob.produce.produccion.model.EmpresaModel;
 import pe.gob.produce.produccion.model.LoginModel;
 import pe.gob.produce.produccion.model.ServicioModel;
 import pe.gob.produce.produccion.model.UsuarioModel;
@@ -238,12 +240,62 @@ public class CotizacionMBean {
 		System.out.println("login user " + login.getUsuario() + "hola" +
 		getServicioModel().getCodigoCITE() + "que tal");
 		
+		String codigoNroDoc="";
 		UsuarioBO usurio = new UsuarioBO();
 		usurio = comunServices.buscarUsuario(login.getUsuario());
 		
 		getCotizacionModel().setUsuarioModel(new UsuarioModel());
 		getCotizacionModel().getUsuarioModel().setNombres(usurio.getNombres());
+		getCotizacionModel().getUsuarioModel().setDni(usurio.getDni());
+		getCotizacionModel().getUsuarioModel().setDireccion(usurio.getDireccion());
+		
+		//datos de empresa
+		getCotizacionModel().getUsuarioModel().setEmpresaModel(new EmpresaModel());
+		getCotizacionModel().getUsuarioModel().getEmpresaModel().setRazonSocial(usurio.getEmpresa().getRazonSocial());
+		getCotizacionModel().getUsuarioModel().getEmpresaModel().setRuc(usurio.getEmpresa().getRuc());
+		getCotizacionModel().getUsuarioModel().getEmpresaModel().setRepresentante(usurio.getEmpresa().getRepresentante());
+		getCotizacionModel().getUsuarioModel().getEmpresaModel().setNombreContacto(usurio.getEmpresa().getNombreContacto());
+		getCotizacionModel().getUsuarioModel().getEmpresaModel().setNombreCargo(usurio.getEmpresa().getNombreCargo());
+	
 		int codigo = cotizacionServices.obtenerCodigoCotizacion();
+		
+		String citeID = getServicioModel().getCodigoCITE();
+		if(codigo == 0 ){
+			codigoNroDoc = "00012016123";
+		}
+		
+		if(citeID.equals("1")) 
+		{	
+			getServicioModel().setDescripcionCITE("Cite Madera");
+			getServicioModel().setSede("LIMA");
+			
+			//codigoServicio = "0001" + fecha.formatoFechaDDMMAAAA2(new Date()) + String.valueOf(numero.obtenerNumeroAleatorioEntero());
+		}
+		
+		if(citeID.equals("2")) 
+		{	
+			getServicioModel().setDescripcionCITE("Cite Calzado");
+			getServicioModel().setSede("LIMA");
+			
+			//codigoServicio = "0002" + fecha.formatoFechaDDMMAAAA2(new Date()) + String.valueOf(numero.obtenerNumeroAleatorioEntero());
+		}
+		if(citeID.equals("3")) 
+		{	
+			getServicioModel().setDescripcionCITE("Cite Agroindustrial");
+			getServicioModel().setSede("ICA");
+			
+			//codigoServicio = "0003" + fecha.formatoFechaDDMMAAAA2(new Date()) + String.valueOf(numero.obtenerNumeroAleatorioEntero());
+		}
+		if(citeID.equals("4")) 
+		{	
+			getServicioModel().setDescripcionCITE("Cite Pesquero");
+			getServicioModel().setSede("CALLAO");
+			
+			//codigoServicio = "0004" + fecha.formatoFechaDDMMAAAA2(new Date()) + String.valueOf(numero.obtenerNumeroAleatorioEntero());
+		}
+		
+		
+		//getSelectedServicios().get(0).get
 		
 		System.out.println("Codigo de cotizacion " + codigo);
 		

@@ -14,6 +14,7 @@ import pe.gob.produce.produccion.bo.MuestraBO;
 public class ServicioModel {
 
 	private String codigo;
+	private String sede;
 	private String nombre;
 	private String descripcion;
 	private String nombreSolicitante;
@@ -35,6 +36,17 @@ public class ServicioModel {
 	public List<MuestraBO> getListarMuestra() {
 		return listarMuestra;
 	}
+	
+	
+	public String getSede() {
+		return sede;
+	}
+
+
+	public void setSede(String sede) {
+		this.sede = sede;
+	}
+
 
 	public void setListarMuestra(List<MuestraBO> listarMuestra) {
 		this.listarMuestra = listarMuestra;

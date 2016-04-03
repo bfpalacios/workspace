@@ -26,6 +26,24 @@
 			<p:panelGrid id="pnlGridNuevaCotizacion">
 				
 				<p:row>
+				<p:column styleClass="ui-column-label-spij styleAlignRightColumn">
+					<h:outputText id="lCotizacion"
+						value="#{mensaje['produccion.buscar.servicio.label.cotizacionnro']}" />
+				</p:column>
+				<p:column>
+					<p:inputText id="cotizacionNro"
+						value="#{cotizacionMBean.cotizacionModel.codigo}" size="20" />
+				</p:column>
+				<p:column styleClass="ui-column-label-spij styleAlignRightColumn">
+					<h:outputText id="lFecha" value="#{mensaje['general.label.fecha']}" />
+				</p:column>
+				<p:column>
+					<p:calendar value="#{cotizacionMBean.date}" id="fechaCotizacion"
+						pattern="dd/MM/yyyy" mode="popup" showOn="button">
+					</p:calendar>
+				</p:column>
+			</p:row>
+				<p:row>
 
 					<p:column styleClass="ui-column-label-spij styleAlignRightColumn">
 						<h:outputText id="lblNombre"
@@ -33,7 +51,7 @@
 					</p:column>
 
 					<p:column>
-						<p:inputText id="nombre" size="25"
+						<p:inputText id="nombre" size="40"
 							value="#{cotizacionMBean.cotizacionModel.usuarioModel.nombres}" />
 						<p:message for="nombre" />
 					</p:column>
@@ -54,31 +72,16 @@
 				<p:row>
 
 					<p:column styleClass="ui-column-label-spij styleAlignRightColumn">
-						<h:outputText id="lblRubro"
-							value="#{mensaje['produccion.nuevo.cliente.rubro']}" />
-					</p:column>
-
-					<p:column>
-						<p:inputText id="rubro" size="10"
-							value="#{cotizacionMBean.cotizacionModel.usuarioModel.rubro}" />
-						<p:message for="rubro" />
-					</p:column>
-
-					<p:column styleClass="ui-column-label-spij styleAlignRightColumn">
 						<h:outputText id="lblDireccion"
 							value="#{mensaje['produccion.nuevo.cliente.direccion']}" />
 					</p:column>
 
-
-
-					<p:column colspan="5">
+					<p:column>
 						<p:inputText id="direccionUsuario" size="40"
 							value="#{cotizacionMBean.cotizacionModel.usuarioModel.direccion}" />
+						<p:message for="direccionUsuario" />
 					</p:column>
 
-				</p:row>
-
-				<p:row>
 					<p:column styleClass="ui-column-label-spij styleAlignRightColumn">
 						<h:outputText id="lblTelefonoUsuario"
 							value="#{mensaje['produccion.nuevo.cliente.telefono']}" />
@@ -117,19 +120,123 @@
 
 				</p:row>
 
+				<p:row>
+					<p:column styleClass="ui-column-label-spij styleAlignRightColumn">
+						<h:outputText id="lblCite"
+							value="#{mensaje['produccion.nuevo.cliente.cite']}" />
+					</p:column>
+
+					<p:column>
+						<p:inputText id="cite" size="25"
+							value="#{cotizacionMBean.servicioModel.descripcionCITE}" />
+					</p:column>
+					<p:column styleClass="ui-column-label-spij styleAlignRightColumn">
+						<h:outputText id="lblSede"
+							value="#{mensaje['produccion.nuevo.cliente.sede']}" />
+					</p:column>
+
+					<p:column colspan="3">
+						<p:inputText id="sede" size="25"
+							value="#{cotizacionMBean.servicioModel.sede}" />
+					</p:column>
+
+
+
+				</p:row>
+				<p:spacer width="10px" />
+
+				<p:row id="filTabla2">
+					<p:column id="colTabla2"
+						styleClass="ui-column-label-spij styleAlignRightColumn"
+						colspan="5">
+						<p:dataTable id="grillaTablaServicios"
+							value="#{cotizacionMBean.selectedServicios}" var="registro"
+							paginator="true" rows="20">
+
+
+
+							<p:column headerText="Retirar"
+								styleClass="ui-column-label-spij styleAlignRightColumn">
+								<p:commandButton process="grillaTablaServicios" value="Retirar"
+									ajax="true" icon="ui-icon-close" title="Retirar servicio"
+									actionListener="#{cotizacionMBean.retirarServicio(registro)}"
+									update="grillaTablaServicios">
+								</p:commandButton>
+							</p:column>
+
+							<p:column headerText="Codigo(*)"
+								styleClass="ui-column-label-spij styleAlignRightColumn">
+								<h:outputText value="#{registro.codigo}" />
+							</p:column>
+
+							<p:column headerText="Nombre Servicio"
+								styleClass="ui-column-label-spij styleAlignRightColumn">
+								<h:outputText value="#{registro.nombre}" />
+							</p:column>
+
+							<p:column headerText="Unidad"
+								styleClass="ui-column-label-spij styleAlignRightColumn">
+								<h:outputText value="#{registro.unidad}" />
+							</p:column>
+
+							<p:column headerText="Requisito"
+								styleClass="ui-column-label-spij styleAlignRightColumn">
+								<h:outputText value="#{registro.requisito}" />
+							</p:column>
+
+							<p:column headerText="Valor de Venta"
+								styleClass="ui-column-label-spij styleAlignRightColumn">
+								<h:outputText value="#{registro.valorDeVenta}">
+								</h:outputText>
+							</p:column>
+
+
+							<p:column headerText="Precio de Venta"
+								styleClass="ui-column-label-spij styleAlignRightColumn">
+								<h:outputText value="#{registro.precioDeVenta}">
+								</h:outputText>
+
+							</p:column>
+
+							<p:columnGroup type="footer">
+								<p:row>
+									<p:column colspan="6" style="text-align:right"
+										footerText="Costo Total:" />
+									<p:column footerText="S/. #{cotizacionMBean.totalSuma} " />
+								</p:row>
+							</p:columnGroup>
+
+						</p:dataTable>
+					</p:column>
+				</p:row>
 
 			</p:panelGrid>
+
+			<p:spacer width="10px" />
+
+			<p:row id="pnlTerminos">
+				<p:column>
+					<p:link outcome="/login"
+						value="#{mensaje['produccion.terminos.condiciones.titulo']}">
+						<f:param name="lTerminosYCondiciones" value="10" />
+					</p:link>
+				</p:column>
+
+			</p:row>
+
+
 		</p:panel>
 
-		<!--  p:outputPanel id="pnlVerCotizacion"
+		
+		<p:outputPanel id="pnlGuardarCotizacion"
 			style="width:400x;margin-top:10px;">
 			<p:row>
 				<p:column colspan="2" styleClass="styleAlignLeftColumn">
-					<p:commandButton id="botonVerCotizacion"
+					<p:commandButton id="botonGuardarCotizacion"
 						styleClass="buttonMarginNormal"
-						value="#{mensaje['produccion.nueva.cotizacion.label.vercotizacion']}"
-						actionListener="#{cotizacionMBean.verCotizacion}"
-						update="multiServicioDetail,cotizacionNro,fechaCotizacion "
+						value="#{mensaje['produccion.nueva.cotizacion.label.guardarcotizacion']}"
+						actionListener="#{cotizacionMBean.guardarCotizacion}"
+						update="grillaTablaServicios,cotizacionNro,fechaCotizacion "
 						ajax="false" />
 				</p:column>
 
@@ -138,7 +245,7 @@
 						actionListener="#{cotizacionMBean.cancelar}" ajax="false" />
 				</p:column>
 			</p:row>
-		</p:outputPanel -->
+		</p:outputPanel>
 
 
 
