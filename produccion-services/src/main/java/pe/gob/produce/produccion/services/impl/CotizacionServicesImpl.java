@@ -1,7 +1,5 @@
 package pe.gob.produce.produccion.services.impl;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -26,10 +24,22 @@ public class CotizacionServicesImpl implements CotizacionServices{
 	}
 
 	@Override
-	public void guardarCotizacion(List<CotizacionBO> listaCotizacion)
+	public void guardarCotizacion(CotizacionBO cotizacion)
+			{
+		// TODO Auto-generated method stub
+		try {
+			cotizacionDAO.guardarCotizacion(cotizacion);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
+	@Override
+	public int obtenerCiteSede(String ubigeo, String nombreCite)
 			throws Exception {
 		// TODO Auto-generated method stub
-		cotizacionDAO.guardarCotizacion(listaCotizacion);
+		return cotizacionDAO.obtenerCiteSede(ubigeo, nombreCite);
 	}
 	
 	

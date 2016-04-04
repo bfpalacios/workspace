@@ -9,11 +9,19 @@ import org.springframework.stereotype.Component;
 @RequestScoped
 public class CotizacionModel {
 
-	
-	private String codigo;
+
+	private String secuencial;
+	private int codigo;
+	private String descripcion;
 	private UsuarioModel usuarioModel;
 	private ServicioModel servicioModel;
 	
+	
+	
+	public int getCodigo() {
+		return codigo;
+	}
+
 	public UsuarioModel getUsuarioModel() {
 		return usuarioModel;
 	}
@@ -30,11 +38,24 @@ public class CotizacionModel {
 		this.servicioModel = servicioModel;
 	}
 
-	public String getCodigo() {
-		return codigo;
+
+	public String getDescripcion() {
+		return descripcion;
 	}
 
-	public void setCodigo(String codigo) {
+	public void setDescripcion(String descripcion) {
+		this.descripcion = descripcion;
+	}
+
+	public String getSecuencial() {
+		return secuencial;
+	}
+
+	public void setSecuencial(String secuencial) {
+		this.secuencial = secuencial;
+	}
+
+	public void setCodigo(int codigo) {
 		this.codigo = codigo;
 	}
 	

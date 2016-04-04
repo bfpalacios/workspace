@@ -49,11 +49,15 @@
 								itemValue="#{CITE.codigo}" />
 				</p:selectOneMenu>
 				
+					
+				<p:spacer width="5px" />
+				<h:outputText id="Lobservacion"
+							value="#{mensaje['produccion.buscar.servicio.label.observacion']}" />
 				<p:commandButton value="Buscar" id="botonBuscar"
 					actionListener="#{cotizacionMBean.buscarServicio}" ajax="true"
 					update="tablaServicios" />
-					
-				<p:spacer width="5px" />
+				
+				
 			</h:panelGrid>
 
 		</p:panel>
@@ -139,7 +143,7 @@
 				</p:column>
 				<p:column>
 					<p:inputText id="cotizacionNro"
-						value="#{cotizacionMBean.cotizacionModel.codigo}" size="20" />
+						value="#{cotizacionMBean.cotizacionModel.descripcion}" size="20" />
 				</p:column>
 				<p:column styleClass="ui-column-label-spij styleAlignRightColumn">
 					<h:outputText id="lFecha" value="#{mensaje['general.label.fecha']}" />
