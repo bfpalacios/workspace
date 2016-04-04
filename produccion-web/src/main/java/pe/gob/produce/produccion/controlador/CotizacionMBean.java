@@ -301,6 +301,120 @@ public class CotizacionMBean {
 			return pagina ;
 			
 	}
+	
+	public String enviarCotizacionEmpresa() throws Exception {
+		
+		String pagina = "";
+		
+		FacesContext facesContext = FacesContext.getCurrentInstance();
+		LoginModel login = (LoginModel)
+		facesContext.getExternalContext().getSessionMap().get("user");
+		
+		UsuarioBO usurio = new UsuarioBO();
+		
+		usurio = comunServices.buscarUsuario(login.getUsuario());
+		String idUsuario="";
+		idUsuario = usurio.getIdUsuario();
+		ObtenerNumeroAleatorio numero = new ObtenerNumeroAleatorio();
+		FormateadorFecha fecha = new FormateadorFecha();
+		
+		//inicializarClases();
+		int sede =0;
+		String ubigeo = "";
+		String citeID = "1";
+		String descripcionCITE = getServicioModel().getDescripcionCITE();
+		
+		if(descripcionCITE.equals("Cite Madera") ){
+			citeID = "1";
+		}
+		if(descripcionCITE.equals("Cite Calzado") ){
+			citeID = "2";
+		}
+		if(descripcionCITE.equals("Cite Agroindustrial") ){
+			citeID = "3";
+		}
+		if(descripcionCITE.equals("Cite Pesquero") ){
+			citeID = "4";
+		}
+		
+		System.out.println("cite descripcion " + descripcionCITE);
+		
+		//esto luego en la tabla cite se debe cambiar en vez de 1 es 10 , 2 es 20 , 3 es 30 , 4 es 40
+		int codigoCite = Integer.parseInt(citeID);
+		codigoCite = codigoCite*10;
+		List<ServicioBO> listaServicio = new ArrayList<ServicioBO>();
+
+		List<CotizacionModel> datosServiciosModelGrid = new ArrayList<CotizacionModel>();
+		
+		int codigo = cotizacionServices.obtenerCodigoCotizacion();
+		
+		
+		if(citeID.equals("1")){
+			ubigeo = "140141";
+			
+		}
+		if(citeID.equals("2")){
+			ubigeo = "140122";
+			
+		}
+		if(citeID.equals("3")){
+			ubigeo = "100106";
+			
+		}
+		if(citeID.equals("4")){
+			ubigeo = "240106";
+			
+		}
+		
+		sede = cotizacionServices.obtenerCiteSede(ubigeo, descripcionCITE);
+		System.out.println("Sede "+ sede);
+		
+		if (codigo == 0){
+			codigo = 1;
+			getCotizacionModel().setCodigo(codigo);
+			
+		} 
+		if (codigo > 0){
+			codigo = codigo + 1;
+			getCotizacionModel().setCodigo(codigo);
+			
+		} 
+		
+		//SE CREA VARAIBLE PARA COLOCARLOS AL ATRIBUTO SECUENCIAL
+		int codigoSecuencial = codigo;
+		System.out.println("Tamanio de la lista de cotizacion " + getServicioCotizacion().size());
+		for (ServicioModel servicio : getServicioCotizacion()) {
+				CotizacionBO cotizacionBO = new CotizacionBO();
+				
+				
+				cotizacionBO.setCodigo(codigo);	
+				cotizacionBO.setSecuencial(codigoSecuencial + codigoCite + fecha.obtenerFechaAnio(new Date()) + numero.obtenerNumeroAleatorioEntero());
+				cotizacionBO.setServicio(new ServicioBO());
+				cotizacionBO.getServicio().setCodigo(servicio.getCodigo());
+				cotizacionBO.setIdCite(codigoCite*10);
+				
+				cotizacionBO.setUsuario(new UsuarioBO());
+				cotizacionBO.getUsuario().setIdUsuario(idUsuario);
+				
+				//Registrada igual 1 , aprobada igual a 2 y archivada igual a 3
+				cotizacionBO.setEstado(1);
+				cotizacionBO.setSede(sede);
+				codigo ++;
+				try {
+					cotizacionServices.guardarCotizacion(cotizacionBO);
+				}catch(Exception e){
+					e.printStackTrace();
+					mostrarMensaje(9);				
+				}	
+		}
+
+			limpiarObjetos();
+			mostrarMensaje(8);
+			pagina = "/paginas/ModuloProduccion/empresa/cotizacion/nuevo/nuevaCotizacion.xhtml";
+			
+			return pagina ;
+			
+	}
 
 	public void buscarServicio() throws Exception {
 
@@ -352,7 +466,67 @@ public class CotizacionMBean {
 
 		return pagina;
 	}
+	
+	public String verCotizacionEmpresa() throws Exception {
+		String pagina = "";
+		if(servicioCotizacion != null  ) {
+			setServicioCotizacion(servicioCotizacion);
+		}
+		else setServicioCotizacion(selectedServicios);
+		
+		
+		FacesContext facesContext = FacesContext.getCurrentInstance();
+		LoginModel login = (LoginModel)
+		facesContext.getExternalContext().getSessionMap().get("user");
+		
+		
+		UsuarioBO usurio = new UsuarioBO();
+		usurio = comunServices.buscarUsuario(login.getUsuario());
+		
+		getCotizacionModel().setUsuarioModel(new UsuarioModel());
+		getCotizacionModel().getUsuarioModel().setNombres(usurio.getNombres());
+		getCotizacionModel().getUsuarioModel().setDni(usurio.getDni());
+		getCotizacionModel().getUsuarioModel().setDireccion(usurio.getDireccion());
+		
+		//datos de empresa
+		getCotizacionModel().getUsuarioModel().setEmpresaModel(new EmpresaModel());
+		getCotizacionModel().getUsuarioModel().getEmpresaModel().setRazonSocial(usurio.getEmpresa().getRazonSocial());
+		getCotizacionModel().getUsuarioModel().getEmpresaModel().setRuc(usurio.getEmpresa().getRuc());
+		getCotizacionModel().getUsuarioModel().getEmpresaModel().setRepresentante(usurio.getEmpresa().getRepresentante());
+		getCotizacionModel().getUsuarioModel().getEmpresaModel().setNombreContacto(usurio.getEmpresa().getNombreContacto());
+		getCotizacionModel().getUsuarioModel().getEmpresaModel().setNombreCargo(usurio.getEmpresa().getNombreCargo());
+	
+		
+		String citeID = getServicioModel().getCodigoCITE();
+		
+		//SE ASOCIA A LAS CITES LA SEDE Y SU DESCRIPCION 
+		if(citeID.equals("1")) 
+		{	
+			getServicioModel().setDescripcionCITE("Cite Madera");
+			getServicioModel().setSede("LIMA");
+		}
+		
+		if(citeID.equals("2")) 
+		{	
+			getServicioModel().setDescripcionCITE("Cite Calzado");
+			getServicioModel().setSede("LIMA");
+		}
+		if(citeID.equals("3")) 
+		{	
+			getServicioModel().setDescripcionCITE("Cite Agroindustrial");
+			getServicioModel().setSede("ICA");
+		}
+		if(citeID.equals("4")) 
+		{	
+			getServicioModel().setDescripcionCITE("Cite Pesquero");
+			getServicioModel().setSede("CALLAO");
+		}
+		
+		
+		pagina = "/paginas/ModuloProduccion/empresa/cotizacion/nuevo/verCotizacion.xhtml";
 
+		return pagina;
+	}
 	public String verCotizacion() throws Exception {
 		String pagina = "";
 		if(servicioCotizacion != null  ) {
