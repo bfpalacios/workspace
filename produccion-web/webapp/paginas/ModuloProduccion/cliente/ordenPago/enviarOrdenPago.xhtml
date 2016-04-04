@@ -10,18 +10,21 @@
 <ui:composition
 	template="/plantilla/ModuloProduccion/Plantillas/plantilla.xhtml">
 	<ui:define name="contenido">
+
 		<p:outputPanel id="pnlGridMensajes"
 			style="width:500px;margin-top:5px;">
 			<p:row>
 				<p:column colspan="4" rowspan="2">
-					<p:messages id="messagesOrdenPago" showDetail="true" autoUpdate="true"
-						closable="true" />
+					<p:messages id="messagesOrdenPago" showDetail="true"
+						autoUpdate="true" closable="true" />
 				</p:column>
 			</p:row>
 		</p:outputPanel>
 
 		<p:spacer width="5px" />
+
 		<p:panel header="Enviar Orden de Pago" style="width: 100%;">
+
 			<p:panelGrid id="pnlGridLoginAcceso">
 				<p:row>
 					<p:column colspan="6"
@@ -47,10 +50,9 @@
 							<h:outputText id="lblTitulo"
 								value="#{mensaje['produccion.enviar.ordenpago.label.enviar']}" />
 						</h3>
-
-
 					</p:column>
 				</p:row>
+
 				<p:row>
 
 					<p:column styleClass="ui-column-label-spij styleAlignRightColumn">
@@ -59,8 +61,7 @@
 					</p:column>
 
 					<p:column>
-						<p:inputText id="razonSocial" size="40"
-							value=" " />
+						<p:inputText id="razonSocial" size="40" value=" " />
 						<p:message for="razonSocial" />
 					</p:column>
 
@@ -70,8 +71,7 @@
 					</p:column>
 
 					<p:column colspan="3">
-						<p:inputText id="ordenpago" size="20"
-							value=" " />
+						<p:inputText id="ordenpago" size="20" value=" " />
 						<p:message for="ruc" />
 					</p:column>
 
@@ -98,13 +98,10 @@
 
 
 					<p:column colspan="3">
-						<p:inputText id="representante" size="40"
-							value=" " />
+						<p:inputText id="representante" size="40" value=" " />
 					</p:column>
 
 				</p:row>
-
-
 
 				<p:row>
 					<p:column styleClass="ui-column-label-spij styleAlignRightColumn">
@@ -140,8 +137,7 @@
 					</p:column>
 
 					<p:column>
-						<p:inputText id="ordenPago" size="40"
-							value=" " />
+						<p:inputText id="ordenPago" size="40" value=" " />
 						<p:message for="razonSocial" />
 					</p:column>
 
@@ -151,8 +147,7 @@
 					</p:column>
 
 					<p:column colspan="3">
-						<p:inputText id="ruc" size="20"
-							value=" " />
+						<p:inputText id="ruc" size="20" value=" " />
 						<p:message for="ruc" />
 					</p:column>
 
@@ -161,125 +156,121 @@
 
 				<p:separator />
 				<p:spacer width="5px" />
-				<!-- Comienza datos de Usuario  -->
-
 
 			</p:panelGrid>
-			<!--  <p:outputPanel id="pnlGuardar" style="width:400x;margin-top:10px;">
-						<p:row>
-							<p:column colspan="2" styleClass="styleAlignLeftColumn">
-								<p:commandButton id="botonGuardar" styleClass="buttonMarginNormal"
-									value="#{mensaje['produccion.nuevo.servicio.label.enviar']}"
-									actionListener="#{servicioMBean.guardarNuevoServicio}"
-									update="lFecha,nombreServicio, descripcionServicio,  nombreSolicitante,  cargo,  telefono, email"
-									ajax="false" />
-							</p:column>
-		
-							<p:column colspan="2" styleClass="styleAlignRightColumn">
-								<p:commandButton value="Cancelar" id="botonCamcelar"
-									actionListener="#{servicioMBean.cancelar}" ajax="false" />
-							</p:column>
-						</p:row>
-					</p:outputPanel> -->
+
 			<p:spacer width="5px" />
 
-			
-			
 			<p:spacer width="50px" />
 			<p:panelGrid id="pnlGridResultadoBuscarServicio">
 
-			<p:row id="filTabla">
-				<p:column id="colTabla"
-					styleClass="ui-column-label-spij styleAlignRightColumn" colspan="3">
+				<p:row id="filTabla">
+					<p:column id="colTabla"
+						styleClass="ui-column-label-spij styleAlignRightColumn"
+						colspan="3">
 
-					<p:dataTable id="tablaServicios"
-						value="#{servicioMBean.datosServiciosModelGrid}"
-						selectionMode="multiple"
-						selection="#{servicioMBean.selectedServicios}"
-						rowKey="#{registro.codigo}" var="registro" binding="#{tabla}"
-						emptyMessage="Sin datos para cargar" paginator="true" rows="20">
+						<p:dataTable id="tablaX"
+							value="#{ordenPagoMBean.lsServicioDTO}"
+							rowKey="#{registro.codigo}" var="registro" binding="#{tabla}"
+							emptyMessage="Sin datos para cargar" paginator="true" rows="20">
 
+							<p:column headerText="Codigo(*)"
+								styleClass="ui-column-label-spij styleAlignRightColumn">
+								<h:outputText value="#{registro.codigo}" />
+							</p:column>
 
-						<p:column headerText="Codigo(*)"
-							styleClass="ui-column-label-spij styleAlignRightColumn">
-							<h:outputText value="#{registro.codigo}" />
-						</p:column>
+							<p:column headerText="Nombre Servicio"
+								styleClass="ui-column-label-spij styleAlignRightColumn">
+								<h:outputText value="#{registro.nombreServicio}" />
+							</p:column>
 
-						<p:column headerText="Nombre Servicio"
-							styleClass="ui-column-label-spij styleAlignRightColumn">
-							<h:outputText value="#{registro.nombre}" />
-						</p:column>
+							<p:column headerText="Unidad"
+								styleClass="ui-column-label-spij styleAlignRightColumn">
+								<h:outputText value="#{registro.unidad}" />
+							</p:column>
 
-						<p:column headerText="Unidad"
-							styleClass="ui-column-label-spij styleAlignRightColumn">
-							<h:outputText value="#{registro.unidad}" />
-						</p:column>
+							<p:column headerText="Valor de Venta"
+								styleClass="ui-column-label-spij styleAlignRightColumn">
+								<h:outputText value="#{registro.valorVenta}" />
+							</p:column>
 
-						<p:column headerText="Requisito"
-							styleClass="ui-column-label-spij styleAlignRightColumn">
-							<h:outputText value="#{registro.requisito}" />
-						</p:column>
+							<p:column headerText="Precio de Venta"
+								styleClass="ui-column-label-spij styleAlignRightColumn">
+								<h:outputText value="#{registro.precioVenta}" />
+							</p:column>
 
-						<p:column headerText="Valor de Venta"
-							styleClass="ui-column-label-spij styleAlignRightColumn">
-							<h:outputText value="#{registro.valorDeVenta}" />
-						</p:column>
-						
-						<p:column headerText="Precio de Venta"
-							styleClass="ui-column-label-spij styleAlignRightColumn">
-							<h:outputText value="#{registro.precioDeVenta}" />
+							<p:columnGroup type="footer">
+								<p:row>
+									<p:column colspan="4" style="text-align:right" footerText="Costo Total:" />
+									<p:column footerText="S/. #{ordenPagoMBean.cotizacionTransaccion.costoTotal} " />
+								</p:row>
+							</p:columnGroup>
 
-						</p:column>
+						</p:dataTable>
 
-						
-					</p:dataTable>
+					</p:column>
+				</p:row>
+			</p:panelGrid>
 
-				</p:column>
-			</p:row>
-		</p:panelGrid>
-		<p:spacer width="5px" />
+			<p:spacer width="5px" />
+
 			<p:panelGrid id="pnlGridNuevaCotizacion"
 				style="width: 95%;border: 0px;">
-
 				<p:row>
-					<p:column styleClass="ui-column-label-spij styleAlignRightColumn"
-						>
+					<p:column styleClass="ui-column-label-spij styleAlignRightColumn">
 						<h:outputText id="lCotizacion"
 							value="#{mensaje['produccion.enviar.ordenpago.label.cargarcomprobante']}" />
 						<p:growl id="messages" showDetail="true" />
-
-							<p:fileUpload value="Adjuntar" mode="advanced" previewWidth="300" style="margin-left: 160px;"
-								skinSimple="true" />	
+						<p:fileUpload label="Buscar comprobante ..."
+							uploadLabel="Subir comprobante" cancelLabel="Cancelar"
+							fileUploadListener="#{ordenPagoMBean.handleFileUpload}"
+							mode="advanced" dragDropSupport="false" update="messages"
+							fileLimit="1" value="Adjuntar comprobante" previewWidth="300"
+							style="margin-left: 160px;" skinSimple="true" />
 					</p:column>
-
 				</p:row>
 			</p:panelGrid>
-			
 
 			<p:outputPanel id="pnlGuardar" style="width:400px;margin-top:10px;">
 				<p:row>
 					<p:column colspan="2" styleClass="styleAlignLeftColumn">
-						<p:commandButton id="botonGuardar" styleClass="buttonMarginNormal"
-							value="#{mensaje['produccion.enviar.ordenpago.btn.enviarordenpago']}"
-							actionListener="#{servicioMBean.guardarNuevoServicio}"
-							update="lFecha,nombreServicio, descripcionServicio,  nombreSolicitante,  cargo,  telefono, email"
-							ajax="false" />
+
+						<p:commandButton action="#{ordenPagoMBean.generarOrdenPago()}"
+							type="submit" value="Generar Orden de Pago"
+							title="Generar Orden de Pago" oncomplete="PF('dlg1').show()">
+							<f:param name="numCotizacion"
+								value="#{ordenPagoMBean.codigoServicioOrdenPago}" />
+						</p:commandButton>
+
 					</p:column>
 
 					<p:column colspan="2" styleClass="styleAlignRightColumn">
-						<p:commandButton
-							value="#{mensaje['produccion.nuevo.ordenpago.btn.cancelar']}"
-							id="botonCamcelar" actionListener="#{servicioMBean.cancelar}"
-							ajax="false" />
+
+						<p:commandButton value="Regresar a Cotizaciones" type="submit"
+							id="botonCancelar"
+							action="#{ordenPagoMBean.regresarCotizaciones()}" ajax="false">
+						</p:commandButton>
+
 					</p:column>
+
 				</p:row>
 			</p:outputPanel>
 
+			<p:dialog header="Informe del Sistema" widgetVar="dlg1"
+				style="height: 350px; width: 400px;">
+
+				<h3>SU ORDEN FUE ENVIADA CON ÉXITO</h3>
+				<br />
+				<p:commandButton value="Aceptar" id="btnBusquedaOrdenes"
+					type="submit"
+					action="#{ordenPagoMBean.redireccionarBusquedaOrdenes()}"
+					ajax="false">
+				</p:commandButton>
+				<br />
+
+			</p:dialog>
 
 		</p:panel>
-
-
-
 	</ui:define>
 </ui:composition>
 </html>
