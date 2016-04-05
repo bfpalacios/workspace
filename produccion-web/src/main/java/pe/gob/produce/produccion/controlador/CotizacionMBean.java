@@ -546,6 +546,8 @@ public class CotizacionMBean {
 		
 		UsuarioBO usurio = new UsuarioBO();
 		usurio = comunServices.buscarUsuario(login.getUsuario());
+		System.out.println("login user " + login.getUsuario() + "hola" +
+		getServicioModel().getCodigoCITE() + "que tal");
 		
 		getCotizacionModel().setUsuarioModel(new UsuarioModel());
 		getCotizacionModel().getUsuarioModel().setNombres(usurio.getNombres());
