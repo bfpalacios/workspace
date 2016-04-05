@@ -9,6 +9,7 @@ import org.springframework.stereotype.Component;
 @RequestScoped
 public class CotizacionModel {
 
+
 	private int codigo;
 	private String secuencial;
 	private String descripcion;
