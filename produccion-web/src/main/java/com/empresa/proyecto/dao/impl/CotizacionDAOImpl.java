@@ -11,8 +11,6 @@ import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
 import com.empresa.proyecto.dao.CotizacionDAO;
-import com.empresa.proyecto.dto.CotizacionDTO;
-import com.empresa.proyecto.dto.ServicioDTO;
 
 @Repository
 public class CotizacionDAOImpl implements CotizacionDAO {
@@ -24,7 +22,7 @@ public class CotizacionDAOImpl implements CotizacionDAO {
 		this.jdbcTemplate = new JdbcTemplate(dataSource);
 	}
 
-	@Override
+	/*@Override
 	public List<CotizacionDTO> lsCotizacionByUsuario(Integer idusuario) {
 
 		String sql = " SELECT C.IDCOTIZACION, U.IDUSUARIO, U.APELLIDO_PAT + ' ' + U.APELLIDO_MAT + ' ' + U.NOMBRES AS SOLICITANTE, "
@@ -103,6 +101,6 @@ public class CotizacionDAOImpl implements CotizacionDAO {
 
         CotizacionDTO cotizacion = (CotizacionDTO) jdbcTemplate.queryForObject(sql, mapper, idcotizacion);
         return cotizacion;
-	}
+	}*/
 
 }

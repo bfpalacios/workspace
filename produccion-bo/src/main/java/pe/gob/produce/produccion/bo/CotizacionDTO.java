@@ -1,4 +1,4 @@
-package com.empresa.proyecto.dto;
+package pe.gob.produce.produccion.bo;
 
 import java.util.Date;
 
