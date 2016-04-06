@@ -17,7 +17,6 @@ import pe.gob.produce.produccion.bo.UbigeoBO;
 import pe.gob.produce.produccion.core.util.Convertidor;
 import pe.gob.produce.produccion.core.util.FormateadorFecha;
 import pe.gob.produce.produccion.core.util.ObtenerNumeroAleatorio;
-import pe.gob.produce.produccion.model.LoginModel;
 import pe.gob.produce.produccion.model.ServicioModel;
 import pe.gob.produce.produccion.services.CITEServices;
 import pe.gob.produce.produccion.services.ComunServices;

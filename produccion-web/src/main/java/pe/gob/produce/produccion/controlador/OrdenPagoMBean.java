@@ -2,12 +2,14 @@ package pe.gob.produce.produccion.controlador;
 
 import java.io.BufferedOutputStream;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
@@ -18,24 +20,26 @@ import org.primefaces.model.UploadedFile;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
-import pe.gob.produce.produccion.bo.CotizacionDTO;
-import pe.gob.produce.produccion.bo.ServicioDTO;
+import com.empresa.proyecto.dao.CotizacionDAO;
+import com.empresa.proyecto.dto.CotizacionDTO;
+import com.empresa.proyecto.dto.ServicioDTO;
+import com.empresa.proyecto.dto.UsuarioDTO;
+
+import pe.gob.produce.produccion.bo.CITEBO;
+import pe.gob.produce.produccion.bo.CotizacionBO;
+import pe.gob.produce.produccion.bo.UsuarioBO;
 import pe.gob.produce.produccion.core.util.Convertidor;
 import pe.gob.produce.produccion.core.util.FormateadorFecha;
+import pe.gob.produce.produccion.dao.CITEIDAO;
+import pe.gob.produce.produccion.model.LoginModel;
 import pe.gob.produce.produccion.model.ServicioModel;
-import pe.gob.produce.produccion.services.CotizacionServices;
 
 @Controller("ordenPagoMBean")
 @ViewScoped
 public class OrdenPagoMBean {
 
-	/*@Autowired
-	private CotizacionDAO cotizacionDAO;
-	*/
 	@Autowired
-	private CotizacionServices cotizacionServices;
-	
-	
+	private CotizacionDAO cotizacionDAO;
 
 	@Autowired
 	private ServicioModel servicioModel;
@@ -62,6 +66,7 @@ public class OrdenPagoMBean {
 	private Integer codigoServicioOrdenPago;
 	private String rutaComprobante;
 	private CotizacionDTO cotizacionTransaccion;
+	
 
 	// constructor
 	public OrdenPagoMBean() {
@@ -383,7 +388,7 @@ public class OrdenPagoMBean {
 	}
 
 	public List<CotizacionDTO> getLsCotizacionDTO() {
-		this.lsCotizacionDTO = cotizacionServices.lsCotizacionByUsuario(1);
+		this.lsCotizacionDTO = cotizacionDAO.lsCotizacionByUsuario(1);
 		return this.lsCotizacionDTO;
 	}
 
@@ -403,17 +408,19 @@ public class OrdenPagoMBean {
 		String pagina = "";
 		String numCotizacion = (String) extContext().getRequestParameterMap().get("numCotizacion");
 		this.codigoServicioOrdenPago = Integer.parseInt(numCotizacion);
-		this.cotizacionTransaccion = cotizacionServices.getCotizacion(Integer.parseInt(numCotizacion));
-		this.lsServicioDTO = cotizacionServices.lsServicioByCotizacion(Integer.parseInt(numCotizacion));
+		this.cotizacionTransaccion = cotizacionDAO.getCotizacion(Integer.parseInt(numCotizacion));
+		this.lsServicioDTO = cotizacionDAO.lsServicioByCotizacion(Integer.parseInt(numCotizacion));
 		pagina = "/paginas/ModuloProduccion/cliente/ordenPago/enviarOrdenPago.xhtml";
+
+		
 		return pagina;
 	}
 
 	public void generarOrdenPago() {
 		String numCotizacion = (String) extContext().getRequestParameterMap().get("numCotizacion");
-		cotizacionServices.generarOrdenPago(Integer.parseInt(numCotizacion), this.rutaComprobante);
-		
-		//Limpiar
+		cotizacionDAO.generarOrdenPago(Integer.parseInt(numCotizacion), this.rutaComprobante);
+
+		// Limpiar
 		this.codigoServicioOrdenPago = null;
 		this.cotizacionTransaccion = null;
 		this.rutaComprobante = null;
@@ -472,6 +479,8 @@ public class OrdenPagoMBean {
 	public void setCotizacionTransaccion(CotizacionDTO cotizacionTransaccion) {
 		this.cotizacionTransaccion = cotizacionTransaccion;
 	}
+
+	
 
 	// utilidad
 	private ExternalContext extContext() {

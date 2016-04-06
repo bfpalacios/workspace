@@ -58,7 +58,7 @@ public class CotizacionMBean {
 	private Date date;
 
 	// constantes
-	private static int MODO_ADMIN = 1;
+	
 
 	// para la lista de servicios se declara una variable list de tipo
 	// ServicioModel
@@ -126,8 +126,7 @@ public class CotizacionMBean {
 
 				datosServiciosModelGrid.add(servicioModel);
 			}
-			setCotizacionModel(new CotizacionModel());
-			//getCotizacionModel().setCodigo("001 - 2016");
+
 			setDatosServiciosModelGrid(datosServiciosModelGrid);
 			listarCITE();
 
@@ -176,9 +175,8 @@ public class CotizacionMBean {
 
 				datosServiciosModelGrid.add(servicioModel);
 			}
+
 			
-			setCotizacionModel(new CotizacionModel());
-			//getCotizacionModel().setCodigo("001 - 2016");
 			setDatosServiciosModelGrid(datosServiciosModelGrid);
 			listarCITE();
 
@@ -197,8 +195,6 @@ public class CotizacionMBean {
 		FacesContext facesContext = FacesContext.getCurrentInstance();
 		LoginModel login = (LoginModel)
 		facesContext.getExternalContext().getSessionMap().get("user");
-		System.out.println("login user " + login.getUsuario() + "hola" +
-		getServicioModel().getCodigoCITE() + "que tal");
 		
 		UsuarioBO usurio = new UsuarioBO();
 		
@@ -546,8 +542,6 @@ public class CotizacionMBean {
 		
 		UsuarioBO usurio = new UsuarioBO();
 		usurio = comunServices.buscarUsuario(login.getUsuario());
-		System.out.println("login user " + login.getUsuario() + "hola" +
-		getServicioModel().getCodigoCITE() + "que tal");
 		
 		getCotizacionModel().setUsuarioModel(new UsuarioModel());
 		getCotizacionModel().getUsuarioModel().setNombres(usurio.getNombres());
@@ -561,7 +555,7 @@ public class CotizacionMBean {
 		getCotizacionModel().getUsuarioModel().getEmpresaModel().setRepresentante(usurio.getEmpresa().getRepresentante());
 		getCotizacionModel().getUsuarioModel().getEmpresaModel().setNombreContacto(usurio.getEmpresa().getNombreContacto());
 		getCotizacionModel().getUsuarioModel().getEmpresaModel().setNombreCargo(usurio.getEmpresa().getNombreCargo());
-		int codigo = cotizacionServices.obtenerCodigoCotizacion();
+	
 		
 		String citeID = getServicioModel().getCodigoCITE();
 		
@@ -588,7 +582,7 @@ public class CotizacionMBean {
 			getServicioModel().setSede("CALLAO");
 		}
 		
-		System.out.println("Codigo de cotizacion " + codigo);
+		
 		pagina = "/paginas/ModuloProduccion/cliente/cotizacion/nuevo/verCotizacion.xhtml";
 
 		return pagina;
