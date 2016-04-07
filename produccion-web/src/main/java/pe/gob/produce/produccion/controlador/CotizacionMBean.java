@@ -123,7 +123,7 @@ public class CotizacionMBean {
 				servicioModel.setRequisito(servicioBO.getRequisito());
 				servicioModel.setValorDeVenta(servicioBO.getValorDeVenta());
 				servicioModel.setPrecioDeVenta(servicioBO.getPrecioDeVenta());
-
+				servicioModel.setDescripcionCITE(servicioBO.getCite().getDescripcion());
 				datosServiciosModelGrid.add(servicioModel);
 			}
 
@@ -146,6 +146,8 @@ public class CotizacionMBean {
 				servicioModel.setNombre(servicioBO.getNombre());
 				servicioModel.setUnidad(servicioBO.getUnidad());
 				servicioModel.setRequisito(servicioBO.getRequisito());
+
+				servicioModel.setDescripcionCITE(servicioBO.getCite().getDescripcion());
 				servicioModel.setValorDeVenta(servicioBO.getValorDeVenta());
 				servicioModel.setPrecioDeVenta(servicioBO.getPrecioDeVenta());
 
@@ -170,6 +172,8 @@ public class CotizacionMBean {
 				servicioModel.setNombre(servicioBO.getNombre());
 				servicioModel.setUnidad(servicioBO.getUnidad());
 				servicioModel.setRequisito(servicioBO.getRequisito());
+
+				servicioModel.setDescripcionCITE(servicioBO.getCite().getDescripcion());
 				servicioModel.setValorDeVenta(servicioBO.getValorDeVenta());
 				servicioModel.setPrecioDeVenta(servicioBO.getPrecioDeVenta());
 
@@ -446,6 +450,8 @@ public class CotizacionMBean {
 			servicioModel.setNombre(servicioBO.getNombre());
 			servicioModel.setUnidad(servicioBO.getUnidad());
 			servicioModel.setRequisito(servicioBO.getRequisito());
+
+			servicioModel.setDescripcionCITE(servicioBO.getCite().getDescripcion());
 			servicioModel.setValorDeVenta(servicioBO.getValorDeVenta());
 			servicioModel.setPrecioDeVenta(servicioBO.getPrecioDeVenta());
 

@@ -51,8 +51,12 @@
 				
 					
 				<p:spacer width="5px" />
-				<h:outputText id="Lobservacion"
-							value="#{mensaje['produccion.buscar.servicio.label.observacion']}" />
+				<p:outputPanel id="disabledButtonOrdenPago">
+							<p:commandButton
+								value="#{mensaje['produccion.buscar.servicio.label.observacion']}"
+								style="opacity:1 !important; margin-bottom: 10px;" id="disabled"
+								disabled="true" />
+				</p:outputPanel>
 				<p:commandButton value="Buscar" id="botonBuscar"
 					actionListener="#{cotizacionMBean.buscarServicio}" ajax="true"
 					update="tablaServicios" />
@@ -102,7 +106,10 @@
 							styleClass="ui-column-label-spij styleAlignRightColumn">
 							<h:outputText value="#{registro.requisito}" />
 						</p:column>
-
+						<p:column headerText="CITE"
+							styleClass="ui-column-label-spij styleAlignRightColumn">
+							<h:outputText value="#{registro.descripcionCITE}" />
+						</p:column>
 						<p:column headerText="Valor de Venta"
 							styleClass="ui-column-label-spij styleAlignRightColumn">
 							<h:outputText value="#{registro.valorDeVenta}" />

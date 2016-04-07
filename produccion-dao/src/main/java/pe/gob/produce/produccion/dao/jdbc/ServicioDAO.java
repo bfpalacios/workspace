@@ -10,6 +10,7 @@ import java.util.List;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import pe.gob.produce.produccion.bo.CITEBO;
 import pe.gob.produce.produccion.bo.ServicioBO;
 import pe.gob.produce.produccion.core.dao.jdbc.BaseDAO;
 import pe.gob.produce.produccion.core.dao.jdbc.Conexion;
@@ -45,6 +46,8 @@ public class ServicioDAO extends BaseDAO implements ServicioIDao  {
 		        servicioBO.setNombre(rs.getString("SERVICIO_DESC"));
 		        servicioBO.setUnidad(rs.getString("UNIDAD_DESC"));
 		        servicioBO.setRequisito(rs.getString("REQUISITO"));
+		        servicioBO.setCite(new CITEBO());
+		        servicioBO.getCite().setDescripcion(rs.getString("NOMBRE_CITE"));
 		        servicioBO.setValorDeVenta(Float.toString(rs.getFloat("VALOR_VENTA")));
 		        servicioBO.setPrecioDeVenta(Float.toString(rs.getFloat("PRECIO_VENTA")));
 		        
