@@ -493,6 +493,9 @@ public class CotizacionMBean {
 		getCotizacionModel().getUsuarioModel().setNombres(usurio.getNombres());
 		getCotizacionModel().getUsuarioModel().setDni(usurio.getDni());
 		getCotizacionModel().getUsuarioModel().setDireccion(usurio.getDireccion());
+		getCotizacionModel().getUsuarioModel().setTelefono(usurio.getTelefono());
+		getCotizacionModel().getUsuarioModel().setEmail1(usurio.getEmailAdmin());
+		getCotizacionModel().getUsuarioModel().setEmail2(usurio.getEmailAdmin());
 		
 		//datos de empresa
 		getCotizacionModel().getUsuarioModel().setEmpresaModel(new EmpresaModel());
@@ -553,6 +556,10 @@ public class CotizacionMBean {
 		getCotizacionModel().getUsuarioModel().setNombres(usurio.getNombres());
 		getCotizacionModel().getUsuarioModel().setDni(usurio.getDni());
 		getCotizacionModel().getUsuarioModel().setDireccion(usurio.getDireccion());
+		getCotizacionModel().getUsuarioModel().setTelefono(usurio.getTelefono());
+
+		getCotizacionModel().getUsuarioModel().setEmail1(usurio.getEmailAdmin());
+		getCotizacionModel().getUsuarioModel().setEmail2(usurio.getEmailAdmin());
 		
 		//datos de empresa
 		getCotizacionModel().getUsuarioModel().setEmpresaModel(new EmpresaModel());
