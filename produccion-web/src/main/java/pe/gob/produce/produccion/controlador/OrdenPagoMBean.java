@@ -120,7 +120,7 @@ public class OrdenPagoMBean {
 		servicioModel4.setPrecioDeVenta("544.21");
 
 		// servicioModel4.setTotalPrecioDeVenta("123");
-
+		
 		listaServicio.add(servicioModel4);
 		setDatosServiciosModelGrid(listaServicio);
 	}
