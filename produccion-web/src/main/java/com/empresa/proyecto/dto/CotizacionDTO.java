@@ -11,6 +11,17 @@ public class CotizacionDTO {
 	private String citeDestino;
 	private Double costoTotal;
 	private Integer estado;
+	private String descEstado;
+	
+
+	public String getDescEstado() {
+		return descEstado;
+	}
+
+	public void setDescEstado(String descEstado) {
+		
+		this.descEstado = descEstado;
+	}
 
 	public CotizacionDTO() {
 	}
@@ -28,7 +39,7 @@ public class CotizacionDTO {
 	}
 
 	public void setRazonSocial(String razonSocial) {
-		this.razonSocial = razonSocial;
+		this.razonSocial = razonSocial;	
 	}
 
 	public String getSolicitante() {

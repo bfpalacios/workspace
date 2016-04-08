@@ -31,25 +31,38 @@ public class CotizacionDAOImpl implements CotizacionDAO {
 		String sql = " SELECT C.IDCOTIZACION, U.IDUSUARIO, U.APELLIDO_PAT + ' ' + U.APELLIDO_MAT + ' ' + U.NOMBRES AS SOLICITANTE, "
 				+ " C.FECHA, (SELECT A.NOMBRE_CITE FROM CITE A INNER JOIN CITE_SEDE B ON A.IDCITE=B.IDCITE WHERE B.IDCITE_SEDE = C.IDCITE_SEDE) CITE_DESTINO , "
 				+ " C.TOTAL, C.ESTADO FROM COTIZACION C INNER JOIN USUARIO U ON C.IDUSUARIO=U.IDUSUARIO  WHERE U.IDUSUARIO = ?";
-
+		
 		RowMapper rowMapper = new RowMapper() {
 			@Override
 			public Object mapRow(ResultSet rs, int i) throws SQLException {
 				CotizacionDTO c = new CotizacionDTO();
+								
 				c.setNumeroCotizacion("" + rs.getInt("IDCOTIZACION"));
 				c.setRazonSocial(rs.getString("IDUSUARIO"));
 				c.setSolicitante(rs.getString("SOLICITANTE"));
 				c.setFecha(rs.getDate("FECHA"));
 				c.setCiteDestino(rs.getString("CITE_DESTINO"));
 				c.setCostoTotal(rs.getDouble("TOTAL"));
-				c.setEstado(rs.getInt("ESTADO"));
+				if (rs.getInt("ESTADO") == 1) {
+					c.setDescEstado("Registrado");
+				}
+				if (rs.getInt("ESTADO") == 2) {
+					c.setDescEstado("Aprobado");
+				}
+				if (rs.getInt("ESTADO") == 3) {
+					c.setDescEstado("Archivado");
+				}
+				
 				return c;
 			}
+
+			
 		};
 
 		List<CotizacionDTO> ls = jdbcTemplate.query(sql, rowMapper, idusuario);
 		return ls;
 	}
+
 
 	@Override
 	public List<ServicioDTO> lsServicioByCotizacion(Integer idcotizacion) {

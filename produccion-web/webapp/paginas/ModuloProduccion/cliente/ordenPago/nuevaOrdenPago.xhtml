@@ -161,17 +161,15 @@
 							
 							<p:column headerText="Estado"
 								styleClass="ui-column-label-spij styleAlignRightColumn">
-							<!--  	${registro.estado} == denis; -->
-								<h:outputText value="${registro.estado}">
+									<h:outputText value="#{registro.descEstado}">
 								</h:outputText>
-								<c:if test="${registro.estado == 1}">
-								estoy aqui
-								</c:if>
-
-								<c:if test="${RESULTADO=='ROLE_CLIENTE'}">
-									dd
-								</c:if>
 								
+								<!-- <c:set var="estadoCotizacion" scope="session" value="${registro.estado}" />				
+								
+								<c:if test="${estadoCotizacion=1}">
+									estoy aqui
+								</c:if>		 -->
+																			
 							</p:column>
 
 							<p:column headerText="Acción"
