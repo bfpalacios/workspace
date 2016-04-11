@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import pe.gob.produce.produccion.bo.CotizacionBO;
+import pe.gob.produce.produccion.bo.CotizacionDetalleBO;
 import pe.gob.produce.produccion.dao.CotizacionIDAO;
 import pe.gob.produce.produccion.services.CotizacionServices;
 
@@ -24,15 +25,17 @@ public class CotizacionServicesImpl implements CotizacionServices{
 	}
 
 	@Override
-	public void guardarCotizacion(CotizacionBO cotizacion)
-			{
+	public int guardarCotizacion(CotizacionBO cotizacion)
+	{
+		int idCotizacion = 0;
 		// TODO Auto-generated method stub
 		try {
-			cotizacionDAO.guardarCotizacion(cotizacion);
+			idCotizacion =  cotizacionDAO.guardarCotizacion(cotizacion);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		return idCotizacion;
 	}
 
 	@Override
@@ -40,6 +43,16 @@ public class CotizacionServicesImpl implements CotizacionServices{
 			throws Exception {
 		// TODO Auto-generated method stub
 		return cotizacionDAO.obtenerCiteSede(ubigeo, nombreCite);
+	}
+
+	@Override
+	public void guardarCotizacionDetalle(CotizacionDetalleBO cotizacionDetalle) {
+		try {
+			cotizacionDAO.guardarCotizacionDetalle(cotizacionDetalle);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 	

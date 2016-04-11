@@ -15,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
 import pe.gob.produce.produccion.bo.CotizacionBO;
+import pe.gob.produce.produccion.bo.CotizacionDetalleBO;
 import pe.gob.produce.produccion.bo.EmpresaBO;
 import pe.gob.produce.produccion.bo.ServicioBO;
 import pe.gob.produce.produccion.bo.UsuarioBO;
@@ -236,9 +237,6 @@ public class CotizacionMBean {
 
 		List<CotizacionModel> datosServiciosModelGrid = new ArrayList<CotizacionModel>();
 		
-		int codigo = cotizacionServices.obtenerCodigoCotizacion();
-		
-		
 		if(citeID.equals("1")){
 			ubigeo = "140141";
 			
@@ -259,6 +257,8 @@ public class CotizacionMBean {
 		sede = cotizacionServices.obtenerCiteSede(ubigeo, descripcionCITE);
 		System.out.println("Sede "+ sede);
 		
+		int codigo = cotizacionServices.obtenerCodigoCotizacion();
+		
 		if (codigo == 0){
 			codigo = 1;
 			getCotizacionModel().setCodigo(codigo);
@@ -270,28 +270,48 @@ public class CotizacionMBean {
 			
 		} 
 		
-		//SE CREA VARAIBLE PARA COLOCARLOS AL ATRIBUTO SECUENCIAL
-		int codigoSecuencial = codigo;
+		CotizacionBO cotizacionBO = new CotizacionBO();
+		int codigoCotizacion = 0;
+		
+		cotizacionBO.setCodigo(codigo);	
+		//cotizacionBO.setSecuencial(codigoSecuencial + codigoCite + fecha.obtenerFechaAnio(new Date()) + numero.obtenerNumeroAleatorioEntero());
+		cotizacionBO.setServicio(new ServicioBO());
+		//este dato se va a sacar de la tabla cotizacion
+		cotizacionBO.getServicio().setCodigo("00012016123");
+		cotizacionBO.setIdCite(codigoCite*10);
+		
+		cotizacionBO.setUsuario(new UsuarioBO());
+		cotizacionBO.getUsuario().setIdUsuario(idUsuario);
+		cotizacionBO.setCostoTotal(getTotalSumaCotizar());	
+		
+		//Registrada igual 1 , aprobada igual a 2 y archivada igual a 3
+		cotizacionBO.setEstado(1);
+		cotizacionBO.setSede(sede);
+		
+		try {
+			codigoCotizacion = cotizacionServices.guardarCotizacion(cotizacionBO);
+		}catch(Exception e){
+			e.printStackTrace();
+			mostrarMensaje(9);				
+		}	
+		
+		//se llena la tabla COTIZACION_DETALLE
 		System.out.println("Tamanio de la lista de cotizacion " + getServicioCotizacion().size());
 		for (ServicioModel servicio : getServicioCotizacion()) {
-				CotizacionBO cotizacionBO = new CotizacionBO();
+				CotizacionDetalleBO cotizacionDetalle = new CotizacionDetalleBO();
 				
 				
-				cotizacionBO.setCodigo(codigo);	
-				cotizacionBO.setSecuencial(codigoSecuencial + codigoCite + fecha.obtenerFechaAnio(new Date()) + numero.obtenerNumeroAleatorioEntero());
-				cotizacionBO.setServicio(new ServicioBO());
-				cotizacionBO.getServicio().setCodigo(servicio.getCodigo());
-				cotizacionBO.setIdCite(codigoCite*10);
+				cotizacionDetalle.setCodigo(codigoCotizacion);	
+				cotizacionDetalle.setSecuencial(codigoCotizacion + codigoCite + fecha.obtenerFechaAnio(new Date()) + numero.obtenerNumeroAleatorioEntero());
+				cotizacionDetalle.setServicio(new ServicioBO());
+				cotizacionDetalle.getServicio().setCodigo(servicio.getCodigo());
 				
-				cotizacionBO.setUsuario(new UsuarioBO());
-				cotizacionBO.getUsuario().setIdUsuario(idUsuario);
 				
 				//Registrada igual 1 , aprobada igual a 2 y archivada igual a 3
-				cotizacionBO.setEstado(1);
-				cotizacionBO.setSede(sede);
+				cotizacionDetalle.setSede(sede);
 				codigo ++;
 				try {
-					cotizacionServices.guardarCotizacion(cotizacionBO);
+					cotizacionServices.guardarCotizacionDetalle(cotizacionDetalle);
 				}catch(Exception e){
 					e.printStackTrace();
 					mostrarMensaje(9);				

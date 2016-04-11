@@ -7,9 +7,17 @@ public class CotizacionBO {
 	private int idCite;	
 	private int sede;	
 	private int estado;
+	private Double costoTotal;
 	private ServicioBO servicio;
 	private UsuarioBO usuario;
 	
+
+	public Double getCostoTotal() {
+		return costoTotal;
+	}
+	public void setCostoTotal(Double costoTotal) {
+		this.costoTotal = costoTotal;
+	}
 	
 	public int getSede() {
 		return sede;
