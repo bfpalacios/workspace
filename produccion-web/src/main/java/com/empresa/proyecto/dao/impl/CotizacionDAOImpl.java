@@ -28,7 +28,7 @@ public class CotizacionDAOImpl implements CotizacionDAO {
 	@Override
 	public List<CotizacionDTO> lsCotizacionByUsuario(Integer idusuario) {
 
-		String sql = " SELECT C.IDCOTIZACION, U.IDUSUARIO, U.APELLIDO_PAT + ' ' + U.APELLIDO_MAT + ' ' + U.NOMBRES AS SOLICITANTE, "
+		String sql = " SELECT C.IDCOTIZACION, U.IDUSUARIO, U.APELLIDO_PAT + ' ' + U.APELLIDO_MAT + ' ' + U.NOMBRES AS SOLICITANTE,U.NOMBRES AS NOMBRE, "
 				+ " C.FECHA, (SELECT A.NOMBRE_CITE FROM CITE A INNER JOIN CITE_SEDE B ON A.IDCITE=B.IDCITE WHERE B.IDCITE_SEDE = C.IDCITE_SEDE) CITE_DESTINO , "
 				+ " C.TOTAL, C.ESTADO FROM COTIZACION C INNER JOIN USUARIO U ON C.IDUSUARIO=U.IDUSUARIO  WHERE U.IDUSUARIO = ?";
 		
@@ -38,7 +38,7 @@ public class CotizacionDAOImpl implements CotizacionDAO {
 				CotizacionDTO c = new CotizacionDTO();
 								
 				c.setNumeroCotizacion("" + rs.getInt("IDCOTIZACION"));
-				c.setRazonSocial(rs.getString("IDUSUARIO"));
+				c.setRazonSocial(rs.getString("NOMBRE"));
 				c.setSolicitante(rs.getString("SOLICITANTE"));
 				c.setFecha(rs.getDate("FECHA"));
 				c.setCiteDestino(rs.getString("CITE_DESTINO"));

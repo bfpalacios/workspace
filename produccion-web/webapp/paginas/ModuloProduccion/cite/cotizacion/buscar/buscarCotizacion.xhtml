@@ -96,12 +96,12 @@
 						rowKey="#{registro.codigo}" var="registro" binding="#{tabla}"
 						emptyMessage="Sin datos para cargar" paginator="true" rows="20">
 
-
+						
 						<p:column headerText="N° Cotización"
 							styleClass="ui-column-label-spij styleAlignRightColumn">
 							<h:outputText value="#{registro.codigo}" />
 						</p:column>
-
+						
 						<p:column headerText="Razón Social"
 							styleClass="ui-column-label-spij styleAlignRightColumn">
 							<h:outputText value="#{registro.nombre}" />
@@ -128,7 +128,16 @@
 
 						</p:column>
 
-						
+						<p:column headerText="Opciones"
+							styleClass="ui-column-label-spij styleAlignRightColumn">
+							<p:commandButton action=" "
+								type="submit" image="ui-icon ui-icon-pencil" value="Ver cotización"
+								title="Ver cotización" ajax="false">
+								<f:param name="numCotizacion"
+									value=" " />
+							</p:commandButton>
+						</p:column>
+
 					</p:dataTable>
 
 				</p:column>
