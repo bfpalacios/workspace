@@ -1,22 +1,20 @@
 package pe.gob.produce.produccion.controlador;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Date;
-import java.util.Iterator;
 import java.util.List;
-import java.util.ListIterator;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ViewScoped;
+import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 
+import org.primefaces.context.RequestContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
 import pe.gob.produce.produccion.bo.CotizacionBO;
 import pe.gob.produce.produccion.bo.CotizacionDetalleBO;
-import pe.gob.produce.produccion.bo.EmpresaBO;
 import pe.gob.produce.produccion.bo.ServicioBO;
 import pe.gob.produce.produccion.bo.UsuarioBO;
 import pe.gob.produce.produccion.core.util.Convertidor;
@@ -193,23 +191,26 @@ public class CotizacionMBean {
 	}
 	
 	
-	public String enviarCotizacion() throws Exception {
+	public void enviarCotizacion() throws Exception {
 		
 		String pagina = "";
 		
+		//se obtiene el usuario de sesion
 		FacesContext facesContext = FacesContext.getCurrentInstance();
 		LoginModel login = (LoginModel)
 		facesContext.getExternalContext().getSessionMap().get("user");
 		
-		UsuarioBO usurio = new UsuarioBO();
-		
+		//se crea la clase para obtener el idUsuario
+		UsuarioBO usurio = new UsuarioBO();		
 		usurio = comunServices.buscarUsuario(login.getUsuario());
 		String idUsuario="";
 		idUsuario = usurio.getIdUsuario();
+		
+		//inicializacion de clases core
 		ObtenerNumeroAleatorio numero = new ObtenerNumeroAleatorio();
 		FormateadorFecha fecha = new FormateadorFecha();
 		
-		//inicializarClases();
+		//inicializacion de variables
 		int sede =0;
 		String ubigeo = "";
 		String citeID = "1";
@@ -228,7 +229,6 @@ public class CotizacionMBean {
 			citeID = "4";
 		}
 		
-		System.out.println("cite descripcion " + descripcionCITE);
 		
 		//esto luego en la tabla cite se debe cambiar en vez de 1 es 10 , 2 es 20 , 3 es 30 , 4 es 40
 		int codigoCite = Integer.parseInt(citeID);
@@ -312,6 +312,7 @@ public class CotizacionMBean {
 				codigo ++;
 				try {
 					cotizacionServices.guardarCotizacionDetalle(cotizacionDetalle);
+					mostrarMensaje(8);
 				}catch(Exception e){
 					e.printStackTrace();
 					mostrarMensaje(9);				
@@ -319,30 +320,57 @@ public class CotizacionMBean {
 		}
 
 			limpiarObjetos();
-			mostrarMensaje(8);
-			pagina = "/paginas/ModuloProduccion/cliente/cotizacion/nuevo/nuevaCotizacion.xhtml";
+			listarCITE();
 			
-			return pagina ;
 			
+			pagina = "/produccion-web/paginas/ModuloProduccion/cliente/cotizacion/nuevo/nuevaCotizacion.xhtml";
+			String url = (pagina);
+			
+			
+			FacesContext context = FacesContext.getCurrentInstance();
+			ExternalContext ec = context.getExternalContext();
+			try {	
+				
+				context.getExternalContext().getFlash().setKeepMessages(true);
+				context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "", "La cotizacion se guardo correctamente"));
+				/*context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Exito en Guardar la cotizacion", "La cotizacion se guardo correctamente"));
+				context.getCurrentInstance().(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Exito en Guardar la cotizacion", "La cotizacion se guardo correctamente"));
+				
+				//message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Se guardo correctamente.", "La cotizacion se guardo correctamente.");
+		         
+		        RequestContext.getCurrentInstance().showMessageInDialog(new FacesMessage(FacesMessage.SEVERITY_INFO, "Se guardo correctamente.", "La cotizacion se guardo correctamente"));
+		       	*/
+		       	
+				ec.redirect(url);
+					
+					
+			} 
+			catch (Exception ex) {
+			}
+			
+			//return pagina;
 	}
 	
-	public String enviarCotizacionEmpresa() throws Exception {
+	public void enviarCotizacionEmpresa() throws Exception {
 		
 		String pagina = "";
 		
+		//se obtiene el usuario de sesion
 		FacesContext facesContext = FacesContext.getCurrentInstance();
 		LoginModel login = (LoginModel)
 		facesContext.getExternalContext().getSessionMap().get("user");
 		
-		UsuarioBO usurio = new UsuarioBO();
-		
+		//se crea la clase para obtener el idUsuario
+		UsuarioBO usurio = new UsuarioBO();		
 		usurio = comunServices.buscarUsuario(login.getUsuario());
 		String idUsuario="";
 		idUsuario = usurio.getIdUsuario();
+		
+		//inicializacion de clases core
 		ObtenerNumeroAleatorio numero = new ObtenerNumeroAleatorio();
 		FormateadorFecha fecha = new FormateadorFecha();
 		
-		//inicializarClases();
+		//inicializacion de variables
 		int sede =0;
 		String ubigeo = "";
 		String citeID = "1";
@@ -361,7 +389,6 @@ public class CotizacionMBean {
 			citeID = "4";
 		}
 		
-		System.out.println("cite descripcion " + descripcionCITE);
 		
 		//esto luego en la tabla cite se debe cambiar en vez de 1 es 10 , 2 es 20 , 3 es 30 , 4 es 40
 		int codigoCite = Integer.parseInt(citeID);
@@ -369,9 +396,6 @@ public class CotizacionMBean {
 		List<ServicioBO> listaServicio = new ArrayList<ServicioBO>();
 
 		List<CotizacionModel> datosServiciosModelGrid = new ArrayList<CotizacionModel>();
-		
-		int codigo = cotizacionServices.obtenerCodigoCotizacion();
-		
 		
 		if(citeID.equals("1")){
 			ubigeo = "140141";
@@ -393,6 +417,8 @@ public class CotizacionMBean {
 		sede = cotizacionServices.obtenerCiteSede(ubigeo, descripcionCITE);
 		System.out.println("Sede "+ sede);
 		
+		int codigo = cotizacionServices.obtenerCodigoCotizacion();
+		
 		if (codigo == 0){
 			codigo = 1;
 			getCotizacionModel().setCodigo(codigo);
@@ -404,28 +430,49 @@ public class CotizacionMBean {
 			
 		} 
 		
-		//SE CREA VARAIBLE PARA COLOCARLOS AL ATRIBUTO SECUENCIAL
-		int codigoSecuencial = codigo;
+		CotizacionBO cotizacionBO = new CotizacionBO();
+		int codigoCotizacion = 0;
+		
+		cotizacionBO.setCodigo(codigo);	
+		//cotizacionBO.setSecuencial(codigoSecuencial + codigoCite + fecha.obtenerFechaAnio(new Date()) + numero.obtenerNumeroAleatorioEntero());
+		cotizacionBO.setServicio(new ServicioBO());
+		//este dato se va a sacar de la tabla cotizacion
+		cotizacionBO.getServicio().setCodigo("00012016123");
+		cotizacionBO.setIdCite(codigoCite*10);
+		
+		cotizacionBO.setUsuario(new UsuarioBO());
+		cotizacionBO.getUsuario().setIdUsuario(idUsuario);
+		cotizacionBO.setCostoTotal(getTotalSumaCotizar());	
+		
+		//Registrada igual 1 , aprobada igual a 2 y archivada igual a 3
+		cotizacionBO.setEstado(1);
+		cotizacionBO.setSede(sede);
+		
+		try {
+			codigoCotizacion = cotizacionServices.guardarCotizacion(cotizacionBO);
+		}catch(Exception e){
+			e.printStackTrace();
+			mostrarMensaje(9);				
+		}	
+		
+		//se llena la tabla COTIZACION_DETALLE
 		System.out.println("Tamanio de la lista de cotizacion " + getServicioCotizacion().size());
 		for (ServicioModel servicio : getServicioCotizacion()) {
-				CotizacionBO cotizacionBO = new CotizacionBO();
+				CotizacionDetalleBO cotizacionDetalle = new CotizacionDetalleBO();
 				
 				
-				cotizacionBO.setCodigo(codigo);	
-				cotizacionBO.setSecuencial(codigoSecuencial + codigoCite + fecha.obtenerFechaAnio(new Date()) + numero.obtenerNumeroAleatorioEntero());
-				cotizacionBO.setServicio(new ServicioBO());
-				cotizacionBO.getServicio().setCodigo(servicio.getCodigo());
-				cotizacionBO.setIdCite(codigoCite*10);
+				cotizacionDetalle.setCodigo(codigoCotizacion);	
+				cotizacionDetalle.setSecuencial(codigoCotizacion + codigoCite + fecha.obtenerFechaAnio(new Date()) + numero.obtenerNumeroAleatorioEntero());
+				cotizacionDetalle.setServicio(new ServicioBO());
+				cotizacionDetalle.getServicio().setCodigo(servicio.getCodigo());
 				
-				cotizacionBO.setUsuario(new UsuarioBO());
-				cotizacionBO.getUsuario().setIdUsuario(idUsuario);
 				
 				//Registrada igual 1 , aprobada igual a 2 y archivada igual a 3
-				cotizacionBO.setEstado(1);
-				cotizacionBO.setSede(sede);
+				cotizacionDetalle.setSede(sede);
 				codigo ++;
 				try {
-					cotizacionServices.guardarCotizacion(cotizacionBO);
+					cotizacionServices.guardarCotizacionDetalle(cotizacionDetalle);
+					mostrarMensaje(8);
 				}catch(Exception e){
 					e.printStackTrace();
 					mostrarMensaje(9);				
@@ -433,10 +480,30 @@ public class CotizacionMBean {
 		}
 
 			limpiarObjetos();
-			mostrarMensaje(8);
-			pagina = "/paginas/ModuloProduccion/empresa/cotizacion/nuevo/nuevaCotizacion.xhtml";
+			listarCITE();
 			
-			return pagina ;
+			
+			pagina = "/produccion-web/paginas/ModuloProduccion/empresa/cotizacion/nuevo/nuevaCotizacion.xhtml";
+			String url = (pagina);
+			
+			
+			FacesContext context = FacesContext.getCurrentInstance();
+			ExternalContext ec = context.getExternalContext();
+			try {	
+				
+				context.getExternalContext().getFlash().setKeepMessages(true);
+				//context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Exito en Guardar la cotizacion", "La cotizacion se guardo correctamente"));
+				context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "", "La cotizacion se guardo correctamente"));
+				
+		       	
+				ec.redirect(url);
+					
+					
+			} 
+			catch (Exception ex) {
+			}
+			
+			//return pagina;
 			
 	}
 
@@ -557,6 +624,8 @@ public class CotizacionMBean {
 		return pagina;
 	}
 	public String verCotizacion() throws Exception {
+		
+		//inicializarClases();
 		String pagina = "";
 		if(servicioCotizacion != null  ) {
 			setServicioCotizacion(servicioCotizacion);
@@ -620,6 +689,12 @@ public class CotizacionMBean {
 
 		return pagina;
 	}
+	
+	public void showMessage() {
+        FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Se guardo correctamente", "La cotizacion se guardo correctamente");
+         
+        RequestContext.getCurrentInstance().showMessageInDialog(message);
+    }
 
 	public String selectorBuscarCotizacionServicio(int modo) throws Exception {
 		String pagina = "";
@@ -647,10 +722,11 @@ public class CotizacionMBean {
 
 	private void limpiarObjetos() {
 		setServicioModel(null);
+		
 		setServicioModel(new ServicioModel());
 		setCotizacionModel(new CotizacionModel());
-		//setServicioCotizacion(new ArrayList<ServicioModel>());
-			
+		setServicioCotizacion(new ArrayList<ServicioModel>());
+		setSelectedServicios(new ArrayList<ServicioModel>());	
 	}
 
 	private void listarCITE() {
@@ -705,9 +781,14 @@ public class CotizacionMBean {
 			FacesContext.getCurrentInstance().addMessage(null, message);
 			break;
 		case 8:
+			message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Se guardo correctamente.", "La cotizacion se guardo correctamente.");
+	         
+	        RequestContext.getCurrentInstance().showMessageInDialog(message);
+	       	/*
 			message = new FacesMessage(FacesMessage.SEVERITY_INFO, "",
 					"La cotizacion se guardo correctamente");
 			FacesContext.getCurrentInstance().addMessage(null, message);
+			*/
 			break;
 		case 9:
 			message = new FacesMessage(FacesMessage.SEVERITY_FATAL, "",
