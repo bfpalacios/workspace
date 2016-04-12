@@ -7,7 +7,7 @@
 	xmlns:p="http://primefaces.org/ui">
 
 <ui:composition
-	template="/plantilla/ModuloProduccion/Plantillas/plantilla.xhtml">
+	template="/plantilla/ModuloProduccion/Plantillas/plantilla_cite.xhtml">
 	<ui:define name="contenido">
 		<p:outputPanel id="pnlGridMensajes"
 			style="width:400px;margin-top:5px;">
@@ -22,9 +22,7 @@
 		<p:panel header="Buscar Cotizaciones" style="width: 800px;">
 			
 			<p:panelGrid id="pnlGridBuscarCotizacion">
-				<p:outputPanel id="disabledButton">
-					<p:commandButton value="#{mensaje['produccion.buscar.cotizacion.disabled.cliente']}" style="opacity:1 !important; margin-bottom: 10px;" id="disabled" disabled="true" />
-				</p:outputPanel>
+				
 				<p:row>
 					<p:column styleClass="ui-column-label-spij styleAlignRightColumn">
 						<h:outputText id="lNumero"
@@ -130,8 +128,10 @@
 
 						<p:column headerText="Opciones"
 							styleClass="ui-column-label-spij styleAlignRightColumn">
-							<p:commandButton action=" "
+							<p:commandButton
+								actionListener=" "
 								type="submit" image="ui-icon ui-icon-pencil" value="Ver cotización"
+								update=""
 								title="Ver cotización" ajax="false">
 								<f:param name="numCotizacion"
 									value=" " />
@@ -146,13 +146,6 @@
 		<p:spacer width="5px" />
 		<p:outputPanel id="pnlGuardar" style="width:400x;margin-top:10px;">
 			<p:row>
-				<p:column colspan="2" styleClass="styleAlignLeftColumn">
-					<p:commandButton id="botonGuardar" styleClass="buttonMarginNormal" 
-						value="#{mensaje['produccion.buscar.cotizacion.label.vercotizacion']}"
-						actionListener="#{servicioMBean.guardarNuevoServicio}"
-						update="lFecha,nombreServicio, descripcionServicio,  nombreSolicitante,  cargo,  telefono, email"
-						ajax="false" />
-				</p:column>
 				
 				<p:column colspan="2" styleClass="styleAlignRightColumn">
 					<p:commandButton value="Imprimir Cotización" id="botonCamcelar"
