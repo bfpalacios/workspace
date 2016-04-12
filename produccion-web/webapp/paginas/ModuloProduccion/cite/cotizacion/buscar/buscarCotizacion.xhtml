@@ -63,8 +63,8 @@
 				<p:row id="filServicios">
 					<p:column colspan="4"
 						styleClass="ui-column-label-spij styleAlignCenterColumn">
-						<p:commandButton value="Buscar" id="botonBuscar" actionListener="#{servicioMBean.buscarServicio}" ajax="true"
-							update="tablaServicios" />
+						<p:commandButton value="Buscar" id="botonBuscar" actionListener=" " ajax="true"
+							update=" " />
 					</p:column>
 					
 				</p:row>
@@ -75,7 +75,7 @@
 		<p:panelGrid id="pnlGridResultadoBuscarServicio">
 			<f:facet name="header">
 				<p:row>
-					<p:column colspan="2">Consulta de Cotizaciones </p:column>
+					<p:column colspan="2">Resultado de la Búsqueda </p:column>
 				</p:row>
 			</f:facet>
 
@@ -97,41 +97,41 @@
 						
 						<p:column headerText="N° Cotización"
 							styleClass="ui-column-label-spij styleAlignRightColumn">
-							<h:outputText value="#{registro.codigo}" />
+							<h:outputText value="0012016" />
 						</p:column>
 						
 						<p:column headerText="Razón Social"
 							styleClass="ui-column-label-spij styleAlignRightColumn">
-							<h:outputText value="#{registro.nombre}" />
+							<h:outputText value="Denis Guerrero" />
 						</p:column>
 
 						<p:column headerText="Solicitante"
 							styleClass="ui-column-label-spij styleAlignRightColumn">
-							<h:outputText value="#{registro.unidad}" />
+							<h:outputText value=" - " />
 						</p:column>
 
 						<p:column headerText="Fecha"
 							styleClass="ui-column-label-spij styleAlignRightColumn">
-							<h:outputText value="#{registro.requisito}" />
+							<h:outputText value=" 12/04/2016" />
 						</p:column>
 
 						<p:column headerText="Cite Destino"
 							styleClass="ui-column-label-spij styleAlignRightColumn">
-							<h:outputText value="#{registro.valorDeVenta}" />
+							<h:outputText value="Cite Madera" />
 						</p:column>
 
 						<p:column headerText="Costo Total"
 							styleClass="ui-column-label-spij styleAlignRightColumn">
-							<h:outputText value="#{registro.precioDeVenta}" />
+							<h:outputText value="S/.350" />
 
 						</p:column>
 
 						<p:column headerText="Opciones"
 							styleClass="ui-column-label-spij styleAlignRightColumn">
 							<p:commandButton
-								actionListener=" "
-								type="submit" image="ui-icon ui-icon-pencil" value="Ver cotización"
-								update=""
+								actionListener="#{cotizacionMBean.enviarCotizacion}"
+								type="submit" image="ui-icon ui-icon-zoomin" value="Ver cotización"
+								update=" "
 								title="Ver cotización" ajax="false">
 								<f:param name="numCotizacion"
 									value=" " />
@@ -149,7 +149,7 @@
 				
 				<p:column colspan="2" styleClass="styleAlignRightColumn">
 					<p:commandButton value="Imprimir Cotización" id="botonCamcelar"
-						actionListener="#{servicioMBean.cancelar}" ajax="false" />
+						actionListener=" " ajax="false" />
 				</p:column>
 			</p:row>
 		</p:outputPanel>

@@ -18,7 +18,9 @@
 				</p:column>
 			</p:row>
 		</p:outputPanel>
-		<p:spacer width="5px" />		
+		
+		<p:spacer width="5px" />	
+		<p:panel header="Ver Cotización">	
 		<p:panelGrid id="pnlGridLoginAcceso" style="width: 90%;" >
 				<p:row>
 					<p:column colspan="6"
@@ -28,9 +30,6 @@
 							<h:outputText id="lblTitulo"	
 								value="#{mensaje['produccion.cotizacioncite.label.subtitulo']}" />
 						</h3>
-						<p:outputPanel id="disabledButtonOrdenServicio" style="float: right; margin-top: -35px; margin-right: 570px;">   
-													
-						</p:outputPanel>
 						
 						<p:outputPanel id="disabledButton" style="float: right; margin-top: -35px;">       
 							
@@ -48,7 +47,7 @@
 				<p:row>
 
 					<p:column styleClass="ui-column-label-spij styleAlignRightColumn">
-						<h:outputText id="lblRazonSocialOrdenServicio" 
+						<h:outputText id="lblRazonSocialCotizacionCite" 
 							value="#{mensaje['produccion.buscar.ordenservicio.label.razonsocial']}" />
 					</p:column>
 
@@ -59,7 +58,7 @@
 					</p:column>
 
 					<p:column styleClass="ui-column-label-spij styleAlignRightColumn">
-						<h:outputText id="lblRucOrdenServicio"
+						<h:outputText id="lblRucCotizacionCite"
 							value="#{mensaje['produccion.buscar.ordenservicio.label.ruc']}" />
 					</p:column>
 
@@ -80,7 +79,7 @@
 					</p:column>
 
 					<p:column>
-						<p:inputText id="rubroOrdenServicio1" styleClass="ui-column-label-spij styleAlignRightColumn disabledInput" disabled="true" size="40" 
+						<p:inputText id="rubroCotizacionCite" styleClass="ui-column-label-spij styleAlignRightColumn disabledInput" disabled="true" size="40" 
 							value=" " />
 						<p:message for="rubro" />
 					</p:column>
@@ -92,7 +91,7 @@
 
 
 					<p:column colspan="3">
-						<p:inputText id="representanteOrdenServicio" styleClass="ui-column-label-spij styleAlignRightColumn disabledInput" disabled="true" size="40"
+						<p:inputText id="representanteCotizacionCite" styleClass="ui-column-label-spij styleAlignRightColumn disabledInput" disabled="true" size="40"
 							value=" " />
 					</p:column>
 
@@ -106,18 +105,18 @@
 					</p:column>
 
 					<p:column>
-						<p:inputText id="solicitanteOrdenServicio" styleClass="ui-column-label-spij styleAlignRightColumn disabledInput" disabled="true" size="40"
+						<p:inputText id="solicitanteCotizacionCite" styleClass="ui-column-label-spij styleAlignRightColumn disabledInput" disabled="true" size="40"
 							value=" " />
 						<p:message for="razonSocial" />
 					</p:column>
 
 					<p:column styleClass="ui-column-label-spij styleAlignRightColumn">
-						<h:outputText id="lblCargoOrdenServicio"
+						<h:outputText id="lblCargoCotizacionCite"
 							value="#{mensaje['produccion.buscar.ordenservicio.label.cargo']}" />
 					</p:column>
 
 					<p:column colspan="3">
-						<p:inputText id="cargoOrdenServicio" styleClass="ui-column-label-spij styleAlignRightColumn disabledInput" disabled="true" size="20"
+						<p:inputText id="cargoCotizacionCite" styleClass="ui-column-label-spij styleAlignRightColumn disabledInput" disabled="true" size="20"
 							value=" " />
 						<p:message for="ruc" />
 					</p:column>
@@ -145,7 +144,7 @@
 
 
 					<p:column colspan="3">
-						<p:inputText id="representante" styleClass="ui-column-label-spij styleAlignRightColumn disabledInput" disabled="true" size="40"
+						<p:inputText id="emailCotizacionCite" styleClass="ui-column-label-spij styleAlignRightColumn disabledInput" disabled="true" size="40"
 							value=" " />
 					</p:column>
 
@@ -157,6 +156,7 @@
 
 
 			</p:panelGrid>
+			</p:panel>
 			
 			<p:spacer width="50px" />
 		
@@ -169,7 +169,7 @@
 				</p:column>
 				<p:column>
 					<p:inputText id="cotizacionCiteNro" styleClass="ui-column-label-spij styleAlignRightColumn disabledInput" disabled="true"
-						value="#{servicioMBean.servicioModel.codigo}" size="20" />
+						value=" " size="20" />
 				</p:column>
 
 				<p:column styleClass="ui-column-label-spij styleAlignRightColumn">
@@ -241,10 +241,11 @@
 		
 		</p:panelGrid>
 		<p:spacer width="20px" />
+		
 		<p:panelGrid id="pnlGridEstadoCotizacion" style="width: 95%;border: 0px;">
 
 			<p:row>
-				<p:column colspan="1">
+				<p:column colspan="1" style="width: 95%;border: 0px; height: 100px;" >
 					<h:outputText id="lEstadoCotizacionCite"
 						value="#{mensaje['produccion.cotizacioncite.label.estadocotizacion']}" />
 					<p:selectOneMenu id="selectOneEstado"

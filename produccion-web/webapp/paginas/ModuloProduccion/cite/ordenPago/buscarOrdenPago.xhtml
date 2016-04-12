@@ -149,6 +149,13 @@
 							<h:outputText value="#{registro.precioDeVenta}" />
 
 						</p:column>
+						<p:column headerText="Opciones"
+								styleClass="ui-column-label-spij styleAlignRightColumn">
+								<p:commandButton action="#{ordenPagoMBean.mostrarPreOrdenPago()}"
+									type="submit" image="ui-icon ui-icon-zoomin" value="Ver Orden" title="Ver Orden" ajax="false">
+									<f:param name="numCotizacion" value=" " />
+								</p:commandButton>
+							</p:column>
 
 						
 					</p:dataTable>
