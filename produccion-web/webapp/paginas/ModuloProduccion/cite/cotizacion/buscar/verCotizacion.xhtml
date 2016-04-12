@@ -48,13 +48,13 @@
 				<p:row>
 
 					<p:column styleClass="ui-column-label-spij styleAlignRightColumn">
-						<h:outputText id="lblRazonSocialOrdenServicio"
+						<h:outputText id="lblRazonSocialOrdenServicio" 
 							value="#{mensaje['produccion.buscar.ordenservicio.label.razonsocial']}" />
 					</p:column>
 
 					<p:column>
-						<p:inputText id="razonSocial" size="40"
-							value=" " />
+						<p:inputText id="razonSocial" styleClass="ui-column-label-spij styleAlignRightColumn disabledInput" size="40"
+							value=" " disabled="true"/>
 						<p:message for="razonSocial" />
 					</p:column>
 
@@ -64,8 +64,8 @@
 					</p:column>
 
 					<p:column colspan="3">
-						<p:inputText id="ruc" size="20"
-							value=" " />
+						<p:inputText id="ruc" size="20" styleClass="ui-column-label-spij styleAlignRightColumn disabledInput"
+							value=" " disabled="true"/>
 						<p:message for="ruc" />
 					</p:column>
 
@@ -80,7 +80,7 @@
 					</p:column>
 
 					<p:column>
-						<p:inputText id="rubroOrdenServicio1" size="40"
+						<p:inputText id="rubroOrdenServicio1" styleClass="ui-column-label-spij styleAlignRightColumn disabledInput" disabled="true" size="40" 
 							value=" " />
 						<p:message for="rubro" />
 					</p:column>
@@ -92,7 +92,7 @@
 
 
 					<p:column colspan="3">
-						<p:inputText id="representanteOrdenServicio" size="40"
+						<p:inputText id="representanteOrdenServicio" styleClass="ui-column-label-spij styleAlignRightColumn disabledInput" disabled="true" size="40"
 							value=" " />
 					</p:column>
 
@@ -106,7 +106,7 @@
 					</p:column>
 
 					<p:column>
-						<p:inputText id="solicitanteOrdenServicio" size="40"
+						<p:inputText id="solicitanteOrdenServicio" styleClass="ui-column-label-spij styleAlignRightColumn disabledInput" disabled="true" size="40"
 							value=" " />
 						<p:message for="razonSocial" />
 					</p:column>
@@ -117,7 +117,7 @@
 					</p:column>
 
 					<p:column colspan="3">
-						<p:inputText id="cargoOrdenServicio" size="20"
+						<p:inputText id="cargoOrdenServicio" styleClass="ui-column-label-spij styleAlignRightColumn disabledInput" disabled="true" size="20"
 							value=" " />
 						<p:message for="ruc" />
 					</p:column>
@@ -133,7 +133,7 @@
 					</p:column>
 
 					<p:column>
-						<p:inputText id="rubro" size="40"
+						<p:inputText id="rubro" styleClass="ui-column-label-spij styleAlignRightColumn disabledInput" disabled="true" size="40"
 							value=" " />
 						<p:message for="rubro" />
 					</p:column>
@@ -145,7 +145,7 @@
 
 
 					<p:column colspan="3">
-						<p:inputText id="representante" size="40"
+						<p:inputText id="representante" styleClass="ui-column-label-spij styleAlignRightColumn disabledInput" disabled="true" size="40"
 							value=" " />
 					</p:column>
 
@@ -168,7 +168,7 @@
 						value="#{mensaje['produccion.buscar.servicio.label.cotizacionnro']}" />
 				</p:column>
 				<p:column>
-					<p:inputText id="cotizacionCiteNro" styleClass="ui-column-label-spij styleAlignRightColumn cotizacionCiteNro" disabled="true"
+					<p:inputText id="cotizacionCiteNro" styleClass="ui-column-label-spij styleAlignRightColumn disabledInput" disabled="true"
 						value="#{servicioMBean.servicioModel.codigo}" size="20" />
 				</p:column>
 

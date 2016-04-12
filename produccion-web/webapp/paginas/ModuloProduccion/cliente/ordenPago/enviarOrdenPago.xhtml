@@ -29,12 +29,6 @@
 				<p:row>
 					<p:column colspan="6"
 						sstyleClass="ui-column-label-spij styleAlignRightColumn">
-						<p:outputPanel id="disabledButton">
-							<p:commandButton
-								value="#{mensaje['produccion.nuevo.ordenpago.disabled.cliente']}"
-								style="opacity:1 !important; margin-bottom: 10px;" id="disabled"
-								disabled="true" />
-						</p:outputPanel>
 
 						<p:outputPanel id="disabledButtonEnviarOrdenPago"
 							style="float: right; margin-top: -34px;">
@@ -61,7 +55,7 @@
 					</p:column>
 
 					<p:column>
-						<p:inputText id="razonSocial" size="40" value=" " />
+						<p:inputText id="razonSocial" styleClass="ui-column-label-spij styleAlignRightColumn disabledInput" disabled="true" size="40" value=" " />
 						<p:message for="razonSocial" />
 					</p:column>
 
@@ -71,7 +65,7 @@
 					</p:column>
 
 					<p:column colspan="3">
-						<p:inputText id="ordenpago" size="20" value=" " />
+						<p:inputText id="ordenpago" styleClass="ui-column-label-spij styleAlignRightColumn disabledInput" disabled="true" size="20" value=" " />
 						<p:message for="ruc" />
 					</p:column>
 
@@ -86,7 +80,7 @@
 					</p:column>
 
 					<p:column>
-						<p:inputText id="rubro" size="40"
+						<p:inputText id="rubro" styleClass="ui-column-label-spij styleAlignRightColumn disabledInput" disabled="true" size="40"
 							value="#{usuarioMBean.usuarioModel.rubro}" />
 						<p:message for="rubro" />
 					</p:column>
@@ -98,7 +92,7 @@
 
 
 					<p:column colspan="3">
-						<p:inputText id="representante" size="40" value=" " />
+						<p:inputText id="representante" styleClass="ui-column-label-spij styleAlignRightColumn disabledInput" disabled="true" size="40" value=" " />
 					</p:column>
 
 				</p:row>
@@ -110,10 +104,7 @@
 					</p:column>
 
 					<p:column>
-						<p:selectOneMenu value="#{usuarioMBean.usuarioModelSelect.rol}">
-							<f:selectItems value="#{usuarioMBean.usuarioModel.rolesUsuario}"
-								var="roles" itemLabel="#{roles.role}" itemValue="#{roles.idRol}" />
-						</p:selectOneMenu>
+						<p:inputText id="ordenPago" styleClass="ui-column-label-spij styleAlignRightColumn disabledInput" disabled="true" size="40" value=" " />
 					</p:column>
 
 					<p:column styleClass="ui-column-label-spij styleAlignRightColumn">
@@ -122,10 +113,7 @@
 					</p:column>
 
 					<p:column colspan="3">
-						<p:selectOneMenu value="#{usuarioMBean.usuarioModelSelect.rol}">
-							<f:selectItems value="#{usuarioMBean.usuarioModel.rolesUsuario}"
-								var="roles" itemLabel="#{roles.role}" itemValue="#{roles.idRol}" />
-						</p:selectOneMenu>
+						<p:inputText id="ordenPago" styleClass="ui-column-label-spij styleAlignRightColumn disabledInput" disabled="true" size="40" value=" " />
 					</p:column>
 
 				</p:row>
@@ -137,7 +125,7 @@
 					</p:column>
 
 					<p:column>
-						<p:inputText id="ordenPago" size="40" value=" " />
+						<p:inputText id="ordenPago" styleClass="ui-column-label-spij styleAlignRightColumn disabledInput" disabled="true" size="40" value=" " />
 						<p:message for="razonSocial" />
 					</p:column>
 
@@ -147,7 +135,7 @@
 					</p:column>
 
 					<p:column colspan="3">
-						<p:inputText id="ruc" size="20" value=" " />
+						<p:inputText id="ruc" styleClass="ui-column-label-spij styleAlignRightColumn disabledInput" disabled="true" size="20" value=" " />
 						<p:message for="ruc" />
 					</p:column>
 

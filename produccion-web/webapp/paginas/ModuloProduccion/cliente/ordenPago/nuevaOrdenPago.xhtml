@@ -48,47 +48,47 @@
 				<p:row>
 
 					<p:column styleClass="ui-column-label-spij styleAlignRightColumn">
-						<h:outputText id="lblRazonSocial"
+						<h:outputText id="lblSolicitantel"
 							value="#{mensaje['produccion.nuevo.ordenpago.label.solicitante']}" />
 					</p:column>
 
 					<p:column>
-						<p:inputText id="razonSocial" size="40" value=" " />
-						<p:message for="razonSocial" />
+						<p:inputText id="solicitante" size="40" value=" " styleClass="ui-column-label-spij styleAlignRightColumn disabledInput" disabled="true"/>
+						<p:message for="solicitante" />
 					</p:column>
 
 					<p:column styleClass="ui-column-label-spij styleAlignRightColumn">
-						<h:outputText id="lblRuc"
+						<h:outputText id="lblCargo"
 							value="#{mensaje['produccion.nuevo.ordenpago.label.cargo']}" />
 					</p:column>
 
 					<p:column colspan="3">
-						<p:inputText id="ruc" size="20" value=" " />
-						<p:message for="ruc" />
+						<p:inputText id="cargo" styleClass="ui-column-label-spij styleAlignRightColumn disabledInput" disabled="true" size="20" value=" " />
+						<p:message for="cargo" />
 					</p:column>
 
 				</p:row>
 				<p:row>
 
 					<p:column styleClass="ui-column-label-spij styleAlignRightColumn">
-						<h:outputText id="lblRubro"
+						<h:outputText id="lblTelefono"
 							value="#{mensaje['produccion.nuevo.ordenpago.label.telefono']}" />
 					</p:column>
 
 					<p:column>
-						<p:inputText id="rubro" size="40"
-							value="#{usuarioMBean.usuarioModel.rubro}" />
-						<p:message for="rubro" />
+						<p:inputText id="telefono" styleClass="ui-column-label-spij styleAlignRightColumn disabledInput" disabled="true" size="40"
+							value=" " />
+						<p:message for="telefono" />
 					</p:column>
 
 					<p:column styleClass="ui-column-label-spij styleAlignRightColumn">
-						<h:outputText id="lblRepresentante"
+						<h:outputText id="lblEmail"
 							value="#{mensaje['produccion.nuevo.ordenpago.label.email']}" />
 					</p:column>
 
 
 					<p:column colspan="3">
-						<p:inputText id="representante" size="40" value=" " />
+						<p:inputText id="email" styleClass="ui-column-label-spij styleAlignRightColumn disabledInput" disabled="true" size="40" value=" " />
 					</p:column>
 
 				</p:row>
