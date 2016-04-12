@@ -515,7 +515,8 @@ public class UsuarioMBean extends GenericoController{
 				
 			
 				String razonSocial 	= getUsuarioModel().getEmpresaModel().getRazonSocial()==null?"":validaCadena(getUsuarioModel().getEmpresaModel().getRazonSocial())==true?getUsuarioModel().getEmpresaModel().getRazonSocial():"invalido";
-				String ruc 			= getUsuarioModel().getEmpresaModel().getRuc()==null?"":validaNumero(getUsuarioModel().getEmpresaModel().getRuc())==true?getUsuarioModel().getEmpresaModel().getRuc():"invalido";
+				//String ruc 			= getUsuarioModel().getEmpresaModel().getRuc()==null?"":validaNumero(getUsuarioModel().getEmpresaModel().getRuc())==true?getUsuarioModel().getEmpresaModel().getRuc():"invalido";
+				String ruc 			= getUsuarioModel().getEmpresaModel().getRuc();
 				String rubro 		= getUsuarioModel().getRubro()==null?"":validaCadena(getUsuarioModel().getRubro())==true?getUsuarioModel().getRubro():"invalido";
 				String representante = getUsuarioModel().getEmpresaModel().getRepresentante()==null?"":validaCadena(getUsuarioModel().getEmpresaModel().getRepresentante())==true?getUsuarioModel().getEmpresaModel().getRepresentante():"invalido";
 				

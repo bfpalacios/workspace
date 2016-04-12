@@ -333,13 +333,7 @@ public class CotizacionMBean {
 				
 				context.getExternalContext().getFlash().setKeepMessages(true);
 				context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "", "La cotizacion se guardo correctamente"));
-				/*context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Exito en Guardar la cotizacion", "La cotizacion se guardo correctamente"));
-				context.getCurrentInstance().(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Exito en Guardar la cotizacion", "La cotizacion se guardo correctamente"));
 				
-				//message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Se guardo correctamente.", "La cotizacion se guardo correctamente.");
-		         
-		        RequestContext.getCurrentInstance().showMessageInDialog(new FacesMessage(FacesMessage.SEVERITY_INFO, "Se guardo correctamente.", "La cotizacion se guardo correctamente"));
-		       	*/
 		       	
 				ec.redirect(url);
 					

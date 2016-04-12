@@ -42,7 +42,7 @@ public class UsuarioDaoImpl extends DAOImpl<Usuario,String> implements UsuarioID
 	public void grabarUsuario(UsuarioBO usuarioNuevo) throws SQLException{
 		
 		int idUsuario;
-		String numeroDocumento;
+		String numeroDocumento = "";
 		String estado = "1";
 		Connection con = null;
 		CallableStatement cstm = null;
@@ -57,12 +57,12 @@ public class UsuarioDaoImpl extends DAOImpl<Usuario,String> implements UsuarioID
 		cstm.setString(5, usuarioNuevo.getApellidoMaterno());
 
 		cstm.setInt(6, Integer.parseInt(usuarioNuevo.getIdRol()));
-		cstm.setString(7, usuarioNuevo.getApellidoMaterno());
-		cstm.setString(8, usuarioNuevo.getApellidoMaterno());
+		cstm.setString(7, usuarioNuevo.getTelefono());
+		cstm.setString(8, usuarioNuevo.getTelefono());
 		//cstm.setString(6, usuarioNuevo.getCorreo());
 		//cstm.setString(7, usuarioNuevo.getDireccion());
 		//cstm.setString(8, usuarioNuevo.getTelefono());//en el managementbean adicionarlo
-		cstm.setInt(9, Integer.parseInt(usuarioNuevo.getIdRol()));//cambiar por el estado
+		cstm.setInt(9, 1);//cambiar por el estado
 		cstm.setInt(10, Integer.parseInt(usuarioNuevo.getIdRol()));
 		cstm.setString(11, usuarioNuevo.getEmpresa().getRazonSocial());
 		cstm.setString(12, usuarioNuevo.getEmpresa().getRuc());
@@ -79,6 +79,8 @@ public class UsuarioDaoImpl extends DAOImpl<Usuario,String> implements UsuarioID
 
 		idUsuario = cstm.getInt(19);
 		System.out.println("id de usuario " + String.valueOf(idUsuario));
+		System.out.println("dni " + usuarioNuevo.getDni());
+		System.out.println("ruc " + usuarioNuevo.getEmpresa().getRuc());
 		
 		if(!usuarioNuevo.getDireccion().equals(""))
 		{
@@ -90,9 +92,12 @@ public class UsuarioDaoImpl extends DAOImpl<Usuario,String> implements UsuarioID
 		if(!usuarioNuevo.getDni().equals(""))
 		{			
 			numeroDocumento = usuarioNuevo.getDni();			
-		}else 
-		numeroDocumento = usuarioNuevo.getEmpresa().getRuc();
+		}
 		
+		if(!usuarioNuevo.getEmpresa().getRuc().equals(""))
+		{
+			numeroDocumento = usuarioNuevo.getEmpresa().getRuc();
+		}
 		
 		if(!numeroDocumento.equals(""))
 		{

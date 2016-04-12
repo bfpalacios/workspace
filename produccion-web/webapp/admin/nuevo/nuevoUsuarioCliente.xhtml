@@ -299,8 +299,8 @@
 					<p:column colspan="2" styleClass="styleAlignRightColumn">
 						<p:commandButton 
 							id="botonGuardar" value="Registrar Usuario" styleClass="buttonMarginNormal"
-							actionListener="#{usuarioMBean.guardarNuevoUsuarioEmpresa}"
-							update="rubro,dpto, provincia, distrito, idUsuario, emailAdmin, clave, email1,email2, direccionUsuario, telefonoUsuario, rol" 
+							actionListener="#{usuarioMBean.guardarNuevoUsuarioCliente}"
+							update="nombre, tipoDoc, dni, rubro,dpto, provincia, distrito, idUsuario, emailAdmin, clave,confirmarclave, email1,email2, direccionUsuario, telefonoUsuario, rol" 
 							ajax="true"/>						
 					</p:column>
 					
