@@ -1,5 +1,6 @@
 package pe.gob.produce.produccion.controlador;
 
+
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -283,6 +284,7 @@ public class CotizacionMBean {
 		cotizacionBO.setUsuario(new UsuarioBO());
 		cotizacionBO.getUsuario().setIdUsuario(idUsuario);
 		cotizacionBO.setCostoTotal(getTotalSumaCotizar());	
+		cotizacionBO.setFecha(getDate());	
 		
 		//Registrada igual 1 , aprobada igual a 2 y archivada igual a 3
 		cotizacionBO.setEstado(1);
@@ -441,6 +443,7 @@ public class CotizacionMBean {
 		//Registrada igual 1 , aprobada igual a 2 y archivada igual a 3
 		cotizacionBO.setEstado(1);
 		cotizacionBO.setSede(sede);
+		cotizacionBO.setFecha(getDate());	
 		
 		try {
 			codigoCotizacion = cotizacionServices.guardarCotizacion(cotizacionBO);
@@ -728,8 +731,8 @@ public class CotizacionMBean {
 		
 		setServicioModel(new ServicioModel());
 		setCotizacionModel(new CotizacionModel());
-		setServicioCotizacion(new ArrayList<ServicioModel>());
-		setSelectedServicios(new ArrayList<ServicioModel>());	
+		//setServicioCotizacion(new ArrayList<ServicioModel>());
+		//setSelectedServicios(new ArrayList<ServicioModel>());	
 	}
 
 	private void listarCITE() {

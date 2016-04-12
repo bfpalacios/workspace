@@ -2,6 +2,7 @@ package pe.gob.produce.produccion.dao.jdbc;
 
 import java.sql.CallableStatement;
 import java.sql.Connection;
+import java.sql.Date;
 import java.util.List;
 
 import org.springframework.stereotype.Component;
@@ -66,6 +67,7 @@ public class CotizacionDAOimpl extends BaseDAO implements CotizacionIDAO{
 		CallableStatement cstm = null;
 		try {
 			con = Conexion.obtenerConexion();
+			//cstm = con.prepareCall("{call SP_Nueva_Cotizacion(?,?,?,?,?,?,?,?)}");	
 			cstm = con.prepareCall("{call SP_Nueva_Cotizacion(?,?,?,?,?,?,?)}");	
 			System.out.println("ID DE USUARIO " + cotizacion.getUsuario().getIdUsuario());
 			System.out.println("codigo de servicio " + cotizacion.getServicio().getCodigo());
@@ -73,6 +75,7 @@ public class CotizacionDAOimpl extends BaseDAO implements CotizacionIDAO{
 			System.out.println("SECUENCIAL " + cotizacion.getSecuencial());
 			System.out.println("COSTO TOTAL " + cotizacion.getCostoTotal());
 			System.out.println("estado " + cotizacion.getEstado());
+			//System.out.println("fecha " + cotizacion.getFecha());
 			cstm.setQueryTimeout(3);	
 			cstm.setInt(1, Integer.parseInt(cotizacion.getUsuario().getIdUsuario()));		
 			cstm.setString(2, cotizacion.getServicio().getCodigo());		
@@ -80,6 +83,7 @@ public class CotizacionDAOimpl extends BaseDAO implements CotizacionIDAO{
 			cstm.setString(4, cotizacion.getSecuencial());
 			cstm.setDouble(5, cotizacion.getCostoTotal());
 			cstm.setInt(6, cotizacion.getEstado());		
+			//cstm.setDate(7, (Date) cotizacion.getFecha());		
 			
 			cstm.registerOutParameter(7, java.sql.Types.INTEGER);
 			

@@ -1,17 +1,25 @@
 package pe.gob.produce.produccion.bo;
 
+import java.util.Date;
+
 public class CotizacionBO {
 	
 	private int codigo;
 	private String secuencial;
 	private int idCite;	
 	private int sede;	
+	private Date fecha;
 	private int estado;
 	private Double costoTotal;
 	private ServicioBO servicio;
-	private UsuarioBO usuario;
-	
+	private UsuarioBO usuario;	
 
+	public Date getFecha() {
+		return fecha;
+	}
+	public void setFecha(Date fecha) {
+		this.fecha = fecha;
+	}
 	public Double getCostoTotal() {
 		return costoTotal;
 	}
