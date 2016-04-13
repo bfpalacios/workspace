@@ -314,7 +314,7 @@ public class CotizacionMBean {
 				codigo ++;
 				try {
 					cotizacionServices.guardarCotizacionDetalle(cotizacionDetalle);
-					mostrarMensaje(8);
+					//mostrarMensaje(8);
 				}catch(Exception e){
 					e.printStackTrace();
 					mostrarMensaje(9);				
@@ -325,7 +325,7 @@ public class CotizacionMBean {
 			listarCITE();
 			
 			
-			pagina = "/produccion-web/paginas/ModuloProduccion/cliente/cotizacion/nuevo/nuevaCotizacion.xhtml";
+			/*pagina = "/produccion-web/paginas/ModuloProduccion/cliente/cotizacion/nuevo/nuevaCotizacion.xhtml";
 			String url = (pagina);
 			
 			
@@ -342,7 +342,7 @@ public class CotizacionMBean {
 					
 			} 
 			catch (Exception ex) {
-			}
+			}*/
 			
 			//return pagina;
 	}
@@ -469,7 +469,7 @@ public class CotizacionMBean {
 				codigo ++;
 				try {
 					cotizacionServices.guardarCotizacionDetalle(cotizacionDetalle);
-					mostrarMensaje(8);
+					//mostrarMensaje(8);
 				}catch(Exception e){
 					e.printStackTrace();
 					mostrarMensaje(9);				
@@ -480,7 +480,7 @@ public class CotizacionMBean {
 			listarCITE();
 			
 			
-			pagina = "/produccion-web/paginas/ModuloProduccion/empresa/cotizacion/nuevo/nuevaCotizacion.xhtml";
+			/*pagina = "/produccion-web/paginas/ModuloProduccion/empresa/cotizacion/nuevo/nuevaCotizacion.xhtml";
 			String url = (pagina);
 			
 			
@@ -501,7 +501,7 @@ public class CotizacionMBean {
 			}
 			
 			//return pagina;
-			
+			*/
 	}
 
 	public void buscarServicio() throws Exception {
@@ -857,6 +857,12 @@ public class CotizacionMBean {
 		this.selectedServicios = selectedServicios;
 	}
 	
+	public String redireccionarBusquedaCotizaciones() {
+		String pagina = "";
+		pagina = "/paginas/ModuloProduccion/cliente/cotizacion/nuevo/nuevaCotizacion.xhtml";
+		//pagina = "/produccion-web/paginas/ModuloProduccion/cliente/cotizacion/buscar/buscarCotizacion.xhtml";
+		return pagina;
+	}
 	
 
 	public List<ServicioModel> getServicioCotizacion() {

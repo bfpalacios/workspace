@@ -231,21 +231,14 @@
 			<p:row>
 				<p:column colspan="2" styleClass="styleAlignLeftColumn">
 					
+						
 					<p:commandButton 
 							value="#{mensaje['produccion.nueva.cotizacion.label.vercotizacion']}"
 							id="botonVerCotizacion"
 							action="#{cotizacionMBean.verCotizacion}"
 							update="grillaTablaServicios,cotizacionNro,fechaCotizacion "
 							ajax="false" />
-				</p:column>			
-				<!--p:column colspan="2" styleClass="styleAlignLeftColumn">
-					<p:commandButton id="botonVerCotizacion"
-						styleClass="buttonMarginNormal"
-						value="#{mensaje['produccion.nueva.cotizacion.label.vercotizacion']}"
-						actionListener="#{cotizacionMBean.verCotizacion}"
-						update="grillaTablaServicios,cotizacionNro,fechaCotizacion "
-						ajax="true" />
-				</p:column -->
+				</p:column>
 
 				<p:column colspan="2" styleClass="styleAlignRightColumn">
 					<p:commandButton value="Cancelar" id="botonCamcelar"
@@ -253,9 +246,6 @@
 				</p:column>
 			</p:row>
 		</p:outputPanel>
-
-
-
 
 	</ui:define>
 </ui:composition>

@@ -58,13 +58,6 @@ public class CotizacionModel {
 	public void setCodigo(int codigo) {
 		this.codigo = codigo;
 	}
-
-	//En la noche nos comunicamos para darte una mejor explicación. Básicamente tienes:
-
-	1) Buscar la cotizacion.
-	2) Ver la cotización.
-	3) Cambiar el estado de generado a aprobado o de generado a archivado y guardar ese estado en base de datos en la table cotización
-	
 	
 	
 }
