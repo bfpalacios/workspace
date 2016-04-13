@@ -164,21 +164,6 @@
 			</p:row>
 		</p:panelGrid>
 		<p:spacer width="5px" />
-		<p:outputPanel id="pnlGuardar" style="width:400x;margin-top:10px;">
-			<p:row>
-				<p:column colspan="2" styleClass="styleAlignLeftColumn">
-					<p:commandButton id="botonGuardar" styleClass="buttonMarginNormal" 
-						value="#{mensaje['produccion.buscar.ordenpago.btn.verordenpago']}"
-						actionListener="#{ordenPagoMBean.selectorBuscarOrdenPago2(2)}"
-						ajax="false" />
-				</p:column>
-				
-				<p:column colspan="2" styleClass="styleAlignRightColumn">
-					<p:commandButton value="Imprimir Orden de Pago" id="botonCamcelar"
-						actionListener="#{servicioMBean.cancelar}" ajax="false" />
-				</p:column>
-			</p:row>
-		</p:outputPanel>
 			
 
 		

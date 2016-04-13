@@ -53,33 +53,25 @@
 					</p:column>
 
 					<p:column>
-						<p:inputText id="solicitante" size="40" value=" " styleClass="ui-column-label-spij styleAlignRightColumn disabledInput" disabled="true"/>
+						<h:outputText id="solicitante" size="40" value="Nombre del solicitante" styleClass="ui-column-label-spij styleAlignRightColumn disabledInput" disabled="true"/>
 						<p:message for="solicitante" />
 					</p:column>
-
-					<p:column styleClass="ui-column-label-spij styleAlignRightColumn">
-						<h:outputText id="lblCargo"
-							value="#{mensaje['produccion.nuevo.ordenpago.label.cargo']}" />
-					</p:column>
-
-					<p:column colspan="3">
-						<p:inputText id="cargo" styleClass="ui-column-label-spij styleAlignRightColumn disabledInput" disabled="true" size="20" value=" " />
-						<p:message for="cargo" />
-					</p:column>
-
-				</p:row>
-				<p:row>
-
+					
 					<p:column styleClass="ui-column-label-spij styleAlignRightColumn">
 						<h:outputText id="lblTelefono"
 							value="#{mensaje['produccion.nuevo.ordenpago.label.telefono']}" />
 					</p:column>
 
 					<p:column>
-						<p:inputText id="telefono" styleClass="ui-column-label-spij styleAlignRightColumn disabledInput" disabled="true" size="40"
-							value=" " />
+						<h:outputText id="telefono" styleClass="ui-column-label-spij styleAlignRightColumn disabledInput" disabled="true" size="40"
+							value="123456789" />
 						<p:message for="telefono" />
 					</p:column>
+
+					
+
+				</p:row>
+				<p:row>
 
 					<p:column styleClass="ui-column-label-spij styleAlignRightColumn">
 						<h:outputText id="lblEmail"
@@ -87,8 +79,18 @@
 					</p:column>
 
 
+					<p:column>
+						<h:outputText id="email" styleClass="ui-column-label-spij styleAlignRightColumn disabledInput" disabled="true" size="40" value="email de lapersona o empresa" />
+					</p:column>
+					
+					<p:column styleClass="ui-column-label-spij styleAlignRightColumn">
+						<h:outputText id="lblCargo"
+							value="#{mensaje['produccion.nuevo.ordenpago.label.cargo']}" />
+					</p:column>
+
 					<p:column colspan="3">
-						<p:inputText id="email" styleClass="ui-column-label-spij styleAlignRightColumn disabledInput" disabled="true" size="40" value=" " />
+						<h:outputText id="cargo" styleClass="ui-column-label-spij styleAlignRightColumn disabledInput" disabled="true" size="20" value="Cargo en cuestion" />
+						<p:message for="cargo" />
 					</p:column>
 
 				</p:row>
@@ -127,14 +129,9 @@
 								<h:outputText value="#{registro.numeroCotizacion}" />
 							</p:column>
 
-							<p:column headerText="Razón Social"
+							<p:column headerText="Nombre/Razón Social"
 								styleClass="ui-column-label-spij styleAlignRightColumn">
 								<h:outputText value="#{registro.razonSocial}" />
-							</p:column>
-
-							<p:column headerText="Solicitante"
-								styleClass="ui-column-label-spij styleAlignRightColumn">
-								<h:outputText value="#{registro.solicitante}" />
 							</p:column>
 
 							<p:column headerText="Fecha"

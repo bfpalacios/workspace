@@ -55,34 +55,33 @@
 					</p:column>
 
 					<p:column>
-						<p:inputText id="razonSocial" styleClass="ui-column-label-spij styleAlignRightColumn disabledInput" disabled="true" size="40" value=" " />
+						<h:outputText id="razonSocial" styleClass="ui-column-label-spij styleAlignRightColumn disabledInput" disabled="true" size="40" value="usuario persona y empresa" />
 						<p:message for="razonSocial" />
 					</p:column>
-
-					<p:column styleClass="ui-column-label-spij styleAlignRightColumn">
-						<h:outputText id="lblCargoOrdenPago"
-							value="#{mensaje['produccion.nuevo.ordenpago.label.cargo']}" />
-					</p:column>
-
-					<p:column colspan="3">
-						<p:inputText id="ordenpago" styleClass="ui-column-label-spij styleAlignRightColumn disabledInput" disabled="true" size="20" value=" " />
-						<p:message for="ruc" />
-					</p:column>
-
-
-				</p:row>
-
-				<p:row>
-
+					
 					<p:column styleClass="ui-column-label-spij styleAlignRightColumn">
 						<h:outputText id="lblRubro"
 							value="#{mensaje['produccion.nuevo.ordenpago.label.telefono']}" />
 					</p:column>
 
 					<p:column>
-						<p:inputText id="rubro" styleClass="ui-column-label-spij styleAlignRightColumn disabledInput" disabled="true" size="40"
-							value="#{usuarioMBean.usuarioModel.rubro}" />
+						<h:outputText id="rubro" styleClass="ui-column-label-spij styleAlignRightColumn disabledInput" disabled="true" size="40"
+							value="usuario persona y empresa" />
 						<p:message for="rubro" />
+					</p:column>
+
+				</p:row>
+
+				<p:row>
+
+					<p:column styleClass="ui-column-label-spij styleAlignRightColumn">
+						<h:outputText id="lblCargoOrdenPago"
+							value="#{mensaje['produccion.nuevo.ordenpago.label.cargo']}" />
+					</p:column>
+
+					<p:column>
+						<h:outputText id="ordenpago" styleClass="ui-column-label-spij styleAlignRightColumn disabledInput" disabled="true" size="20" value="sólo usuario empresa" />
+						<p:message for="ruc" />
 					</p:column>
 
 					<p:column styleClass="ui-column-label-spij styleAlignRightColumn">
@@ -91,8 +90,8 @@
 					</p:column>
 
 
-					<p:column colspan="3">
-						<p:inputText id="representante" styleClass="ui-column-label-spij styleAlignRightColumn disabledInput" disabled="true" size="40" value=" " />
+					<p:column>
+						<h:outputText id="representante" styleClass="ui-column-label-spij styleAlignRightColumn disabledInput" disabled="true" size="40" value="sólo usuario empresa" />
 					</p:column>
 
 				</p:row>
@@ -104,7 +103,7 @@
 					</p:column>
 
 					<p:column>
-						<p:inputText id="ordenPago" styleClass="ui-column-label-spij styleAlignRightColumn disabledInput" disabled="true" size="40" value=" " />
+						<h:outputText id="ordenPago" styleClass="ui-column-label-spij styleAlignRightColumn disabledInput" disabled="true" size="40" value="usuario persona y empresa" />
 					</p:column>
 
 					<p:column styleClass="ui-column-label-spij styleAlignRightColumn">
@@ -112,8 +111,8 @@
 							value="#{mensaje['produccion.nuevo.ordenpago.label.sede']}" />
 					</p:column>
 
-					<p:column colspan="3">
-						<p:inputText id="ordenPago" styleClass="ui-column-label-spij styleAlignRightColumn disabledInput" disabled="true" size="40" value=" " />
+					<p:column>
+						<h:outputText id="ordenPago" styleClass="ui-column-label-spij styleAlignRightColumn disabledInput" disabled="true" size="40" value="usuario persona y empresa" />
 					</p:column>
 
 				</p:row>
@@ -125,7 +124,7 @@
 					</p:column>
 
 					<p:column>
-						<p:inputText id="ordenPago" styleClass="ui-column-label-spij styleAlignRightColumn disabledInput" disabled="true" size="40" value=" " />
+						<h:outputText id="ordenPago" styleClass="ui-column-label-spij styleAlignRightColumn disabledInput" disabled="true" size="40" value="usuario persona y empresa" />
 						<p:message for="razonSocial" />
 					</p:column>
 
@@ -134,8 +133,8 @@
 							value="#{mensaje['produccion.enviar.ordenpago.label.fechacotizacion']}" />
 					</p:column>
 
-					<p:column colspan="3">
-						<p:inputText id="ruc" styleClass="ui-column-label-spij styleAlignRightColumn disabledInput" disabled="true" size="20" value=" " />
+					<p:column>
+						<h:outputText id="ruc" styleClass="ui-column-label-spij styleAlignRightColumn disabledInput" disabled="true" size="20" value="usuario persona y empresa" />
 						<p:message for="ruc" />
 					</p:column>
 

@@ -20,140 +20,124 @@
 		</p:outputPanel>
 		<p:spacer width="5px" />
 		<p:panel header="Ver Orden de Pago">		
-		<p:panelGrid id="pnlGridLoginAcceso" header="Ver Orden de Pago" style="width: 100%;" >
+		<p:panelGrid id="pnlGridLoginAcceso">
 				<p:row>
 					<p:column colspan="6"
 						sstyleClass="ui-column-label-spij styleAlignRightColumn">
-						
-						<h3>
-							<h:outputText id="lblTitulo"	
-								value="#{mensaje['produccion.cotizacioncite.label.subtitulo']}" />
-						</h3>
-						
-						
-						<p:outputPanel id="disabledButton" style="float: right; margin-top: -35px;">       
-							
-						<h:outputText id="lFecha"
-						value="#{mensaje['general.label.fecha']}" />
-						<p:calendar value="#{servicioMBean.date}" id="fechaServicio"
-						pattern="dd/MM/yyyy" mode="popup" showOn="button">
-					</p:calendar>
+
+						<p:outputPanel id="disabledButtonEnviarOrdenPago"
+							style="float: right; margin-top: -34px;">
+
+							<h:outputText id="lFecha"
+								value="#{mensaje['general.label.fecha']}" />
+							<p:calendar value="#{servicioMBean.date}" id="fechaServicio"
+								pattern="dd/MM/yyyy" mode="popup" showOn="button">
+							</p:calendar>
 						</p:outputPanel>
-						
 
+						<h3>
+							<h:outputText id="lblTitulo"
+								value="#{mensaje['produccion.enviar.ordenpago.label.enviar']}" />
+						</h3>
 					</p:column>
-			
+				</p:row>
+
+				<p:row>
+
+					<p:column styleClass="ui-column-label-spij styleAlignRightColumn">
+						<h:outputText id="lblRazonSocialOrdenPago"
+							value="#{mensaje['produccion.nuevo.ordenpago.label.solicitante']}" />
+					</p:column>
+
+					<p:column>
+						<h:outputText id="razonSocial" styleClass="ui-column-label-spij styleAlignRightColumn disabledInput" disabled="true" size="40" value="usuario persona y empresa" />
+						<p:message for="razonSocial" />
+					</p:column>
+					
+					<p:column styleClass="ui-column-label-spij styleAlignRightColumn">
+						<h:outputText id="lblRubro"
+							value="#{mensaje['produccion.nuevo.ordenpago.label.telefono']}" />
+					</p:column>
+
+					<p:column>
+						<h:outputText id="rubro" styleClass="ui-column-label-spij styleAlignRightColumn disabledInput" disabled="true" size="40"
+							value="usuario persona y empresa" />
+						<p:message for="rubro" />
+					</p:column>
+
+				</p:row>
+
+				<p:row>
+
+					<p:column styleClass="ui-column-label-spij styleAlignRightColumn">
+						<h:outputText id="lblCargoOrdenPago"
+							value="#{mensaje['produccion.nuevo.ordenpago.label.cargo']}" />
+					</p:column>
+
+					<p:column>
+						<h:outputText id="ordenpago" styleClass="ui-column-label-spij styleAlignRightColumn disabledInput" disabled="true" size="20" value="sólo usuario empresa" />
+						<p:message for="ruc" />
+					</p:column>
+
+					<p:column styleClass="ui-column-label-spij styleAlignRightColumn">
+						<h:outputText id="lblRepresentante"
+							value="#{mensaje['produccion.nuevo.ordenpago.label.email']}" />
+					</p:column>
+
+
+					<p:column>
+						<h:outputText id="representante" styleClass="ui-column-label-spij styleAlignRightColumn disabledInput" disabled="true" size="40" value="sólo usuario empresa" />
+					</p:column>
+
+				</p:row>
+
+				<p:row>
+					<p:column styleClass="ui-column-label-spij styleAlignRightColumn">
+						<h:outputText id="lblTelefonoUsuario"
+							value="#{mensaje['produccion.nuevo.ordenpago.label.cite']}" />
+					</p:column>
+
+					<p:column>
+						<h:outputText id="ordenPago" styleClass="ui-column-label-spij styleAlignRightColumn disabledInput" disabled="true" size="40" value="usuario persona y empresa" />
+					</p:column>
+
+					<p:column styleClass="ui-column-label-spij styleAlignRightColumn">
+						<h:outputText id="lblEmail1"
+							value="#{mensaje['produccion.nuevo.ordenpago.label.sede']}" />
+					</p:column>
+
+					<p:column>
+						<h:outputText id="ordenPago" styleClass="ui-column-label-spij styleAlignRightColumn disabledInput" disabled="true" size="40" value="usuario persona y empresa" />
+					</p:column>
+
 				</p:row>
 				<p:row>
 
 					<p:column styleClass="ui-column-label-spij styleAlignRightColumn">
-						<h:outputText id="lblRazonSocialOrdenServicio"
-							value="#{mensaje['produccion.buscar.ordenservicio.label.razonsocial']}" />
+						<h:outputText id="lblRazonSocial"
+							value="#{mensaje['produccion.enviar.ordenpago.label.numreferencia']}" />
 					</p:column>
 
 					<p:column>
-						<p:inputText id="razonSocial" size="40"
-							value=" " />
+						<h:outputText id="ordenPago" styleClass="ui-column-label-spij styleAlignRightColumn disabledInput" disabled="true" size="40" value="usuario persona y empresa" />
 						<p:message for="razonSocial" />
 					</p:column>
 
 					<p:column styleClass="ui-column-label-spij styleAlignRightColumn">
-						<h:outputText id="lblRucOrdenServicio"
-							value="#{mensaje['produccion.buscar.ordenservicio.label.ruc']}" />
+						<h:outputText id="lblOrdenPago"
+							value="#{mensaje['produccion.enviar.ordenpago.label.fechacotizacion']}" />
 					</p:column>
 
-					<p:column colspan="3">
-						<p:inputText id="ruc" size="20"
-							value=" " />
+					<p:column>
+						<h:outputText id="ruc" styleClass="ui-column-label-spij styleAlignRightColumn disabledInput" disabled="true" size="20" value="usuario persona y empresa" />
 						<p:message for="ruc" />
 					</p:column>
 
 
 				</p:row>
 
-				<p:row>
-
-					<p:column styleClass="ui-column-label-spij styleAlignRightColumn">
-						<h:outputText id="lblDireccion"
-							value="#{mensaje['produccion.buscar.ordenservicio.label.direccion']}" />
-					</p:column>
-
-					<p:column>
-						<p:inputText id="rubroOrdenServicio1" size="40"
-							value=" " />
-						<p:message for="rubro" />
-					</p:column>
-
-					<p:column styleClass="ui-column-label-spij styleAlignRightColumn">
-						<h:outputText id="lblContacto"
-							value="#{mensaje['produccion.buscar.cotizacionCite.label.representante']}" />
-					</p:column>
-
-
-					<p:column colspan="3">
-						<p:inputText id="representanteOrdenServicio" size="40"
-							value=" " />
-					</p:column>
-
-				</p:row>
-				
-				<p:row>
-
-					<p:column styleClass="ui-column-label-spij styleAlignRightColumn">
-						<h:outputText id="lblSolicitante2"
-							value="#{mensaje['produccion.buscar.ordenservicio.label.solicitante']}" />
-					</p:column>
-
-					<p:column>
-						<p:inputText id="solicitanteOrdenServicio" size="40"
-							value=" " />
-						<p:message for="razonSocial" />
-					</p:column>
-
-					<p:column styleClass="ui-column-label-spij styleAlignRightColumn">
-						<h:outputText id="lblCargoOrdenServicio"
-							value="#{mensaje['produccion.buscar.ordenservicio.label.cargo']}" />
-					</p:column>
-
-					<p:column colspan="3">
-						<p:inputText id="cargoOrdenServicio" size="20"
-							value=" " />
-						<p:message for="ruc" />
-					</p:column>
-
-
-				</p:row>
-
-				<p:row>
-
-					<p:column styleClass="ui-column-label-spij styleAlignRightColumn">
-						<h:outputText id="lblTelefono"
-							value="#{mensaje['produccion.buscar.ordenservicio.label.telefono']}" />
-					</p:column>
-
-					<p:column>
-						<p:inputText id="rubro" size="40"
-							value=" " />
-						<p:message for="rubro" />
-					</p:column>
-
-					<p:column styleClass="ui-column-label-spij styleAlignRightColumn">
-						<h:outputText id="lblEmail"
-							value="#{mensaje['produccion.buscar.ordenservicio.label.email']}" />
-					</p:column>
-
-
-					<p:column colspan="3">
-						<p:inputText id="representante" size="40"
-							value=" " />
-					</p:column>
-
-				</p:row>
-						
 				<p:separator />
 				<p:spacer width="5px" />
-				<!-- Comienza datos de Usuario  -->
-
 
 			</p:panelGrid>
 		</p:panel>
