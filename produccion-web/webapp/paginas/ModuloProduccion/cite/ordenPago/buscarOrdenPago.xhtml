@@ -26,7 +26,7 @@
 				<p:row>
 					<p:column styleClass="ui-column-label-spij styleAlignRightColumn">
 						<h:outputText id="lNombreCliente"
-							value="Buscar por Nombre Cliente" />
+							value="Buscar por Nombre/Razón Social" />
 					</p:column>
 					<p:column colspan="4">
 						<p:inputText id="NombreOrdenPago"
@@ -142,6 +142,10 @@
 						<p:column headerText="Cite Destino"
 							styleClass="ui-column-label-spij styleAlignRightColumn">
 							<h:outputText value="#{registro.valorDeVenta}" />
+						</p:column>
+						<p:column headerText="Estado"
+							styleClass="ui-column-label-spij styleAlignRightColumn">
+							<h:outputText value="Registrado" />
 						</p:column>
 
 						<p:column headerText="Costo Total"

@@ -145,13 +145,12 @@ public class OrdenServicioMBean {
 
 					//listarCITE();
 					pagina = "/paginas/ModuloProduccion/cliente/ordenServicio/buscarOrdenServicio.xhtml"; break;
-			/*@@ESTE ES EL CASO PARA PERFIL EMPLEADO
-			 * case 2: MODO_USUARIO = MODO_OCAA;
-					inicializarClases();									
-					if(getDatosAlumnoExcelModelGrid() != null){
-						getDatosAlumnoExcelModelGrid().removeAll(getDatosAlumnoExcelModelGrid());
-					}
-					pagina = "/paginas/ModuloObservados/ocaa/cargar/cargarDatosAlumnosObs.xhtml"; break;*/
+			/*@@ESTE ES EL CASO PARA PERFIL EMPLEADO */
+			 case 2: MODO_USUARIO = MODO_ADMIN;									
+					inicializarClases();
+
+					//listarCITE();
+					pagina = "/paginas/ModuloProduccion/cite/ordenServicio/buscarOrdenServicio.xhtml"; break;
 		}
 		return pagina;		
 	 }

@@ -18,36 +18,34 @@
 				</p:column>
 			</p:row>
 		</p:outputPanel>
-		
+
 		<p:panel header="Buscar Orden de Servicio" style="width: 800px;">
-			
+
 			<p:panelGrid id="pnlGridBuscarCotizacion">
-				<p:outputPanel id="disabledButton">
-					<p:commandButton value="#{mensaje['produccion.buscar.cotizacion.disabled.cliente']}" style="opacity:1 !important; margin-bottom: 10px;" id="disabled" disabled="true" />
-				</p:outputPanel>
+
 				<p:row>
 					<p:column styleClass="ui-column-label-spij styleAlignRightColumn">
-						<h:outputText id="lNumero"
-							value="#{mensaje['produccion.buscar.ordenservicio.label.numero']}" />
-							<p:inputText id="numeroCotizacion"
+						<h:outputText id="lNumero" value="Orden de Pago N°" />
+						<p:inputText id="numeroCotizacion"
 							value="#{servicioMBean.servicioModel.nombre}" size="20" />
 					</p:column>
-					
+
 
 				</p:row>
 
 				<p:row id="filServicios">
 					<p:column colspan="4"
 						styleClass="ui-column-label-spij styleAlignCenterColumn">
-						<p:commandButton value="Buscar" id="botonBuscar" actionListener="#{servicioMBean.buscarServicio}" ajax="true"
+						<p:commandButton value="Buscar" id="botonBuscar"
+							actionListener="#{servicioMBean.buscarServicio}" ajax="true"
 							update="tablaServicios" />
 					</p:column>
-					
+
 				</p:row>
 			</p:panelGrid>
 		</p:panel>
 		<p:spacer width="10px" />
-				
+
 		<p:panelGrid id="pnlGridResultadoBuscarServicio">
 			<f:facet name="header">
 				<p:row>
@@ -106,33 +104,29 @@
 							<h:outputText value="#{registro.precioDeVenta}" />
 
 						</p:column>
-
-						
+						<p:column headerText="Opciones"
+							styleClass="ui-column-label-spij styleAlignRightColumn">
+							<p:commandButton action=" "
+								type="submit" image="ui-icon ui-icon-zoomin" value="Ver Orden de servicio"
+								title="Ver Orden de servicio" ajax="false">
+								<f:param name="numOrdenServicio" value=" " />
+							</p:commandButton>
+							<p:commandButton action=" "
+								type="submit" image="ui-icon ui-icon-document" value="Ver Informe"
+								title="Ver Informe" ajax="false">
+								<f:param name="numOrdenServicio" value=" " />
+							</p:commandButton>
+						</p:column>
 					</p:dataTable>
 
 				</p:column>
 			</p:row>
 		</p:panelGrid>
 		<p:spacer width="5px" />
-		<p:outputPanel id="pnlGuardar" style="width:400x;margin-top:10px;">
-			<p:row>
-				<p:column colspan="2" styleClass="styleAlignLeftColumn">
-					<p:commandButton id="botonGuardar" styleClass="buttonMarginNormal" 
-						value="#{mensaje['produccion.buscar.ordenservicio.btn.verordenservicio']}"
-						actionListener="#{servicioMBean.guardarNuevoServicio}"
-						update="lFecha,nombreServicio, descripcionServicio,  nombreSolicitante,  cargo,  telefono, email"
-						ajax="false" />
-				</p:column>
-				
-				<p:column colspan="2" styleClass="styleAlignRightColumn">
-					<p:commandButton value="Ver Informe" id="botonCamcelar"
-						actionListener="#{servicioMBean.cancelar}" ajax="false" />
-				</p:column>
-			</p:row>
-		</p:outputPanel>
-			
-
 		
+
+
+
 
 	</ui:define>
 </ui:composition>
