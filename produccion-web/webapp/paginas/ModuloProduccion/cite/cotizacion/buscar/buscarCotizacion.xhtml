@@ -34,6 +34,17 @@
 					</p:column>
 
 				</p:row>
+				<p:row>
+					<p:column styleClass="ui-column-label-spij styleAlignRightColumn">
+						<h:outputText id="lNombreRazonSocial"
+							value="#{mensaje['produccion.buscar.cotizacioncite.nombre.razonsocial']}" />
+					</p:column>
+					<p:column colspan="4">
+						<p:inputText id="nombreRazonSocial"
+							value="#{servicioMBean.servicioModel.nombre}" size="20" />
+					</p:column>
+
+				</p:row>
 
 				<p:row>
 					<p:column styleClass="ui-column-label-spij styleAlignRightColumn">
@@ -100,7 +111,7 @@
 							<h:outputText value="0012016" />
 						</p:column>
 						
-						<p:column headerText="Razón Social"
+						<p:column headerText="Nombre/Razón Social"
 							styleClass="ui-column-label-spij styleAlignRightColumn">
 							<h:outputText value="Denis Guerrero" />
 						</p:column>
@@ -144,15 +155,6 @@
 			</p:row>
 		</p:panelGrid>
 		<p:spacer width="5px" />
-		<p:outputPanel id="pnlGuardar" style="width:400x;margin-top:10px;">
-			<p:row>
-				
-				<p:column colspan="2" styleClass="styleAlignRightColumn">
-					<p:commandButton value="Imprimir Cotización" id="botonCamcelar"
-						actionListener=" " ajax="false" />
-				</p:column>
-			</p:row>
-		</p:outputPanel>
 			
 
 		

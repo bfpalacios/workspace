@@ -125,10 +125,17 @@
 						<p:column headerText="Costo Total"
 							styleClass="ui-column-label-spij styleAlignRightColumn">
 							<h:outputText value="#{registro.precioDeVenta}" />
-
 						</p:column>
 
-						
+						<p:column headerText="Opciones"
+							styleClass="ui-column-label-spij styleAlignRightColumn">
+							<p:commandButton action="#{ordenPagoMBean.mostrarPreOrdenPago()}"
+								type="submit" image="ui-icon ui-icon-zoomin" value="Ver Cotización"
+								title="Ver Cotización" ajax="false">
+								<f:param name="numCotizacion" value=" " />
+							</p:commandButton>
+						</p:column>
+
 					</p:dataTable>
 
 				</p:column>
@@ -137,13 +144,6 @@
 		<p:spacer width="5px" />
 		<p:outputPanel id="pnlGuardar" style="width:400x;margin-top:10px;">
 			<p:row>
-				<p:column colspan="2" styleClass="styleAlignLeftColumn">
-					<p:commandButton id="botonGuardar" styleClass="buttonMarginNormal" 
-						value="#{mensaje['produccion.buscar.cotizacion.label.vercotizacion']}"
-						actionListener="#{servicioMBean.guardarNuevoServicio}"
-						update="lFecha,nombreServicio, descripcionServicio,  nombreSolicitante,  cargo,  telefono, email"
-						ajax="false" />
-				</p:column>
 				
 				<p:column colspan="2" styleClass="styleAlignRightColumn">
 					<p:commandButton value="Imprimir Cotización" id="botonCamcelar"

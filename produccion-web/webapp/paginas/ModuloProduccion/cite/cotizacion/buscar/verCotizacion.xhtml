@@ -21,7 +21,7 @@
 		
 		<p:spacer width="5px" />	
 		<p:panel header="Ver Cotización">	
-		<p:panelGrid id="pnlGridLoginAcceso" style="width: 90%;" >
+		<p:panelGrid id="pnlGridLoginAcceso" style="width: 50%;" >
 				<p:row>
 					<p:column colspan="6"
 						sstyleClass="ui-column-label-spij styleAlignRightColumn">
@@ -30,15 +30,6 @@
 							<h:outputText id="lblTitulo"	
 								value="#{mensaje['produccion.cotizacioncite.label.subtitulo']}" />
 						</h3>
-						
-						<p:outputPanel id="disabledButton" style="float: right; margin-top: -35px;">       
-							
-						<h:outputText id="lFecha"
-						value="#{mensaje['general.label.fecha']}" />
-						<p:calendar value="#{servicioMBean.date}" id="fechaServicio"
-						pattern="dd/MM/yyyy" mode="popup" showOn="button">
-					</p:calendar>
-						</p:outputPanel>
 						
 
 					</p:column>
@@ -52,8 +43,8 @@
 					</p:column>
 
 					<p:column>
-						<h:outputText id="razonSocial" styleClass="ui-column-label-spij styleAlignRightColumn disabledInput" size="40"
-							value=" " disabled="true"/>
+						<h:outputText id="razonSocial" styleClass="ui-column-label-spij styleAlignRightColumn"
+							value=" " />
 						<p:message for="razonSocial" />
 					</p:column>
 
@@ -62,9 +53,9 @@
 							value="#{mensaje['produccion.buscar.ordenservicio.label.ruc']}" />
 					</p:column>
 
-					<p:column colspan="3">
-						<h:outputText id="ruc" size="20" styleClass="ui-column-label-spij styleAlignRightColumn disabledInput"
-							value=" " disabled="true"/>
+					<p:column>
+						<h:outputText id="ruc" size="20" styleClass="ui-column-label-spij styleAlignRightColumn"
+							value=" "/>
 						<p:message for="ruc" />
 					</p:column>
 
@@ -79,50 +70,27 @@
 					</p:column>
 
 					<p:column>
-						<h:outputText id="rubroCotizacionCite" styleClass="ui-column-label-spij styleAlignRightColumn disabledInput" disabled="true" size="40" 
+						<h:outputText id="rubroCotizacionCite" styleClass="ui-column-label-spij styleAlignRightColumn" size="40" 
 							value=" " />
 						<p:message for="rubro" />
 					</p:column>
-
-					<p:column styleClass="ui-column-label-spij styleAlignRightColumn">
-						<h:outputText id="lblContacto"
-							value="#{mensaje['produccion.buscar.cotizacionCite.label.representante']}" />
-					</p:column>
-
-
-					<p:column colspan="3">
-						<h:outputText id="representanteCotizacionCite" styleClass="ui-column-label-spij styleAlignRightColumn disabledInput" disabled="true" size="40"
-							value=" " />
-					</p:column>
-
-				</p:row>
-				
-				<p:row>
-
+					
 					<p:column styleClass="ui-column-label-spij styleAlignRightColumn">
 						<h:outputText id="lblSolicitante2"
 							value="#{mensaje['produccion.buscar.ordenservicio.label.solicitante']}" />
 					</p:column>
 
 					<p:column>
-						<h:outputText id="solicitanteCotizacionCite" styleClass="ui-column-label-spij styleAlignRightColumn disabledInput" disabled="true" size="40"
+						<h:outputText id="solicitanteCotizacionCite" styleClass="ui-column-label-spij styleAlignRightColumn" size="40"
 							value=" " />
 						<p:message for="razonSocial" />
 					</p:column>
 
-					<p:column styleClass="ui-column-label-spij styleAlignRightColumn">
-						<h:outputText id="lblCargoCotizacionCite"
-							value="#{mensaje['produccion.buscar.ordenservicio.label.cargo']}" />
-					</p:column>
-
-					<p:column colspan="3">
-						<h:outputText id="cargoCotizacionCite" styleClass="ui-column-label-spij styleAlignRightColumn disabledInput" disabled="true" size="20"
-							value=" " />
-						<p:message for="ruc" />
-					</p:column>
-
+					
 
 				</p:row>
+				
+				
 
 				<p:row>
 
@@ -132,7 +100,7 @@
 					</p:column>
 
 					<p:column>
-						<h:outputText id="rubro" styleClass="ui-column-label-spij styleAlignRightColumn disabledInput" disabled="true" size="40"
+						<h:outputText id="rubro" styleClass="ui-column-label-spij styleAlignRightColumn" size="40"
 							value=" " />
 						<p:message for="rubro" />
 					</p:column>
@@ -143,10 +111,37 @@
 					</p:column>
 
 
-					<p:column colspan="3">
-						<h:outputText id="emailCotizacionCite" styleClass="ui-column-label-spij styleAlignRightColumn disabledInput" disabled="true" size="40"
+					<p:column>
+						<h:outputText id="emailCotizacionCite" styleClass="ui-column-label-spij styleAlignRightColumn" size="40"
 							value=" " />
 					</p:column>
+
+				</p:row>
+				
+				<p:row>
+
+					<p:column styleClass="ui-column-label-spij styleAlignRightColumn">
+						<h:outputText id="lblContacto"
+							value="#{mensaje['produccion.buscar.cotizacionCite.label.representante']}" />
+					</p:column>
+
+
+					<p:column>
+						<h:outputText id="representanteCotizacionCite" styleClass="ui-column-label-spij styleAlignRightColumn" size="40"
+							value=" " />
+					</p:column>
+
+					<p:column styleClass="ui-column-label-spij styleAlignRightColumn">
+						<h:outputText id="lblCargoCotizacionCite"
+							value="#{mensaje['produccion.buscar.ordenservicio.label.cargo']}" />
+					</p:column>
+
+					<p:column>
+						<h:outputText id="cargoCotizacionCite" styleClass="ui-column-label-spij styleAlignRightColumn" size="20"
+							value=" " />
+						<p:message for="ruc" />
+					</p:column>
+
 
 				</p:row>
 						
